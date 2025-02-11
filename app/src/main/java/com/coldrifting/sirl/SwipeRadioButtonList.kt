@@ -68,11 +68,22 @@ fun SwipeRadioButtonList(modifier: Modifier = Modifier,
                 {
                     // Update favorites to match new list indices
                     favorites.remove(index)
+
+                    val newList: MutableList<Int> = mutableListOf()
+
                     for (x in favorites) {
-                        if (x > index) {
-                            favorites.remove(x)
-                            favorites.add(x - 1)
+                        if (x <= index) {
+                            newList.add(x)
                         }
+                        else {
+                            newList.add(x - 1)
+                        }
+                    }
+
+                    favorites.clear()
+
+                    for (x in newList) {
+                        favorites.add(x)
                     }
 
                     list.removeAt(index)
