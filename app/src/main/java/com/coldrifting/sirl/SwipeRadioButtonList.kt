@@ -35,8 +35,11 @@ data class ListItem(val id:Int, val text:String)
 fun SwipeRadioButtonList(modifier: Modifier = Modifier,
                          list: MutableList<ListItem>,
                          favorites: MutableList<Int>,
-                         onEdit: (Int) -> Unit) {
+                         onEdit: (Int) -> Unit)
+{
     val (selectedOption, onOptionSelected) = remember { mutableIntStateOf(0) }
+    val lastSwiped = remember { mutableIntStateOf(-1) }
+
     // Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
     LazyColumn(modifier.selectableGroup()
     ) {
@@ -83,8 +86,10 @@ fun SwipeRadioButtonList(modifier: Modifier = Modifier,
             )
 
             SwipeRevealItem(
-                pinAction,
-                delAction
+                index = index,
+                curIndex = lastSwiped,
+                leftAction = pinAction,
+                rightAction = delAction
             ) {
                 Row(
                     Modifier

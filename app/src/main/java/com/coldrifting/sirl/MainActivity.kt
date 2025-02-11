@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.coldrifting.sirl.examples.SwipeRadioButtonListExample
 import com.coldrifting.sirl.examples.SwipeReorderableListExample
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlin.random.Random
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SIRLTheme {
-                SwipeReorderableListExample()
+                SwipeRadioButtonListExample()
             }
         }
     }

@@ -29,6 +29,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -82,6 +83,8 @@ fun SwipeReorderableListExample() {
     ) { innerPadding ->
         val view = LocalView.current
 
+        val lastSwiped = remember { mutableIntStateOf(-1) }
+
         val lazyListState: LazyListState = rememberLazyListState()
         val reorderableLazyListState: ReorderableLazyListState =
             rememberReorderableLazyListState(lazyListState) { from, to ->
@@ -129,6 +132,8 @@ fun SwipeReorderableListExample() {
 
                     Surface(color = color, shadowElevation = elevation) {
                         SwipeRevealItem(
+                            index = index,
+                            curIndex = lastSwiped,
                             leftAction = addAction,
                             rightAction = delAction
                         ) {

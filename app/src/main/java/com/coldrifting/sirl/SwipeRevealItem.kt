@@ -29,9 +29,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,6 +49,7 @@ import androidx.core.view.HapticFeedbackConstantsCompat
 import androidx.core.view.ViewCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -61,6 +64,8 @@ data class SwipeTapAction(val colorFg: Color,
 
 @Composable
 fun SwipeRevealItem(
+    index: Int = -1,
+    curIndex: MutableIntState? = null,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
     content: @Composable () -> Unit) {
@@ -104,10 +109,26 @@ fun SwipeRevealItem(
         )
     }
 
-    val coroutineScope: CoroutineScope = rememberCoroutineScope()
+    val overScrollEffect: OverscrollEffect? = rememberOverscrollEffect()
+    val flingBehavior: TargetedFlingBehavior = AnchoredDraggableDefaults.flingBehavior(
+        state = state,
+        positionalThreshold = { distance -> distance * 0.5f },
+        animationSpec = snap()
+    )
+
+    // Ensure action buttons show behind content when disabled and are clickable when enabled
+    val zOrder: Float = if (state.currentValue != SwipeToRevealValue.Center) 2f else 0f
+
+    val color: Color = state.offset.let {
+        when {
+            it < 0.0f -> rightAction?.colorBg ?: Color.Transparent
+            it > 0.0f -> leftAction?.colorBg ?: Color.Transparent
+            else -> Color.Transparent
+        }
+    }
 
     val view: View = LocalView.current
-
+    val coroutineScope: CoroutineScope = rememberCoroutineScope()
     var leftActionColorFg: State<Color> = animateColorAsState(leftAction?.colorFg ?: Color.Transparent, animationSpec = tween(animTime))
     if (leftAction?.snapBack == true && state.settledValue == SwipeToRevealValue.Left) {
         leftActionColorFg = animateColorAsState(Color.Transparent, animationSpec = tween(animTime))
@@ -122,7 +143,6 @@ fun SwipeRevealItem(
             }
         }
     }
-
     var rightActionColorFg = animateColorAsState(rightAction?.colorFg ?: Color.Transparent, animationSpec = tween(animTime))
     if (rightAction?.snapBack == true && state.settledValue == SwipeToRevealValue.Right) {
         rightActionColorFg = animateColorAsState(Color.Transparent, animationSpec = tween(animTime))
@@ -138,42 +158,27 @@ fun SwipeRevealItem(
         }
     }
 
-    // Timer based Hack for now since I can't figure out how to get opening a new swipe to close the previous one
-    if (leftAction != null) {
-        if (state.settledValue == SwipeToRevealValue.Left) {
-            LaunchedEffect(key1 = "AutoCloseLeft") {
-                delay(1500)
-                state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
+    // Update the index of the last swiped action
+    LaunchedEffect(state) {
+        snapshotFlow { state.settledValue }.collect { value ->
+            if (value != SwipeToRevealValue.Center) {
+                curIndex?.intValue = index
+                Log.d("TEST", "Anchor reached for: $index")
             }
         }
     }
 
-    if (rightAction != null) {
-        if (state.settledValue == SwipeToRevealValue.Right) {
-            LaunchedEffect(key1 = "AutoCloseRight") {
-                delay(1500)
-                state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
+    // Close any previous swipe actions
+    if (curIndex != null) {
+        LaunchedEffect(state) {
+            snapshotFlow { curIndex.intValue }.collect { value ->
+                if (value != index && state.settledValue != SwipeToRevealValue.Center) {
+                    Log.d("TEST", "Hide Anchor for: $index")
+                    state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
+                }
             }
         }
     }
-
-    val zOrder: Float = if (state.offset >= actionOffset || state.offset <= -actionOffset) 2f else 0f
-
-    val color: Color = state.offset.let {
-        when {
-            it < 0.0f -> rightAction?.colorBg ?: Color.Transparent
-            it > 0.0f -> leftAction?.colorBg ?: Color.Transparent
-            else -> Color.Transparent
-        }
-    }
-
-    val flingBehavior: TargetedFlingBehavior = AnchoredDraggableDefaults.flingBehavior(
-        state = state,
-        positionalThreshold = { distance -> distance * 0.5f },
-        animationSpec = snap()
-    )
-
-    val overScrollEffect: OverscrollEffect? = rememberOverscrollEffect()
 
     Box(
         modifier = Modifier
@@ -205,7 +210,6 @@ fun SwipeRevealItem(
             }
         }
 
-        // actions for "Read" and "Delete"
         Row(
             modifier = Modifier.matchParentSize()
                 .zIndex(zOrder),
