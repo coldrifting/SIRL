@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.reorderable)
+
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.material)

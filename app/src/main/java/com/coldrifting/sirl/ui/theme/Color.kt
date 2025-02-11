@@ -12,3 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val DelColor = Color(0xFFC43838)
 val PinColor = Color(0xFFDFB84C)
+val EditColor = Color(0xFF4CAF70)

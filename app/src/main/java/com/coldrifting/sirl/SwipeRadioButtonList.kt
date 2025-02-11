@@ -1,6 +1,5 @@
 package com.coldrifting.sirl
 
-import androidx.collection.mutableIntListOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,33 +23,69 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.coldrifting.sirl.ui.theme.DelColor
+import com.coldrifting.sirl.ui.theme.PinColor
 
 data class ListItem(val id:Int, val text:String)
 
 @Composable
 fun SwipeRadioButtonList(modifier: Modifier = Modifier,
-                               list: MutableList<ListItem>,
-                                favs: MutableList<Int>,
-                               onEdit: (Int) -> Unit,
-                               onDelete: (Int) -> Unit) {
+                         list: MutableList<ListItem>,
+                         favorites: MutableList<Int>,
+                         onEdit: (Int) -> Unit) {
     val (selectedOption, onOptionSelected) = remember { mutableIntStateOf(0) }
     // Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
-    LazyColumn(modifier.selectableGroup()) {
-        items(count = list.size , key = { index -> list[index].id}) { index ->
-            SwipeRevealItem(
-                onLeftAction = {
-                    if (favs.contains(index)) {
-                        favs.remove(index)
+    LazyColumn(modifier.selectableGroup()
+    ) {
+        items(count = list.size , key = { index -> list[index].id }) { index ->
+
+            val pinAction = SwipeTapAction(
+                Color.Black,
+                PinColor,
+                Icons.Default.Star,
+                {
+                    if (favorites.contains(index)) {
+                        favorites.remove(index)
                     }
                     else {
-                        favs.add(index)
+                        favorites.add(index)
                     }
                 },
-                onRightAction = {
-                onDelete.invoke(index)
-            }) {
+                true,
+                "Edit"
+            )
+
+            val delAction = SwipeTapAction(
+                Color.White,
+                DelColor,
+                Icons.Default.Delete,
+                {
+                    // Update favorites to match new list indices
+                    favorites.remove(index)
+                    for (x in favorites) {
+                        if (x > index) {
+                            favorites.remove(x)
+                            favorites.add(x - 1)
+                        }
+                    }
+
+                    list.removeAt(index)
+
+                    if (selectedOption >= list.size) {
+                        onOptionSelected(list.size - 1)
+                    }
+                },
+                false,
+                "Delete"
+            )
+
+            SwipeRevealItem(
+                pinAction,
+                delAction
+            ) {
                 Row(
                     Modifier
                         .fillMaxWidth()
@@ -73,10 +109,12 @@ fun SwipeRadioButtonList(modifier: Modifier = Modifier,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                     Spacer(Modifier.weight(1f))
-                    key(favs) {
-                        if (favs.contains(index)) {
+                    key(favorites.size) {
+                        if (favorites.contains(index)) {
                             IconButton(onClick = {onEdit.invoke(index)}) {
-                                Icon(Icons.Filled.Star, contentDescription = "Edit", tint = com.coldrifting.sirl.ui.theme.PinColor)
+                                Icon(imageVector = pinAction.icon,
+                                    tint = pinAction.colorBg,
+                                    contentDescription = pinAction.desc)
                             }
                         }
                     }
