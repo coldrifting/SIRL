@@ -1,7 +1,9 @@
 package com.coldrifting.sirl
 
+import android.util.Log
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
 import androidx.compose.foundation.gestures.AnchoredDraggableState
@@ -25,7 +27,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -100,12 +102,15 @@ fun SwipeRevealItem(onLeftAction: (() -> Unit)? = null, onRightAction: (() -> Un
 
     val coroutineScope = rememberCoroutineScope()
 
-    SideEffect {
-        if (dragState.offset > actionOffset) {
+    if (dragState.settledValue == SwipeToRevealValue.Left) {
+        LaunchedEffect(key1 = "SwipeFromLeftFull") {
             coroutineScope.launch {
-                dragState.animateTo(SwipeToRevealValue.Center, animationSpec = snap(0))
+                dragState.animateTo(SwipeToRevealValue.Center, animationSpec = tween(60))
+                Log.d("TEST", "Settled Left")
+                onLeftAction?.invoke()
             }
-        } }
+        }
+    }
 
     val zOrder: Float = if (dragState.offset >= actionOffset || dragState.offset <= -actionOffset) 2f else 0f
 

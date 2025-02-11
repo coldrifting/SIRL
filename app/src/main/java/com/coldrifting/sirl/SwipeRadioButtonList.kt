@@ -1,5 +1,6 @@
 package com.coldrifting.sirl
 
+import androidx.collection.mutableIntListOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,13 +11,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -29,13 +31,23 @@ data class ListItem(val id:Int, val text:String)
 @Composable
 fun SwipeRadioButtonList(modifier: Modifier = Modifier,
                                list: MutableList<ListItem>,
+                                favs: MutableList<Int>,
                                onEdit: (Int) -> Unit,
                                onDelete: (Int) -> Unit) {
     val (selectedOption, onOptionSelected) = remember { mutableIntStateOf(0) }
     // Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
     LazyColumn(modifier.selectableGroup()) {
         items(count = list.size , key = { index -> list[index].id}) { index ->
-            SwipeRevealItem(onRightAction = {
+            SwipeRevealItem(
+                onLeftAction = {
+                    if (favs.contains(index)) {
+                        favs.remove(index)
+                    }
+                    else {
+                        favs.add(index)
+                    }
+                },
+                onRightAction = {
                 onDelete.invoke(index)
             }) {
                 Row(
@@ -61,8 +73,12 @@ fun SwipeRadioButtonList(modifier: Modifier = Modifier,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                     Spacer(Modifier.weight(1f))
-                    IconButton(onClick = {onEdit.invoke(index)}) {
-                        Icon(Icons.Filled.Edit, contentDescription = "Edit")
+                    key(favs) {
+                        if (favs.contains(index)) {
+                            IconButton(onClick = {onEdit.invoke(index)}) {
+                                Icon(Icons.Filled.Star, contentDescription = "Edit", tint = com.coldrifting.sirl.ui.theme.PinColor)
+                            }
+                        }
                     }
                 }
             }

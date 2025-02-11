@@ -51,6 +51,8 @@ fun SmallTopAppBarExample() {
             ListItem(3, "Harmons")) }
     var i = 3
 
+    val faves = remember { mutableStateListOf(3) }
+
     val openAlertDialog = remember { mutableStateOf(false) }
     val listItem = remember { mutableIntStateOf(-1) }
 
@@ -95,6 +97,7 @@ fun SmallTopAppBarExample() {
         SwipeRadioButtonList(
             modifier = Modifier.padding(innerPadding),
             list = list.toMutableList(),
+            favs = faves,
             onEdit = {Toast.makeText(context, "delete$it", Toast.LENGTH_SHORT).show()},
             onDelete = { listItem.intValue = it; openAlertDialog.value = true})
     }
