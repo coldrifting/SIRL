@@ -46,6 +46,7 @@ import androidx.compose.ui.zIndex
 import androidx.core.view.HapticFeedbackConstantsCompat
 import androidx.core.view.ViewCompat
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -133,6 +134,25 @@ fun SwipeRevealItem(
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_START)
                 rightAction.action.invoke()
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_END)
+            }
+        }
+    }
+
+    // Timer based Hack for now since I can't figure out how to get opening a new swipe to close the previous one
+    if (leftAction != null) {
+        if (state.settledValue == SwipeToRevealValue.Left) {
+            LaunchedEffect(key1 = "AutoCloseLeft") {
+                delay(1500)
+                state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
+            }
+        }
+    }
+
+    if (rightAction != null) {
+        if (state.settledValue == SwipeToRevealValue.Right) {
+            LaunchedEffect(key1 = "AutoCloseRight") {
+                delay(1500)
+                state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
             }
         }
     }

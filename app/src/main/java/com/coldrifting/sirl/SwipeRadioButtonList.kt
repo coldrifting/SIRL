@@ -74,7 +74,7 @@ fun SwipeRadioButtonList(modifier: Modifier = Modifier,
 
                     list.removeAt(index)
 
-                    if (selectedOption >= list.size) {
+                    if (list.size in 1..selectedOption) {
                         onOptionSelected(list.size - 1)
                     }
                 },
