@@ -40,11 +40,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.view.HapticFeedbackConstantsCompat
 import androidx.core.view.ViewCompat
-import com.coldrifting.sirl.ListItem
-import com.coldrifting.sirl.SwipeRevealItem
-import com.coldrifting.sirl.SwipeTapAction
+import com.coldrifting.sirl.components.ListItem
+import com.coldrifting.sirl.components.SwipeRevealItem
+import com.coldrifting.sirl.components.SwipeTapAction
 import com.coldrifting.sirl.getNextListId
 import com.coldrifting.sirl.getStoreNameString
+import com.coldrifting.sirl.ui.theme.DelColor
+import com.coldrifting.sirl.ui.theme.EditColor
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.ReorderableLazyListState
 import sh.calvin.reorderable.rememberReorderableLazyListState
@@ -115,7 +117,7 @@ fun SwipeReorderableListExample() {
 
                     val addAction = SwipeTapAction(
                         Color.White,
-                        com.coldrifting.sirl.ui.theme.EditColor,
+                        EditColor,
                         Icons.Default.Edit,
                         {},
                         true,
@@ -123,7 +125,7 @@ fun SwipeReorderableListExample() {
                     )
                     val delAction = SwipeTapAction(
                         Color.White,
-                        com.coldrifting.sirl.ui.theme.DelColor,
+                        DelColor,
                         Icons.Default.Delete,
                         { list.removeAt(index) },
                         false,

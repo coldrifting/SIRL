@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.examples
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -17,8 +16,8 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.coldrifting.sirl.ListItem
-import com.coldrifting.sirl.SwipeRadioButtonList
+import com.coldrifting.sirl.components.ListItem
+import com.coldrifting.sirl.components.SwipeRadioButtonList
 import com.coldrifting.sirl.getNextListId
 import com.coldrifting.sirl.getStoreNameString
 
@@ -28,7 +27,8 @@ fun SwipeRadioButtonListExample() {
     val list = remember { mutableStateListOf(
         ListItem(1, "Macey's (1700 S)"),
         ListItem(2, "WinCo (2100 S)"),
-        ListItem(3, "Harmon's")) }
+        ListItem(3, "Harmon's")
+    ) }
 
     Scaffold(
         floatingActionButton = {
@@ -55,8 +55,8 @@ fun SwipeRadioButtonListExample() {
 
             SwipeRadioButtonList(
                 modifier= Modifier.padding(innerPadding),
-                list = list,
-                favorites = faves,
-                onEdit = { Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show() })
+                listItems = list)
+                //favorites = faves,
+                //onEdit = { Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show() })
         })
 }

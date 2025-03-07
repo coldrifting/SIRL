@@ -41,6 +41,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
+import com.coldrifting.sirl.components.ListItem
+import com.coldrifting.sirl.screens.StoreAisleList
+import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.serialization.Serializable
 import kotlin.random.Random
@@ -49,10 +53,10 @@ import kotlin.random.Random
 object Stores
 
 @Serializable
-object StoresList
+object StoreList
 
 @Serializable
-data class StoresAisleList(val id: Int)
+data class StoreAisleList(val id: Int)
 
 @Serializable
 object Ingredients
@@ -89,9 +93,12 @@ class MainActivity : ComponentActivity() {
                     content = { innerPadding ->
                         Box(modifier = Modifier.padding(innerPadding)) {
                             NavHost(navController = navController, startDestination = Stores) {
-                                navigation<Stores>(startDestination = StoresList) {
-                                        composable<StoresList> { Text("Stores") }
-                                        composable<StoresAisleList> { Text("Stores - Sub Route") }
+                                navigation<Stores>(startDestination = StoreList) {
+                                    composable<StoreList> { StoreList(navController, viewModel) }
+                                    composable<StoreAisleList> { backStackEntry ->
+                                        val aisleList: StoreAisleList = backStackEntry.toRoute()
+
+                                        StoreAisleList(aisleList.id, viewModel) }
                                 }
                                 composable<Ingredients> { Text("Ingredients") }
                                 composable<Recipes> { Text("Recipes") }
@@ -168,8 +175,8 @@ fun NavBar(navController: NavHostController) {
 fun Fab(viewModel: AppViewModel, navController: NavHostController) {
     FloatingActionButton(
         onClick = {
-            viewModel.setEditAction { viewModel.setTitle("New Title") }
-            navController.navigate(StoresAisleList(3))
+            viewModel.addAisle(0, getStoreNameString())
+            //viewModel.addStore(getStoreNameString())
         }
     ) {
         Icon(Icons.Filled.Add, "Add")

@@ -1,4 +1,4 @@
-package com.coldrifting.sirl
+package com.coldrifting.sirl.components
 
 import android.util.Log
 import android.view.View
@@ -48,8 +48,6 @@ import androidx.compose.ui.zIndex
 import androidx.core.view.HapticFeedbackConstantsCompat
 import androidx.core.view.ViewCompat
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -58,7 +56,7 @@ enum class SwipeToRevealValue { Left, Center, Right }
 data class SwipeTapAction(val colorFg: Color,
                           val colorBg: Color,
                           val icon: ImageVector,
-                          val action: () -> Unit,
+                          val action: (Int) -> Unit,
                           val snapBack: Boolean = false,
                           val desc: String = "")
 
@@ -138,7 +136,7 @@ fun SwipeRevealItem(
                 Log.d("TEST", "Settled Left")
 
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_START)
-                leftAction.action.invoke()
+                leftAction.action.invoke(index)
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_END)
             }
         }
@@ -152,7 +150,7 @@ fun SwipeRevealItem(
                 Log.d("TEST", "Settled Right")
 
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_START)
-                rightAction.action.invoke()
+                rightAction.action.invoke(index)
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_END)
             }
         }
@@ -223,7 +221,7 @@ fun SwipeRevealItem(
                         onClick = {
                             coroutineScope.launch {
                                 state.animateTo(SwipeToRevealValue.Center, TweenSpec(animTime))
-                                leftAction.action.invoke()
+                                leftAction.action.invoke(index)
                             }
                         }) {
                         Icon(
@@ -244,7 +242,7 @@ fun SwipeRevealItem(
                         onClick = {
                             coroutineScope.launch {
                                 state.animateTo(SwipeToRevealValue.Center, TweenSpec(animTime))
-                                rightAction.action.invoke()
+                                rightAction.action.invoke(index)
                             }
                         }) {
                         Icon(

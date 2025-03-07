@@ -15,7 +15,7 @@
 * limitations under the License.
 */
 
-package com.coldrifting.sirl
+package com.coldrifting.sirl.components
 
 
 import android.util.Log
@@ -69,13 +69,16 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 
 @Composable
-fun LazyColumnDragAndDropDemo(modifier: Modifier) {
-    var list by remember { mutableStateOf(List(50) { it }) }
+fun LazyColumnDragAndDropDemo(modifier: Modifier = Modifier,
+                              listItems: List<String>,
+                              onListItemSwap: (Int, Int) -> Unit)
+{
 
     val listState = rememberLazyListState()
     val dragDropState =
         rememberDragDropState(listState) { fromIndex, toIndex ->
-            list = list.toMutableList().apply { add(toIndex, removeAt(fromIndex)) }
+            onListItemSwap(fromIndex, toIndex)
+            //list = listItems.toMutableList().apply { add(toIndex, removeAt(fromIndex)) }
         }
 
     LazyColumn(
@@ -84,7 +87,7 @@ fun LazyColumnDragAndDropDemo(modifier: Modifier) {
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        itemsIndexed(list, key = { _, item -> item }) { index, item ->
+        itemsIndexed(listItems, key = { _, item -> item }) { index, item ->
             DraggableItem(modifier = Modifier.background(MaterialTheme.colorScheme.surface),
                 dragDropState = dragDropState,
                 index = index) { isDragging ->
