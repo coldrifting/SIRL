@@ -18,9 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.coldrifting.sirl.components.ListItem
 import com.coldrifting.sirl.components.SwipeRadioButtonList
-import com.coldrifting.sirl.getNextListId
-import com.coldrifting.sirl.getStoreNameString
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SwipeRadioButtonListExample() {
@@ -33,7 +30,7 @@ fun SwipeRadioButtonListExample() {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { list.add(ListItem(getNextListId(list), getStoreNameString())) },
+                onClick = { /* list.add(ListItem(getNextListId(list), getStoreNameString())) */ },
             ) {
                 Icon(Icons.Filled.Add, "Floating action button.")
             }

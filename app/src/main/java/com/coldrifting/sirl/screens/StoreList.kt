@@ -17,7 +17,7 @@ import com.coldrifting.sirl.components.SwipeRadioButtonList
 fun StoreList(navHostController: NavHostController, viewModel: AppViewModel) {
     val storeList by viewModel.stores.collectAsState()
     SwipeRadioButtonList(
-        listItems = storeList.map({ ListItem(it.key, it.value) }),
+        listItems = storeList.map { ListItem(it.key, it.value) },
         auxButton = AuxButtonData({navHostController.navigate(StoreAisleList(it))}, Icons.Filled.PlayArrow),
         onSelect = viewModel::selectStore,
         leftSwipe = SwipeData({viewModel.renameStore(it, "blah")}),

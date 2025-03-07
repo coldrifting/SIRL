@@ -6,13 +6,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class AppViewModel: ViewModel() {
-
-    private val _title = MutableStateFlow("App Top Bar")
-    val title = _title.asStateFlow()
-
-    private val _editAction = MutableStateFlow<(() -> Unit)?>(null)
-    val editAction = _editAction.asStateFlow()
-
     private val _selectedStore = MutableStateFlow(-1)
     val selectedStore = _selectedStore.asStateFlow()
 
@@ -22,14 +15,6 @@ class AppViewModel: ViewModel() {
 
     private val _aisles = MutableStateFlow(mapOf(Pair(0, listOf("Aisle 1", "Bakery", "AAA", "Testing"))))
     val aisles = _aisles.asStateFlow()
-
-    fun setEditAction(editAction: () -> Unit) {
-        _editAction.value = editAction
-    }
-
-    fun setTitle(title: String) {
-        _title.value = title
-    }
 
     fun getStore(id: Int): String? {
         return _stores.value[id]
@@ -65,7 +50,7 @@ class AppViewModel: ViewModel() {
     }
 
     fun addAisle(id: Int, aisleName: String) {
-        val aisles = _aisles.value[id] ?: return
+        val aisles = _aisles.value[id] ?: listOf()
         if (aisles.contains(aisleName)) return
         _aisles.update {
             _aisles.value + (id to aisles.toMutableList().apply{add(aisleName)})
@@ -76,7 +61,6 @@ class AppViewModel: ViewModel() {
         val aisles = _aisles.value[id] ?: return
         if (aisles.contains(newAisleName)) return
         for(i in aisles.indices) {
-            val x = aisles[i]
             if (aisles[i].hashCode() == index) {
                 _aisles.update {
                     _aisles.value + (id to aisles.toMutableList().apply { set(i, newAisleName) })

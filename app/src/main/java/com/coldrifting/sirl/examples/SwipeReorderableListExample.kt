@@ -43,8 +43,6 @@ import androidx.core.view.ViewCompat
 import com.coldrifting.sirl.components.ListItem
 import com.coldrifting.sirl.components.SwipeRevealItem
 import com.coldrifting.sirl.components.SwipeTapAction
-import com.coldrifting.sirl.getNextListId
-import com.coldrifting.sirl.getStoreNameString
 import com.coldrifting.sirl.ui.theme.DelColor
 import com.coldrifting.sirl.ui.theme.EditColor
 import sh.calvin.reorderable.ReorderableItem
@@ -57,16 +55,16 @@ fun SwipeReorderableListExample() {
     val list =
         remember {
             mutableStateListOf(
-                ListItem(1, "Maceys (1700 S)"),
+                ListItem(1, "Macey's (1700 S)"),
                 ListItem(2, "WinCo (2100 S)"),
-                ListItem(3, "Harmons")
+                ListItem(3, "Harmon's")
             )
         }
 
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { list.add(ListItem(getNextListId(list), getStoreNameString())) },
+                onClick = { /* list.add(ListItem(getNextListId(list), getStoreNameString())) */ },
             ) {
                 Icon(Icons.Filled.Add, "Floating action button.")
             }
