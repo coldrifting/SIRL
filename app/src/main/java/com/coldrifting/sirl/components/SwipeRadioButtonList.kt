@@ -19,7 +19,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,30 +34,37 @@ import com.coldrifting.sirl.ui.theme.EditColor
 
 data class SwipeData(val action: (Int) -> Unit, val snapBack: Boolean = false)
 data class AuxButtonData(val action: (Int) -> Unit, val icon: ImageVector)
-data class ListItem(val id: Int, val text: String)
 
 @Composable
-fun SwipeRadioButtonList(
+fun <T> SwipeRadioButtonList(
     modifier: Modifier = Modifier,
-    listItems: List<ListItem>,
-    onSelect: ((Int) -> Unit)? = null,
+    listItems: List<T>,
+    toString: (T) -> String,
+    getKey: (T) -> Int,
+    selectedItem: Int,
+    onSelectItem: (Int) -> Unit,
     auxButton: AuxButtonData? = null,
     leftSwipe: SwipeData? = null,
     rightSwipe: SwipeData? = null
 ) {
-    val (selectedOption, onOptionSelected) = remember { mutableIntStateOf(0) }
     val lastSwiped = remember { mutableIntStateOf(-1) }
+
+    val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
+
+    key(listItems) {
+        list.value = listItems.map{item -> ListItem(getKey(item), item) }
+    }
 
     // Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
     LazyColumn(
         modifier.selectableGroup()
     ) {
-        items(listItems.sortedBy { it.text }) { item ->
+        items(list.value, key = { it.key }) { item ->
             val leftAction = if (leftSwipe != null) SwipeTapAction(
                 Color.White,
                 EditColor,
                 Icons.Default.Edit,
-                { leftSwipe.action(item.id) },
+                { leftSwipe.action(item.key) },
                 leftSwipe.snapBack,
                 "Edit"
             ) else null
@@ -64,13 +73,13 @@ fun SwipeRadioButtonList(
                 Color.White,
                 DelColor,
                 Icons.Default.Delete,
-                { rightSwipe.action(item.id) },
+                { rightSwipe.action(item.key) },
                 rightSwipe.snapBack,
                 "Delete"
             ) else null
 
             SwipeRevealItem(
-                index = item.id,
+                index = item.key,
                 curIndex = lastSwiped,
                 leftAction = leftAction,
                 rightAction = rightAction
@@ -81,25 +90,25 @@ fun SwipeRadioButtonList(
                         .height(56.dp)
                         .background(MaterialTheme.colorScheme.surface)
                         .selectable(
-                            selected = (item.id == selectedOption),
-                            onClick = { onOptionSelected(item.id); onSelect?.invoke(item.id) },
+                            selected = (item.key == selectedItem),
+                            onClick = { onSelectItem(item.key) },
                             role = Role.RadioButton
                         )
                         .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = (item.id == selectedOption),
+                        selected = (item.key == selectedItem),
                         onClick = null // null recommended for accessibility with screen readers
                     )
                     Text(
-                        text = item.text,
+                        text = toString(item.item),
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                     Spacer(Modifier.weight(1f))
                     if (auxButton != null) {
-                        IconButton(onClick = { auxButton.action(item.id) })
+                        IconButton(onClick = { auxButton.action(item.key) })
                         {
                             Icon(auxButton.icon, "")
                         }

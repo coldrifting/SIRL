@@ -21,7 +21,7 @@ fun getRouteName(obj: Any, viewModel: AppViewModel): String {
     return when(obj) {
         is Stores -> "Stores"
         is StoreList -> "Stores - All"
-        is StoreAisleList -> "Aisles - ${viewModel.getStore(obj.id)}"
+        is StoreAisleList -> "Aisles - ${viewModel.getStoreName(obj.id)}"
         is Ingredients -> "Ingredients"
         is Recipes -> "Recipes"
         is Cart -> "Cart"

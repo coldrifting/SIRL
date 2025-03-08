@@ -1,9 +1,6 @@
 package com.coldrifting.sirl.components
 
-import android.util.Log
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,11 +18,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,16 +31,25 @@ import androidx.core.view.HapticFeedbackConstantsCompat
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
+data class ListItem<T>(val key: Int, val item: T)
+
 @Composable
-fun SwipeReorderableList(
+fun <T> SwipeReorderableList(
     modifier: Modifier = Modifier,
-    listItems: List<String>,
+    listItems: List<T>,
+    toString: (T) -> String,
+    getKey: (T) -> Int,
+    onDragStopped: (List<T>) -> Unit,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
-    onMove: (from: Int, to: Int) -> Unit,
-    onDragStopped: () -> Unit
 ) {
     val view = LocalView.current
+
+    val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
+
+    key(listItems) {
+        list.value = listItems.map{item -> ListItem(getKey(item), item) }
+    }
 
     val lastSwiped = remember { mutableIntStateOf(-1) }
 
@@ -50,62 +57,63 @@ fun SwipeReorderableList(
     val reorderableLazyListState = rememberReorderableLazyListState(
         lazyListState = lazyListState,
         onMove = { from, to ->
-            onMove( from.index, to.index)
+            list.value = list.value.toMutableList().apply{ add(to.index, removeAt(from.index)) }
         }
     )
 
     LazyColumn(
         state = lazyListState,
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize()
     )
     {
-            items(listItems, key = { it }) {
-                Log.d("TEST", "CurrentIndexList: $it")
-                ReorderableItem(
-                    state = reorderableLazyListState,
-                    key = it
-                ) { isDragging ->
-                    val elevation: Dp by animateDpAsState(if (isDragging) 4.dp else 0.dp)
-
-                    //val color: Color = MaterialTheme.colorScheme.surfaceContainer
-                    val color: Color by animateColorAsState(if (isDragging) Color.Transparent else MaterialTheme.colorScheme.surfaceContainer)
-
-                    Surface(color = color, shadowElevation = elevation) {
-                        SwipeRevealItem(
-                            index = it.hashCode(),
-                            curIndex = lastSwiped,
-                            leftAction = leftAction,
-                            rightAction = rightAction
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(color)
-                                    .padding(horizontal = 8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(text = it)
-                                Spacer(Modifier.weight(1f))
-                                IconButton(
-                                    modifier = Modifier.draggableHandle(
-                                        onDragStarted = {
-                                            view.performHapticFeedback(HapticFeedbackConstantsCompat.LONG_PRESS)
-                                        },
-                                        onDragStopped = {
-                                            view.performHapticFeedback(HapticFeedbackConstantsCompat.GESTURE_END)
-                                            onDragStopped()
-                                        },
-                                    ),
-                                        onClick = {},
-                                ) {
-                                    Icon(Icons.Rounded.Menu, contentDescription = "Reorder")
-                                }
-
+        items(
+            items = list.value,
+            key = { it.key }
+        ) {
+            ReorderableItem(
+                state = reorderableLazyListState,
+                key = it.key
+            )
+            { isDragging ->
+                val elevation: Dp by animateDpAsState(if (isDragging) 8.dp else 0.dp)
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.surface,
+                    tonalElevation = elevation,
+                    shadowElevation = elevation
+                )
+                {
+                    SwipeRevealItem(
+                        index = it.key,
+                        curIndex = lastSwiped,
+                        leftAction = leftAction,
+                        rightAction = rightAction
+                    )
+                    {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        )
+                        {
+                            Text(toString(it.item))
+                            Spacer(Modifier.weight(1f))
+                            IconButton(
+                                modifier = Modifier.draggableHandle(
+                                    onDragStarted = {
+                                        view.performHapticFeedback(HapticFeedbackConstantsCompat.LONG_PRESS)
+                                    },
+                                    onDragStopped = {
+                                        view.performHapticFeedback(HapticFeedbackConstantsCompat.GESTURE_END)
+                                        onDragStopped(list.value.map{entry -> entry.item})
+                                    }),
+                                onClick = {})
+                            {
+                                Icon(Icons.Rounded.Menu, contentDescription = "Reorder")
                             }
-
                         }
                     }
                 }
+            }
         }
     }
 

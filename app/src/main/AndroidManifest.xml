@@ -12,7 +12,7 @@
         android:theme="@style/Theme.SIRL"
         >
         <activity
-            android:name=".MainActivity"
+            android:name=".AppActivity"
             android:exported="true"
             android:theme="@style/Theme.SIRL">
             <intent-filter>
