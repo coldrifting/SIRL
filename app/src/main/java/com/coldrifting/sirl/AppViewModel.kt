@@ -56,6 +56,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
     fun deleteAisle(locationId: Int) {
         repository.deleteStoreLocation(locationId)
     }
+
+    fun getAisleName(locationId: Int): String? {
+        return locations.value.firstOrNull{ s -> s.locationId == locationId}?.locationName
+    }
 }
 
 object AppViewModelProvider {

@@ -24,6 +24,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberOverscrollEffect
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -47,6 +50,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.core.view.HapticFeedbackConstantsCompat
 import androidx.core.view.ViewCompat
+import com.coldrifting.sirl.ui.theme.DelColor
+import com.coldrifting.sirl.ui.theme.EditColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -59,6 +64,28 @@ data class SwipeTapAction(val colorFg: Color,
                           val action: (Int) -> Unit,
                           val snapBack: Boolean = false,
                           val desc: String = "")
+
+fun swipeEditAction(action: (Int) -> Unit): SwipeTapAction {
+    return SwipeTapAction(
+        Color.White,
+        EditColor,
+        Icons.Default.Edit,
+        {action.invoke(it)},
+        true,
+        "Edit"
+    )
+}
+
+fun swipeDeleteAction(action: (Int) -> Unit): SwipeTapAction {
+    return SwipeTapAction(
+        Color.White,
+        DelColor,
+        Icons.Default.Delete,
+        {action.invoke(it)},
+        false,
+        "Delete"
+    )
+}
 
 @Composable
 fun SwipeRevealItem(

@@ -10,9 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -25,12 +22,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import com.coldrifting.sirl.ui.theme.DelColor
-import com.coldrifting.sirl.ui.theme.EditColor
 
 data class SwipeData(val action: (Int) -> Unit, val snapBack: Boolean = false)
 data class AuxButtonData(val action: (Int) -> Unit, val icon: ImageVector)
@@ -44,8 +38,8 @@ fun <T> SwipeRadioButtonList(
     selectedItem: Int,
     onSelectItem: (Int) -> Unit,
     auxButton: AuxButtonData? = null,
-    leftSwipe: SwipeData? = null,
-    rightSwipe: SwipeData? = null
+    leftAction: SwipeTapAction? = null,
+    rightAction: SwipeTapAction? = null
 ) {
     val lastSwiped = remember { mutableIntStateOf(-1) }
 
@@ -60,24 +54,6 @@ fun <T> SwipeRadioButtonList(
         modifier.selectableGroup()
     ) {
         items(list.value, key = { it.key }) { item ->
-            val leftAction = if (leftSwipe != null) SwipeTapAction(
-                Color.White,
-                EditColor,
-                Icons.Default.Edit,
-                { leftSwipe.action(item.key) },
-                leftSwipe.snapBack,
-                "Edit"
-            ) else null
-
-            val rightAction = if (rightSwipe != null) SwipeTapAction(
-                Color.White,
-                DelColor,
-                Icons.Default.Delete,
-                { rightSwipe.action(item.key) },
-                rightSwipe.snapBack,
-                "Delete"
-            ) else null
-
             SwipeRevealItem(
                 index = item.key,
                 curIndex = lastSwiped,

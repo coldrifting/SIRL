@@ -116,27 +116,4 @@ fun <T> SwipeReorderableList(
             }
         }
     }
-
-    /*
-    val openAlertDialog = remember { mutableStateOf(false) }
-    val listItem = remember { mutableIntStateOf(-1) }
-
-    when {
-        openAlertDialog.value -> {
-            AlertDialogExample(
-                onDismissRequest = { openAlertDialog.value = false },
-                onConfirmation = {
-                    openAlertDialog.value = false
-                    println("Confirmation registered") // Add logic here to handle confirmation.
-
-                    list.removeAt(listItem.intValue)
-
-                },
-                dialogTitle = "Alert dialog example",
-                dialogText = "This is an example of an alert dialog with buttons.",
-                icon = Icons.Default.Info
-            )
-        }
-    }
-     */
 }
