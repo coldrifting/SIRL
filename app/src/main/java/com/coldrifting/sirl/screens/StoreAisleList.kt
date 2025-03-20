@@ -28,7 +28,7 @@ fun StoreAisleList(id: Int, navHostController: NavHostController, viewModel: App
         Color.White,
         EditColor,
         Icons.Default.Edit,
-        {viewModel.renameAisle(id, it, "blah")},
+        {viewModel.renameAisle(it, "blah")},
         true,
         "Edit"
     )
@@ -36,13 +36,13 @@ fun StoreAisleList(id: Int, navHostController: NavHostController, viewModel: App
         Color.White,
         DelColor,
         Icons.Default.Delete,
-        {viewModel.deleteAisle(id, it)},
+        {viewModel.deleteAisle(it)},
         false,
         "Delete"
     )
 
     viewModel.setCurrentStoreForEdit(id)
-    val aisles by viewModel.aisles.collectAsState()
+    val aisles by viewModel.locations.collectAsState()
 
     Scaffold(
         topBar = { TopBar(navHostController, title) },

@@ -1,74 +1,72 @@
 package com.coldrifting.sirl
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.coldrifting.sirl.entities.StoreLocation
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.SharingStarted
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 
-class AppViewModel: ViewModel() {
-    private val repo: Repo = Repo()
+class AppViewModel(private val repository: AppRepository) : ViewModel() {
+    val stores: StateFlow<List<Store>> = repository.allStores
+    val locations: StateFlow<List<StoreLocation>> = repository.allLocations
 
-    val selectedStore = repo.selectedStoreId
-
-    val stores = repo.stores
-
-    val aisles = repo.currentStoreLocations
-
-    fun getStoreName(storeId: Int): String? {
-        return repo.getStore(storeId)?.name
-    }
+    val selectedStore = repository.selectedStoreId
 
     fun selectStore(storeId: Int) {
-        repo.selectStore(storeId)
+        repository.selectStore(storeId)
     }
 
     fun setCurrentStoreForEdit(storeId: Int) {
-        repo.setCurrentStoreForEdit(storeId)
+        repository.setCurrentStoreForEdit(storeId)
     }
 
+
     fun addStore(storeName: String) {
-        repo.addStore(storeName)
+        repository.addStore(storeName)
     }
 
     fun deleteStore(storeId: Int) {
-        repo.deleteStore(storeId)
+        repository.deleteStore(storeId)
     }
 
     fun renameStore(storeId: Int, newName: String) {
-        repo.renameStore(storeId, newName)
+        repository.renameStore(storeId, newName)
     }
 
+    fun getStoreName(storeId: Int): String? {
+        return stores.value.firstOrNull{ s -> s.storeId == storeId}?.storeName
+    }
+
+
     fun syncAisles(items: List<StoreLocation>) {
-        if (items != repo.currentStoreLocations.value) {
-            repo.replaceStoreLocations(items)
+        if (items != locations.value) {
+            repository.reorderStoreLocations(items)
         }
     }
 
     fun addAisle(storeId: Int, storeLocationName: String) {
-        repo.addStoreLocation(storeId, storeLocationName)
+        repository.addStoreLocation(storeId, storeLocationName)
     }
 
-    fun renameAisle(storeId: Int, locationId: Int, newLocationName: String) {
-        repo.renameStoreLocation(storeId, locationId, newLocationName)
+    fun renameAisle(locationId: Int, newLocationName: String) {
+        repository.renameStoreLocation(locationId, newLocationName)
+
     }
 
-    fun deleteAisle(storeId: Int, index: Int) {
-        repo.deleteStoreLocation(storeId, index)
+    fun deleteAisle(locationId: Int) {
+        repository.deleteStoreLocation(locationId)
     }
+}
 
-    private fun <T, R> StateFlow<T>.mapToStateFlow(
-        transform: (T) -> R,
-        initialValue: R
-    ): StateFlow<R> = this.map {
-        transform(it)
-    }.stateIn(
-        scope = CoroutineScope(Dispatchers.Default),
-        started = SharingStarted.Eagerly,
-        initialValue = initialValue
-    )
+object AppViewModelProvider {
+    val Factory = viewModelFactory {
+        initializer {
+            AppViewModel(
+                //fetches the application singleton
+                (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]
+                        //and then extracts the repository in it
+                        as AppApplication).appRepository
+            )
+        }
+    }
 }

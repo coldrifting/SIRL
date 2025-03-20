@@ -48,7 +48,7 @@ fun <T> SwipeReorderableList(
     val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
 
     key(listItems) {
-        list.value = listItems.map{item -> ListItem(getKey(item), item) }
+        list.value = listItems.map{item -> ListItem(key = getKey(item), item = item) }
     }
 
     val lastSwiped = remember { mutableIntStateOf(-1) }

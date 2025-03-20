@@ -30,7 +30,7 @@ class AppActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SIRLTheme {
-                val viewModel: AppViewModel by viewModels()
+                val viewModel: AppViewModel by viewModels { AppViewModelProvider.Factory }
                 MainContent(viewModel)
             }
         }

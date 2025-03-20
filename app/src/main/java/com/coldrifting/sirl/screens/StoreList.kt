@@ -31,7 +31,7 @@ fun StoreList(navHostController: NavHostController, viewModel: AppViewModel, tit
             SwipeRadioButtonList(
                 modifier = Modifier.padding(innerPadding),
                 listItems = storeList,
-                toString = { it.name },
+                toString = { it.storeName },
                 getKey = {it.storeId },
                 auxButton = AuxButtonData(
                     { navHostController.navigate(StoreAisleList(it)) },
