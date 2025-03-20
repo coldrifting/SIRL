@@ -19,6 +19,7 @@ import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
+import com.coldrifting.sirl.routeStores
 
 @Composable
 fun StoreAisleList(id: Int, navHostController: NavHostController, viewModel: AppViewModel, title: String) {
@@ -53,7 +54,7 @@ fun StoreAisleList(id: Int, navHostController: NavHostController, viewModel: App
 
     Scaffold(
         topBar = { TopBar(navHostController, title) },
-        bottomBar = { NavBar(navHostController) },
+        bottomBar = { NavBar(navHostController, routeStores) },
         floatingActionButton = { Fab(addAction = { showNewAlertDialog = true }) },
         content = { innerPadding ->
             SwipeReorderableList(

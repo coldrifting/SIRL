@@ -5,23 +5,18 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.navigation.NavDestination.Companion.hasRoute
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
+import com.coldrifting.sirl.TopLevelRoute
 import com.coldrifting.sirl.topLevelRoutes
 
 @Composable
-fun NavBar(navController: NavHostController) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
+fun NavBar(navController: NavHostController, selectedRoute: TopLevelRoute<out Any>) {
     NavigationBar {
         topLevelRoutes.forEach { topLevelRoute ->
-            NavigationBarItem(label = { Text(topLevelRoute.name) },
-                icon = { Icon(topLevelRoute.icon, contentDescription = topLevelRoute.name) },
-                selected = navBackStackEntry?.destination?.hierarchy?.any {
-                    it.hasRoute(topLevelRoute.route::class)
-                } == true,
+            val routeName: String = topLevelRoute.route.javaClass.simpleName
+            NavigationBarItem(label = { Text(routeName) },
+                icon = { Icon(topLevelRoute.icon, contentDescription = routeName) },
+                selected = topLevelRoute == selectedRoute,
                 onClick = {
                     navController.navigate(topLevelRoute.route) {
                         popUpTo(navController.graph.id) {

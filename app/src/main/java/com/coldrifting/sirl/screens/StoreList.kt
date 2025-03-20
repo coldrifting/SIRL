@@ -23,6 +23,7 @@ import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
+import com.coldrifting.sirl.routeStores
 
 @Composable
 fun StoreList(navHostController: NavHostController, viewModel: AppViewModel, title: String) {
@@ -57,7 +58,7 @@ fun StoreList(navHostController: NavHostController, viewModel: AppViewModel, tit
 
     Scaffold(
         topBar = { TopBar(navHostController, title) },
-        bottomBar = { NavBar(navHostController) },
+        bottomBar = { NavBar(navHostController, routeStores) },
         floatingActionButton = { Fab(addAction = { showNewAlertDialog = true }) },
         content = { innerPadding ->
             SwipeRadioButtonList(
