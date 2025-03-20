@@ -27,6 +27,9 @@ import com.coldrifting.sirl.routeStores
 
 @Composable
 fun StoreList(navHostController: NavHostController, viewModel: AppViewModel, title: String) {
+    // Prevent Aisle list from displaying old data when we switch to a different store
+    viewModel.setCurrentStoreForEdit(-1)
+
     val storeList by viewModel.stores.collectAsState()
     val selectedStore by viewModel.selectedStore.collectAsState()
 
