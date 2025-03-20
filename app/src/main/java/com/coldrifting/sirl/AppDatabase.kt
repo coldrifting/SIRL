@@ -27,6 +27,9 @@ interface AppDAO {
     @Delete(entity = Store::class)
     suspend fun deleteStore(storeId: StoreId)
 
+    @Query("SELECT COALESCE((SELECT MIN(storeId) FROM Store), -1)")
+    suspend fun firstStoreIdOrDefault() : Int
+
     // Store Aisle Locations
     @Query("SELECT * FROM StoreLocation ORDER BY sortingPrefix")
     fun allLocations() : Flow<List<StoreLocation>>

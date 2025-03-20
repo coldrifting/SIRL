@@ -1,12 +1,12 @@
 package com.coldrifting.sirl
 
+import android.content.Context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
@@ -16,14 +16,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-
-class AppRepository(val scope: CoroutineScope,
-                    private val dao: AppDAO) {
-    private val _selectedStoreId = MutableStateFlow(-1)
-    val selectedStoreId = _selectedStoreId.asStateFlow()
+class AppRepository(private val scope: CoroutineScope, private val dao: AppDAO, private val context: Context) {
+    val selectedStoreId = context.settingsDataStore.data.map { settings -> settings.storeSelection }.toStateFlow(-1)
 
     private val _currentStoreForEdits = MutableStateFlow(-1)
-    val currentStoreForEdits = _currentStoreForEdits.asStateFlow()
 
     val allStores = dao.allStores().toStateFlow()
     val allLocations = combineStates(
@@ -33,10 +29,9 @@ class AppRepository(val scope: CoroutineScope,
         transform = {a, b -> a.filter{s -> s.storeId == b}}
     )
 
-
     fun selectStore(storeId: Int) {
-        _selectedStoreId.update {
-            return@update storeId
+        scope.launch {
+            context.settingsDataStore.updateData { t -> t.toBuilder().setStoreSelection(storeId).build() }
         }
     }
 
@@ -49,6 +44,9 @@ class AppRepository(val scope: CoroutineScope,
     fun addStore(storeName: String) {
         scope.launch {
             dao.addStore(Store(storeName = storeName))
+            if (selectedStoreId.value == -1) {
+                selectStore(dao.firstStoreIdOrDefault())
+            }
         }
     }
 
@@ -61,6 +59,9 @@ class AppRepository(val scope: CoroutineScope,
     fun deleteStore(storeId: Int) {
         scope.launch {
             dao.deleteStore(StoreId(storeId))
+            if (selectedStoreId.value == storeId) {
+                selectStore(dao.firstStoreIdOrDefault())
+            }
         }
     }
 
@@ -123,22 +124,17 @@ class AppRepository(val scope: CoroutineScope,
         }
     }
 
+    private fun <T> Flow<T>.toStateFlow(defaultVal: T): StateFlow<T> {
+        return this.stateIn(
+            scope = scope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = defaultVal)
+    }
+
     private fun <T> Flow<List<T>>.toStateFlow(): StateFlow<List<T>> {
         return this.stateIn(
             scope = scope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = listOf()
-        ) //start with an empty list
+            initialValue = listOf()) //start with an empty list
     }
-
-    private fun <T, R> Flow<T>.mapAsStateFlow(
-        transform: (T) -> R,
-        initialValue: R
-    ): StateFlow<R> = this.map {
-        transform(it)
-    }.stateIn(
-        scope = scope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = initialValue
-    )
 }

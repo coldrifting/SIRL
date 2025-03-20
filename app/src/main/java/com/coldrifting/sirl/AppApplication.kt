@@ -16,5 +16,5 @@ class AppApplication: Application() {
         ).build()
     }
 
-    val appRepository by lazy { AppRepository(scope, db.appDao()) }
+    val appRepository by lazy { AppRepository(scope, db.appDao(), this.applicationContext) }
 }
