@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 
-data class SwipeData(val action: (Int) -> Unit, val snapBack: Boolean = false)
 data class AuxButtonData(val action: (Int) -> Unit, val icon: ImageVector)
 
 @Composable
