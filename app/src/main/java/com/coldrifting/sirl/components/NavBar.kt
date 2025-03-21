@@ -1,13 +1,18 @@
 package com.coldrifting.sirl.components
 
+import android.content.res.Configuration
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.TopLevelRoute
+import com.coldrifting.sirl.routeIngredients
 import com.coldrifting.sirl.topLevelRoutes
+import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
 fun NavBar(navController: NavHostController, selectedRoute: TopLevelRoute<out Any>) {
@@ -27,5 +32,13 @@ fun NavBar(navController: NavHostController, selectedRoute: TopLevelRoute<out An
                     }
                 })
         }
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun NavBarPreview() {
+    SIRLTheme {
+        NavBar(rememberNavController(), routeIngredients)
     }
 }

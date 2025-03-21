@@ -1,0 +1,1858 @@
+[
+  {
+    "itemId": 1,
+    "itemName": "Apple Cider Vinegar",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 2,
+    "itemName": "Balsamic Vinegar",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 3,
+    "itemName": "Red Wine Vinegar",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 4,
+    "itemName": "Rice Wine Vinegar",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 5,
+    "itemName": "Honey",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 6,
+    "itemName": "Olive Oil",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 7,
+    "itemName": "Bagels",
+    "itemCategory": "Shelf",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 8,
+    "itemName": "Bread",
+    "itemCategory": "Shelf",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 9,
+    "itemName": "Croutons",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 10,
+    "itemName": "English Muffins",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 11,
+    "itemName": "Hamburger Buns",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 12,
+    "itemName": "Canned fruit",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 13,
+    "itemName": "Spam",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 14,
+    "itemName": "Tuna",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 15,
+    "itemName": "Mayonnaise",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 16,
+    "itemName": "Ranch Dressing",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 17,
+    "itemName": "Natural Peanut Butter",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 18,
+    "itemName": "Applesauce",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 19,
+    "itemName": "Barbecue Sauce",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 20,
+    "itemName": "Dijon Mustard",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 21,
+    "itemName": "Ketchup",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 22,
+    "itemName": "Mustard",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 23,
+    "itemName": "Worcestershire sauce",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 24,
+    "itemName": "Kalamata Olives",
+    "itemCategory": "Shelf",
+    "packageType": "Jars",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 25,
+    "itemName": "Olives",
+    "itemCategory": "Shelf",
+    "packageType": "Cans",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 26,
+    "itemName": "Pickels",
+    "itemCategory": "Shelf",
+    "packageType": "Jars",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 27,
+    "itemName": "Pizza Sauce",
+    "itemCategory": "Shelf",
+    "packageType": "Jars",
+    "packageUnits": "Ounces",
+    "packageAmount": 8
+  },
+  {
+    "itemId": 28,
+    "itemName": "Tortillas",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 29,
+    "itemName": "Tortillas (Small)",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 30,
+    "itemName": "Ramen",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 31,
+    "itemName": "Black Beans",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 32,
+    "itemName": "Butter Beans",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 33,
+    "itemName": "Cannellini Beans",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 34,
+    "itemName": "Corn (Canned)",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 35,
+    "itemName": "Green Beans",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 36,
+    "itemName": "Kidney Beans",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 37,
+    "itemName": "Crushed Tomatoes",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 38,
+    "itemName": "Diced Tomatoes",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 39,
+    "itemName": "Fire Roasted Diced Tomatoes",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 40,
+    "itemName": "Petite Diced Tomatoes",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 41,
+    "itemName": "Tomato Paste",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 42,
+    "itemName": "Basil Pesto",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 43,
+    "itemName": "Grated Parmesan",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 44,
+    "itemName": "Alfredo Sauce",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 45,
+    "itemName": "Fettuccine Pasta",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": "Ounces",
+    "packageAmount": 16
+  },
+  {
+    "itemId": 46,
+    "itemName": "Mac & Cheese",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 47,
+    "itemName": "Macaroni Pasta",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": "Ounces",
+    "packageAmount": 16
+  },
+  {
+    "itemId": 48,
+    "itemName": "Marinara Sauce",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 49,
+    "itemName": "Penne Pasta",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 50,
+    "itemName": "Taco Seasoning",
+    "itemCategory": "Shelf",
+    "packageType": "Packets",
+    "packageUnits": "Ounces",
+    "packageAmount": 1
+  },
+  {
+    "itemId": 51,
+    "itemName": "Chicken Broth",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 52,
+    "itemName": "Soup",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 53,
+    "itemName": "Vegetable Broth",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 54,
+    "itemName": "Candy",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 55,
+    "itemName": "Lo Mein Noodles",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 56,
+    "itemName": "Oyster Sauce",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 57,
+    "itemName": "Rice",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 58,
+    "itemName": "Soy Sauce",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 59,
+    "itemName": "Sriracha",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 60,
+    "itemName": "Toasted Sesame oil",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 61,
+    "itemName": "Lemon Juice",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 62,
+    "itemName": "Lime Juice",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 63,
+    "itemName": "Panko",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 64,
+    "itemName": "Diced Green Chilies",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 65,
+    "itemName": "Salsa",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 66,
+    "itemName": "Basil",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 67,
+    "itemName": "Black Pepper",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 68,
+    "itemName": "Cayenne pepper",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 69,
+    "itemName": "Chili powder",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 70,
+    "itemName": "Chipotle Powder",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 71,
+    "itemName": "Cinnamon",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 72,
+    "itemName": "Cocoa Powder",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 73,
+    "itemName": "Coriander",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 74,
+    "itemName": "Crushed Red Pepper",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 75,
+    "itemName": "Cumin",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 76,
+    "itemName": "Dill",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 77,
+    "itemName": "Garlic Powder",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 78,
+    "itemName": "Ground Cinnamon",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 79,
+    "itemName": "Ground Cloves",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 80,
+    "itemName": "Ground Cumin",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 81,
+    "itemName": "Ground Ginger",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 82,
+    "itemName": "Ground Nutmeg",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 83,
+    "itemName": "Italian Seasoning",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 84,
+    "itemName": "Lemon Pepper",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 85,
+    "itemName": "Onion Powder",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 86,
+    "itemName": "Oregano",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 87,
+    "itemName": "Rosemary",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 88,
+    "itemName": "Sage",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 89,
+    "itemName": "Salt",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 90,
+    "itemName": "Sesame seeds",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 91,
+    "itemName": "Smoked Paprika",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 92,
+    "itemName": "Thyme",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 93,
+    "itemName": "Vanilla Extract",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 94,
+    "itemName": "Baking Powder",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 95,
+    "itemName": "Breadcrumbs",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 96,
+    "itemName": "Brown Sugar",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 97,
+    "itemName": "Chia Seeds",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 98,
+    "itemName": "Cornmeal",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 99,
+    "itemName": "Cornstarch",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 100,
+    "itemName": "Evaporated Milk",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 101,
+    "itemName": "Flour",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 102,
+    "itemName": "Molasses",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 103,
+    "itemName": "Powdered Sugar",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 104,
+    "itemName": "Semi-Sweet Chocolate",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 105,
+    "itemName": "Sugar",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 106,
+    "itemName": "Sweetened Condensed Milk",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 107,
+    "itemName": "Yeast",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 108,
+    "itemName": "Canola Oil",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 109,
+    "itemName": "Sesame Oil",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 110,
+    "itemName": "Vegetable Oil",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 111,
+    "itemName": "Pancakes",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 112,
+    "itemName": "Syrup",
+    "itemCategory": "Shelf",
+    "packageType": "Bottles",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 113,
+    "itemName": "Canned Coconut Milk",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 114,
+    "itemName": "Pumpkin Puree",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 115,
+    "itemName": "Brownie Mix",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 116,
+    "itemName": "Mashed Potatoes",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 117,
+    "itemName": "Breakfast Bars",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 118,
+    "itemName": "Cereal",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 119,
+    "itemName": "Oatmeal",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 120,
+    "itemName": "Poptarts",
+    "itemCategory": "Shelf",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 121,
+    "itemName": "Rolled Oats",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 122,
+    "itemName": "Cashews",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 123,
+    "itemName": "Peanuts",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 124,
+    "itemName": "Pecans",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 125,
+    "itemName": "Walnuts",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 126,
+    "itemName": "Frozen Pizza",
+    "itemCategory": "Frozen",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 127,
+    "itemName": "Impossible",
+    "itemCategory": "Frozen",
+    "packageType": "Packages",
+    "packageUnits": "Ounces",
+    "packageAmount": 12
+  },
+  {
+    "itemId": 128,
+    "itemName": "Frozen Broccoli",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 129,
+    "itemName": "Frozen Carrots",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 130,
+    "itemName": "Frozen Corn",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 131,
+    "itemName": "Frozen Edamame",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 132,
+    "itemName": "Frozen Green Beans",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 133,
+    "itemName": "Frozen Onions and Peppers",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 134,
+    "itemName": "Frozen Peas",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 135,
+    "itemName": "Frozen Pineapple",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 136,
+    "itemName": "Frozen Raspberries",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 137,
+    "itemName": "Frozen Spinach",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 138,
+    "itemName": "Frozen Vegetables",
+    "itemCategory": "Frozen",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 139,
+    "itemName": "Frozen Meals",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 140,
+    "itemName": "Orange Juice Concentrate",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 141,
+    "itemName": "Black Bean Burgers",
+    "itemCategory": "Frozen",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 142,
+    "itemName": "Chick'n Patties",
+    "itemCategory": "Frozen",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 143,
+    "itemName": "Ice Cream",
+    "itemCategory": "Frozen",
+    "packageType": "Cartons",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 144,
+    "itemName": "Breakfast Burritos",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 145,
+    "itemName": "Breakfast Sandwiches",
+    "itemCategory": "Frozen",
+    "packageType": "Boxes",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 146,
+    "itemName": "Hashbrowns",
+    "itemCategory": "Frozen",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 147,
+    "itemName": "Tater tots",
+    "itemCategory": "Frozen",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 148,
+    "itemName": "Milk",
+    "itemCategory": "Dairy",
+    "packageType": "Bottles",
+    "packageUnits": "Gallons",
+    "packageAmount": 1
+  },
+  {
+    "itemId": 149,
+    "itemName": "Oat Milk",
+    "itemCategory": "Dairy",
+    "packageType": "Cartons",
+    "packageUnits": "Ounces",
+    "packageAmount": 52
+  },
+  {
+    "itemId": 150,
+    "itemName": "Butter",
+    "itemCategory": "Dairy",
+    "packageType": "Packages",
+    "packageUnits": "Tablespoons",
+    "packageAmount": 24
+  },
+  {
+    "itemId": 151,
+    "itemName": "Half & Half",
+    "itemCategory": "Dairy",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 152,
+    "itemName": "Heavy Cream",
+    "itemCategory": "Dairy",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 153,
+    "itemName": "Heavy Whipping Cream",
+    "itemCategory": "Dairy",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 154,
+    "itemName": "Margarine",
+    "itemCategory": "Dairy",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 155,
+    "itemName": "Greek Yogurt (Plain)",
+    "itemCategory": "Dairy",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 156,
+    "itemName": "Yogurt",
+    "itemCategory": "Dairy",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 157,
+    "itemName": "Eggs",
+    "itemCategory": "Dairy",
+    "packageType": "Cartons",
+    "packageUnits": "EACH",
+    "packageAmount": 12
+  },
+  {
+    "itemId": 158,
+    "itemName": "Sour Cream",
+    "itemCategory": "Dairy",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 159,
+    "itemName": "Orange Juice",
+    "itemCategory": "Drinks",
+    "packageType": "Bottles",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 160,
+    "itemName": "Iced Coffee",
+    "itemCategory": "Drinks",
+    "packageType": "Bottles",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 161,
+    "itemName": "Bacon",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 162,
+    "itemName": "Chicken",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 163,
+    "itemName": "Chicken Breast",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 164,
+    "itemName": "Ground beef",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 165,
+    "itemName": "Ground Italian Sausage",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 166,
+    "itemName": "Ground Pork",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 167,
+    "itemName": "Ground Turkey",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 168,
+    "itemName": "Porkchops",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 169,
+    "itemName": "Sausage",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 170,
+    "itemName": "Sausage (Kielbasa)",
+    "itemCategory": "Meat",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 171,
+    "itemName": "Frozen Fish",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 172,
+    "itemName": "Frozen Meatballs",
+    "itemCategory": "Frozen",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 173,
+    "itemName": "Tempeh",
+    "itemCategory": "Vegetarian",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 174,
+    "itemName": "Tofu",
+    "itemCategory": "Vegetarian",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 175,
+    "itemName": "Flatbread",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 176,
+    "itemName": "Pita Bread",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 177,
+    "itemName": "Parmesan",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 178,
+    "itemName": "Cream Cheese",
+    "itemCategory": "Deli",
+    "packageType": "Packages",
+    "packageUnits": "Ounces",
+    "packageAmount": 6
+  },
+  {
+    "itemId": 179,
+    "itemName": "Feta Cheese",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 180,
+    "itemName": "Cheddar Cheese",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 181,
+    "itemName": "Monterey Jack Cheese",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 183,
+    "itemName": "Mozzarella Cheese",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 184,
+    "itemName": "Pepper Jack Cheese",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 185,
+    "itemName": "Provolone Cheese",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 186,
+    "itemName": "White Cheddar Cheese",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 187,
+    "itemName": "Guacamole",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 188,
+    "itemName": "Rotisserie Chicken",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 189,
+    "itemName": "Hummus",
+    "itemCategory": "Deli",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 190,
+    "itemName": "Lunch Meat",
+    "itemCategory": "Deli",
+    "packageType": "Bags",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 191,
+    "itemName": "Kale",
+    "itemCategory": "Produce",
+    "packageType": "Bags",
+    "packageUnits": "Ounces",
+    "packageAmount": 8
+  },
+  {
+    "itemId": 192,
+    "itemName": "Lettuce",
+    "itemCategory": "Produce",
+    "packageType": "Bags",
+    "packageUnits": "Ounces",
+    "packageAmount": 8
+  },
+  {
+    "itemId": 193,
+    "itemName": "Mushrooms",
+    "itemCategory": "Produce",
+    "packageType": "Packages",
+    "packageUnits": "Ounces",
+    "packageAmount": 8
+  },
+  {
+    "itemId": 194,
+    "itemName": "Shredded Carrots",
+    "itemCategory": "Produce",
+    "packageType": "Bags",
+    "packageUnits": "Ounces",
+    "packageAmount": 8
+  },
+  {
+    "itemId": 195,
+    "itemName": "Spinach",
+    "itemCategory": "Produce",
+    "packageType": "Bags",
+    "packageUnits": "Ounces",
+    "packageAmount": 8
+  },
+  {
+    "itemId": 196,
+    "itemName": "Sun Dried Tomatoes",
+    "itemCategory": "Produce",
+    "packageType": "Bags",
+    "packageUnits": "Ounces",
+    "packageAmount": 8
+  },
+  {
+    "itemId": 197,
+    "itemName": "Apples",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 198,
+    "itemName": "Avocados",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 199,
+    "itemName": "Bananas",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 200,
+    "itemName": "Bay Leaf",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 201,
+    "itemName": "Bok Choy",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 202,
+    "itemName": "Broccoli",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 203,
+    "itemName": "Cabbage",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 204,
+    "itemName": "Carrots",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 205,
+    "itemName": "Celery",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 206,
+    "itemName": "Coleslaw Mix",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 207,
+    "itemName": "Cucumbers",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 208,
+    "itemName": "Eggplant",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 209,
+    "itemName": "Garlic",
+    "itemCategory": "Produce",
+    "packageType": "Cloves",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 210,
+    "itemName": "Ginger",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 211,
+    "itemName": "Grape Tomatoes",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 212,
+    "itemName": "Green Bell Peppers",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 213,
+    "itemName": "Green Onions",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 214,
+    "itemName": "Jalapenos",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 215,
+    "itemName": "Lemons",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 216,
+    "itemName": "Limes",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 217,
+    "itemName": "Poblano Peppers",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 218,
+    "itemName": "Red Bell Pepper",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 219,
+    "itemName": "Red Onions",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 220,
+    "itemName": "Red Potatoes",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 221,
+    "itemName": "Roma Tomatoes",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 222,
+    "itemName": "Salad Kit",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 223,
+    "itemName": "Tomatoes",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 224,
+    "itemName": "White Onions",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 225,
+    "itemName": "Yellow Onions",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 226,
+    "itemName": "Yellow Squash",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 227,
+    "itemName": "Zucchini",
+    "itemCategory": "Produce",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 228,
+    "itemName": "Cinnamon Rolls",
+    "itemCategory": "Bakery",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 229,
+    "itemName": "French Bread",
+    "itemCategory": "Bakery",
+    "packageType": "Loafs",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 230,
+    "itemName": "Garlic Bread",
+    "itemCategory": "Bakery",
+    "packageType": "Loafs",
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 231,
+    "itemName": "Muffins",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 232,
+    "itemName": "Rolls",
+    "itemCategory": "Bakery",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  },
+  {
+    "itemId": 233,
+    "itemName": "Olive Oil (Extra-Virgin)",
+    "itemCategory": "Shelf",
+    "packageType": null,
+    "packageUnits": null,
+    "packageAmount": null
+  }
+]

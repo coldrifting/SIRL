@@ -1,140 +1,188 @@
 package com.coldrifting.sirl
 
 import android.content.Context
+import android.util.Log
+import com.coldrifting.sirl.data.access.AisleDAO
+import com.coldrifting.sirl.data.access.ItemAisleDAO
+import com.coldrifting.sirl.data.access.ItemDAO
+import com.coldrifting.sirl.data.access.StoreDAO
+import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.Store
+import com.coldrifting.sirl.entities.types.ItemCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
+import java.util.concurrent.Executors
 
-class AppRepository(private val scope: CoroutineScope, private val dao: AppDAO, private val context: Context) {
-    val selectedStoreId = context.settingsDataStore.data.map { settings -> settings.storeSelection }.toStateFlow(-1)
+class AppRepository(
+    private val scope: CoroutineScope,
+    private val storeDao: StoreDAO,
+    private val aisleDao: AisleDAO,
+    private val itemDao: ItemDAO,
+    private val itemAisleDao: ItemAisleDAO,
+    private val context: Context
+) {
+    // StateFlows
+    val allStores = storeDao.all().toStateFlow()
+    private val allAisles = aisleDao.all().toStateFlow()
+    private val allItems = itemDao.all().toStateFlow()
 
-    private val _currentStoreForEdits = MutableStateFlow(-1)
+    fun getAislesAtStore(storeId: Int): StateFlow<List<Aisle>> {
+        return aisleDao.all(storeId).toStateFlow()
+    }
 
-    val allStores = dao.allStores().toStateFlow()
-    val allLocations = combineStates(
-        flow = dao.allLocations().toStateFlow(),
-        flow2 = _currentStoreForEdits,
-        initialValue = listOf(),
-        transform = {a, b -> a.filter{s -> s.storeId == b}}
-    )
+    fun getItemsWithFilter(itemName: String): StateFlow<List<Item>> {
+        return itemDao.all(itemName).toStateFlow()
+    }
+
+    // Store Selection
+    val selectedStoreId =
+        context.settingsDataStore.data.map { settings -> settings.storeSelection }.toStateFlow(-1)
 
     fun selectStore(storeId: Int) {
         scope.launch {
-            context.settingsDataStore.updateData { t -> t.toBuilder().setStoreSelection(storeId).build() }
+            context.settingsDataStore.updateData { t ->
+                t.toBuilder().setStoreSelection(storeId).build()
+            }
         }
     }
 
-    fun setCurrentStoreForEdit(storeId: Int) {
-        _currentStoreForEdits.update {
-            return@update storeId
+    fun trySelectStore() {
+        if (allStores.value.firstOrNull{s -> s.storeId == selectedStoreId.value} == null) {
+            ioThread {
+                val newSelectedStoreId = storeDao.firstStoreIdOrDefault()
+                if (newSelectedStoreId != -1) {
+                    selectStore(newSelectedStoreId)
+                }
+                else {
+                    Log.d("TEST", "Unable to select a store")
+                }
+            }
         }
     }
 
+    // Stores
     fun addStore(storeName: String) {
-        scope.launch {
-            dao.addStore(Store(storeName = storeName))
+        ioThread {
+            storeDao.insert(Store(storeName = storeName))
             if (selectedStoreId.value == -1) {
-                selectStore(dao.firstStoreIdOrDefault())
+                selectStore(storeDao.firstStoreIdOrDefault())
             }
         }
     }
 
     fun renameStore(storeId: Int, newName: String) {
-        scope.launch {
-            dao.addStore(Store(storeId, newName))
+        ioThread {
+            storeDao.insert(Store(storeId, newName))
         }
     }
 
     fun deleteStore(storeId: Int) {
-        scope.launch {
-            dao.deleteStore(StoreId(storeId))
+        ioThread {
+            storeDao.delete(Store(storeId = storeId, storeName = ""))
             if (selectedStoreId.value == storeId) {
-                selectStore(dao.firstStoreIdOrDefault())
+                selectStore(storeDao.firstStoreIdOrDefault())
             }
         }
     }
 
-    fun addStoreLocation(storeId: Int, storeLocationName: String) {
-        scope.launch {
-            val maxSortValue = dao.maxSortingPrefixValue()
-            dao.addLocation(StoreLocation(storeId = storeId, locationName = storeLocationName, sortingPrefix = maxSortValue + 1))
+    fun getStoreName(storeId: Int): String {
+        return allStores.value.firstOrNull { s -> s.storeId == storeId }?.storeName ?: ""
+    }
+
+    // Aisles
+    fun addAisle(storeId: Int, aisleName: String) {
+        ioThread {
+            val maxSortValue = aisleDao.maxSortingPrefixValue()
+            aisleDao.insert(
+                Aisle(
+                    storeId = storeId,
+                    aisleName = aisleName,
+                    sortingPrefix = maxSortValue + 1
+                )
+            )
         }
     }
 
-    fun renameStoreLocation(locationId: Int, newLocationName: String) {
-        scope.launch {
-            dao.updateLocation(locationId = locationId, newLocationName = newLocationName)
+    fun renameAisle(aisleId: Int, newAisleName: String) {
+        ioThread {
+            aisleDao.updateAisleName(aisleId, newAisleName)
         }
     }
 
-    fun deleteStoreLocation(locationId: Int) {
-        scope.launch {
-            dao.deleteLocation(StoreLocationId(locationId))
+    fun deleteAisle(aisleId: Int) {
+        ioThread {
+            aisleDao.delete(Aisle(aisleId = aisleId, aisleName = "", storeId = -1))
         }
     }
 
-    fun reorderStoreLocations(items: List<StoreLocation>) {
-        scope.launch {
+    fun reorderAisles(items: List<Aisle>) {
+        ioThread {
             val list = getReorderedItems(items)
-            dao.addLocations(list)
+            aisleDao.insert(list)
         }
     }
 
-    private fun getReorderedItems(items: List<StoreLocation>) : List<StoreLocation> {
-        val list = mutableListOf<StoreLocation>()
-        for((count, storeLocation) in items.withIndex()) {
-            list.add(StoreLocation(
-                locationId = storeLocation.locationId,
-                storeId = storeLocation.storeId,
-                locationName = storeLocation.locationName,
-                sortingPrefix = count))
+    fun getAisleName(aisleId: Int): String {
+        return allAisles.value.firstOrNull { a -> a.aisleId == aisleId }?.aisleName ?: ""
+    }
+
+    // Items
+    fun addItem(itemName: String) {
+        ioThread {
+            itemDao.insert(Item(itemName = itemName, itemCategory = ItemCategory.Frozen))
+        }
+    }
+
+    fun deleteItem(itemId: Int) {
+        ioThread {
+            itemDao.delete(
+                Item(
+                    itemId = itemId,
+                    itemName = "",
+                    itemCategory = ItemCategory.NonFood
+                )
+            )
+        }
+    }
+
+    fun getItemName(itemId: Int): String {
+        return allItems.value.firstOrNull { i -> i.itemId == itemId }?.itemName ?: ""
+    }
+
+    private fun ioThread(f: () -> Unit) {
+        Executors.newSingleThreadExecutor().execute(f)
+    }
+
+    private fun getReorderedItems(items: List<Aisle>): List<Aisle> {
+        val list = mutableListOf<Aisle>()
+        for ((count, storeLocation) in items.withIndex()) {
+            list.add(
+                Aisle(
+                    aisleId = storeLocation.aisleId,
+                    storeId = storeLocation.storeId,
+                    aisleName = storeLocation.aisleName,
+                    sortingPrefix = count
+                )
+            )
         }
         return list
     }
 
-    private fun <T1, T2, R> combineStates(flow: StateFlow<T1>, flow2: StateFlow<T2>, initialValue: R, transform: suspend (a: T1, b: T2) -> R): StateFlow<R> {
-        return object : StateFlow<R> {
-            private val mutex = Mutex()
-            override var value: R = initialValue
-
-            override val replayCache: List<R> get() = listOf(value)
-
-            override suspend fun collect(collector: FlowCollector<R>): Nothing {
-                combine(flow, flow2, transform)
-                    .onStart { emit(initialValue) }
-                    .collect {
-                        mutex.withLock {
-                            value = it
-                            collector.emit(it)
-                        }
-                    }
-                error("This exception is needed to 'return' Nothing. It won't be thrown (collection of StateFlow will never end)")
-            }
-        }
+    private fun <T> Flow<List<T>>.toStateFlow(): StateFlow<List<T>> {
+        return this.toStateFlow(listOf())
     }
 
     private fun <T> Flow<T>.toStateFlow(defaultVal: T): StateFlow<T> {
         return this.stateIn(
             scope = scope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = defaultVal)
-    }
-
-    private fun <T> Flow<List<T>>.toStateFlow(): StateFlow<List<T>> {
-        return this.stateIn(
-            scope = scope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = listOf()) //start with an empty list
+            started = SharingStarted.Eagerly,
+            initialValue = defaultVal
+        )
     }
 }

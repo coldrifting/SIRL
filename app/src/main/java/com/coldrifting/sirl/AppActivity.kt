@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,7 +20,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.coldrifting.sirl.screens.Cart
-import com.coldrifting.sirl.screens.Ingredients
+import com.coldrifting.sirl.screens.IngredientDetails
+import com.coldrifting.sirl.screens.IngredientList
 import com.coldrifting.sirl.screens.Recipes
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
@@ -30,45 +33,94 @@ class AppActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SIRLTheme {
-                val viewModel: AppViewModel by viewModels { AppViewModelProvider.Factory }
-                MainContent(viewModel)
+                MainContent()
             }
         }
     }
-}
 
-@Composable
-fun MainContent(viewModel: AppViewModel) {
-    val navController = rememberNavController()
-    var title by remember { mutableStateOf("") }
-    NavHost(
-        navController = navController,
-        enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None },
-        startDestination = Stores)
-    {
-        navigation<Stores>(startDestination = StoreList) {
-            composable<StoreList> {
-                title = getRouteName(StoreList, viewModel)
-                StoreList(navController, viewModel, title)
+    @Composable
+    fun MainContent() {
+        val viewModel: AppViewModel by viewModels { AppViewModel.Factory }
+
+         LaunchedEffect(Unit) {
+             viewModel.trySelectStore()
+         }
+
+        val navController = rememberNavController()
+        var title by remember { mutableStateOf("") }
+        NavHost(
+            navController = navController,
+            enterTransition = { EnterTransition.None },
+            exitTransition = { ExitTransition.None },
+            startDestination = Ingredients
+        )
+        {
+            navigation<Stores>(startDestination = StoreList) {
+                composable<StoreList> {
+                    title = getRouteName(StoreList, viewModel)
+
+                    val selectedStore by viewModel.selectedStore.collectAsState()
+                    val storeList by viewModel.stores.collectAsState()
+
+                    StoreList(
+                        navHostController = navController,
+                        title = title,
+                        addStore = viewModel::addStore,
+                        renameStore = viewModel::renameStore,
+                        deleteStore = viewModel::deleteStore,
+                        selectStore = viewModel::selectStore,
+                        getStoreName = viewModel::getStoreName,
+                        selectedStore = selectedStore,
+                        storeList = storeList
+                    )
+                }
+                composable<StoreAisleList> { backStackEntry ->
+                    val aisleList: StoreAisleList = backStackEntry.toRoute()
+                    title = getRouteName(aisleList, viewModel)
+
+                    val aisles by viewModel.getAislesAtStore(aisleList.id).collectAsState()
+
+                    StoreAisleList(
+                        navHostController = navController,
+                        title = title,
+                        id = aisleList.id,
+                        addAisle = viewModel::addAisle,
+                        renameAisle = viewModel::renameAisle,
+                        deleteAisle = viewModel::deleteAisle,
+                        getAisleName = viewModel::getAisleName,
+                        syncAisles = viewModel::syncAisles,
+                        aisles = aisles
+                    )
+                }
             }
-            composable<StoreAisleList> { backStackEntry ->
-                val aisleList: StoreAisleList = backStackEntry.toRoute()
-                title = getRouteName(aisleList, viewModel)
-                StoreAisleList(aisleList.id, navController, viewModel, title)
+            navigation<Ingredients>(startDestination = IngredientList) {
+                composable<IngredientList> {
+                    title = getRouteName(Ingredients, viewModel)
+                    IngredientList(
+                        navHostController = navController,
+                        title = title,
+                        addItem = viewModel::addItem,
+                        deleteItem = viewModel::deleteItem,
+                        getItems = viewModel::getItemWithFilter)
+                }
+                composable<IngredientDetails> { backStackEntry ->
+                    val ingredientDetails: IngredientDetails = backStackEntry.toRoute()
+                    title = getRouteName(ingredientDetails, viewModel)
+                    IngredientDetails(
+                        navHostController = navController,
+                        title = title,
+                        itemId = ingredientDetails.id,
+                        getItemName = viewModel::getItemName)
+                }
             }
-        }
-        composable<Ingredients> {
-            title = getRouteName(Ingredients, viewModel)
-            Ingredients(navController, title)
-        }
-        composable<Recipes> {
-            title = getRouteName(Recipes, viewModel)
-            Recipes(navController, title)
-        }
-        composable<Cart> {
-            title = getRouteName(Cart, viewModel)
-            Cart(navController, title)
+            composable<Recipes> {
+                title = getRouteName(Recipes, viewModel)
+                Recipes(navController, title)
+            }
+            composable<Cart> {
+                title = getRouteName(Cart, viewModel)
+                Cart(navController, title)
+            }
         }
     }
 }

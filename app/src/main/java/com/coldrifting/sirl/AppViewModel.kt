@@ -4,23 +4,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.Store
 import kotlinx.coroutines.flow.StateFlow
 
 class AppViewModel(private val repository: AppRepository) : ViewModel() {
+    // StateFlows
     val stores: StateFlow<List<Store>> = repository.allStores
-    val locations: StateFlow<List<StoreLocation>> = repository.allLocations
+    fun getAislesAtStore(storeId: Int): StateFlow<List<Aisle>> {
+        return repository.getAislesAtStore(storeId)
+    }
 
+    fun getItemWithFilter(itemName: String): StateFlow<List<Item>> {
+        return repository.getItemsWithFilter(itemName)
+    }
+
+    // Store Selection
     val selectedStore = repository.selectedStoreId
-
     fun selectStore(storeId: Int) {
         repository.selectStore(storeId)
     }
 
-    fun setCurrentStoreForEdit(storeId: Int) {
-        repository.setCurrentStoreForEdit(storeId)
-    }
-
-
+    // Stores
     fun addStore(storeName: String) {
         repository.addStore(storeName)
     }
@@ -33,44 +39,59 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.renameStore(storeId, newName)
     }
 
-    fun getStoreName(storeId: Int): String? {
-        return stores.value.firstOrNull{ s -> s.storeId == storeId}?.storeName
+    fun getStoreName(storeId: Int): String {
+        return repository.getStoreName(storeId)
     }
 
-
-    fun syncAisles(items: List<StoreLocation>) {
-        if (items != locations.value) {
-            repository.reorderStoreLocations(items)
+    // Aisles
+    fun syncAisles(storeId: Int, items: List<Aisle>) {
+        if (items != getAislesAtStore(storeId).value) {
+            repository.reorderAisles(items)
         }
     }
 
-    fun addAisle(storeId: Int, storeLocationName: String) {
-        repository.addStoreLocation(storeId, storeLocationName)
+    fun addAisle(storeId: Int, aisleName: String) {
+        repository.addAisle(storeId, aisleName)
     }
 
-    fun renameAisle(locationId: Int, newLocationName: String) {
-        repository.renameStoreLocation(locationId, newLocationName)
-
+    fun renameAisle(aisleId: Int, newAisleName: String) {
+        repository.renameAisle(aisleId, newAisleName)
     }
 
-    fun deleteAisle(locationId: Int) {
-        repository.deleteStoreLocation(locationId)
+    fun deleteAisle(aisleId: Int) {
+        repository.deleteAisle(aisleId)
     }
 
-    fun getAisleName(locationId: Int): String? {
-        return locations.value.firstOrNull{ s -> s.locationId == locationId}?.locationName
+    fun getAisleName(aisleId: Int): String {
+        return repository.getAisleName(aisleId)
     }
-}
 
-object AppViewModelProvider {
-    val Factory = viewModelFactory {
-        initializer {
-            AppViewModel(
-                //fetches the application singleton
-                (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]
-                        //and then extracts the repository in it
-                        as AppApplication).appRepository
-            )
+    // Items
+    fun addItem(itemName: String) {
+        repository.addItem(itemName)
+    }
+
+    fun deleteItem(itemId: Int) {
+        repository.deleteItem(itemId)
+    }
+
+    fun getItemName(itemId: Int): String {
+        return repository.getItemName(itemId)
+    }
+
+    fun trySelectStore() {
+        repository.trySelectStore()
+    }
+
+    companion object AppViewModelProvider {
+        // Fetches the application singleton and extracts the repository in it
+        val Factory = viewModelFactory {
+            val appKey = ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY
+            initializer {
+                AppViewModel(
+                    (this[appKey] as AppApplication).appRepository
+                )
+            }
         }
     }
 }

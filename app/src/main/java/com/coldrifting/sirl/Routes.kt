@@ -28,6 +28,8 @@ fun getRouteName(obj: Any, viewModel: AppViewModel): String {
         is StoreList -> "Stores - All"
         is StoreAisleList -> "Aisles - ${viewModel.getStoreName(obj.id)}"
         is Ingredients -> "Ingredients"
+        is IngredientList -> "Ingredients"
+        is IngredientDetails -> "Ingredients - ${viewModel.getItemName(obj.id)}"
         is Recipes -> "Recipes"
         is Cart -> "Cart"
         else -> ""
@@ -45,6 +47,12 @@ data class StoreAisleList(val id: Int)
 
 @Serializable
 object Ingredients
+
+@Serializable
+object IngredientList
+
+@Serializable
+data class IngredientDetails(val id: Int)
 
 @Serializable
 object Recipes

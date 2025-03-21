@@ -93,12 +93,12 @@ fun AlertDialog(
     Dialog(onDismiss) {
         Surface(shape = MaterialTheme.shapes.medium) {
             Column {
-                Column(Modifier.padding(24.dp)) {
+                Column(Modifier.padding(top = 24.dp, bottom = 10.dp, start = 24.dp, end = 24.dp)) {
                     title.invoke()
                     Spacer(Modifier.size(16.dp))
                     content.invoke()
                 }
-                Spacer(Modifier.size(4.dp))
+                Spacer(Modifier.size(2.dp))
                 Row(
                     Modifier.padding(8.dp).fillMaxWidth(),
                     Arrangement.spacedBy(8.dp, Alignment.End),

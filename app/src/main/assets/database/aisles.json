@@ -1,0 +1,146 @@
+[
+  {
+    "aisleId": 1,
+    "storeId": 1,
+    "aisleName": "Aisle 02",
+    "sortingPrefix": 1
+  },
+  {
+    "aisleId": 2,
+    "storeId": 1,
+    "aisleName": "Aisle 02 End cap",
+    "sortingPrefix": 2
+  },
+  {
+    "aisleId": 3,
+    "storeId": 1,
+    "aisleName": "Aisle 03",
+    "sortingPrefix": 3
+  },
+  {
+    "aisleId": 4,
+    "storeId": 1,
+    "aisleName": "Aisle 04",
+    "sortingPrefix": 4
+  },
+  {
+    "aisleId": 5,
+    "storeId": 1,
+    "aisleName": "Aisle 05",
+    "sortingPrefix": 5
+  },
+  {
+    "aisleId": 6,
+    "storeId": 1,
+    "aisleName": "Aisle 06",
+    "sortingPrefix": 6
+  },
+  {
+    "aisleId": 7,
+    "storeId": 1,
+    "aisleName": "Aisle 07",
+    "sortingPrefix": 7
+  },
+  {
+    "aisleId": 8,
+    "storeId": 1,
+    "aisleName": "Aisle 08",
+    "sortingPrefix": 8
+  },
+  {
+    "aisleId": 9,
+    "storeId": 1,
+    "aisleName": "Aisle 09",
+    "sortingPrefix": 9
+  },
+  {
+    "aisleId": 10,
+    "storeId": 1,
+    "aisleName": "Aisle 10",
+    "sortingPrefix": 10
+  },
+  {
+    "aisleId": 11,
+    "storeId": 1,
+    "aisleName": "Aisle 11",
+    "sortingPrefix": 11
+  },
+  {
+    "aisleId": 12,
+    "storeId": 1,
+    "aisleName": "Aisle 12",
+    "sortingPrefix": 12
+  },
+  {
+    "aisleId": 13,
+    "storeId": 1,
+    "aisleName": "Aisle 13",
+    "sortingPrefix": 13
+  },
+  {
+    "aisleId": 14,
+    "storeId": 1,
+    "aisleName": "Aisle 14",
+    "sortingPrefix": 14
+  },
+  {
+    "aisleId": 15,
+    "storeId": 1,
+    "aisleName": "Aisle 15",
+    "sortingPrefix": 15
+  },
+  {
+    "aisleId": 16,
+    "storeId": 1,
+    "aisleName": "Back Right",
+    "sortingPrefix": 16
+  },
+  {
+    "aisleId": 17,
+    "storeId": 1,
+    "aisleName": "Back Middle",
+    "sortingPrefix": 17
+  },
+  {
+    "aisleId": 18,
+    "storeId": 1,
+    "aisleName": "Meat",
+    "sortingPrefix": 18
+  },
+  {
+    "aisleId": 19,
+    "storeId": 1,
+    "aisleName": "Frozen Meat",
+    "sortingPrefix": 19
+  },
+  {
+    "aisleId": 20,
+    "storeId": 1,
+    "aisleName": "Aisle 1 End cap",
+    "sortingPrefix": 20
+  },
+  {
+    "aisleId": 21,
+    "storeId": 1,
+    "aisleName": "Aisle 1",
+    "sortingPrefix": 21
+  },
+  {
+    "aisleId": 22,
+    "storeId": 1,
+    "aisleName": "Produce",
+    "sortingPrefix": 22
+  },
+  {
+    "aisleId": 23,
+    "storeId": 1,
+    "aisleName": "Bakery",
+    "sortingPrefix": 23
+  },
+  {
+    "aisleId": 24,
+    "storeId": 2,
+    "aisleName": "Example Aisle",
+    "sortingPrefix": 1
+  }
+]
