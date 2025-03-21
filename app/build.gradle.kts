@@ -41,6 +41,9 @@ dependencies {
 
     // DataStore
     implementation(libs.androidx.datastore)
+
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 }
 
 protobuf {
