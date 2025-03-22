@@ -25,7 +25,7 @@ import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(navHostController: NavHostController, title: String) {
+fun TopBar(navHostController: NavHostController, title: String, topAction: @Composable (() -> Unit)? = null) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 
     TopAppBar(
@@ -41,6 +41,9 @@ fun TopBar(navHostController: NavHostController, title: String) {
                     }
                 }
             }
+        },
+        actions = {
+            topAction?.invoke()
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,

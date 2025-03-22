@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.entities.types
+package com.coldrifting.sirl.data.enums
 
 enum class BayType {
     None,

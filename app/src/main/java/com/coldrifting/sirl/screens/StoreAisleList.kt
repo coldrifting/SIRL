@@ -36,8 +36,9 @@ fun StoreAisleList(
     renameAisle: (Int, String) -> Unit,
     deleteAisle: (Int) -> Unit,
     getAisleName: (Int) -> String,
-    syncAisles: (Int, List<Aisle>) -> Unit,
-    aisles: List<Aisle>
+    syncAisles: (Int, List<Aisle>, Int) -> Unit,
+    aisles: List<Aisle>,
+    scrollTo: Int
 ) {
     var lastTextValue by remember { mutableStateOf("") }
     var listItem by remember { mutableIntStateOf(-1) }
@@ -79,7 +80,7 @@ fun StoreAisleList(
                 listItems = aisles,
                 toString = { it.aisleName },
                 getKey = { it.aisleId },
-                onDragStopped = { l -> syncAisles(id, l) },
+                onDragStopped = { l, i -> syncAisles(id, l, i) },
                 leftAction = swipeEditAction
                 {
                     listItem = it
@@ -90,6 +91,7 @@ fun StoreAisleList(
                 {
                     deleteAisle(it)
                 },
+                scrollTo = scrollTo
             )
         }
     )
@@ -107,11 +109,12 @@ fun StoreAisleListPreview() {
             renameAisle = { _, _ -> },
             deleteAisle = { },
             getAisleName = { "Aisle Name" },
-            syncAisles = { _, _ -> },
+            syncAisles = { _, _, _ -> },
             aisles = listOf(
                 Aisle(2, 1, "Bakery", 0),
                 Aisle(1, 1, "Aisle 1", 1)
-            )
+            ),
+            scrollTo = 0
         )
     }
 }

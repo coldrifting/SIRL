@@ -9,13 +9,19 @@ import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.entities.types.ItemCategory
+import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
@@ -27,6 +33,7 @@ class AppRepository(
     private val itemAisleDao: ItemAisleDAO,
     private val context: Context
 ) {
+
     // StateFlows
     val allStores = storeDao.all().toStateFlow()
     private val allAisles = aisleDao.all().toStateFlow()
@@ -34,10 +41,6 @@ class AppRepository(
 
     fun getAislesAtStore(storeId: Int): StateFlow<List<Aisle>> {
         return aisleDao.all(storeId).toStateFlow()
-    }
-
-    fun getItemsWithFilter(itemName: String): StateFlow<List<Item>> {
-        return itemDao.all(itemName).toStateFlow()
     }
 
     // Store Selection
@@ -53,18 +56,66 @@ class AppRepository(
     }
 
     fun trySelectStore() {
-        if (allStores.value.firstOrNull{s -> s.storeId == selectedStoreId.value} == null) {
+        if (allStores.value.firstOrNull { s -> s.storeId == selectedStoreId.value } == null) {
             ioThread {
                 val newSelectedStoreId = storeDao.firstStoreIdOrDefault()
                 if (newSelectedStoreId != -1) {
                     selectStore(newSelectedStoreId)
-                }
-                else {
+                } else {
                     Log.d("TEST", "Unable to select a store")
                 }
             }
         }
     }
+
+    enum class ItemsSortingMode {
+        Name,
+        Aisle,
+        Temp
+    }
+
+    private val _itemsFilterTextState = MutableStateFlow("")
+    val itemsFilterTextState = _itemsFilterTextState.asStateFlow()
+
+    fun setFilterText(searchText: String) {
+        _itemsFilterTextState.update {
+            searchText
+        }
+    }
+
+    private val _itemsSortingModeState = MutableStateFlow(ItemsSortingMode.Name)
+    val itemsSortingModeState = _itemsSortingModeState.asStateFlow()
+    fun toggleItemsSortingMode() {
+        _itemsSortingModeState.update { oldValue ->
+            when (oldValue) {
+                ItemsSortingMode.Name -> ItemsSortingMode.Aisle
+                ItemsSortingMode.Aisle -> ItemsSortingMode.Temp
+                ItemsSortingMode.Temp -> ItemsSortingMode.Name
+            }
+        }
+    }
+
+    data class FilterCombine(
+        val filterText: String,
+        val curStore: Int,
+        val sortMode: ItemsSortingMode
+    )
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val itemsWithFilter = combine(
+        itemsFilterTextState,
+        selectedStoreId,
+        itemsSortingModeState
+    ) { filterText: String, curStore: Int, sortMode: ItemsSortingMode ->
+        FilterCombine(filterText, curStore, sortMode)
+    }.flatMapLatest {
+        itemAisleDao.details(it.curStore, it.sortMode.name, it.filterText)
+            .map { map ->
+                map.toList().map { listItem ->
+                    ItemWithAisleName(listItem.first, listItem.second?.aisleName)
+                }
+            }
+    }.stateIn(scope, SharingStarted.Eagerly, emptyList())
 
     // Stores
     fun addStore(storeName: String) {
@@ -135,7 +186,7 @@ class AppRepository(
     // Items
     fun addItem(itemName: String) {
         ioThread {
-            itemDao.insert(Item(itemName = itemName, itemCategory = ItemCategory.Frozen))
+            itemDao.insert(Item(itemName = itemName))
         }
     }
 
@@ -144,8 +195,7 @@ class AppRepository(
             itemDao.delete(
                 Item(
                     itemId = itemId,
-                    itemName = "",
-                    itemCategory = ItemCategory.NonFood
+                    itemName = ""
                 )
             )
         }

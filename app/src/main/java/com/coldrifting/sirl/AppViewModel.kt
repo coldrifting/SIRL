@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.coldrifting.sirl.data.entities.Aisle
-import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.Store
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 
 class AppViewModel(private val repository: AppRepository) : ViewModel() {
     // StateFlows
@@ -16,9 +17,11 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         return repository.getAislesAtStore(storeId)
     }
 
-    fun getItemWithFilter(itemName: String): StateFlow<List<Item>> {
-        return repository.getItemsWithFilter(itemName)
-    }
+    val itemsSortingModeState: StateFlow<AppRepository.ItemsSortingMode> = repository.itemsSortingModeState
+    val itemsFilterTextState: StateFlow<String> = repository.itemsFilterTextState
+    val itemsWithFilter = repository.itemsWithFilter
+
+    val firstItemIndexState = MutableStateFlow(0)
 
     // Store Selection
     val selectedStore = repository.selectedStoreId
@@ -44,9 +47,12 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
     }
 
     // Aisles
-    fun syncAisles(storeId: Int, items: List<Aisle>) {
+    fun syncAisles(storeId: Int, items: List<Aisle>, firstItemIndex: Int) {
         if (items != getAislesAtStore(storeId).value) {
             repository.reorderAisles(items)
+            firstItemIndexState.update {
+                firstItemIndex
+            }
         }
     }
 
@@ -81,6 +87,14 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun trySelectStore() {
         repository.trySelectStore()
+    }
+
+    fun toggleItemSorting() {
+        repository.toggleItemsSortingMode()
+    }
+
+    fun updateItemFilter(searchText: String) {
+        repository.setFilterText(searchText)
     }
 
     companion object AppViewModelProvider {

@@ -2,6 +2,7 @@ package com.coldrifting.sirl.data.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
@@ -14,7 +15,9 @@ import kotlinx.serialization.Serializable
             parentColumns = arrayOf("storeId"),
             childColumns = arrayOf("storeId"),
             onDelete = ForeignKey.CASCADE)
-    ])
+    ],
+    indices = [Index("storeId")]
+)
 data class Aisle(
     @PrimaryKey(autoGenerate = true)
     val aisleId: Int = 0,

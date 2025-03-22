@@ -1,12 +1,13 @@
-package com.coldrifting.sirl.entities.types
+package com.coldrifting.sirl.data.enums
 
-enum class PackageType {
+enum class ContainerType {
     Bags,
     Bottles,
     Boxes,
     Cartons,
     Cloves,
     Jars,
+    Jugs,
     Loafs,
     Cans,
     Packages,

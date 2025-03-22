@@ -1,5 +1,6 @@
 package com.coldrifting.sirl.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +26,7 @@ fun <T> SwipeList(
     getKey: (T) -> Int,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
+    rowPadding: PaddingValues = PaddingValues(horizontal = 16.dp)
 ) {
     val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
 
@@ -51,9 +53,7 @@ fun <T> SwipeList(
                 rightAction = rightAction
             ) {
                 Row(
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .height(56.dp),
+                    modifier = Modifier.padding(rowPadding).height(56.dp),
                     verticalAlignment = Alignment.CenterVertically
                 )
                 {

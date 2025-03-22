@@ -1,5 +1,6 @@
 package com.coldrifting.sirl.components
 
+import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -7,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.Icon
@@ -39,9 +40,10 @@ fun <T> SwipeReorderableList(
     listItems: List<T>,
     toString: (T) -> String,
     getKey: (T) -> Int,
-    onDragStopped: (List<T>) -> Unit,
+    onDragStopped: (List<T>, Int) -> Unit,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
+    scrollTo: Int
 ) {
     val view = LocalView.current
 
@@ -53,7 +55,7 @@ fun <T> SwipeReorderableList(
 
     val lastSwiped = remember { mutableIntStateOf(-1) }
 
-    val lazyListState = rememberLazyListState()
+    val lazyListState = remember(scrollTo) { LazyListState(firstVisibleItemIndex = scrollTo) }
     val reorderableLazyListState = rememberReorderableLazyListState(
         lazyListState = lazyListState,
         onMove = { from, to ->
@@ -104,7 +106,8 @@ fun <T> SwipeReorderableList(
                                     },
                                     onDragStopped = {
                                         view.performHapticFeedback(HapticFeedbackConstantsCompat.GESTURE_END)
-                                        onDragStopped(list.value.map{entry -> entry.item})
+                                        Log.d("TEST", lazyListState.firstVisibleItemIndex.toString())
+                                        onDragStopped(list.value.map{entry -> entry.item}, lazyListState.firstVisibleItemIndex)
                                     }),
                                 onClick = {})
                             {

@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -63,7 +62,6 @@ fun <T> SwipeRadioButtonList(
                     Modifier
                         .fillMaxWidth()
                         .height(56.dp)
-                        .background(MaterialTheme.colorScheme.surface)
                         .selectable(
                             selected = (item.key == selectedItem),
                             onClick = { onSelectItem(item.key) },

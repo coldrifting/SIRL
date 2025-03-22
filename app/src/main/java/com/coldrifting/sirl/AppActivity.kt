@@ -34,7 +34,7 @@ class AppActivity : ComponentActivity() {
         installSplashScreen()
         enableEdgeToEdge()
         setContent {
-            SIRLTheme {
+            SIRLTheme(dynamicColor = false) {
                 MainContent()
             }
         }
@@ -82,6 +82,8 @@ class AppActivity : ComponentActivity() {
 
                     val aisles by viewModel.getAislesAtStore(aisleList.id).collectAsState()
 
+                    val scrollTo by viewModel.firstItemIndexState.collectAsState()
+
                     StoreAisleList(
                         navHostController = navController,
                         title = title,
@@ -91,19 +93,27 @@ class AppActivity : ComponentActivity() {
                         deleteAisle = viewModel::deleteAisle,
                         getAisleName = viewModel::getAisleName,
                         syncAisles = viewModel::syncAisles,
-                        aisles = aisles
+                        aisles = aisles,
+                        scrollTo = scrollTo
                     )
                 }
             }
             navigation<Ingredients>(startDestination = IngredientList) {
                 composable<IngredientList> {
                     title = getRouteName(Ingredients, viewModel)
+                    val sortingMode by viewModel.itemsSortingModeState.collectAsState()
+                    val items by viewModel.itemsWithFilter.collectAsState()
+                    val searchText by viewModel.itemsFilterTextState.collectAsState()
                     IngredientList(
                         navHostController = navController,
                         title = title,
                         addItem = viewModel::addItem,
                         deleteItem = viewModel::deleteItem,
-                        getItems = viewModel::getItemWithFilter)
+                        items = items,
+                        onFilterTextChanged = viewModel::updateItemFilter,
+                        setItemSort = viewModel::toggleItemSorting,
+                        sortMode = sortingMode.name,
+                        searchText = searchText)
                 }
                 composable<IngredientDetails> { backStackEntry ->
                     val ingredientDetails: IngredientDetails = backStackEntry.toRoute()
