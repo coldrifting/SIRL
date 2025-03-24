@@ -5,7 +5,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Store
+import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.enums.BayType
+import com.coldrifting.sirl.data.enums.ItemTemp
+import com.coldrifting.sirl.data.enums.UnitType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -81,8 +87,16 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.deleteItem(itemId)
     }
 
-    fun getItemName(itemId: Int): String {
-        return repository.getItemName(itemId)
+    fun getItem(itemId: Int): StateFlow<Item> {
+        return repository.getItem(itemId)
+    }
+
+    fun setItemTemp(itemId: Int, itemTemp: ItemTemp) {
+        repository.setItemTemp(itemId, itemTemp)
+    }
+
+    fun setItemName(itemId: Int, itemName: String) {
+        repository.setItemName(itemId, itemName)
     }
 
     fun trySelectStore() {
@@ -95,6 +109,34 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun updateItemFilter(searchText: String) {
         repository.setFilterText(searchText)
+    }
+
+    fun updateItemAisle(itemId: Int, aisleId: Int, bayType: BayType = BayType.Middle) {
+        repository.updateItemAisle(itemId, aisleId, bayType)
+    }
+
+    fun getItemAisle(itemId: Int): StateFlow<ItemAisle?> {
+        return repository.getItemAisle(itemId)
+    }
+
+    fun setItemDefaultUnits(itemId: Int, unitType: UnitType) {
+        repository.setItemDefaultUnits(itemId, unitType)
+    }
+
+    fun getItemPreparations(itemId: Int): StateFlow<List<ItemPrep>> {
+        return repository.getItemPreparations(itemId)
+    }
+
+    fun addItemPrep(itemId: Int, prepName: String) {
+        repository.addItemPrep(itemId, prepName)
+    }
+
+    fun updateItemPrep(prepId: Int, prepName: String) {
+        repository.updateItemPrep(prepId, prepName)
+    }
+
+    fun deleteItemPrep(prepId: Int) {
+        repository.deleteItemPrep(prepId)
     }
 
     companion object AppViewModelProvider {

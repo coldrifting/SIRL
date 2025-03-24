@@ -72,7 +72,6 @@ fun Modifier.positionAwareImePadding() = composed {
 @Composable
 fun IngredientList(
     navHostController: NavHostController,
-    title: String,
     addItem: (String) -> Unit,
     deleteItem: (Int) -> Unit,
     items: List<ItemWithAisleName>,
@@ -92,7 +91,7 @@ fun IngredientList(
 
     Scaffold(
         topBar = @Composable {
-            TopBar(navHostController, "$title by $sortMode") {
+            TopBar(navHostController, "Ingredients by $sortMode") {
                 IconButton(onClick = setItemSort) {
                     Icon(
                         Icons.Default.Menu,
@@ -179,7 +178,6 @@ fun IngredientListPreview() {
     SIRLTheme {
         IngredientList(
             navHostController = rememberNavController(),
-            title = "Items",
             addItem = {},
             deleteItem = {},
             items =

@@ -33,7 +33,6 @@ import com.coldrifting.sirl.ui.theme.SIRLTheme
 @Composable
 fun StoreList(
     navHostController: NavHostController,
-    title: String,
     addStore: (String) -> Unit,
     renameStore: (Int, String) -> Unit,
     deleteStore: (Int) -> Unit,
@@ -69,7 +68,7 @@ fun StoreList(
     }
 
     Scaffold(
-        topBar = { TopBar(navHostController, title) },
+        topBar = { TopBar(navHostController, "Stores") },
         bottomBar = { NavBar(navHostController, routeStores) },
         floatingActionButton = {
             FloatingActionButton(onClick = {showNewAlertDialog = true}) {
@@ -109,7 +108,6 @@ fun StoreListPreview() {
     SIRLTheme {
         StoreList(
             navHostController = rememberNavController(),
-            title = "Stores",
             addStore = { },
             renameStore = { _, _ -> },
             deleteStore = { },

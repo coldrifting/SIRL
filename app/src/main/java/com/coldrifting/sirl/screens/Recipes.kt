@@ -20,9 +20,9 @@ import com.coldrifting.sirl.routeRecipes
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
-fun Recipes(navHostController: NavHostController, title: String) {
+fun Recipes(navHostController: NavHostController) {
     Scaffold(
-        topBar = { TopBar(navHostController, title) },
+        topBar = { TopBar(navHostController, "Recipes") },
         bottomBar = { NavBar(navHostController, routeRecipes) },
         floatingActionButton = {
             FloatingActionButton(onClick = {}) {
@@ -42,6 +42,6 @@ fun Recipes(navHostController: NavHostController, title: String) {
 @Composable
 fun RecipesPreview() {
     SIRLTheme {
-        Recipes(navHostController = rememberNavController(), "Recipes")
+        Recipes(navHostController = rememberNavController())
     }
 }

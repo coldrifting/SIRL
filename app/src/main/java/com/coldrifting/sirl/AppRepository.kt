@@ -5,11 +5,17 @@ import android.util.Log
 import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.ItemAisleDAO
 import com.coldrifting.sirl.data.access.ItemDAO
+import com.coldrifting.sirl.data.access.ItemPrepDAO
 import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
+import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.enums.BayType
+import com.coldrifting.sirl.data.enums.ItemTemp
+import com.coldrifting.sirl.data.enums.UnitType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -31,13 +37,13 @@ class AppRepository(
     private val aisleDao: AisleDAO,
     private val itemDao: ItemDAO,
     private val itemAisleDao: ItemAisleDAO,
+    private val itemPrepDao: ItemPrepDAO,
     private val context: Context
 ) {
 
     // StateFlows
     val allStores = storeDao.all().toStateFlow()
     private val allAisles = aisleDao.all().toStateFlow()
-    private val allItems = itemDao.all().toStateFlow()
 
     fun getAislesAtStore(storeId: Int): StateFlow<List<Aisle>> {
         return aisleDao.all(storeId).toStateFlow()
@@ -201,8 +207,20 @@ class AppRepository(
         }
     }
 
-    fun getItemName(itemId: Int): String {
-        return allItems.value.firstOrNull { i -> i.itemId == itemId }?.itemName ?: ""
+    fun getItem(itemId: Int): StateFlow<Item> {
+        return itemDao.getItem(itemId).toStateFlow(Item(itemName = " "))
+    }
+
+    fun setItemTemp(itemId: Int, itemTemp: ItemTemp) {
+        scope.launch {
+            itemDao.updateTemp(itemId, itemTemp)
+        }
+    }
+
+    fun setItemName(itemId: Int, itemName: String) {
+        scope.launch {
+            itemDao.updateName(itemId, itemName)
+        }
     }
 
     private fun ioThread(f: () -> Unit) {
@@ -234,5 +252,43 @@ class AppRepository(
             started = SharingStarted.Eagerly,
             initialValue = defaultVal
         )
+    }
+
+    fun getItemAisle(itemId: Int): StateFlow<ItemAisle?> {
+        return itemAisleDao.getByItem(itemId, selectedStoreId.value).toStateFlow(null)
+    }
+
+    fun updateItemAisle(itemId: Int, aisleId: Int, bayType: BayType) {
+        scope.launch {
+            itemAisleDao.insert(ItemAisle(itemId, selectedStoreId.value, aisleId, bayType))
+        }
+    }
+
+    fun setItemDefaultUnits(itemId: Int, unitType: UnitType) {
+        scope.launch {
+            itemDao.updateItemDefaultUnits(itemId, unitType)
+        }
+    }
+
+    fun getItemPreparations(itemId: Int): StateFlow<List<ItemPrep>> {
+        return itemPrepDao.getItemPreps(itemId).toStateFlow()
+    }
+
+    fun addItemPrep(itemId: Int, prepName: String) {
+        scope.launch {
+            itemPrepDao.insert(ItemPrep(itemId = itemId, prepName = prepName))
+        }
+    }
+
+    fun updateItemPrep(prepId: Int, prepName: String) {
+        scope.launch {
+            itemPrepDao.update(prepId, prepName)
+        }
+    }
+
+    fun deleteItemPrep(prepId: Int) {
+        scope.launch {
+            itemPrepDao.delete(ItemPrep(itemPrepId = prepId, itemId = -1, prepName = ""))
+        }
     }
 }

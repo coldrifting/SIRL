@@ -20,9 +20,9 @@ import com.coldrifting.sirl.routeCart
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
-fun Cart(navHostController: NavHostController, title: String) {
+fun Cart(navHostController: NavHostController) {
     Scaffold(
-        topBar = { TopBar(navHostController, title) },
+        topBar = { TopBar(navHostController, "Cart") },
         bottomBar = { NavBar(navHostController, routeCart) },
         floatingActionButton = {
             FloatingActionButton(onClick = {}) {
@@ -41,6 +41,6 @@ fun Cart(navHostController: NavHostController, title: String) {
 @Composable
 fun CartPreview() {
     SIRLTheme {
-        Cart(navHostController = rememberNavController(), "Cart")
+        Cart(navHostController = rememberNavController())
     }
 }

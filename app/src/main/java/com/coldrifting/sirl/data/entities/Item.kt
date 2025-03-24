@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.coldrifting.sirl.data.entities.helper.PackageInfo
 import com.coldrifting.sirl.data.enums.ItemTemp
+import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.ui.theme.LocalCustomColorsPalette
 import kotlinx.serialization.Serializable
 
@@ -16,7 +16,7 @@ data class Item(
     val itemId: Int = 0,
     val itemName: String,
     val itemTemp: ItemTemp = ItemTemp.Ambient,
-    val packageInfo: PackageInfo? = null
+    val defaultUnits: UnitType = UnitType.EACHES
 ) {
     @Composable
     fun getTempColor(): Color {

@@ -1,10 +1,10 @@
 package com.coldrifting.sirl
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.serialization.Serializable
 
@@ -21,20 +21,6 @@ val topLevelRoutes = listOf(
     routeRecipes,
     routeCart
 )
-
-fun getRouteName(obj: Any, viewModel: AppViewModel): String {
-    return when(obj) {
-        is Stores -> "Stores"
-        is StoreList -> "Stores - All"
-        is StoreAisleList -> "Aisles - ${viewModel.getStoreName(obj.id)}"
-        is Ingredients -> "Ingredients"
-        is IngredientList -> "Ingredients"
-        is IngredientDetails -> "Ingredients - ${viewModel.getItemName(obj.id)}"
-        is Recipes -> "Recipes"
-        is Cart -> "Cart"
-        else -> ""
-    }
-}
 
 @Serializable
 object Stores

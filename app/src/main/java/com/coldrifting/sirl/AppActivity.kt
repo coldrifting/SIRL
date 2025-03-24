@@ -11,9 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -49,7 +46,6 @@ class AppActivity : ComponentActivity() {
          }
 
         val navController = rememberNavController()
-        var title by remember { mutableStateOf("") }
         NavHost(
             navController = navController,
             enterTransition = { EnterTransition.None },
@@ -59,14 +55,12 @@ class AppActivity : ComponentActivity() {
         {
             navigation<Stores>(startDestination = StoreList) {
                 composable<StoreList> {
-                    title = getRouteName(StoreList, viewModel)
 
                     val selectedStore by viewModel.selectedStore.collectAsState()
                     val storeList by viewModel.stores.collectAsState()
 
                     StoreList(
                         navHostController = navController,
-                        title = title,
                         addStore = viewModel::addStore,
                         renameStore = viewModel::renameStore,
                         deleteStore = viewModel::deleteStore,
@@ -78,7 +72,10 @@ class AppActivity : ComponentActivity() {
                 }
                 composable<StoreAisleList> { backStackEntry ->
                     val aisleList: StoreAisleList = backStackEntry.toRoute()
-                    title = getRouteName(aisleList, viewModel)
+
+                    // TODO - Add proper method for this in view model
+                    val storeList by viewModel.stores.collectAsState()
+                    val store = storeList.first {s -> s.storeId == aisleList.id }
 
                     val aisles by viewModel.getAislesAtStore(aisleList.id).collectAsState()
 
@@ -86,8 +83,7 @@ class AppActivity : ComponentActivity() {
 
                     StoreAisleList(
                         navHostController = navController,
-                        title = title,
-                        id = aisleList.id,
+                        store = store,
                         addAisle = viewModel::addAisle,
                         renameAisle = viewModel::renameAisle,
                         deleteAisle = viewModel::deleteAisle,
@@ -100,13 +96,11 @@ class AppActivity : ComponentActivity() {
             }
             navigation<Ingredients>(startDestination = IngredientList) {
                 composable<IngredientList> {
-                    title = getRouteName(Ingredients, viewModel)
                     val sortingMode by viewModel.itemsSortingModeState.collectAsState()
                     val items by viewModel.itemsWithFilter.collectAsState()
                     val searchText by viewModel.itemsFilterTextState.collectAsState()
                     IngredientList(
                         navHostController = navController,
-                        title = title,
                         addItem = viewModel::addItem,
                         deleteItem = viewModel::deleteItem,
                         items = items,
@@ -117,21 +111,36 @@ class AppActivity : ComponentActivity() {
                 }
                 composable<IngredientDetails> { backStackEntry ->
                     val ingredientDetails: IngredientDetails = backStackEntry.toRoute()
-                    title = getRouteName(ingredientDetails, viewModel)
+                    val item by viewModel.getItem(ingredientDetails.id).collectAsState()
+                    val itemAisle by viewModel.getItemAisle(item.itemId).collectAsState()
+                    val currentStore by viewModel.selectedStore.collectAsState()
+                    val stores by viewModel.stores.collectAsState()
+                    val store = stores.first {s -> s.storeId == currentStore}
+                    val aisles by viewModel.getAislesAtStore(currentStore).collectAsState()
+                    val prep by viewModel.getItemPreparations(item.itemId).collectAsState()
                     IngredientDetails(
                         navHostController = navController,
-                        title = title,
-                        itemId = ingredientDetails.id,
-                        getItemName = viewModel::getItemName)
+                        item = item,
+                        itemAisle = itemAisle,
+                        aisles = aisles,
+                        prep = prep,
+                        currentStore = store,
+                        setStore = viewModel::selectStore,
+                        updatePrep = viewModel::updateItemPrep,
+                        addPrep = viewModel::addItemPrep,
+                        deletePrep = viewModel::deleteItemPrep,
+                        setItemName = viewModel::setItemName,
+                        setItemAisle = viewModel::updateItemAisle,
+                        setItemTemp = viewModel::setItemTemp,
+                        setItemDefaultUnits = viewModel::setItemDefaultUnits,
+                        stores = stores)
                 }
             }
             composable<Recipes> {
-                title = getRouteName(Recipes, viewModel)
-                Recipes(navController, title)
+                Recipes(navController)
             }
             composable<Cart> {
-                title = getRouteName(Cart, viewModel)
-                Cart(navController, title)
+                Cart(navController)
             }
         }
     }

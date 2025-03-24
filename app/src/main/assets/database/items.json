@@ -3,1556 +3,1392 @@
     "itemId": 1,
     "itemName": "Apple Cider Vinegar",
     "itemTemp": "Ambient",
-    "packageInfo": null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 2,
     "itemName": "Balsamic Vinegar",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 3,
     "itemName": "Red Wine Vinegar",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 4,
     "itemName": "Rice Wine Vinegar",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 5,
     "itemName": "Honey",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 6,
     "itemName": "Olive Oil",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 7,
     "itemName": "Bagels",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "EACHES",
-      "amount": 1.0
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 8,
     "itemName": "Bread",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "EACHES",
-      "amount": 1.0
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 9,
     "itemName": "Croutons",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 10,
     "itemName": "English Muffins",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 11,
     "itemName": "Hamburger Buns",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 12,
     "itemName": "Canned fruit",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 13,
     "itemName": "Spam",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 14,
     "itemName": "Tuna",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 15,
     "itemName": "Mayonnaise",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 16,
     "itemName": "Ranch Dressing",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 17,
     "itemName": "Natural Peanut Butter",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 18,
     "itemName": "Applesauce",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 19,
     "itemName": "Barbecue Sauce",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 20,
     "itemName": "Dijon Mustard",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 21,
     "itemName": "Ketchup",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 22,
     "itemName": "Mustard",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 23,
     "itemName": "Worcestershire sauce",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 24,
     "itemName": "Kalamata Olives",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Jars",
-      "units": "EACHES",
-      "amount": 50
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 25,
     "itemName": "Olives",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Cans",
-      "units": "EACHES",
-      "amount": 50
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 26,
     "itemName": "Pickels",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Jars",
-      "units": "EACHES",
-      "amount": 10
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 27,
     "itemName": "Pizza Sauce",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Jars",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 28,
     "itemName": "Tortillas",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 29,
     "itemName": "Tortillas (Small)",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 30,
     "itemName": "Ramen",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 31,
     "itemName": "Black Beans",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 32,
     "itemName": "Butter Beans",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 33,
     "itemName": "Cannellini Beans",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 34,
     "itemName": "Corn (Canned)",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 35,
     "itemName": "Green Beans",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 36,
     "itemName": "Kidney Beans",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 37,
     "itemName": "Crushed Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 38,
     "itemName": "Diced Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 39,
     "itemName": "Fire Roasted Diced Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 40,
     "itemName": "Petite Diced Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 41,
     "itemName": "Tomato Paste",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 42,
     "itemName": "Basil Pesto",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 43,
     "itemName": "Grated Parmesan",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 44,
     "itemName": "Alfredo Sauce",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 45,
     "itemName": "Fettuccine Pasta",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "Ounces",
-      "amount": 16
-    }
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 46,
-    "itemName": "Mac & Cheese",
+    "itemName": "Boxed Mac & Cheese",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 47,
     "itemName": "Macaroni Pasta",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "Ounces",
-      "amount": 16
-    }
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 48,
     "itemName": "Marinara Sauce",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 49,
     "itemName": "Penne Pasta",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 50,
     "itemName": "Taco Seasoning",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Packets",
-      "units": "Ounces",
-      "amount": 1
-    }
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 51,
     "itemName": "Chicken Broth",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 52,
     "itemName": "Soup",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 53,
     "itemName": "Vegetable Broth",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 54,
     "itemName": "Candy",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 55,
     "itemName": "Lo Mein Noodles",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 56,
     "itemName": "Oyster Sauce",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 57,
     "itemName": "Rice",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 58,
     "itemName": "Soy Sauce",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 59,
     "itemName": "Sriracha",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 60,
     "itemName": "Toasted Sesame oil",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 61,
     "itemName": "Lemon Juice",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 62,
     "itemName": "Lime Juice",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 63,
     "itemName": "Panko",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 64,
     "itemName": "Diced Green Chilies",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 65,
     "itemName": "Salsa",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 66,
     "itemName": "Basil",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 67,
     "itemName": "Black Pepper",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 68,
     "itemName": "Cayenne pepper",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 69,
     "itemName": "Chili powder",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 70,
     "itemName": "Chipotle Powder",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 71,
     "itemName": "Cinnamon",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 72,
     "itemName": "Cocoa Powder",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 73,
     "itemName": "Coriander",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 74,
     "itemName": "Crushed Red Pepper",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 75,
     "itemName": "Cumin",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 76,
     "itemName": "Dill",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 77,
     "itemName": "Garlic Powder",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 78,
     "itemName": "Ground Cinnamon",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 79,
     "itemName": "Ground Cloves",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 80,
     "itemName": "Ground Cumin",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 81,
     "itemName": "Ground Ginger",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 82,
     "itemName": "Ground Nutmeg",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 83,
     "itemName": "Italian Seasoning",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 84,
     "itemName": "Lemon Pepper",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 85,
     "itemName": "Onion Powder",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 86,
     "itemName": "Oregano",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 87,
     "itemName": "Rosemary",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 88,
     "itemName": "Sage",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 89,
     "itemName": "Salt",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 90,
     "itemName": "Sesame seeds",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 91,
     "itemName": "Smoked Paprika",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 92,
     "itemName": "Thyme",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 93,
     "itemName": "Vanilla Extract",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 94,
     "itemName": "Baking Powder",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 95,
     "itemName": "Breadcrumbs",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 96,
     "itemName": "Brown Sugar",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 97,
     "itemName": "Chia Seeds",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 98,
     "itemName": "Cornmeal",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 99,
     "itemName": "Cornstarch",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 100,
     "itemName": "Evaporated Milk",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 101,
     "itemName": "Flour",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 102,
     "itemName": "Molasses",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 103,
     "itemName": "Powdered Sugar",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 104,
     "itemName": "Semi-Sweet Chocolate",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 105,
     "itemName": "Sugar",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 106,
     "itemName": "Sweetened Condensed Milk",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 107,
     "itemName": "Yeast",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 108,
     "itemName": "Canola Oil",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 109,
     "itemName": "Sesame Oil",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 110,
     "itemName": "Vegetable Oil",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 111,
     "itemName": "Pancakes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 112,
     "itemName": "Maple Syrup",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Bottles",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 113,
     "itemName": "Canned Coconut Milk",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 114,
     "itemName": "Pumpkin Puree",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 115,
     "itemName": "Brownie Mix",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 116,
     "itemName": "Mashed Potatoes",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 117,
     "itemName": "Breakfast Bars",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 118,
     "itemName": "Cereal",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 119,
     "itemName": "Oatmeal",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 120,
     "itemName": "Poptarts",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 121,
     "itemName": "Rolled Oats",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 122,
     "itemName": "Cashews",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 123,
     "itemName": "Peanuts",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 124,
     "itemName": "Pecans",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 125,
     "itemName": "Walnuts",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 126,
     "itemName": "Frozen Pizza",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 127,
     "itemName": "Impossible",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Packages",
-      "units": "Ounces",
-      "amount": 12
-    }
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 128,
     "itemName": "Frozen Broccoli",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 129,
     "itemName": "Frozen Carrots",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 130,
     "itemName": "Frozen Corn",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 131,
     "itemName": "Frozen Edamame",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 132,
     "itemName": "Frozen Green Beans",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 133,
     "itemName": "Frozen Onions and Peppers",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 134,
     "itemName": "Frozen Peas",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 135,
     "itemName": "Frozen Pineapple",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 136,
     "itemName": "Frozen Raspberries",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 137,
     "itemName": "Frozen Spinach",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 138,
     "itemName": "Frozen Vegetables",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 139,
     "itemName": "Frozen Meals",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 140,
     "itemName": "Orange Juice Concentrate",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 141,
     "itemName": "Black Bean Burgers",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 142,
     "itemName": "Chick'n Patties",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 143,
     "itemName": "Ice Cream",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Cartons",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 144,
     "itemName": "Breakfast Burritos",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 145,
     "itemName": "Breakfast Sandwiches",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Boxes",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 146,
     "itemName": "Hashbrowns",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 147,
     "itemName": "Tater tots",
     "itemTemp": "Frozen",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 148,
     "itemName": "Milk",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Jugs",
-      "units": "Gallons",
-      "amount": 1
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 149,
     "itemName": "Oat Milk",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Jugs",
-      "units": "Ounces",
-      "amount": 52
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 150,
     "itemName": "Butter",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Packages",
-      "units": "Tablespoons",
-      "amount": 24
-    }
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 151,
     "itemName": "Half & Half",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 152,
     "itemName": "Heavy Cream",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 153,
     "itemName": "Heavy Whipping Cream",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 154,
     "itemName": "Margarine",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 155,
     "itemName": "Greek Yogurt (Plain)",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 156,
     "itemName": "Yogurt",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 157,
     "itemName": "Eggs",
     "itemTemp": "Chilled",
-    "packageInfo": null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 158,
     "itemName": "Sour Cream",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 159,
     "itemName": "Orange Juice",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Jugs",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 160,
     "itemName": "Iced Coffee",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Jugs",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 161,
     "itemName": "Bacon",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 162,
     "itemName": "Chicken",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 163,
     "itemName": "Chicken Breast",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 164,
     "itemName": "Ground beef",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 165,
     "itemName": "Ground Italian Sausage",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 166,
     "itemName": "Ground Pork",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 167,
     "itemName": "Ground Turkey",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 168,
     "itemName": "Porkchops",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 169,
     "itemName": "Sausage",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 170,
     "itemName": "Sausage (Kielbasa)",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 171,
     "itemName": "Frozen Fish",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 172,
     "itemName": "Frozen Meatballs",
     "itemTemp": "Frozen",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 173,
     "itemName": "Tempeh",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 174,
     "itemName": "Tofu",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 175,
     "itemName": "Flatbread",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 176,
     "itemName": "Pita Bread",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 177,
     "itemName": "Parmesan",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 178,
     "itemName": "Cream Cheese",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Packages",
-      "units": "Ounces",
-      "amount": 6
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 179,
     "itemName": "Feta Cheese",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 180,
     "itemName": "Cheddar Cheese",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 181,
     "itemName": "Monterey Jack Cheese",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 183,
     "itemName": "Mozzarella Cheese",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 184,
     "itemName": "Pepper Jack Cheese",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 185,
     "itemName": "Provolone Cheese",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 186,
     "itemName": "White Cheddar Cheese",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 187,
     "itemName": "Guacamole",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 188,
     "itemName": "Rotisserie Chicken",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 189,
     "itemName": "Hummus",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   },
   {
     "itemId": 190,
     "itemName": "Lunch Meat",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Packages",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "Pounds"
   },
   {
     "itemId": 191,
     "itemName": "Kale",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 192,
     "itemName": "Lettuce",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 193,
     "itemName": "Mushrooms",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Packages",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "Ounces"
   },
   {
     "itemId": 194,
     "itemName": "Shredded Carrots",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 195,
     "itemName": "Spinach",
     "itemTemp": "Chilled",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 196,
     "itemName": "Sun Dried Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Bags",
-      "units": "Ounces",
-      "amount": 8
-    }
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 197,
     "itemName": "Apples",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 198,
     "itemName": "Avocados",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 199,
     "itemName": "Bananas",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 200,
     "itemName": "Bay Leaf",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 201,
     "itemName": "Bok Choy",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 202,
     "itemName": "Broccoli",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 203,
     "itemName": "Cabbage",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 204,
     "itemName": "Carrots",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 205,
     "itemName": "Celery",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 206,
     "itemName": "Coleslaw Mix",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 207,
     "itemName": "Cucumbers",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 208,
     "itemName": "Eggplant",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 209,
     "itemName": "Garlic",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Cloves",
-      "units": "EACHES",
-      "amount": 1
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 210,
     "itemName": "Ginger",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 211,
     "itemName": "Grape Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Cups"
   },
   {
     "itemId": 212,
     "itemName": "Green Bell Peppers",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 213,
     "itemName": "Green Onions",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 214,
     "itemName": "Jalapenos",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 215,
     "itemName": "Lemons",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 216,
     "itemName": "Limes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 217,
     "itemName": "Poblano Peppers",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 218,
     "itemName": "Red Bell Pepper",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 219,
     "itemName": "Red Onions",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 220,
     "itemName": "Red Potatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 221,
     "itemName": "Roma Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 222,
     "itemName": "Salad Kit",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 223,
     "itemName": "Tomatoes",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 224,
     "itemName": "White Onions",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 225,
     "itemName": "Yellow Onions",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 226,
     "itemName": "Yellow Squash",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 227,
     "itemName": "Zucchini",
     "itemTemp": "Chilled",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 228,
     "itemName": "Cinnamon Rolls",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 229,
     "itemName": "French Bread",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Loafs",
-      "units": "EACHES",
-      "amount": 1.0
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 230,
     "itemName": "Garlic Bread",
     "itemTemp": "Ambient",
-    "packageInfo": {
-      "container": "Loafs",
-      "units": "EACHES",
-      "amount": 1.0
-    }
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 231,
     "itemName": "Muffins",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 232,
     "itemName": "Rolls",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "EACHES"
   },
   {
     "itemId": 233,
     "itemName": "Olive Oil (Extra-Virgin)",
     "itemTemp": "Ambient",
-    "packageInfo":  null
+    "defaultUnits": "Tablespoons"
   }
 ]

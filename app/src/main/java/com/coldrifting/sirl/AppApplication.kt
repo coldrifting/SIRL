@@ -16,5 +16,6 @@ class AppApplication: Application() {
             db.aisleDao(),
             db.itemDao(),
             db.itemAislesDao(),
+            db.itemPrepDao(),
             this.applicationContext) }
 }

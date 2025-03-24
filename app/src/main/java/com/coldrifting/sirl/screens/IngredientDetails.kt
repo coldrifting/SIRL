@@ -1,19 +1,21 @@
 package com.coldrifting.sirl.screens
 
 import android.content.res.Configuration
-import android.util.Log
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,6 +23,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,76 +36,185 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.components.NavBar
+import com.coldrifting.sirl.components.SwipeList
+import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TopBar
+import com.coldrifting.sirl.components.swipeDeleteAction
+import com.coldrifting.sirl.components.swipeEditAction
+import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.ItemPrep
+import com.coldrifting.sirl.data.entities.Store
+import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.enums.BayType
+import com.coldrifting.sirl.data.enums.ItemTemp
+import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
+import kotlinx.coroutines.delay
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IngredientDetails(
     navHostController: NavHostController,
-    title: String,
-    itemId: Int,
-    getItemName: (Int) -> String)
-{
+    item: Item,
+    itemAisle: ItemAisle?,
+    aisles: List<Aisle>,
+    stores: List<Store>,
+    currentStore: Store,
+    prep: List<ItemPrep>,
+    setStore: (Int) -> Unit,
+    setItemName: (Int, String) -> Unit,
+    setItemTemp: (Int, ItemTemp) -> Unit,
+    setItemAisle: (Int, Int, BayType) -> Unit,
+    setItemDefaultUnits: (Int, UnitType) -> Unit,
+    addPrep: (Int, String) -> Unit,
+    updatePrep: (Int, String) -> Unit,
+    deletePrep: (Int) -> Unit,
+) {
+    var lastTextValue by remember { mutableStateOf("") }
+    var listItem by remember { mutableIntStateOf(-1) }
+
+    var showRenameAlertDialog by remember { mutableStateOf(false) }
+    if (showRenameAlertDialog) {
+        TextDialog(
+            title = "Rename Preparation",
+            placeholder = "Ingredient Preparation",
+            action = "Rename",
+            onSuccess = { updatePrep(listItem, it) },
+            onDismiss = { showRenameAlertDialog = false },
+            defaultValue = lastTextValue
+        )
+    }
+
+    var showNewAlertDialog by remember { mutableStateOf(false) }
+    if (showNewAlertDialog) {
+        TextDialog(
+            title = "Add Preparation",
+            placeholder = "Ingredient Preparation",
+            action = "Add",
+            onSuccess = { addPrep(item.itemId, it) },
+            onDismiss = { showNewAlertDialog = false }
+        )
+    }
+
     Scaffold(
-        topBar = { TopBar(navHostController, title) },
+        topBar = { TopBar(navHostController, "Ingredient Details") },
         bottomBar = { NavBar(navHostController, routeIngredients) },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {showNewAlertDialog = true}) {
+                Icon(Icons.Filled.Add, "Add")
+            }
+        },
         content = { innerPadding ->
             Column(
-                modifier = Modifier.padding(innerPadding).padding(horizontal = 16.dp),
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.Start
             ) {
+                var text by remember(item) { mutableStateOf(item.itemName) }
+
                 TextField(
-                    modifier = Modifier.padding(vertical = 10.dp).fillMaxWidth(),
-                    value = getItemName(itemId),
-                    onValueChange = {},
-                    label = {Text("Ingredient Name")}
-                    )
+                    modifier = Modifier
+                        .padding(vertical = 12.dp)
+                        .fillMaxWidth(),
+                    value = text,
+                    singleLine = true,
+                    onValueChange = { text = it },
+                    label = { Text("Ingredient Name") }
+                )
 
-                Section("Location and Temperature") {
-                    DropDown(listOf("Macey's (1700 S)", "WinCo (2100 S)"), "Current Store")
+                // Debounce name changes to item
+                LaunchedEffect(key1 = text) {
+                    if (text.trim() == item.itemName)
+                        return@LaunchedEffect
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween) {
+                    delay(500)
 
-                        DropDown(listOf("Ambient", "Chilled", "Frozen"), "Temp", 110.dp)
-                        DropDown(listOf("Aisle 1", "Bakery", "Produce", "Back Wall"), "Aisle", 110.dp)
-                        DropDown(listOf("None", "Bay 1", "Bay 2", "Bay 3"), "Bay", 110.dp)
-                    }
+                    setItemName(item.itemId, text)
                 }
 
-                Section("Package Details") {
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                    ) {
-                        DropDown(listOf("Bag(s)", "Box(es)"), "Package Type", 260.dp)
+                DropDown(
+                    modifier = Modifier.padding(bottom = 12.dp),
+                    list = ItemTemp.entries,
+                    value = item.itemTemp,
+                    select = { setItemTemp(item.itemId, it) },
+                    label = "Ingredient Temperature"
+                )
 
-                        TextField(
-                            modifier = Modifier.width(100.dp),
-                            interactionSource = remember { MutableInteractionSource() }
-                                .also { interactionSource ->
-                                    LaunchedEffect(interactionSource) {
-                                        interactionSource.interactions.collect {
-                                            if (it is PressInteraction.Release) {
-                                                // works like onClick
-                                                Log.d("TEST", "Button clicked")
-                                            }
-                                        }
-                                    }
-                                },
-                            label = {Text("Amount")},
-                            value = "16 OZ",
-                            onValueChange = {},
-                            readOnly = true
+                Section("Location") {
+
+                    DropDown(
+                        list = stores,
+                        label = "Current Store",
+                        toString = { it.storeName },
+                        value = currentStore,
+                        select = { setStore(it.storeId) }
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        val aisle =
+                            aisles.firstOrNull { a -> a.aisleId == (itemAisle?.aisleId ?: "_") }
+                                ?: Aisle(storeId = 0, aisleName = "(Select an Aisle)")
+
+                        DropDown(
+                            list = aisles,
+                            label = "Aisle",
+                            width = 260.dp,
+                            toString = { it.aisleName },
+                            value = aisle,
+                            select = {
+                                setItemAisle(
+                                    item.itemId,
+                                    it.aisleId,
+                                    itemAisle?.bay ?: BayType.Middle
+                                )
+                            }
+                        )
+
+                        DropDown(
+                            list = BayType.entries,
+                            label = "Bay",
+                            width = 100.dp,
+                            value = itemAisle?.bay ?: BayType.Middle,
+                            select = {
+                                setItemAisle(
+                                    item.itemId,
+                                    itemAisle?.aisleId ?: aisles[0].aisleId,
+                                    it
+                                )
+                            }
                         )
                     }
                 }
 
+                Section("Default Recipe Units") {
+
+                    DropDown(
+                        modifier = Modifier.padding(bottom = 12.dp),
+                        list = UnitType.entries,
+                        label = "Unit Type",
+                        value = item.defaultUnits,
+                        select = { setItemDefaultUnits(item.itemId, it) }
+                    )
+                }
+
                 Section("Preparations") {
-                    TextField(modifier = Modifier.fillMaxWidth(), label = {Text("Preparation")}, value = "Preparation 1", onValueChange = {})
+                    SwipeList(
+                        listItems = prep,
+                        getKey = { it.itemPrepId },
+                        leftAction = swipeEditAction {listItem = it; lastTextValue = prep.firstOrNull { p -> p.itemPrepId == it}?.prepName ?: ""; showRenameAlertDialog = true},
+                        rightAction = swipeDeleteAction {deletePrep(it)},
+                        contentPadding = PaddingValues(vertical = 12.dp),
+                        rowItemLayout = {
+                            Text(it.prepName)
+                        }
+                    )
                 }
             }
         }
@@ -115,9 +227,21 @@ fun IngredientDetailsPreview() {
     SIRLTheme {
         IngredientDetails(
             navHostController = rememberNavController(),
-            title = "Ingredients - French Bread",
-            itemId = 17,
-            getItemName = {"French Bread"})
+            item = Item(itemName = "Aisle"),
+            itemAisle = ItemAisle(0, 0, 0),
+            setItemTemp = { _, _ -> },
+            setItemName = { _, _ -> },
+            setItemAisle = { _, _, _ -> },
+            setItemDefaultUnits = { _, _ -> },
+            aisles = listOf(),
+            stores = listOf(Store(1, "Store 1")),
+            currentStore = Store(1, "Store 1"),
+            setStore = { _ -> },
+            prep = listOf(ItemPrep(itemId = 0, prepName = "Prep 1")),
+            addPrep = { _, _ -> },
+            updatePrep = { _, _ -> },
+            deletePrep = { _ -> }
+        )
     }
 }
 
@@ -132,28 +256,45 @@ fun Section(title: String, content: @Composable () -> Unit) {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun DropDown(list: List<String>, label: String, width: Dp? = null) {
+fun <T> DropDown(
+    modifier: Modifier = Modifier,
+    list: List<T>,
+    toString: ((T) -> String)? = null,
+    select: (T) -> Unit,
+    label: String,
+    value: T,
+    width: Dp? = null
+) {
     var expanded by remember { mutableStateOf(false) }
     ExposedDropdownMenuBox(
-        modifier = if (width != null) Modifier.width(width)
-                    else Modifier.fillMaxWidth(),
+        modifier = if (width != null) modifier.width(width)
+        else modifier.fillMaxWidth(),
         expanded = expanded,
-        onExpandedChange = {expanded = it})
-    {
+        onExpandedChange = { expanded = it },
+    ) {
         TextField(
-            modifier = Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable, true).fillMaxWidth(),
-            value = list.first(),
+            modifier = Modifier
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                .fillMaxWidth(),
+            value = toString?.invoke(value) ?: value.toString(),
+            singleLine = true,
             readOnly = true,
             label = { Text(label) },
-            onValueChange = {})
+            onValueChange = {}
+        )
         ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false })
-        {
+            onDismissRequest = {
+                expanded = false
+            }
+        ) {
             list.forEach { opt ->
                 DropdownMenuItem(
-                    text = { Text(opt) },
-                    onClick = { expanded = false }
+                    text = { Text(toString?.invoke(opt) ?: opt.toString()) },
+                    onClick = {
+                        expanded = false
+                        select(opt)
+                    }
                 )
             }
         }

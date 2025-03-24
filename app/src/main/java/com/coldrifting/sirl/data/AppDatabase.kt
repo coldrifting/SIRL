@@ -4,17 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.ItemAisleDAO
 import com.coldrifting.sirl.data.access.ItemDAO
+import com.coldrifting.sirl.data.access.ItemPrepDAO
 import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.access.base.BaseDAO.Companion.populate
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.data.entities.helper.PackageInfoConverter
 import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import java.util.concurrent.Executors
 
@@ -23,16 +23,17 @@ import java.util.concurrent.Executors
         Store::class,
         Aisle::class,
         Item::class,
-        ItemAisle::class
+        ItemAisle::class,
+        ItemPrep::class
     ],
     version = 1,
     exportSchema = false)
-@TypeConverters(PackageInfoConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun storeDao(): StoreDAO
     abstract fun aisleDao(): AisleDAO
     abstract fun itemDao(): ItemDAO
     abstract fun itemAislesDao(): ItemAisleDAO
+    abstract fun itemPrepDao(): ItemPrepDAO
 
     companion object {
 

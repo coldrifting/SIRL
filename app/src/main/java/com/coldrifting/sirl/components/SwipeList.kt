@@ -26,7 +26,8 @@ fun <T> SwipeList(
     getKey: (T) -> Int,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
-    rowPadding: PaddingValues = PaddingValues(horizontal = 16.dp)
+    rowPadding: PaddingValues = PaddingValues(horizontal = 16.dp),
+    contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
 
@@ -39,6 +40,7 @@ fun <T> SwipeList(
 
     LazyColumn(
         state = listState,
+        contentPadding = contentPadding,
         modifier = modifier.fillMaxSize()
     )
     {

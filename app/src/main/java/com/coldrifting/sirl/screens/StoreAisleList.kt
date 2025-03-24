@@ -24,14 +24,14 @@ import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
 import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.routeStores
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
 fun StoreAisleList(
     navHostController: NavHostController,
-    title: String,
-    id: Int,
+    store: Store,
     addAisle: (Int, String) -> Unit,
     renameAisle: (Int, String) -> Unit,
     deleteAisle: (Int) -> Unit,
@@ -61,13 +61,13 @@ fun StoreAisleList(
             title = "Add Aisle",
             placeholder = "Aisle Name",
             action = "Add",
-            onSuccess = { addAisle(id, it) },
+            onSuccess = { addAisle(store.storeId, it) },
             onDismiss = { showNewAlertDialog = false }
         )
     }
 
     Scaffold(
-        topBar = { TopBar(navHostController, title) },
+        topBar = { TopBar(navHostController, "${store.storeName} - Aisles") },
         bottomBar = { NavBar(navHostController, routeStores) },
         floatingActionButton = {
             FloatingActionButton(onClick = {showNewAlertDialog = true}) {
@@ -80,7 +80,7 @@ fun StoreAisleList(
                 listItems = aisles,
                 toString = { it.aisleName },
                 getKey = { it.aisleId },
-                onDragStopped = { l, i -> syncAisles(id, l, i) },
+                onDragStopped = { l, i -> syncAisles(store.storeId, l, i) },
                 leftAction = swipeEditAction
                 {
                     listItem = it
@@ -103,8 +103,7 @@ fun StoreAisleListPreview() {
     SIRLTheme {
         StoreAisleList(
             navHostController = rememberNavController(),
-            title = "Store - Aisles",
-            id = 1,
+            store = Store(1,"Store"),
             addAisle = { _, _ -> },
             renameAisle = { _, _ -> },
             deleteAisle = { },

@@ -5,13 +5,14 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.enums.BayType
 import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(
     tableName = "ItemAisles",
-    primaryKeys = ["itemId", "aisleId"],
+    primaryKeys = ["itemId", "storeId"],
     foreignKeys = [
         ForeignKey(
             entity = Item::class,
@@ -19,14 +20,20 @@ import kotlinx.serialization.Serializable
             childColumns = arrayOf("itemId"),
             onDelete = ForeignKey.CASCADE),
         ForeignKey(
+            entity = Store::class,
+            parentColumns = arrayOf("storeId"),
+            childColumns = arrayOf("storeId"),
+            onDelete = ForeignKey.CASCADE),
+        ForeignKey(
             entity = Aisle::class,
             parentColumns = arrayOf("aisleId"),
             childColumns = arrayOf("aisleId"),
             onDelete = ForeignKey.CASCADE)
     ],
-    indices = [Index("aisleId")])
+    indices = [Index("itemId"),Index("storeId"),Index("aisleId")])
 data class ItemAisle(
     val itemId: Int,
+    val storeId: Int,
     val aisleId: Int,
-    val bay: BayType = BayType.None
+    val bay: BayType = BayType.Middle
 )
