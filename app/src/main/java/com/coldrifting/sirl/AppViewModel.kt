@@ -24,6 +24,8 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         return repository.getAislesAtStore(storeId)
     }
 
+    val allRecipes = repository.allRecipes
+
     val itemsSortingModeState: StateFlow<AppRepository.ItemsSortingMode> = repository.itemsSortingModeState
     val itemsFilterTextState: StateFlow<String> = repository.itemsFilterTextState
     val itemsWithFilter = repository.itemsWithFilter
@@ -138,6 +140,18 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun deleteItemPrep(prepId: Int) {
         repository.deleteItemPrep(prepId)
+    }
+
+    fun toggleRecipePin(recipeId: Int) {
+        repository.toggleRecipePin(recipeId)
+    }
+
+    fun addRecipe(recipeName: String) {
+        repository.addRecipe(recipeName)
+    }
+
+    fun deleteRecipe(recipeId: Int) {
+        repository.deleteRecipe(recipeId)
     }
 
     companion object AppViewModelProvider {

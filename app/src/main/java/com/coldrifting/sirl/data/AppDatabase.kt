@@ -9,11 +9,13 @@ import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.ItemAisleDAO
 import com.coldrifting.sirl.data.access.ItemDAO
 import com.coldrifting.sirl.data.access.ItemPrepDAO
+import com.coldrifting.sirl.data.access.RecipeDAO
 import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.access.base.BaseDAO.Companion.populate
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
+import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import java.util.concurrent.Executors
@@ -24,7 +26,8 @@ import java.util.concurrent.Executors
         Aisle::class,
         Item::class,
         ItemAisle::class,
-        ItemPrep::class
+        ItemPrep::class,
+        Recipe::class
     ],
     version = 1,
     exportSchema = false)
@@ -34,6 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDAO
     abstract fun itemAislesDao(): ItemAisleDAO
     abstract fun itemPrepDao(): ItemPrepDAO
+    abstract fun recipeDao(): RecipeDAO
 
     companion object {
 
@@ -67,6 +71,7 @@ abstract class AppDatabase : RoomDatabase() {
             val strItems = getAssetText(context, "items")
             val strItemAisles = getAssetText(context, "itemAisles")
             val strItemPreps = getAssetText(context, "itemPreps")
+            val strRecipe = getAssetText(context, "recipes")
 
             return Room.databaseBuilder(
                 context.applicationContext,
@@ -85,6 +90,7 @@ abstract class AppDatabase : RoomDatabase() {
                                 itemDao().populate(strItems)
                                 itemAislesDao().populate(strItemAisles)
                                 itemPrepDao().populate(strItemPreps)
+                                recipeDao().populate(strRecipe)
                             }
                         }
                     }

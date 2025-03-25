@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.routes.IngredientDetails
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextDialog
@@ -54,6 +53,7 @@ import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
+import com.coldrifting.sirl.routes.IngredientDetails
 import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
@@ -168,7 +168,10 @@ fun IngredientList(
                     )
                 },
                 leftAction = swipeEditAction { navHostController.navigate(IngredientDetails(it)) },
-                rightAction = swipeDeleteAction { deleteItem(it) })
+                rightAction = swipeDeleteAction {
+                    // TODO - Add confirm check if delete would cascade to recipes
+                    deleteItem(it)
+                })
         })
 }
 

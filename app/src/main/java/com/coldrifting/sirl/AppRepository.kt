@@ -9,10 +9,12 @@ import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.ItemAisleDAO
 import com.coldrifting.sirl.data.access.ItemDAO
 import com.coldrifting.sirl.data.access.ItemPrepDAO
+import com.coldrifting.sirl.data.access.RecipeDAO
 import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
+import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
 import com.coldrifting.sirl.data.entities.joined.ItemAisle
@@ -42,6 +44,7 @@ class AppRepository(
     private val itemDao: ItemDAO,
     private val itemAisleDao: ItemAisleDAO,
     private val itemPrepDao: ItemPrepDAO,
+    private val recipeDao: RecipeDAO,
     private val context: Context
 ) {
     private val Context.settingsDataStore: DataStore<UserPreferences> by dataStore(
@@ -52,6 +55,8 @@ class AppRepository(
     // StateFlows
     val allStores = storeDao.all().toStateFlow()
     private val allAisles = aisleDao.all().toStateFlow()
+
+    val allRecipes = recipeDao.all().toStateFlow()
 
     fun getAislesAtStore(storeId: Int): StateFlow<List<Aisle>> {
         return aisleDao.all(storeId).toStateFlow()
@@ -182,7 +187,7 @@ class AppRepository(
 
     fun deleteAisle(aisleId: Int) {
         ioThread {
-            aisleDao.delete(Aisle(aisleId = aisleId, aisleName = "", storeId = -1))
+            aisleDao.delete(Aisle(aisleId = aisleId, aisleName = "DELETE", storeId = -1))
         }
     }
 
@@ -296,7 +301,27 @@ class AppRepository(
 
     fun deleteItemPrep(prepId: Int) {
         scope.launch {
-            itemPrepDao.delete(ItemPrep(itemPrepId = prepId, itemId = -1, prepName = ""))
+            itemPrepDao.delete(ItemPrep(itemPrepId = prepId, itemId = -1, prepName = "DELETE"))
+        }
+    }
+
+    fun toggleRecipePin(recipeId: Int) {
+        scope.launch {
+            recipeDao.togglePin(recipeId)
+        }
+    }
+
+    fun addRecipe(recipeName: String) {
+        val recipe = Recipe(recipeName = recipeName)
+        scope.launch {
+            recipeDao.insert(recipe)
+        }
+    }
+
+    fun deleteRecipe(recipeId: Int) {
+        val recipe = Recipe(recipeId = recipeId, recipeName = "DELETE")
+        scope.launch {
+            recipeDao.delete(recipe)
         }
     }
 }

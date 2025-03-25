@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 fun <T> SwipeList(
     modifier: Modifier = Modifier,
     listItems: List<T>,
-    rowItemLayout: @Composable RowScope.(T) -> Unit,
     getKey: (T) -> Int,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
@@ -34,7 +33,8 @@ fun <T> SwipeList(
     spacing: Dp = 0.dp,
     margin: Dp = 0.dp,
     cornerRadius: Dp = 0.dp,
-    scroll: Boolean = true
+    scroll: Boolean = true,
+    rowItemLayout: @Composable RowScope.(T) -> Unit
 ) {
     val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
 

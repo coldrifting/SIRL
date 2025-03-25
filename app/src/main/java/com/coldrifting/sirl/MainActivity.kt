@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,6 +19,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
+import com.coldrifting.sirl.routes.Cart
+import com.coldrifting.sirl.routes.IngredientDetails
+import com.coldrifting.sirl.routes.IngredientList
+import com.coldrifting.sirl.routes.Ingredients
+import com.coldrifting.sirl.routes.RecipeList
+import com.coldrifting.sirl.routes.RecipeView
+import com.coldrifting.sirl.routes.Recipes
+import com.coldrifting.sirl.routes.StoreAisleList
+import com.coldrifting.sirl.routes.StoreList
+import com.coldrifting.sirl.routes.Stores
 import com.coldrifting.sirl.screens.Cart
 import com.coldrifting.sirl.screens.IngredientDetails
 import com.coldrifting.sirl.screens.IngredientList
@@ -24,14 +36,6 @@ import com.coldrifting.sirl.screens.Recipes
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
-import com.coldrifting.sirl.routes.Stores
-import com.coldrifting.sirl.routes.StoreList
-import com.coldrifting.sirl.routes.StoreAisleList
-import com.coldrifting.sirl.routes.Ingredients
-import com.coldrifting.sirl.routes.IngredientList
-import com.coldrifting.sirl.routes.IngredientDetails
-import com.coldrifting.sirl.routes.Recipes
-import com.coldrifting.sirl.routes.Cart
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +62,7 @@ class MainActivity : ComponentActivity() {
             navController = navController,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
-            startDestination = Ingredients
+            startDestination = Recipes
         )
         {
             navigation<Stores>(startDestination = StoreList) {
@@ -144,8 +148,23 @@ class MainActivity : ComponentActivity() {
                         stores = stores)
                 }
             }
-            composable<Recipes> {
-                Recipes(navController)
+            navigation<Recipes>(startDestination = RecipeList) {
+                composable<RecipeList> {
+                    val recipes by viewModel.allRecipes.collectAsState()
+                    Recipes(
+                        navHostController = navController,
+                        recipes = recipes,
+                        toggleRecipePin = viewModel::toggleRecipePin,
+                        addRecipe = viewModel::addRecipe,
+                        deleteRecipe = viewModel::deleteRecipe
+                    )
+                }
+                composable<RecipeView> { backStackEntry ->
+                    val recipeView: RecipeView = backStackEntry.toRoute()
+                    Box {
+                        Text(text = recipeView.recipeId.toString())
+                    }
+                }
             }
             composable<Cart> {
                 Cart(navController)

@@ -1,0 +1,23 @@
+[
+  {
+    "recipeId": 1,
+    "recipeName": "Pasta Alfredo",
+    "recipeUrl": "https://www.budgetbytes.com/lighter-spinach-alfredo-pasta/"
+  },
+  {
+    "recipeId": 2,
+    "recipeName": "Green Chile Mac & Cheese",
+    "recipeUrl": "https://www.budgetbytes.com/green-chile-mac-and-cheese/",
+    "pinned": true
+  },
+  {
+    "recipeId": 3,
+    "recipeName": "Hummus Pita Bread",
+    "recipeUrl": "https://www.budgetbytes.com/loaded-hummus-pitas/"
+  },
+  {
+    "recipeId": 4,
+    "recipeName": "Stuffed Poblano Peppers",
+    "recipeUrl": "https://www.loveandlemons.com/stuffed-poblano-peppers/"
+  }
+]
