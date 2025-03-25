@@ -15,6 +15,8 @@ import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Recipe
+import com.coldrifting.sirl.data.entities.RecipeEntryResult
+import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
 import com.coldrifting.sirl.data.entities.joined.ItemAisle
@@ -33,6 +35,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
@@ -329,5 +332,12 @@ class AppRepository(
         scope.launch {
             recipeDao.setName(recipeId, recipeName)
         }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun getAllRecipesWithData(recipeId: Int): StateFlow<RecipeX> {
+        return recipeDao.getRecipes(recipeId).transformLatest { x ->
+            emit(RecipeEntryResult.toHierarchy(x))
+        }.toStateFlow(RecipeX())
     }
 }

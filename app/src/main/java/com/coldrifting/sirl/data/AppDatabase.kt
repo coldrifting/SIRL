@@ -16,6 +16,8 @@ import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Recipe
+import com.coldrifting.sirl.data.entities.RecipeEntry
+import com.coldrifting.sirl.data.entities.RecipeSection
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import java.util.concurrent.Executors
@@ -27,7 +29,9 @@ import java.util.concurrent.Executors
         Item::class,
         ItemAisle::class,
         ItemPrep::class,
-        Recipe::class
+        Recipe::class,
+        RecipeSection::class,
+        RecipeEntry::class
     ],
     version = 1,
     exportSchema = false)
@@ -72,6 +76,8 @@ abstract class AppDatabase : RoomDatabase() {
             val strItemAisles = getAssetText(context, "itemAisles")
             val strItemPreps = getAssetText(context, "itemPreps")
             val strRecipe = getAssetText(context, "recipes")
+            val strRecipeSections = getAssetText(context, "recipeSections")
+            val strRecipeEntries = getAssetText(context, "recipeEntries")
 
             return Room.databaseBuilder(
                 context.applicationContext,
@@ -91,6 +97,8 @@ abstract class AppDatabase : RoomDatabase() {
                                 itemAislesDao().populate(strItemAisles)
                                 itemPrepDao().populate(strItemPreps)
                                 recipeDao().populate(strRecipe)
+                                recipeDao().populateSections(strRecipeSections)
+                                recipeDao().populateEntries(strRecipeEntries)
                             }
                         }
                     }

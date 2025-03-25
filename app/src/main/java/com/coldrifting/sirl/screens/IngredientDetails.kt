@@ -43,6 +43,7 @@ import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextDialog
+import com.coldrifting.sirl.components.TextFieldWithDebounce
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
@@ -56,7 +57,6 @@ import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
-import kotlinx.coroutines.delay
 
 @Composable
 fun IngredientDetails(
@@ -124,7 +124,6 @@ fun IngredientDetails(
             }
         },
         content = { innerPadding ->
-
             Column(
                 modifier = Modifier
                     .padding(innerPadding)
@@ -132,27 +131,13 @@ fun IngredientDetails(
                     .verticalScroll(scrollState),
                 horizontalAlignment = Alignment.Start
             ) {
-                var text by remember(item) { mutableStateOf(item.itemName) }
-
-                TextField(
-                    modifier = Modifier
-                        .padding(vertical = 12.dp)
-                        .fillMaxWidth(),
-                    value = text,
-                    singleLine = true,
-                    onValueChange = { text = it },
-                    label = { Text("Ingredient Name") }
+                TextFieldWithDebounce(
+                    obj = item,
+                    label = "Ingredient Name",
+                    getId = { it.itemId },
+                    getName = { it.itemName },
+                    setItemName
                 )
-
-                // Debounce name changes to item
-                LaunchedEffect(key1 = text) {
-                    if (text.trim() == item.itemName)
-                        return@LaunchedEffect
-
-                    delay(500)
-
-                    setItemName(item.itemId, text)
-                }
 
                 Section("Location") {
 

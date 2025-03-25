@@ -8,7 +8,8 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = "Recipes")
 data class Recipe(
     @PrimaryKey(autoGenerate = true)
-    var recipeId: Int = 0,
-    var recipeName: String,
-    var recipeUrl: String = "",
-    var pinned: Boolean = false)
+    val recipeId: Int = 0,
+    val recipeName: String,
+    val recipeUrl: String = "",
+    val pinned: Boolean = false
+)

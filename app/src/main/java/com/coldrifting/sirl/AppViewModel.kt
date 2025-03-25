@@ -8,6 +8,7 @@ import com.coldrifting.sirl.data.AppApplication
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
+import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
@@ -156,6 +157,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
     fun setRecipeName(recipeId: Int, recipeName: String) {
         repository.setRecipeName(recipeId, recipeName)
+    }
+
+    fun getRecipes(recipeId: Int): StateFlow<RecipeX> {
+        return repository.getAllRecipesWithData(recipeId)
     }
 
     companion object AppViewModelProvider {

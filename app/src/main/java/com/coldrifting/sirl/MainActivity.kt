@@ -160,8 +160,7 @@ class MainActivity : ComponentActivity() {
                 }
                 composable<RecipeView> { backStackEntry ->
                     val recipeView: RecipeView = backStackEntry.toRoute()
-                    val recipes by viewModel.allRecipes.collectAsState()
-                    val recipe = recipes.first{r -> r.recipeId == recipeView.recipeId}
+                    val recipe by viewModel.getRecipes(recipeView.recipeId).collectAsState()
                     RecipeView(
                         navHostController = navController,
                         recipe = recipe,
