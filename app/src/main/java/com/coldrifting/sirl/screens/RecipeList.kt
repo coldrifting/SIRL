@@ -21,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,16 +32,16 @@ import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
-import com.coldrifting.sirl.components.swipeEditAction
 import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.routes.RecipeView
 import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
+import com.coldrifting.sirl.ui.theme.PinColor
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun Recipes(
+fun RecipeList(
     navHostController: NavHostController,
     recipes: List<Recipe>,
     toggleRecipePin: (Int) -> Unit,
@@ -86,10 +85,12 @@ fun Recipes(
                 modifier = Modifier.padding(innerPadding),
                 listItems = recipes,
                 getKey = { it.recipeId },
-                leftAction = swipeEditAction { navHostController.navigate(RecipeView(it)) },
+                tapAction = { navHostController.navigate(RecipeView(it)) },
                 rightAction = swipeDeleteAction(deleteRecipe)
             ) {
-                Text(it.recipeName)
+                Text(
+                    text = it.recipeName
+                )
                 Spacer(Modifier.weight(1f))
                 IconButton(
                     onClick = {
@@ -101,8 +102,7 @@ fun Recipes(
 
                     val shouldBePinned = if (uiPinState.first == it.recipeId) {
                         uiPinState.second
-                    }
-                    else {
+                    } else {
                         it.pinned
                     }
 
@@ -111,7 +111,7 @@ fun Recipes(
                             Icon(
                                 imageVector = Icons.Default.Star,
                                 contentDescription = "Unpin",
-                                tint = Color(0xFFDFB84C)
+                                tint = PinColor
                             )
                         } else {
                             Icon(
@@ -130,9 +130,9 @@ fun Recipes(
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun RecipesPreview() {
+fun RecipeListPreview() {
     SIRLTheme {
-        Recipes(
+        RecipeList(
             navHostController = rememberNavController(),
             recipes = listOf(Recipe(1, "Recipe 1")),
             toggleRecipePin = {},

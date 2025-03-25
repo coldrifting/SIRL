@@ -19,6 +19,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -233,6 +234,8 @@ fun IngredientDetails(
 
                 Section("Preparations") {
                     val isDefault = prep.isEmpty()
+                    val normalColor = MaterialTheme.colorScheme.onSurface
+                    val defaultColor = normalColor.copy(alpha = 0.38f)
                     key(isDefault) {
                         SwipeList(
                             listItems = prep.ifEmpty {
@@ -259,7 +262,11 @@ fun IngredientDetails(
                                 swipeDeleteAction { deletePrep(it) }
                             } else null,
                             rowItemLayout = {
-                                Text(it.prepName)
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = it.prepName,
+                                    color = if (isDefault) defaultColor else normalColor
+                                )
                             }
                         )
                     }

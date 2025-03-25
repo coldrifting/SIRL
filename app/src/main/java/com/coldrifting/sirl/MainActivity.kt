@@ -32,7 +32,7 @@ import com.coldrifting.sirl.routes.Stores
 import com.coldrifting.sirl.screens.Cart
 import com.coldrifting.sirl.screens.IngredientDetails
 import com.coldrifting.sirl.screens.IngredientList
-import com.coldrifting.sirl.screens.Recipes
+import com.coldrifting.sirl.screens.RecipeList
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
@@ -151,7 +151,7 @@ class MainActivity : ComponentActivity() {
             navigation<Recipes>(startDestination = RecipeList) {
                 composable<RecipeList> {
                     val recipes by viewModel.allRecipes.collectAsState()
-                    Recipes(
+                    RecipeList(
                         navHostController = navController,
                         recipes = recipes,
                         toggleRecipePin = viewModel::toggleRecipePin,

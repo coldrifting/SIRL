@@ -1,5 +1,6 @@
 package com.coldrifting.sirl.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,6 +30,7 @@ fun <T> SwipeList(
     getKey: (T) -> Int,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
+    tapAction: ((Int) -> Unit)? = null,
     rowPadding: PaddingValues = PaddingValues(horizontal = 16.dp),
     spacing: Dp = 0.dp,
     margin: Dp = 0.dp,
@@ -62,6 +64,7 @@ fun <T> SwipeList(
         ) {
             Row(
                 modifier = Modifier
+                    .then(if (tapAction != null) Modifier.clickable { tapAction.invoke(item.key) } else Modifier)
                     .padding(rowPadding)
                     .height(56.dp),
                 verticalAlignment = Alignment.CenterVertically

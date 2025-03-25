@@ -50,7 +50,6 @@ import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
-import com.coldrifting.sirl.components.swipeEditAction
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
 import com.coldrifting.sirl.routes.IngredientDetails
@@ -102,13 +101,9 @@ fun IngredientList(
         },
         bottomBar = {
             Column(Modifier.background(MaterialTheme.colorScheme.surfaceContainer)) {
-                val modifierIme = if (showNewAlertDialog) {
-                    Modifier
-                } else {
-                    Modifier.positionAwareImePadding()
-                }
-
-                BottomAppBar(modifier = modifierIme.padding(bottom = 4.dp),
+                BottomAppBar(modifier = Modifier
+                    .then(if (showNewAlertDialog) Modifier else Modifier.positionAwareImePadding())
+                    .padding(bottom = 4.dp),
                     windowInsets = WindowInsets(0.dp, 0.dp, 0.dp, 0.dp),
                     actions = {
                         Spacer(Modifier.weight(1f))
@@ -167,7 +162,7 @@ fun IngredientList(
                         text = it.aisleName ?: "(No Aisle Set)", fontSize = 12.sp
                     )
                 },
-                leftAction = swipeEditAction { navHostController.navigate(IngredientDetails(it)) },
+                tapAction = { navHostController.navigate(IngredientDetails(it)) },
                 rightAction = swipeDeleteAction {
                     // TODO - Add confirm check if delete would cascade to recipes
                     deleteItem(it)

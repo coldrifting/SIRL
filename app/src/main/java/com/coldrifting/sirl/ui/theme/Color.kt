@@ -77,7 +77,7 @@ val surfaceContainerHighDark = Color(0xFF2E282D)
 val surfaceContainerHighestDark = Color(0xFF3A3338)
 
 val DelColor = Color(0xFFC43838)
-//val PinColor = Color(0xFFDFB84C)
+val PinColor = Color(0xFFDF984C)
 val EditColor = Color(0xFF4CAF70)
 
 val AmbientColorLight = Color(0xFF_84BA84)
