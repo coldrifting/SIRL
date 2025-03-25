@@ -4,9 +4,13 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.DropdownMenuItem
@@ -22,6 +26,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -85,15 +90,28 @@ fun IngredientDetails(
         )
     }
 
+    var userInteraction by remember(item.itemId) { mutableStateOf(false) }
+
+    val scrollState = rememberScrollState()
+
     var showNewAlertDialog by remember { mutableStateOf(false) }
     if (showNewAlertDialog) {
         TextDialog(
             title = "Add Preparation",
             placeholder = "Ingredient Preparation",
             action = "Add",
-            onSuccess = { addPrep(item.itemId, it) },
+            onSuccess = {
+                userInteraction = true
+                addPrep(item.itemId, it)
+            },
             onDismiss = { showNewAlertDialog = false }
         )
+    }
+
+    LaunchedEffect(prep) {
+        if (userInteraction) {
+            scrollState.scrollTo(9990)
+        }
     }
 
     Scaffold(
@@ -105,10 +123,12 @@ fun IngredientDetails(
             }
         },
         content = { innerPadding ->
+
             Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16.dp)
+                    .verticalScroll(scrollState),
                 horizontalAlignment = Alignment.Start
             ) {
                 var text by remember(item) { mutableStateOf(item.itemName) }
@@ -132,14 +152,6 @@ fun IngredientDetails(
 
                     setItemName(item.itemId, text)
                 }
-
-                DropDown(
-                    modifier = Modifier.padding(bottom = 12.dp),
-                    list = ItemTemp.entries,
-                    value = item.itemTemp,
-                    select = { setItemTemp(item.itemId, it) },
-                    label = "Ingredient Temperature"
-                )
 
                 Section("Location") {
 
@@ -193,40 +205,66 @@ fun IngredientDetails(
                     }
                 }
 
-                Section("Default Recipe Units") {
+                Section("Temperature and Units") {
 
-                    DropDown(
-                        modifier = Modifier.padding(bottom = 12.dp),
-                        list = UnitType.entries,
-                        label = "Unit Type",
-                        value = item.defaultUnits,
-                        select = { setItemDefaultUnits(item.itemId, it) }
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        DropDown(
+                            modifier = Modifier.padding(bottom = 12.dp),
+                            width = 200.dp,
+                            list = ItemTemp.entries,
+                            value = item.itemTemp,
+                            select = { setItemTemp(item.itemId, it) },
+                            label = "Ingredient Temperature"
+                        )
+
+                        DropDown(
+                            modifier = Modifier.padding(bottom = 12.dp),
+                            width = 150.dp,
+                            list = UnitType.entries,
+                            label = "Default Units",
+                            value = item.defaultUnits,
+                            select = { setItemDefaultUnits(item.itemId, it) }
+                        )
+                    }
                 }
 
                 Section("Preparations") {
-                    if (prep.isEmpty()) {
-                        TextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = "Default",
-                            onValueChange = {},
-                            enabled = false
-                        )
-                    } else {
+                    val isDefault = prep.isEmpty()
+                    key(isDefault) {
                         SwipeList(
-                            listItems = prep,
-                            getKey = { it.itemPrepId },
-                            leftAction = swipeEditAction {
-                                listItem = it
-                                lastTextValue = prep.firstOrNull { p -> p.itemPrepId == it }?.prepName ?: ""
-                                showRenameAlertDialog = true
+                            listItems = prep.ifEmpty {
+                                listOf(
+                                    ItemPrep(
+                                        itemId = item.itemId,
+                                        prepName = "Default"
+                                    )
+                                )
                             },
-                            rightAction = swipeDeleteAction { deletePrep(it) },
+                            scroll = false,
+                            spacing = 12.dp,
+                            cornerRadius = 6.dp,
+                            getKey = { it.itemPrepId },
+                            leftAction = if (!isDefault) {
+                                swipeEditAction {
+                                    listItem = it
+                                    lastTextValue =
+                                        prep.firstOrNull { p -> p.itemPrepId == it }?.prepName ?: ""
+                                    showRenameAlertDialog = true
+                                }
+                            } else null,
+                            rightAction = if (!isDefault) {
+                                swipeDeleteAction { deletePrep(it) }
+                            } else null,
                             rowItemLayout = {
                                 Text(it.prepName)
                             }
                         )
                     }
+
+                    Spacer(modifier = Modifier.height(12.dp))
                 }
             }
         }

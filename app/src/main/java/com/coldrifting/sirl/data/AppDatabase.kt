@@ -66,6 +66,7 @@ abstract class AppDatabase : RoomDatabase() {
             val strAisles = getAssetText(context, "aisles")
             val strItems = getAssetText(context, "items")
             val strItemAisles = getAssetText(context, "itemAisles")
+            val strItemPreps = getAssetText(context, "itemPreps")
 
             return Room.databaseBuilder(
                 context.applicationContext,
@@ -83,6 +84,7 @@ abstract class AppDatabase : RoomDatabase() {
                                 aisleDao().populate(strAisles)
                                 itemDao().populate(strItems)
                                 itemAislesDao().populate(strItemAisles)
+                                itemPrepDao().populate(strItemPreps)
                             }
                         }
                     }

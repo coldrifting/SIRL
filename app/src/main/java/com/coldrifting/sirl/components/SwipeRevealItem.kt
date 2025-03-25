@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberOverscrollEffect
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
@@ -39,6 +40,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
@@ -93,6 +95,7 @@ fun SwipeRevealItem(
     curIndex: MutableIntState? = null,
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
+    cornerRadius: Dp = 0.dp,
     content: @Composable () -> Unit) {
 
     val animTime = 125
@@ -208,6 +211,7 @@ fun SwipeRevealItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(cornerRadius))
             .background(color)
     ) {
         // Main content that moves with the swipe
@@ -230,6 +234,7 @@ fun SwipeRevealItem(
         ) {
             Box(modifier = Modifier
                 .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(cornerRadius))
                 .background(MaterialTheme.colorScheme.inverseOnSurface)) {
                 content.invoke()
             }

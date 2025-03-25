@@ -1,6 +1,7 @@
 package com.coldrifting.sirl.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -31,7 +32,9 @@ fun <T> SwipeList(
     rightAction: SwipeTapAction? = null,
     rowPadding: PaddingValues = PaddingValues(horizontal = 16.dp),
     spacing: Dp = 0.dp,
-    margin: Dp = 0.dp
+    margin: Dp = 0.dp,
+    cornerRadius: Dp = 0.dp,
+    scroll: Boolean = true
 ) {
     val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
 
@@ -42,29 +45,53 @@ fun <T> SwipeList(
     val lastSwiped = remember { mutableIntStateOf(-1) }
     val listState = rememberLazyListState()
 
-    LazyColumn(
-        modifier = modifier.fillMaxSize().padding(horizontal = margin).clipToBounds(),
-        state = listState,
-        verticalArrangement = Arrangement.spacedBy(spacing),
-    )
-    {
-        items(
-            items = list.value,
-            key = { it.key }
+    val verticalArrangement = Arrangement.spacedBy(spacing)
+    val columnModifier = modifier
+        .fillMaxSize()
+        .padding(horizontal = margin)
+        .clipToBounds()
+
+    @Composable
+    fun content(item: ListItem<T>) {
+        SwipeRevealItem(
+            index = item.key,
+            curIndex = lastSwiped,
+            leftAction = leftAction,
+            rightAction = rightAction,
+            cornerRadius = cornerRadius
         ) {
-            SwipeRevealItem(
-                index = it.key,
-                curIndex = lastSwiped,
-                leftAction = leftAction,
-                rightAction = rightAction
+            Row(
+                modifier = Modifier
+                    .padding(rowPadding)
+                    .height(56.dp),
+                verticalAlignment = Alignment.CenterVertically
+            )
+            {
+                rowItemLayout(item.item)
+            }
+        }
+    }
+
+    if (scroll) {
+        LazyColumn(
+            modifier = columnModifier,
+            verticalArrangement = verticalArrangement,
+            state = listState,
+        ) {
+            items(
+                items = list.value,
+                key = { it.key }
             ) {
-                Row(
-                    modifier = Modifier.padding(rowPadding).height(56.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                )
-                {
-                    rowItemLayout(it.item)
-                }
+                content(it)
+            }
+        }
+    } else {
+        Column(
+            modifier = columnModifier,
+            verticalArrangement = verticalArrangement
+        ) {
+            list.value.forEach {
+                content(it)
             }
         }
     }
