@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
-import com.coldrifting.sirl.data.DateStoreSerializer
+import com.coldrifting.sirl.data.DataStoreSerializer
 import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.ItemAisleDAO
 import com.coldrifting.sirl.data.access.ItemDAO
@@ -46,7 +46,7 @@ class AppRepository(
 ) {
     private val Context.settingsDataStore: DataStore<UserPreferences> by dataStore(
         fileName = "settings.pb",
-        serializer = DateStoreSerializer
+        serializer = DataStoreSerializer
     )
 
     // StateFlows
