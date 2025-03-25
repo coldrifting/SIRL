@@ -1,7 +1,7 @@
-package com.coldrifting.sirl
+package com.coldrifting.sirl.data
 
 import android.app.Application
-import com.coldrifting.sirl.data.AppDatabase
+import com.coldrifting.sirl.AppRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".AppApplication"
+        android:name=".data.AppApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SIRL.Splash"
         >
         <activity
-            android:name=".AppActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"
             >

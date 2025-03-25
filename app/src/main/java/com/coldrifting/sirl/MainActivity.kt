@@ -33,7 +33,7 @@ import com.coldrifting.sirl.routes.IngredientDetails
 import com.coldrifting.sirl.routes.Recipes
 import com.coldrifting.sirl.routes.Cart
 
-class AppActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()

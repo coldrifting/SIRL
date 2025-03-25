@@ -2,6 +2,9 @@ package com.coldrifting.sirl
 
 import android.content.Context
 import android.util.Log
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import com.coldrifting.sirl.data.DateStoreSerializer
 import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.ItemAisleDAO
 import com.coldrifting.sirl.data.access.ItemDAO
@@ -16,6 +19,7 @@ import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
+import com.coldrifting.sirl.proto.UserPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -40,6 +44,10 @@ class AppRepository(
     private val itemPrepDao: ItemPrepDAO,
     private val context: Context
 ) {
+    private val Context.settingsDataStore: DataStore<UserPreferences> by dataStore(
+        fileName = "settings.pb",
+        serializer = DateStoreSerializer
+    )
 
     // StateFlows
     val allStores = storeDao.all().toStateFlow()
