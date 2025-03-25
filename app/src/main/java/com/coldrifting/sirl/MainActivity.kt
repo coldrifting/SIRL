@@ -21,8 +21,9 @@ import com.coldrifting.sirl.routes.Cart
 import com.coldrifting.sirl.routes.IngredientDetails
 import com.coldrifting.sirl.routes.IngredientList
 import com.coldrifting.sirl.routes.Ingredients
+import com.coldrifting.sirl.routes.RecipeDetails
 import com.coldrifting.sirl.routes.RecipeList
-import com.coldrifting.sirl.routes.RecipeView
+import com.coldrifting.sirl.routes.RecipeDetailsEditIngredients
 import com.coldrifting.sirl.routes.Recipes
 import com.coldrifting.sirl.routes.StoreAisleList
 import com.coldrifting.sirl.routes.StoreList
@@ -30,8 +31,9 @@ import com.coldrifting.sirl.routes.Stores
 import com.coldrifting.sirl.screens.Cart
 import com.coldrifting.sirl.screens.IngredientDetails
 import com.coldrifting.sirl.screens.IngredientList
+import com.coldrifting.sirl.screens.RecipeDetails
 import com.coldrifting.sirl.screens.RecipeList
-import com.coldrifting.sirl.screens.RecipeView
+import com.coldrifting.sirl.screens.RecipeDetailsEditIngredients
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
@@ -158,10 +160,18 @@ class MainActivity : ComponentActivity() {
                         deleteRecipe = viewModel::deleteRecipe
                     )
                 }
-                composable<RecipeView> { backStackEntry ->
-                    val recipeView: RecipeView = backStackEntry.toRoute()
-                    val recipe by viewModel.getRecipes(recipeView.recipeId).collectAsState()
-                    RecipeView(
+                composable<RecipeDetails> { backStackEntry ->
+                    val recipeDetailsEditIngredients: RecipeDetailsEditIngredients = backStackEntry.toRoute()
+                    val recipe by viewModel.getRecipes(recipeDetailsEditIngredients.recipeId).collectAsState()
+                    RecipeDetails(
+                        navHostController = navController,
+                        recipe = recipe
+                    )
+                }
+                composable<RecipeDetailsEditIngredients> { backStackEntry ->
+                    val recipeDetailsEditIngredients: RecipeDetailsEditIngredients = backStackEntry.toRoute()
+                    val recipe by viewModel.getRecipes(recipeDetailsEditIngredients.recipeId).collectAsState()
+                    RecipeDetailsEditIngredients(
                         navHostController = navController,
                         recipe = recipe,
                         setRecipeName = viewModel::setRecipeName

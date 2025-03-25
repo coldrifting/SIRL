@@ -14,19 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.coldrifting.sirl.components.NavBar
+import com.coldrifting.sirl.components.Section
 import com.coldrifting.sirl.components.TextFieldWithDebounce
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
 
 @Composable
-fun RecipeView(
+fun RecipeDetailsEditIngredients(
     navHostController: NavHostController,
     recipe: RecipeX,
     setRecipeName: (Int, String) -> Unit
 ) {
     Scaffold(
-        topBar = { TopBar(navHostController, "Recipe Details") },
+        topBar = { TopBar(navHostController, "Edit Recipe Details") },
         bottomBar = { NavBar(navHostController, routeRecipes) }
     ) { innerPadding ->
         val scrollState = rememberScrollState()
@@ -46,7 +47,7 @@ fun RecipeView(
 
             // TODO - Make this look somewhat like the figma and allow for edits
             recipe.recipeSections.forEach { section ->
-                Section(section.sectionName) {
+                Section(title = section.sectionName) {
                     section.items.forEach { item ->
                         Row(
                             modifier = Modifier.fillMaxWidth(),

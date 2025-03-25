@@ -17,7 +17,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
@@ -37,10 +36,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.components.NavBar
+import com.coldrifting.sirl.components.Section
 import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TextFieldWithDebounce
@@ -139,7 +138,7 @@ fun IngredientDetails(
                     setItemName
                 )
 
-                Section("Location") {
+                Section(title = "Location") {
 
                     DropDown(
                         list = stores,
@@ -191,7 +190,7 @@ fun IngredientDetails(
                     }
                 }
 
-                Section("Temperature and Units") {
+                Section(title = "Temperature and Units") {
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -217,7 +216,7 @@ fun IngredientDetails(
                     }
                 }
 
-                Section("Preparations") {
+                Section(title = "Preparations") {
                     val isDefault = prep.isEmpty()
                     val normalColor = MaterialTheme.colorScheme.onSurface
                     val defaultColor = normalColor.copy(alpha = 0.38f)
@@ -285,15 +284,6 @@ fun IngredientDetailsPreview() {
             deletePrep = { _ -> }
         )
     }
-}
-
-@Composable
-fun Section(title: String, content: @Composable () -> Unit) {
-    HorizontalDivider(thickness = 2.dp)
-
-    Text(modifier = Modifier.padding(top = 4.dp, bottom = 8.dp), text = title, fontSize = 18.sp)
-
-    content()
 }
 
 @Composable

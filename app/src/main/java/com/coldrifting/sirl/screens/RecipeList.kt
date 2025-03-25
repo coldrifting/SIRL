@@ -33,7 +33,7 @@ import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.data.entities.Recipe
-import com.coldrifting.sirl.routes.RecipeView
+import com.coldrifting.sirl.routes.RecipeDetails
 import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
 import com.coldrifting.sirl.ui.theme.PinColor
 import com.coldrifting.sirl.ui.theme.SIRLTheme
@@ -85,7 +85,7 @@ fun RecipeList(
                 modifier = Modifier.padding(innerPadding),
                 listItems = recipes,
                 getKey = { it.recipeId },
-                tapAction = { navHostController.navigate(RecipeView(it)) },
+                tapAction = { navHostController.navigate(RecipeDetails(it)) },
                 rightAction = swipeDeleteAction(deleteRecipe)
             ) {
                 Text(

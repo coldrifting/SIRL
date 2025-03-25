@@ -23,7 +23,21 @@ interface RecipeDAO: BaseDAO<Recipe> {
     fun setName(recipeId: Int, recipeName: String)
 
 
-    @Query("SELECT * FROM Recipes " +
+    @Query("SELECT  " +
+            "Recipes.recipeId, " +
+            "Recipes.recipeName, " +
+            "Recipes.recipeUrl, " +
+            "RecipeSections.recipeSectionId, " +
+            "RecipeSections.sectionName, " +
+            "RecipeSections.sortIndex, " +
+            "RecipeEntries.recipeEntryId, " +
+            "RecipeEntries.unitType, " +
+            "RecipeEntries.amount, " +
+            "Items.itemId, " +
+            "Items.itemName, " +
+            "ItemPreps.itemPrepId, " +
+            "ItemPreps.prepName " +
+            "FROM Recipes " +
             "NATURAL JOIN RecipeSections " +
             "NATURAL JOIN RecipeEntries " +
             "NATURAL JOIN Items " +

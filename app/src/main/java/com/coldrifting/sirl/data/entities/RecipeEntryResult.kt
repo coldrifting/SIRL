@@ -29,7 +29,7 @@ data class RecipeEntryResult(
                     ItemPrepX(it.itemPrepId, it.prepName)
                 } else null
 
-                val item = ItemsX(it.itemId, it.itemName, itemPrep, it.unitType, it.amount)
+                val item = ItemsX(it.recipeEntryId, it.itemId, it.itemName, itemPrep, it.unitType, it.amount)
 
                 val section = map[it.recipeSectionId] ?: RecipeSectionX(it.recipeSectionId, it.sectionName, it.sortIndex, listOf())
                 map[section.sectionId] = RecipeSectionX(it.recipeSectionId, it.sectionName, it.sortIndex, section.items + item)
@@ -56,6 +56,7 @@ data class RecipeSectionX(
 )
 
 data class ItemsX(
+    val recipeEntryId: Int,
     val itemId: Int,
     val itemName: String,
     val itemPrep: ItemPrepX?,
