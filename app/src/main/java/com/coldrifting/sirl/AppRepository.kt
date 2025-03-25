@@ -324,4 +324,10 @@ class AppRepository(
             recipeDao.delete(recipe)
         }
     }
+
+    fun setRecipeName(recipeId: Int, recipeName: String) {
+        scope.launch {
+            recipeDao.setName(recipeId, recipeName)
+        }
+    }
 }

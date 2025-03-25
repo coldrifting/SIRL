@@ -154,6 +154,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.deleteRecipe(recipeId)
     }
 
+    fun setRecipeName(recipeId: Int, recipeName: String) {
+        repository.setRecipeName(recipeId, recipeName)
+    }
+
     companion object AppViewModelProvider {
         // Fetches the application singleton and extracts the repository in it
         val Factory = viewModelFactory {

@@ -7,8 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -33,6 +31,7 @@ import com.coldrifting.sirl.screens.Cart
 import com.coldrifting.sirl.screens.IngredientDetails
 import com.coldrifting.sirl.screens.IngredientList
 import com.coldrifting.sirl.screens.RecipeList
+import com.coldrifting.sirl.screens.RecipeView
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
@@ -161,9 +160,13 @@ class MainActivity : ComponentActivity() {
                 }
                 composable<RecipeView> { backStackEntry ->
                     val recipeView: RecipeView = backStackEntry.toRoute()
-                    Box {
-                        Text(text = recipeView.recipeId.toString())
-                    }
+                    val recipes by viewModel.allRecipes.collectAsState()
+                    val recipe = recipes.first{r -> r.recipeId == recipeView.recipeId}
+                    RecipeView(
+                        navHostController = navController,
+                        recipe = recipe,
+                        setRecipeName = viewModel::setRecipeName
+                    )
                 }
             }
             composable<Cart> {

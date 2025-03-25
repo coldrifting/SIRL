@@ -13,4 +13,7 @@ interface RecipeDAO: BaseDAO<Recipe> {
 
     @Query("UPDATE Recipes SET pinned = NOT pinned WHERE recipeId = :recipeId")
     fun togglePin(recipeId: Int)
+
+    @Query("UPDATE RECIPES SET recipeName = :recipeName WHERE recipeId = :recipeId")
+    fun setName(recipeId: Int, recipeName: String)
 }
