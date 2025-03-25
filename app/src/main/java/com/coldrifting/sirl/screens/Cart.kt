@@ -16,7 +16,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.routeCart
+import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeCart
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable

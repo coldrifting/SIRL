@@ -1,6 +1,7 @@
 package com.coldrifting.sirl.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 
 @Composable
 fun TextDialog(
@@ -37,7 +39,14 @@ fun TextDialog(
     defaultValue: String = ""
 ) {
     val focusRequester = remember { FocusRequester() }
-    var textFieldValue by remember { mutableStateOf( TextFieldValue(defaultValue, TextRange(defaultValue.length)) ) }
+    var textFieldValue by remember {
+        mutableStateOf(
+            TextFieldValue(
+                defaultValue,
+                TextRange(defaultValue.length)
+            )
+        )
+    }
 
     AlertDialog(
         title = { Text(title) },
@@ -61,7 +70,8 @@ fun TextDialog(
         },
         confirmButton = {
             TextButton(
-                enabled = textFieldValue.text.trim().isNotEmpty() && defaultValue != textFieldValue.text.trim(),
+                enabled = textFieldValue.text.trim()
+                    .isNotEmpty() && defaultValue != textFieldValue.text.trim(),
                 onClick =
                 {
                     onSuccess.invoke(textFieldValue.text.trim())
@@ -90,21 +100,38 @@ fun AlertDialog(
     confirmButton: @Composable () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    Dialog(onDismiss) {
-        Surface(shape = MaterialTheme.shapes.medium) {
-            Column {
-                Column(Modifier.padding(top = 24.dp, bottom = 10.dp, start = 24.dp, end = 24.dp)) {
-                    title.invoke()
-                    Spacer(Modifier.size(16.dp))
-                    content.invoke()
-                }
-                Spacer(Modifier.size(2.dp))
-                Row(
-                    Modifier.padding(8.dp).fillMaxWidth(),
-                    Arrangement.spacedBy(8.dp, Alignment.End),
-                ) {
-                    dismissButton.invoke()
-                    confirmButton.invoke()
+    Dialog(
+        onDismissRequest = onDismiss,
+        // Don't readjust position for soft keyboard
+        properties = DialogProperties(decorFitsSystemWindows = false)
+    ) {
+        Box(modifier = Modifier.padding(bottom = 50.dp))
+        {
+            Surface(shape = MaterialTheme.shapes.medium)
+            {
+                Column {
+                    Column(
+                        Modifier.padding(
+                            top = 24.dp,
+                            bottom = 10.dp,
+                            start = 24.dp,
+                            end = 24.dp
+                        )
+                    ) {
+                        title.invoke()
+                        Spacer(Modifier.size(16.dp))
+                        content.invoke()
+                    }
+                    Spacer(Modifier.size(2.dp))
+                    Row(
+                        Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        Arrangement.spacedBy(8.dp, Alignment.End),
+                    ) {
+                        dismissButton.invoke()
+                        confirmButton.invoke()
+                    }
                 }
             }
         }

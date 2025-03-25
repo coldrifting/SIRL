@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.IngredientDetails
+import com.coldrifting.sirl.routes.IngredientDetails
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextDialog
@@ -54,7 +54,7 @@ import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
-import com.coldrifting.sirl.routeIngredients
+import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 fun Modifier.positionAwareImePadding() = composed {
@@ -144,7 +144,8 @@ fun IngredientList(
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         content = { innerPadding ->
-            SwipeList(modifier = Modifier.padding(innerPadding),
+            SwipeList(
+                modifier = Modifier.padding(innerPadding),
                 listItems = items,
                 getKey = { it.item.itemId },
                 rowPadding = PaddingValues(start = 0.dp, end = 16.dp),

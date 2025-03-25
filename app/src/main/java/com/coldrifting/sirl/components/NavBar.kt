@@ -9,9 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.TopLevelRoute
-import com.coldrifting.sirl.routeIngredients
-import com.coldrifting.sirl.topLevelRoutes
+import com.coldrifting.sirl.routes.TopLevelRoute
+import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
+import com.coldrifting.sirl.routes.TopLevelRoute.Companion.topLevelRoutes
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable

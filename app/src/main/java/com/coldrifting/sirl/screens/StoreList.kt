@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.StoreAisleList
+import com.coldrifting.sirl.routes.StoreAisleList
 import com.coldrifting.sirl.components.AuxButtonData
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.SwipeRadioButtonList
@@ -27,7 +27,7 @@ import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.routeStores
+import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeStores
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable

@@ -3,7 +3,6 @@ package com.coldrifting.sirl.screens
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -49,7 +48,7 @@ import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
-import com.coldrifting.sirl.routeIngredients
+import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.coroutines.delay
 
@@ -101,7 +100,7 @@ fun IngredientDetails(
         topBar = { TopBar(navHostController, "Ingredient Details") },
         bottomBar = { NavBar(navHostController, routeIngredients) },
         floatingActionButton = {
-            FloatingActionButton(onClick = {showNewAlertDialog = true}) {
+            FloatingActionButton(onClick = { showNewAlertDialog = true }) {
                 Icon(Icons.Filled.Add, "Add")
             }
         },
@@ -163,6 +162,7 @@ fun IngredientDetails(
                                 ?: Aisle(storeId = 0, aisleName = "(Select an Aisle)")
 
                         DropDown(
+                            modifier = Modifier.padding(end = 12.dp),
                             list = aisles,
                             label = "Aisle",
                             width = 260.dp,
@@ -205,16 +205,28 @@ fun IngredientDetails(
                 }
 
                 Section("Preparations") {
-                    SwipeList(
-                        listItems = prep,
-                        getKey = { it.itemPrepId },
-                        leftAction = swipeEditAction {listItem = it; lastTextValue = prep.firstOrNull { p -> p.itemPrepId == it}?.prepName ?: ""; showRenameAlertDialog = true},
-                        rightAction = swipeDeleteAction {deletePrep(it)},
-                        contentPadding = PaddingValues(vertical = 12.dp),
-                        rowItemLayout = {
-                            Text(it.prepName)
-                        }
-                    )
+                    if (prep.isEmpty()) {
+                        TextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = "Default",
+                            onValueChange = {},
+                            enabled = false
+                        )
+                    } else {
+                        SwipeList(
+                            listItems = prep,
+                            getKey = { it.itemPrepId },
+                            leftAction = swipeEditAction {
+                                listItem = it
+                                lastTextValue = prep.firstOrNull { p -> p.itemPrepId == it }?.prepName ?: ""
+                                showRenameAlertDialog = true
+                            },
+                            rightAction = swipeDeleteAction { deletePrep(it) },
+                            rowItemLayout = {
+                                Text(it.prepName)
+                            }
+                        )
+                    }
                 }
             }
         }

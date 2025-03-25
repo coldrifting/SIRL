@@ -1,5 +1,6 @@
 package com.coldrifting.sirl.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -16,6 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -27,7 +30,8 @@ fun <T> SwipeList(
     leftAction: SwipeTapAction? = null,
     rightAction: SwipeTapAction? = null,
     rowPadding: PaddingValues = PaddingValues(horizontal = 16.dp),
-    contentPadding: PaddingValues = PaddingValues(0.dp)
+    spacing: Dp = 0.dp,
+    margin: Dp = 0.dp
 ) {
     val list = remember { mutableStateOf(listOf<ListItem<T>>()) }
 
@@ -39,9 +43,9 @@ fun <T> SwipeList(
     val listState = rememberLazyListState()
 
     LazyColumn(
+        modifier = modifier.fillMaxSize().padding(horizontal = margin).clipToBounds(),
         state = listState,
-        contentPadding = contentPadding,
-        modifier = modifier.fillMaxSize()
+        verticalArrangement = Arrangement.spacedBy(spacing),
     )
     {
         items(

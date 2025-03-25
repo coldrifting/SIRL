@@ -24,6 +24,14 @@ import com.coldrifting.sirl.screens.Recipes
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
+import com.coldrifting.sirl.routes.Stores
+import com.coldrifting.sirl.routes.StoreList
+import com.coldrifting.sirl.routes.StoreAisleList
+import com.coldrifting.sirl.routes.Ingredients
+import com.coldrifting.sirl.routes.IngredientList
+import com.coldrifting.sirl.routes.IngredientDetails
+import com.coldrifting.sirl.routes.Recipes
+import com.coldrifting.sirl.routes.Cart
 
 class AppActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
