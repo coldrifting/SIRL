@@ -27,6 +27,7 @@ interface RecipeDAO: BaseDAO<Recipe> {
             "Recipes.recipeId, " +
             "Recipes.recipeName, " +
             "Recipes.recipeUrl, " +
+            "Recipes.recipeSteps, " +
             "RecipeSections.recipeSectionId, " +
             "RecipeSections.sectionName, " +
             "RecipeSections.sortIndex, " +

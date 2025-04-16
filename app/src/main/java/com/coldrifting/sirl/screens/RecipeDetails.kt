@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.coldrifting.sirl.components.HtmlView
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.Section
 import com.coldrifting.sirl.components.TopBar
@@ -44,7 +45,7 @@ fun RecipeDetails(
             Section(
                 title = "Ingredients",
                 collapsable = true,
-                showDivider = false,
+                startExpanded = false,
                 indentLevel = 1,
                 subContent = recipe.recipeSections.map { r ->
                     Pair(
@@ -75,7 +76,13 @@ fun RecipeDetails(
 
                     }
                 }
+            ) {}
+            Section(
+                title = "Steps",
+                collapsable = true,
+                indentLevel = 1
             ) {
+                HtmlView(recipe.recipeSteps)
             }
         }
     }

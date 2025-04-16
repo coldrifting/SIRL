@@ -44,6 +44,9 @@ dependencies {
 
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
+
+    // External Image Loading
+    implementation(libs.coil.compose)
 }
 
 protobuf {

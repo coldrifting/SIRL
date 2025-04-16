@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,31 +26,20 @@ fun Section(
     indentLevel: Int = 0,
     collapsable: Boolean = false,
     isSubHeading: Boolean = false,
-    showDivider: Boolean = true,
+    startExpanded: Boolean = true,
     subContent: List<Pair<String, @Composable (modifier: Modifier) -> Unit>> = listOf(),
     content: @Composable (modifier: Modifier) -> Unit
 ) {
-    var showContents by remember { mutableStateOf(true) }
+    var showContents by remember { mutableStateOf(startExpanded) }
 
     val padOffset = 16.dp
     val padHeight = if (!isSubHeading) 16.dp else 12.dp
-    val padHeightTop = (padHeight - 2.dp) * 0.6f
-    val padHeightBottom = (padHeight - 2.dp) * 0.4f
 
     Column(modifier = if (collapsable) Modifier
         .clickable { showContents = !showContents }
-        .padding(start = padOffset * indentLevel, end = padOffset)
-        .then(if (!showDivider) Modifier.padding(top = padHeight) else Modifier)
+        .padding(top = padHeight, start = padOffset * indentLevel, end = padOffset)
         .fillMaxWidth()
     else Modifier) {
-        if (showDivider) {
-            HorizontalDivider(
-                modifier = Modifier
-                    .padding(top = padHeightTop, bottom = padHeightBottom),
-                thickness = 2.dp
-            )
-        }
-
         Row(
             modifier = Modifier.padding(bottom = padHeight)
         ) {
@@ -79,7 +67,6 @@ fun Section(
                 title = pair.first,
                 isSubHeading = true,
                 collapsable = collapsable,
-                showDivider = true,
                 indentLevel = indentLevel + 1
             ) {
                 pair.second(

@@ -11,5 +11,6 @@ data class Recipe(
     val recipeId: Int = 0,
     val recipeName: String,
     val recipeUrl: String = "",
-    val pinned: Boolean = false
+    val pinned: Boolean = false,
+    val recipeSteps: String? = null
 )

@@ -8,6 +8,7 @@ data class RecipeEntryResult(
     val recipeName: String = "",
     val recipeUrl: String = "",
     val recipeSectionId: Int = 0,
+    val recipeSteps: String? = null,
     val sectionName: String = "",
     val sortIndex: Int = 0,
     val itemId: Int = 0,
@@ -35,7 +36,13 @@ data class RecipeEntryResult(
                 map[section.sectionId] = RecipeSectionX(it.recipeSectionId, it.sectionName, it.sortIndex, section.items + item)
             }
 
-            val recipe = RecipeX(entries[0].recipeId, entries[0].recipeName, entries[0].recipeUrl, map.values.toList())
+            val recipe = RecipeX(
+                recipeId = entries[0].recipeId,
+                recipeName = entries[0].recipeName,
+                recipeUrl = entries[0].recipeUrl,
+                recipeSections = map.values.toList(),
+                recipeSteps = entries[0].recipeSteps
+            )
             return recipe
         }
     }
@@ -45,7 +52,8 @@ data class RecipeX(
     val recipeId: Int = 0,
     val recipeName: String = "",
     val recipeUrl: String = "",
-    val recipeSections: List<RecipeSectionX> = listOf()
+    val recipeSections: List<RecipeSectionX> = listOf(),
+    val recipeSteps: String? = null
 )
 
 data class RecipeSectionX(
