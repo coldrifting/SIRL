@@ -334,6 +334,12 @@ class AppRepository(
         }
     }
 
+    fun setRecipeSteps(recipeId: Int, recipeSteps: String) {
+        scope.launch {
+            recipeDao.setSteps(recipeId, recipeSteps)
+        }
+    }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getAllRecipesWithData(recipeId: Int): StateFlow<RecipeX> {
         return recipeDao.getRecipes(recipeId).transformLatest { x ->

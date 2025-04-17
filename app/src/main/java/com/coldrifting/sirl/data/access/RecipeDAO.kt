@@ -22,6 +22,8 @@ interface RecipeDAO: BaseDAO<Recipe> {
     @Query("UPDATE RECIPES SET recipeName = :recipeName WHERE recipeId = :recipeId")
     fun setName(recipeId: Int, recipeName: String)
 
+    @Query("UPDATE RECIPES SET recipeSteps = :recipeSteps WHERE recipeId = :recipeId")
+    fun setSteps(recipeId: Int, recipeSteps: String)
 
     @Query("SELECT  " +
             "Recipes.recipeId, " +

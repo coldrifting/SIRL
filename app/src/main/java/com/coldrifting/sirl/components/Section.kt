@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun Section(
     title: String,
-    indentLevel: Int = 0,
+    indentLevel: Int = 1,
     collapsable: Boolean = false,
     isSubHeading: Boolean = false,
     startExpanded: Boolean = true,
@@ -35,46 +35,49 @@ fun Section(
     val padOffset = 16.dp
     val padHeight = if (!isSubHeading) 16.dp else 12.dp
 
-    Column(modifier = if (collapsable) Modifier
-        .clickable { showContents = !showContents }
-        .padding(top = padHeight, start = padOffset * indentLevel, end = padOffset)
-        .fillMaxWidth()
-    else Modifier) {
-        Row(
-            modifier = Modifier.padding(bottom = padHeight)
-        ) {
-            Text(
-                text = title,
-                fontSize = if (isSubHeading) 16.sp else 18.sp
-            )
+    var headerModifier = if (collapsable) Modifier.clickable { showContents = !showContents } else Modifier
 
-            Spacer(Modifier.weight(1f))
-
-            if (collapsable) {
-                Icon(
-                    imageVector = if (showContents) Icons.Default.KeyboardArrowDown else Icons.AutoMirrored.Default.KeyboardArrowLeft,
-                    contentDescription = "ArrowDown"
+    Column {
+        Column(
+            modifier = headerModifier
+                .padding(top = padHeight, start = padOffset * indentLevel, end = padOffset)
+                .fillMaxWidth()) {
+            Row(
+                modifier = Modifier.padding(bottom = padHeight)
+            ) {
+                Text(
+                    text = title,
+                    fontSize = if (isSubHeading) 16.sp else 18.sp
                 )
+
+                Spacer(Modifier.weight(1f))
+
+                if (collapsable) {
+                    Icon(
+                        imageVector = if (showContents) Icons.Default.KeyboardArrowDown else Icons.AutoMirrored.Default.KeyboardArrowLeft,
+                        contentDescription = "ArrowDown"
+                    )
+                }
             }
         }
-    }
 
-    if (showContents) {
-        content(Modifier)
+        if (showContents) {
+            content(Modifier)
 
-        subContent.forEach { pair ->
-            Section(
-                title = pair.first,
-                isSubHeading = true,
-                collapsable = collapsable,
-                indentLevel = indentLevel + 1
-            ) {
-                pair.second(
-                    Modifier.padding(
-                        start = padOffset * (indentLevel + 2),
-                        end = padOffset
+            subContent.forEach { pair ->
+                Section(
+                    title = pair.first,
+                    isSubHeading = true,
+                    collapsable = collapsable,
+                    indentLevel = indentLevel + 1
+                ) {
+                    pair.second(
+                        Modifier.padding(
+                            start = padOffset * (indentLevel + 2),
+                            end = padOffset
+                        )
                     )
-                )
+                }
             }
         }
     }

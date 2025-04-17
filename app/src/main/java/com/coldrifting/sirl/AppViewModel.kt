@@ -159,6 +159,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.setRecipeName(recipeId, recipeName)
     }
 
+    fun setRecipeSteps(recipeId: Int, recipeSteps: String) {
+        repository.setRecipeSteps(recipeId, recipeSteps)
+    }
+
     fun getRecipes(recipeId: Int): StateFlow<RecipeX> {
         return repository.getAllRecipesWithData(recipeId)
     }

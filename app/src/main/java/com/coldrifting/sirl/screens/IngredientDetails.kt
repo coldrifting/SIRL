@@ -131,11 +131,12 @@ fun IngredientDetails(
                 horizontalAlignment = Alignment.Start
             ) {
                 TextFieldWithDebounce(
+                    modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
                     obj = item,
                     label = "Ingredient Name",
                     getId = { it.itemId },
                     getName = { it.itemName },
-                    setItemName
+                    setName = setItemName
                 )
 
                 Section(title = "Location") {
