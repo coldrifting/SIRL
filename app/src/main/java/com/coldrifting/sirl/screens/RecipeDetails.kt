@@ -32,7 +32,7 @@ fun RecipeDetails(
     recipe: RecipeX
 ) {
     Scaffold(
-        topBar = { TopBar(navHostController, "Recipe Details") },
+        topBar = { TopBar(navHostController, recipe.recipeName) },
         bottomBar = { NavBar(navHostController, routeRecipes) }
     ) { innerPadding ->
         val scrollState = rememberScrollState()

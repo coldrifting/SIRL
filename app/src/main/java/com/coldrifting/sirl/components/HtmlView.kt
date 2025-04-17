@@ -4,11 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.unit.dp
@@ -41,7 +44,7 @@ fun HtmlView(html: String?) {
                 if (s.startsWith("<img")) {
                     val src = Regex("src=['\"](.+?)['\"]").find(s)?.destructured?.toList()?.firstOrNull()
                     if (src != null) {
-                        AsyncImage(model = src, contentDescription = null)
+                        AsyncImage(modifier = Modifier.clip(RoundedCornerShape(corner = CornerSize(8.dp))), model = src, contentDescription = null)
                     }
                 }
                 // Text
