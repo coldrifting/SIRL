@@ -53,7 +53,7 @@ fun RecipeDetails(
                 collapsable = true,
                 startExpanded = false,
                 indentLevel = 1,
-                subContent = recipe.recipeSections.map { r ->
+                subContent = recipe.recipeSections.filter { r -> r.items.isNotEmpty() }.map { r ->
                     Pair(
                         r.sectionName
                     ) { m ->

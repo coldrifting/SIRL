@@ -22,5 +22,11 @@
    "recipeId": 4,
    "sortIndex": 1,
    "sectionName": "Main"
+ },
+ {
+   "recipeSectionId": 5,
+   "recipeId": 4,
+   "sortIndex": 2,
+   "sectionName": "Empty Section"
  }
 ]

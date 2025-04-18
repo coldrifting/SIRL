@@ -42,8 +42,8 @@ interface RecipeDAO: BaseDAO<Recipe> {
             "ItemPreps.prepName " +
             "FROM Recipes " +
             "NATURAL JOIN RecipeSections " +
-            "NATURAL JOIN RecipeEntries " +
-            "NATURAL JOIN Items " +
+            "LEFT JOIN RecipeEntries ON RecipeEntries.recipeSectionId = RecipeSections.recipeSectionId " +
+            "LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId " +
             "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
             "WHERE Recipes.recipeId = :recipeId")
     fun getRecipes(recipeId: Int): Flow<List<RecipeEntryResult>>
