@@ -2,6 +2,7 @@ package com.coldrifting.sirl
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.snapshots.SnapshotId
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.coldrifting.sirl.data.DataStoreSerializer
@@ -345,5 +346,11 @@ class AppRepository(
         return recipeDao.getRecipes(recipeId).transformLatest { x ->
             emit(RecipeEntryResult.toHierarchy(x))
         }.toStateFlow(RecipeX())
+    }
+
+    fun setRecipeSectionName(recipeSectionId: Int, recipeSectionName: String) {
+        scope.launch {
+            recipeDao.setSectionName(recipeSectionId, recipeSectionName)
+        }
     }
 }

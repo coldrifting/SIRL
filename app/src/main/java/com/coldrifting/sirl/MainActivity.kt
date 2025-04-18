@@ -175,7 +175,8 @@ class MainActivity : ComponentActivity() {
                     RecipeEdit(
                         navHostController = navController,
                         recipe = recipe,
-                        setRecipeName = viewModel::setRecipeName
+                        setRecipeName = viewModel::setRecipeName,
+                        setRecipeSectionName = viewModel::setRecipeSectionName
                     )
                 }
                 composable<RecipeEditSteps> { backStackEntry ->

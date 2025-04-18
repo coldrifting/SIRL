@@ -34,7 +34,7 @@ data class RecipeEntryResult(
                 } else null
 
                 val item = if (it.itemId != null && it.itemName != null && it.unitType != null && it.amount != null) {
-                    ItemsX(it.recipeEntryId, it.itemId, it.itemName, itemPrep, it.unitType, it.amount)
+                    RecipeItemEntryX(it.recipeEntryId, it.itemId, it.itemName, itemPrep, it.unitType, it.amount)
                 } else null
 
                 // Get or create current section
@@ -69,10 +69,10 @@ data class RecipeSectionX(
     val sectionId: Int,
     val sectionName: String,
     val sortOrder: Int,
-    val items: List<ItemsX>
+    val items: List<RecipeItemEntryX>
 )
 
-data class ItemsX(
+data class RecipeItemEntryX(
     val recipeEntryId: Int,
     val itemId: Int,
     val itemName: String,

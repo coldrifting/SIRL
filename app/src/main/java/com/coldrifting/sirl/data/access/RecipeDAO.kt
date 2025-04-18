@@ -60,6 +60,9 @@ interface RecipeDAO: BaseDAO<Recipe> {
             insertSection(entries)
     }
 
+    @Query("UPDATE RecipeSections SET sectionName = :sectionName WHERE recipeSectionId = :recipeSectionId")
+    fun setSectionName(recipeSectionId: Int, sectionName: String)
+
     @Upsert
     fun insertEntry(obj: RecipeEntry)
 
