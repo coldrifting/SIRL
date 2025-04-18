@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.components
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -45,6 +44,6 @@ fun <T> TextFieldWithDebounce(
 
         delay(500)
 
-        setName(getId(obj), text)
+        setName(getId(obj), text.trim())
     }
 }

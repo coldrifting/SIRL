@@ -15,6 +15,7 @@ import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Recipe
+import com.coldrifting.sirl.data.entities.RecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeEntryResult
 import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.entities.Store
@@ -58,6 +59,8 @@ class AppRepository(
     // StateFlows
     val allStores = storeDao.all().toStateFlow()
     private val allAisles = aisleDao.all().toStateFlow()
+
+    val allItemsWithPrep = itemPrepDao.getAllItemsAndPreps().map{x -> x.map{y -> y.toItemX()}}.toStateFlow()
 
     val allRecipes = recipeDao.all().toStateFlow()
 
@@ -357,6 +360,25 @@ class AppRepository(
         scope.launch {
             recipeDao.setRecipeItemEntryAmount(recipeItemEntryId, amount)
             recipeDao.setRecipeItemEntryUnitType(recipeItemEntryId, unitType)
+        }
+    }
+
+    fun addRecipeSectionItem(recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, unitType: UnitType, amount: Float) {
+        ioThread {
+            recipeDao.insertEntry(RecipeEntry(
+                recipeId = recipeId,
+                recipeSectionId = recipeSectionId,
+                itemId = itemId,
+                itemPrepId = itemPrepId,
+                unitType = unitType,
+                amount = amount
+            ))
+        }
+    }
+
+    fun deleteRecipeSectionEntry(recipeSectionEntryId: Int) {
+        scope.launch {
+            recipeDao.deleteEntry(RecipeEntry(recipeEntryId = recipeSectionEntryId))
         }
     }
 }

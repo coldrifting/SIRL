@@ -29,13 +29,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.coldrifting.sirl.components.IngredientAmountEdit
+import com.coldrifting.sirl.components.IngredientSearchDialog
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextFieldWithDebounce
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
+import com.coldrifting.sirl.data.entities.ItemX
 import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.routes.RecipeEditSteps
@@ -47,15 +50,20 @@ import kotlin.math.round
 @Composable
 fun RecipeEdit(
     navHostController: NavHostController,
+    itemsWithPrep: List<ItemX>,
     recipe: RecipeX,
     setRecipeName: (Int, String) -> Unit,
     setRecipeSectionName: (Int, String) -> Unit,
-    setRecipeItemAmount: (Int, UnitType, Float) -> Unit
+    setRecipeItemAmount: (Int, UnitType, Float) -> Unit,
+    addRecipeEntry: (Int, Int, Int, Int?, UnitType, Float) -> Unit,
+    deleteRecipeEntry: (Int) -> Unit,
 ) {
     Scaffold(
         topBar = { TopBar(navHostController, "Edit Recipe Ingredients", {IconButton(onClick = {navHostController.navigate(RecipeEditSteps(recipe.recipeId))}) { Icon(Icons.Default.Edit, "Edit Steps") } }) },
         bottomBar = { NavBar(navHostController, routeRecipes) },
     ) { innerPadding ->
+
+        // Adjust recipe item amount dialog
         var selectedRecipeItem by remember { mutableIntStateOf(-1) }
         var selectedRecipeItemAmount by remember { mutableFloatStateOf(0.0f) }
         var selectedRecipeItemUnitType by remember {mutableStateOf(UnitType.EACHES)}
@@ -67,6 +75,29 @@ fun RecipeEdit(
                 placeholderUnitType = selectedRecipeItemUnitType,
                 onSuccess = { unitType, amount -> setRecipeItemAmount(selectedRecipeItem, unitType, amount) },
                 onDismiss = { showAmountEditDialog = false })
+        }
+
+        // Add recipe item
+        var currentSectionId by remember { mutableIntStateOf(-1) }
+
+        var showAddIngredientDialog by remember { mutableStateOf(false) }
+        if (showAddIngredientDialog) {
+            IngredientSearchDialog(
+                entries = itemsWithPrep.filterNot { item ->
+                    var itemRecipeMatch = recipe.recipeSections.first{s -> s.sectionId == currentSectionId}.items.firstOrNull { i -> i.itemId == item.itemId }
+                    return@filterNot itemRecipeMatch != null && item.equals(itemRecipeMatch)
+                },
+                onSuccess = { itemWithPrep ->
+                    addRecipeEntry(
+                        recipe.recipeId,
+                        currentSectionId,
+                        itemWithPrep.itemId,
+                        itemWithPrep.itemPrep?.itemPrepId,
+                        itemWithPrep.defaultUnits,
+                        1.0f)
+                },
+                onDismiss = { showAddIngredientDialog = false }
+            )
         }
 
         val scrollState = rememberScrollState()
@@ -86,12 +117,11 @@ fun RecipeEdit(
                 setName = setRecipeName
             )
 
-            // TODO - Make this look somewhat like the figma and allow for edits
             recipe.recipeSections.forEach { section ->
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
 
                 TextFieldWithDebounce(
-                    modifier = Modifier.padding(top = 20.dp, bottom = 16.dp).fillMaxWidth(),
+                    modifier = Modifier.padding(top = 24.dp, bottom = 16.dp).fillMaxWidth(),
                     obj = section,
                     label = "Section Name",
                     getId = {it.sectionId},
@@ -104,14 +134,17 @@ fun RecipeEdit(
                     listItems = section.items,
                     getKey = {it.recipeEntryId},
                     scroll = false,
-                    rightAction = swipeDeleteAction {  },
+                    rightAction = swipeDeleteAction { deleteRecipeEntry(it) },
                     cornerRadius = 6.dp,
                     rowPadding = PaddingValues(start = 16.dp, end = 8.dp),
                     spacing = 6.dp,
                     addListItemElement = {
                         Spacer(Modifier.weight(1f))
                         Button(
-                            onClick = {},
+                            onClick = {
+                                currentSectionId = section.sectionId
+                                showAddIngredientDialog = true
+                            },
                             colors = ButtonDefaults.elevatedButtonColors()
                                 .copy(
                                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -123,13 +156,15 @@ fun RecipeEdit(
                         Spacer(Modifier.weight(1f))
                     }
                 ) {
-                    val itemPrep = it.itemPrep?.prepName
-                    val itemWithPrep =
-                        if (itemPrep != null) it.itemName + " - " + itemPrep
-                        else it.itemName
+                    Text(it.itemName)
+                    Spacer(Modifier.weight(1f))
+                    if (it.itemPrep != null) {
+                        Text(it.itemPrep.prepName,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontSize = 14.sp)
+                    }
 
-                    Text(itemWithPrep)
-                    Spacer(modifier = Modifier.weight(1f))
+                    Spacer(Modifier.width(8.dp))
                     Button(
                         modifier = Modifier.width(80.dp),
                         colors = ButtonDefaults.elevatedButtonColors().copy(contentColor = MaterialTheme.colorScheme.onSurface, containerColor = MaterialTheme.colorScheme.surface),

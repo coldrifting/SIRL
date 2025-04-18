@@ -42,6 +42,7 @@ fun IngredientAmountEdit(
         title = "Select Ingredient Quantity",
         onConfirm = {onSuccess.invoke(unitType, amount)},
         confirmButtonEnabled = amount > 0.0f,
+        bottomPadding = 80,
         onDismiss = {
             unitType = UnitType.EACHES
             amount = 0.0f

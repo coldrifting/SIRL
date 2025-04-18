@@ -1,6 +1,7 @@
 package com.coldrifting.sirl.data.access
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.coldrifting.sirl.data.access.base.BaseDAO
@@ -46,7 +47,8 @@ interface RecipeDAO: BaseDAO<Recipe> {
             "LEFT JOIN RecipeEntries ON RecipeEntries.recipeSectionId = RecipeSections.recipeSectionId " +
             "LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId " +
             "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
-            "WHERE Recipes.recipeId = :recipeId")
+            "WHERE Recipes.recipeId = :recipeId " +
+            "ORDER BY RecipeSections.recipeSectionId, RecipeEntries.recipeEntryId")
     fun getRecipes(recipeId: Int): Flow<List<RecipeEntryResult>>
 
 
@@ -69,6 +71,9 @@ interface RecipeDAO: BaseDAO<Recipe> {
 
     @Upsert
     fun insertEntry(obj: List<RecipeEntry>)
+
+    @Delete
+    fun deleteEntry(obj: RecipeEntry)
 
     fun populateEntries(json: String) {
             val entries = Json.decodeFromString<List<RecipeEntry>>(json)

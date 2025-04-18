@@ -41,14 +41,14 @@ import kotlinx.serialization.Serializable
     ]
 )
 data class RecipeEntry(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val recipeEntryId: Int = 0,
 
-    val recipeId: Int,
-    val recipeSectionId: Int?,
-    val itemId: Int,
-    val itemPrepId: Int?,
+    val recipeId: Int = -1,
+    val recipeSectionId: Int = -1,
+    val itemId: Int = -1,
+    val itemPrepId: Int? = null,
 
-    val unitType: UnitType,
-    val amount: Float
+    val unitType: UnitType = UnitType.EACHES,
+    val amount: Float = 0.0f
 )

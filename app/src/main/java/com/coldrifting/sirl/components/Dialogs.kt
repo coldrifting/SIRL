@@ -1,7 +1,7 @@
 package com.coldrifting.sirl.components
 
+import android.view.Gravity
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,11 +23,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.DialogWindowProvider
 
 @Composable
 fun TextDialog(
@@ -80,45 +82,53 @@ fun AlertDialog(
     dismissText: String = "Cancel",
     confirmText: String = "Confirm",
     confirmButtonEnabled: Boolean = true,
+    showConfirmButton: Boolean = true,
+    bottomPadding: Int = 0,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     Dialog(
         onDismissRequest = onDismiss,
-        // Don't readjust position for soft keyboard
+        // Don't re-adjust position for soft keyboard
         properties = DialogProperties(decorFitsSystemWindows = false)
     ) {
-        Box(modifier = Modifier.padding(bottom = 50.dp))
+        (LocalView.current.parent as DialogWindowProvider).apply {
+            window.setGravity(Gravity.CENTER)
+            window.attributes = window.attributes.apply {
+                y = -bottomPadding
+            }
+        }
+
+        Surface(shape = MaterialTheme.shapes.medium)
         {
-            Surface(shape = MaterialTheme.shapes.medium)
-            {
-                Column {
-                    Column(
-                        Modifier.padding(
-                            top = 24.dp,
-                            bottom = 10.dp,
-                            start = 24.dp,
-                            end = 24.dp
-                        )
-                    ) {
-                        Text(title)
-                        Spacer(Modifier.size(16.dp))
-                        content.invoke()
-                    }
-                    Spacer(Modifier.size(2.dp))
-                    Row(
-                        Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(),
-                        Arrangement.spacedBy(8.dp, Alignment.End),
-                    ) {
-                        TextButton(
-                            onClick = {
-                                onDismiss.invoke()
-                            },
-                            content = { Text(dismissText, color = MaterialTheme.colorScheme.outline) }
-                        )
+            Column {
+                Column(
+                    Modifier.padding(
+                        top = 24.dp,
+                        bottom = 10.dp,
+                        start = 24.dp,
+                        end = 24.dp
+                    )
+                ) {
+                    Text(title)
+                    Spacer(Modifier.size(16.dp))
+                    content.invoke()
+                }
+                Spacer(Modifier.size(2.dp))
+                Row(
+                    Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth(),
+                    Arrangement.spacedBy(8.dp, Alignment.End),
+                ) {
+                    TextButton(
+                        onClick = {
+                            onDismiss.invoke()
+                        },
+                        content = { Text(dismissText, color = MaterialTheme.colorScheme.outline) }
+                    )
+                    if (showConfirmButton) {
                         TextButton(
                             enabled = confirmButtonEnabled,
                             onClick = {

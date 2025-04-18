@@ -81,7 +81,43 @@ data class RecipeItemEntryX(
     val amount: Float
 )
 
+
+data class ItemWithPrepResult(
+    val itemId: Int,
+    val itemName: String,
+    val defaultUnits: UnitType,
+    val itemPrepId: Int?,
+    val prepName: String?
+) {
+    fun toItemX(): ItemX {
+        return ItemX(
+            itemId = itemId,
+            itemName = itemName,
+            itemPrep =
+                if (itemPrepId != null && prepName != null)
+                    ItemPrepX(itemPrepId, prepName)
+                else
+                    null,
+            defaultUnits = defaultUnits)
+    }
+}
+
 data class ItemPrepX(
     val itemPrepId: Int,
     val prepName: String
 )
+
+data class ItemX(
+    val itemId: Int,
+    val itemName: String,
+    val itemPrep: ItemPrepX?,
+    val defaultUnits: UnitType
+) {
+    override fun toString(): String {
+        return itemName + if (itemPrep != null) " - ${itemPrep.prepName}" else ""
+    }
+
+    fun equals(recipeItemEntry: RecipeItemEntryX): Boolean {
+        return this.itemId == recipeItemEntry.itemId && this.itemPrep == recipeItemEntry.itemPrep
+    }
+}

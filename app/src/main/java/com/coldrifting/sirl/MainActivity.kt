@@ -22,9 +22,9 @@ import com.coldrifting.sirl.routes.IngredientDetails
 import com.coldrifting.sirl.routes.IngredientList
 import com.coldrifting.sirl.routes.Ingredients
 import com.coldrifting.sirl.routes.RecipeDetails
-import com.coldrifting.sirl.routes.RecipeList
 import com.coldrifting.sirl.routes.RecipeEdit
 import com.coldrifting.sirl.routes.RecipeEditSteps
+import com.coldrifting.sirl.routes.RecipeList
 import com.coldrifting.sirl.routes.Recipes
 import com.coldrifting.sirl.routes.StoreAisleList
 import com.coldrifting.sirl.routes.StoreList
@@ -33,8 +33,8 @@ import com.coldrifting.sirl.screens.Cart
 import com.coldrifting.sirl.screens.IngredientDetails
 import com.coldrifting.sirl.screens.IngredientList
 import com.coldrifting.sirl.screens.RecipeDetails
-import com.coldrifting.sirl.screens.RecipeList
 import com.coldrifting.sirl.screens.RecipeEdit
+import com.coldrifting.sirl.screens.RecipeList
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
@@ -170,14 +170,18 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 composable<RecipeEdit> { backStackEntry ->
+                    val itemsWithPrep by viewModel.allItemsWithPrep.collectAsState()
                     val recipeEdit: RecipeEdit = backStackEntry.toRoute()
                     val recipe by viewModel.getRecipes(recipeEdit.recipeId).collectAsState()
                     RecipeEdit(
                         navHostController = navController,
+                        itemsWithPrep = itemsWithPrep,
                         recipe = recipe,
                         setRecipeName = viewModel::setRecipeName,
                         setRecipeSectionName = viewModel::setRecipeSectionName,
-                        setRecipeItemAmount = viewModel::setRecipeItemAmount
+                        setRecipeItemAmount = viewModel::setRecipeItemAmount,
+                        addRecipeEntry = viewModel::addRecipeSectionItem,
+                        deleteRecipeEntry = viewModel::deleteRecipeSectionEntry
                     )
                 }
                 composable<RecipeEditSteps> { backStackEntry ->
