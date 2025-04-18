@@ -49,7 +49,15 @@ fun TextDialog(
     }
 
     AlertDialog(
-        title = { Text(title) },
+        title = title,
+        confirmText = action,
+        confirmButtonEnabled = textFieldValue.text.trim().isNotEmpty() &&
+                defaultValue != textFieldValue.text.trim(),
+        onConfirm = {onSuccess.invoke(textFieldValue.text.trim())},
+        onDismiss = {
+            onDismiss.invoke()
+            textFieldValue = TextFieldValue("")
+        },
         content = {
             TextField(
                 modifier = Modifier.focusRequester(focusRequester),
@@ -58,33 +66,7 @@ fun TextDialog(
                 onValueChange = { textFieldValue = it },
                 singleLine = true
             )
-        },
-        dismissButton = {
-            TextButton(
-                onClick =
-                {
-                    onDismiss.invoke()
-                },
-                content = { Text("Cancel") }
-            )
-        },
-        confirmButton = {
-            TextButton(
-                enabled = textFieldValue.text.trim()
-                    .isNotEmpty() && defaultValue != textFieldValue.text.trim(),
-                onClick =
-                {
-                    onSuccess.invoke(textFieldValue.text.trim())
-                    onDismiss.invoke()
-                },
-                content = { Text(action) }
-            )
-        },
-        onDismiss =
-        {
-            onDismiss.invoke()
-            textFieldValue = TextFieldValue("")
-        },
+        }
     )
 
     LaunchedEffect(Unit) {
@@ -94,11 +76,13 @@ fun TextDialog(
 
 @Composable
 fun AlertDialog(
-    title: @Composable () -> Unit,
-    content: @Composable () -> Unit,
-    dismissButton: @Composable () -> Unit,
-    confirmButton: @Composable () -> Unit,
+    title: String,
+    dismissText: String = "Cancel",
+    confirmText: String = "Confirm",
+    confirmButtonEnabled: Boolean = true,
+    onConfirm: () -> Unit,
     onDismiss: () -> Unit,
+    content: @Composable () -> Unit,
 ) {
     Dialog(
         onDismissRequest = onDismiss,
@@ -118,7 +102,7 @@ fun AlertDialog(
                             end = 24.dp
                         )
                     ) {
-                        title.invoke()
+                        Text(title)
                         Spacer(Modifier.size(16.dp))
                         content.invoke()
                     }
@@ -129,8 +113,20 @@ fun AlertDialog(
                             .fillMaxWidth(),
                         Arrangement.spacedBy(8.dp, Alignment.End),
                     ) {
-                        dismissButton.invoke()
-                        confirmButton.invoke()
+                        TextButton(
+                            onClick = {
+                                onDismiss.invoke()
+                            },
+                            content = { Text(dismissText) }
+                        )
+                        TextButton(
+                            enabled = confirmButtonEnabled,
+                            onClick = {
+                                onConfirm.invoke()
+                                onDismiss.invoke()
+                            },
+                            content = { Text(confirmText) }
+                        )
                     }
                 }
             }

@@ -8,6 +8,7 @@ import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.RecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeEntryResult
 import com.coldrifting.sirl.data.entities.RecipeSection
+import com.coldrifting.sirl.data.enums.UnitType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.json.Json
 
@@ -73,4 +74,10 @@ interface RecipeDAO: BaseDAO<Recipe> {
             val entries = Json.decodeFromString<List<RecipeEntry>>(json)
             insertEntry(entries)
     }
+
+    @Query("UPDATE RecipeEntries SET amount = :amount WHERE RecipeEntries.recipeEntryId = :recipeItemEntryId")
+    fun setRecipeItemEntryAmount(recipeItemEntryId: Int, amount: Float)
+
+    @Query("UPDATE RecipeEntries SET unitType = :unitType WHERE RecipeEntries.recipeEntryId = :recipeItemEntryId")
+    fun setRecipeItemEntryUnitType(recipeItemEntryId: Int, unitType: UnitType)
 }

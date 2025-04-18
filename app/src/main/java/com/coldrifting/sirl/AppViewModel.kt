@@ -172,6 +172,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.setRecipeSectionName(recipeSectionId, sectionName)
     }
 
+    fun setRecipeItemAmount(recipeItemEntryId: Int, unitType: UnitType, amount: Float) {
+        repository.setRecipeItemEntryAmount(recipeItemEntryId, unitType, amount)
+    }
+
     companion object AppViewModelProvider {
         // Fetches the application singleton and extracts the repository in it
         val Factory = viewModelFactory {

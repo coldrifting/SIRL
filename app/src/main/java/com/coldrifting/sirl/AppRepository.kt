@@ -2,7 +2,6 @@ package com.coldrifting.sirl
 
 import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.snapshots.SnapshotId
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.coldrifting.sirl.data.DataStoreSerializer
@@ -351,6 +350,13 @@ class AppRepository(
     fun setRecipeSectionName(recipeSectionId: Int, recipeSectionName: String) {
         scope.launch {
             recipeDao.setSectionName(recipeSectionId, recipeSectionName)
+        }
+    }
+
+    fun setRecipeItemEntryAmount(recipeItemEntryId: Int, unitType: UnitType, amount: Float) {
+        scope.launch {
+            recipeDao.setRecipeItemEntryAmount(recipeItemEntryId, amount)
+            recipeDao.setRecipeItemEntryUnitType(recipeItemEntryId, unitType)
         }
     }
 }
