@@ -30,6 +30,7 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.coldrifting.sirl.components.AlertDialog
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.Section
 import com.coldrifting.sirl.components.SwipeList
@@ -56,6 +58,7 @@ import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun IngredientDetails(
@@ -74,9 +77,28 @@ fun IngredientDetails(
     addPrep: (Int, String) -> Unit,
     updatePrep: (Int, String) -> Unit,
     deletePrep: (Int) -> Unit,
+    checkDeletePrep: suspend (Int) -> List<String>,
 ) {
+    var coroutineScope = rememberCoroutineScope()
+
     var lastTextValue by remember { mutableStateOf("") }
     var listItem by remember { mutableIntStateOf(-1) }
+
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    var deleteDialogConflicts by remember { mutableStateOf(listOf<String>()) }
+    var deleteDialogItemPrepId by remember { mutableIntStateOf(-1) }
+    if (showDeleteDialog) {
+        AlertDialog(
+            title = "Delete Ingredient Preparation?",
+            confirmText = "Delete",
+            onConfirm = {deletePrep(deleteDialogItemPrepId)},
+            onDismiss = {deleteDialogConflicts = listOf<String>(); deleteDialogItemPrepId = -1; showDeleteDialog = false}
+        ) {
+            Text("The ingredient and preparation will be removed from these recipes:\n\n" +
+                deleteDialogConflicts.reduce { initial, element -> "$initial\n$element" }
+            )
+        }
+    }
 
     var showRenameAlertDialog by remember { mutableStateOf(false) }
     if (showRenameAlertDialog) {
@@ -243,7 +265,19 @@ fun IngredientDetails(
                                 }
                             } else null,
                             rightAction = if (!isDefault) {
-                                swipeDeleteAction { deletePrep(it) }
+                                swipeDeleteAction {
+                                    coroutineScope.launch {
+                                        val conflicts = checkDeletePrep(it)
+                                        if (conflicts.isEmpty()) {
+                                            deletePrep(it)
+                                        }
+                                        else {
+                                            deleteDialogConflicts = conflicts
+                                            deleteDialogItemPrepId = it
+                                            showDeleteDialog = true
+                                        }
+                                    }
+                                }
                             } else null,
                             spacing = 12.dp,
                             cornerRadius = 6.dp,
@@ -283,7 +317,8 @@ fun IngredientDetailsPreview() {
             prep = listOf(ItemPrep(itemId = 0, prepName = "Prep 1")),
             addPrep = { _, _ -> },
             updatePrep = { _, _ -> },
-            deletePrep = { _ -> }
+            deletePrep = { _ -> },
+            checkDeletePrep = {i -> listOf("")}
         )
     }
 }

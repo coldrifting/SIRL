@@ -194,6 +194,14 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.deleteRecipeSection(recipeSectionId)
     }
 
+    suspend fun getUsedItems(itemId: Int): List<String> {
+        return repository.getUsedItems(itemId)
+    }
+
+    suspend fun getUsedItemPreps(itemPrepId: Int): List<String> {
+        return repository.getUsedItemPreps(itemPrepId)
+    }
+
     companion object AppViewModelProvider {
         // Fetches the application singleton and extracts the repository in it
         val Factory = viewModelFactory {

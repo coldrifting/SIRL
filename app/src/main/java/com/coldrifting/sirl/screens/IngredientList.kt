@@ -31,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -45,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.coldrifting.sirl.components.AlertDialog
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.SwipeList
 import com.coldrifting.sirl.components.TextDialog
@@ -55,6 +57,7 @@ import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
 import com.coldrifting.sirl.routes.IngredientDetails
 import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
+import kotlinx.coroutines.launch
 
 fun Modifier.positionAwareImePadding() = composed {
     var consumePadding by remember { mutableIntStateOf(0) }
@@ -72,6 +75,7 @@ fun Modifier.positionAwareImePadding() = composed {
 fun IngredientList(
     navHostController: NavHostController,
     addItem: (String) -> Unit,
+    checkDeleteItem: suspend (Int) -> List<String>,
     deleteItem: (Int) -> Unit,
     items: List<ItemWithAisleName>,
     setItemSort: () -> Unit,
@@ -79,6 +83,24 @@ fun IngredientList(
     searchText: String,
     sortMode: String
 ) {
+    var coroutineScope = rememberCoroutineScope()
+
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    var deleteDialogConflicts by remember { mutableStateOf(listOf<String>()) }
+    var deleteDialogItem by remember { mutableIntStateOf(-1) }
+    if (showDeleteDialog) {
+        AlertDialog(
+            title = "Delete Ingredient?",
+            confirmText = "Delete",
+            onConfirm = {deleteItem(deleteDialogItem)},
+            onDismiss = {deleteDialogConflicts = listOf<String>(); deleteDialogItem = -1; showDeleteDialog = false}
+        ) {
+            Text("The deleted ingredient will be removed from these recipes:\n\n" +
+                deleteDialogConflicts.reduce { initial, element -> "$initial\n$element" }
+            )
+        }
+    }
+
     var showNewAlertDialog by remember { mutableStateOf(false) }
     if (showNewAlertDialog) {
         TextDialog(title = "Add Ingredient",
@@ -144,8 +166,17 @@ fun IngredientList(
                 listItems = items,
                 getKey = { it.item.itemId },
                 rightAction = swipeDeleteAction {
-                    // TODO - Add confirm check if delete would cascade to recipes
-                    deleteItem(it)
+                    coroutineScope.launch {
+                        val conflicts = checkDeleteItem(it)
+                        if (conflicts.isEmpty()) {
+                            deleteItem(it)
+                        }
+                        else {
+                            deleteDialogConflicts = conflicts
+                            deleteDialogItem = it
+                            showDeleteDialog = true
+                        }
+                    }
                 },
                 tapAction = { navHostController.navigate(IngredientDetails(it)) },
                 rowPadding = PaddingValues(start = 0.dp, end = 16.dp)
@@ -192,6 +223,7 @@ fun IngredientListPreview() {
             onFilterTextChanged = {},
             searchText = "Searching",
             sortMode = "Name",
+            checkDeleteItem = { i: Int -> listOf("") }
         )
     }
 }

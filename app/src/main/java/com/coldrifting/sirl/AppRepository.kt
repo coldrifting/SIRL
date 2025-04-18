@@ -414,4 +414,12 @@ class AppRepository(
             ))
         }
     }
+
+    suspend fun getUsedItems(itemId: Int): List<String> {
+        return recipeDao.getUsedItems(itemId)
+    }
+
+    suspend fun getUsedItemPreps(itemPrepId: Int): List<String> {
+        return recipeDao.getUsedItemPreps(itemPrepId)
+    }
 }
