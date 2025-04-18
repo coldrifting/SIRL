@@ -39,8 +39,7 @@ fun IngredientAmountEdit(
     var dropDownExpanded by remember {mutableStateOf(false)}
 
     AlertDialog(
-        title = "Select Measurement Type",
-        confirmText = "Next",
+        title = "Select Ingredient Quantity",
         onConfirm = {onSuccess.invoke(unitType, amount)},
         confirmButtonEnabled = amount > 0.0f,
         onDismiss = {

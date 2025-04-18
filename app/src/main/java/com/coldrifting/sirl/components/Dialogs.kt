@@ -117,7 +117,7 @@ fun AlertDialog(
                             onClick = {
                                 onDismiss.invoke()
                             },
-                            content = { Text(dismissText) }
+                            content = { Text(dismissText, color = MaterialTheme.colorScheme.outline) }
                         )
                         TextButton(
                             enabled = confirmButtonEnabled,
