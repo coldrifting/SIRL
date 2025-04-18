@@ -29,6 +29,7 @@ import com.coldrifting.sirl.data.entities.ItemX
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IngredientSearchDialog(
+    title: String = "Add Ingredient",
     entries: List<ItemX>,
     onSuccess: (ItemX) -> Unit,
     onDismiss: () -> Unit
@@ -39,7 +40,7 @@ fun IngredientSearchDialog(
     var searchText by remember { mutableStateOf("") }
 
     AlertDialog(
-        title = "Select Ingredient and Preparation",
+        title = title,
         confirmButtonEnabled = selectedEntry != -1,
         bottomPadding = 200,
         onConfirm = {

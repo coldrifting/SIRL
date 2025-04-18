@@ -177,7 +177,8 @@ class MainActivity : ComponentActivity() {
                         navHostController = navController,
                         itemsWithPrep = itemsWithPrep,
                         recipe = recipe,
-                        setRecipeName = viewModel::setRecipeName,
+                        addSection = viewModel::addRecipeSection,
+                        deleteSection = viewModel::deleteRecipeSection,
                         setRecipeSectionName = viewModel::setRecipeSectionName,
                         setRecipeItemAmount = viewModel::setRecipeItemAmount,
                         addRecipeEntry = viewModel::addRecipeSectionItem,
@@ -190,6 +191,7 @@ class MainActivity : ComponentActivity() {
                     com.coldrifting.sirl.screens.RecipeEditSteps(
                         navHostController = navController,
                         recipe = recipe,
+                        setRecipeName = viewModel::setRecipeName,
                         setRecipeSteps = viewModel::setRecipeSteps
                     )
                 }

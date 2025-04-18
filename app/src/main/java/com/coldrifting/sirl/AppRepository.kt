@@ -17,6 +17,7 @@ import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.RecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeEntryResult
+import com.coldrifting.sirl.data.entities.RecipeSection
 import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
@@ -363,22 +364,54 @@ class AppRepository(
         }
     }
 
-    fun addRecipeSectionItem(recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, unitType: UnitType, amount: Float) {
+    fun addRecipeSectionItem(recipeSectionEntryId: Int?, recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, unitType: UnitType, amount: Float) {
         ioThread {
-            recipeDao.insertEntry(RecipeEntry(
-                recipeId = recipeId,
-                recipeSectionId = recipeSectionId,
-                itemId = itemId,
-                itemPrepId = itemPrepId,
-                unitType = unitType,
-                amount = amount
-            ))
+            if (recipeSectionEntryId != null) {
+                recipeDao.insertEntry(RecipeEntry(
+                    recipeEntryId = recipeSectionEntryId,
+                    recipeId = recipeId,
+                    recipeSectionId = recipeSectionId,
+                    itemId = itemId,
+                    itemPrepId = itemPrepId,
+                    unitType = unitType,
+                    amount = amount
+                ))
+            }
+            else {
+                recipeDao.insertEntry(RecipeEntry(
+                    recipeId = recipeId,
+                    recipeSectionId = recipeSectionId,
+                    itemId = itemId,
+                    itemPrepId = itemPrepId,
+                    unitType = unitType,
+                    amount = amount
+                ))
+            }
         }
     }
 
     fun deleteRecipeSectionEntry(recipeSectionEntryId: Int) {
         scope.launch {
             recipeDao.deleteEntry(RecipeEntry(recipeEntryId = recipeSectionEntryId))
+        }
+    }
+
+    fun addRecipeSection(recipeId: Int, recipeSectionName: String) {
+        scope.launch {
+            recipeDao.insertSection(RecipeSection(
+                recipeId = recipeId,
+                sectionName = recipeSectionName
+            ))
+        }
+    }
+
+    fun deleteRecipeSection(recipeSectionId: Int) {
+        scope.launch {
+            recipeDao.deleteSection(RecipeSection(
+                recipeSectionId = recipeSectionId,
+                recipeId = -1,
+                sectionName = ""
+            ))
         }
     }
 }

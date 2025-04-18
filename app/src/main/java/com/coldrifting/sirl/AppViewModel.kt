@@ -178,12 +178,20 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.setRecipeItemEntryAmount(recipeItemEntryId, unitType, amount)
     }
 
-    fun addRecipeSectionItem(recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, unitType: UnitType, amount: Float) {
-        repository.addRecipeSectionItem(recipeId, recipeSectionId, itemId, itemPrepId, unitType, amount)
+    fun addRecipeSectionItem(recipeSectionEntryId: Int?, recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, unitType: UnitType, amount: Float) {
+        repository.addRecipeSectionItem(recipeSectionEntryId, recipeId, recipeSectionId, itemId, itemPrepId, unitType, amount)
     }
 
     fun deleteRecipeSectionEntry(recipeSectionEntryId: Int) {
         repository.deleteRecipeSectionEntry(recipeSectionEntryId)
+    }
+
+    fun addRecipeSection(recipeId: Int, recipeSectionName: String) {
+        repository.addRecipeSection(recipeId, recipeSectionName)
+    }
+
+    fun deleteRecipeSection(recipeSectionId: Int) {
+        repository.deleteRecipeSection(recipeSectionId)
     }
 
     companion object AppViewModelProvider {

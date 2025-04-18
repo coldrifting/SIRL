@@ -19,7 +19,7 @@ import kotlinx.serialization.Serializable
     indices = [Index("recipeId")]
 )
 data class RecipeSection(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val recipeSectionId: Int = 0,
     val recipeId: Int,
     val sectionName: String,

@@ -1,7 +1,8 @@
 package com.coldrifting.sirl.screens
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -19,24 +20,32 @@ import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
 fun RecipeEditSteps(
     navHostController: NavHostController,
     recipe: RecipeX,
+    setRecipeName: (Int, String) -> Unit,
     setRecipeSteps: (Int, String) -> Unit
 ) {
     Scaffold(
-        topBar = { TopBar(navHostController, "Edit Recipe Steps") },
+        topBar = { TopBar(navHostController, "Edit Recipe Name & Steps") },
         bottomBar = { NavBar(navHostController, routeRecipes) }
     ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            Section(title = "Steps") {
-                TextFieldWithDebounce(
-                    modifier = Modifier.positionAwareImePadding().padding(all = 12.dp).fillMaxSize(),
-                    obj = recipe,
-                    label = "Steps",
-                    getId = {it.recipeId},
-                    getName = {it.recipeSteps ?: ""},
-                    setName = setRecipeSteps,
-                    singleLine = false
-                )
-            }
+        Column(modifier = Modifier.padding(innerPadding)) {
+            TextFieldWithDebounce(
+                modifier = Modifier.padding(all = 16.dp).fillMaxWidth(),
+                obj = recipe,
+                label = "Recipe Name",
+                getId = { it.recipeId },
+                getName = { it.recipeName },
+                setName = setRecipeName
+            )
+
+            TextFieldWithDebounce(
+                modifier = Modifier.positionAwareImePadding().padding(all = 12.dp).fillMaxSize(),
+                obj = recipe,
+                label = "Steps",
+                getId = {it.recipeId},
+                getName = {it.recipeSteps ?: ""},
+                setName = setRecipeSteps,
+                singleLine = false
+            )
         }
     }
 }

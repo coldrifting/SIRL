@@ -85,8 +85,8 @@ fun RecipeList(
                 modifier = Modifier.padding(innerPadding),
                 listItems = recipes,
                 getKey = { it.recipeId },
-                tapAction = { navHostController.navigate(RecipeDetails(it)) },
-                rightAction = swipeDeleteAction(deleteRecipe)
+                rightAction = swipeDeleteAction(deleteRecipe),
+                tapAction = { navHostController.navigate(RecipeDetails(it)) }
             ) {
                 Text(
                     text = it.recipeName

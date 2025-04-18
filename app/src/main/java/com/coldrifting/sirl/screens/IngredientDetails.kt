@@ -131,7 +131,9 @@ fun IngredientDetails(
                 horizontalAlignment = Alignment.Start
             ) {
                 TextFieldWithDebounce(
-                    modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .fillMaxWidth(),
                     obj = item,
                     label = "Ingredient Name",
                     getId = { it.itemId },
@@ -231,9 +233,6 @@ fun IngredientDetails(
                                     )
                                 )
                             },
-                            scroll = false,
-                            spacing = 12.dp,
-                            cornerRadius = 6.dp,
                             getKey = { it.itemPrepId },
                             leftAction = if (!isDefault) {
                                 swipeEditAction {
@@ -246,14 +245,16 @@ fun IngredientDetails(
                             rightAction = if (!isDefault) {
                                 swipeDeleteAction { deletePrep(it) }
                             } else null,
-                            rowItemLayout = {
-                                Text(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    text = it.prepName,
-                                    color = if (isDefault) defaultColor else normalColor
-                                )
-                            }
-                        )
+                            spacing = 12.dp,
+                            cornerRadius = 6.dp,
+                            scroll = false
+                        ) {
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = it.prepName,
+                                color = if (isDefault) defaultColor else normalColor
+                            )
+                        }
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))

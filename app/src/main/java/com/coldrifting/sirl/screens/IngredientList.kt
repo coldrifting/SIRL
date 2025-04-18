@@ -143,31 +143,33 @@ fun IngredientList(
                 modifier = Modifier.padding(innerPadding),
                 listItems = items,
                 getKey = { it.item.itemId },
-                rowPadding = PaddingValues(start = 0.dp, end = 16.dp),
-                rowItemLayout = {
-                    val tempColor = it.item.getTempColor()
-                    Box(modifier = Modifier
+                rightAction = swipeDeleteAction {
+                    // TODO - Add confirm check if delete would cascade to recipes
+                    deleteItem(it)
+                },
+                tapAction = { navHostController.navigate(IngredientDetails(it)) },
+                rowPadding = PaddingValues(start = 0.dp, end = 16.dp)
+            ) {
+                val tempColor = it.item.getTempColor()
+                Box(
+                    modifier = Modifier
                         .width(4.dp)
                         .fillMaxHeight()
                         .drawBehind {
                             drawRect(size = size, color = tempColor)
                         })
-                    Text(
-                        modifier = Modifier.padding(start = 12.dp),
-                        text = it.item.itemName,
-                        fontSize = 18.sp
-                    )
-                    Spacer(Modifier.weight(1f))
-                    Text(
-                        text = it.aisleName ?: "(No Aisle Set)", fontSize = 12.sp
-                    )
-                },
-                tapAction = { navHostController.navigate(IngredientDetails(it)) },
-                rightAction = swipeDeleteAction {
-                    // TODO - Add confirm check if delete would cascade to recipes
-                    deleteItem(it)
-                })
-        })
+                Text(
+                    modifier = Modifier.padding(start = 12.dp),
+                    text = it.item.itemName,
+                    fontSize = 18.sp
+                )
+                Spacer(Modifier.weight(1f))
+                Text(
+                    text = it.aisleName ?: "(No Aisle Set)", fontSize = 12.sp
+                )
+            }
+        }
+    )
 }
 
 

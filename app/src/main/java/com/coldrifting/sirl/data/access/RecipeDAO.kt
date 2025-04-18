@@ -48,7 +48,7 @@ interface RecipeDAO: BaseDAO<Recipe> {
             "LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId " +
             "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
             "WHERE Recipes.recipeId = :recipeId " +
-            "ORDER BY RecipeSections.recipeSectionId, RecipeEntries.recipeEntryId")
+            "ORDER BY RecipeSections.recipeSectionId ASC, RecipeEntries.recipeEntryId")
     fun getRecipes(recipeId: Int): Flow<List<RecipeEntryResult>>
 
 
@@ -65,6 +65,9 @@ interface RecipeDAO: BaseDAO<Recipe> {
 
     @Query("UPDATE RecipeSections SET sectionName = :sectionName WHERE recipeSectionId = :recipeSectionId")
     fun setSectionName(recipeSectionId: Int, sectionName: String)
+
+    @Delete
+    fun deleteSection(section: RecipeSection)
 
     @Upsert
     fun insertEntry(obj: RecipeEntry)
