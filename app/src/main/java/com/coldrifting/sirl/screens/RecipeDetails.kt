@@ -15,6 +15,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.coldrifting.sirl.components.HtmlView
 import com.coldrifting.sirl.components.NavBar
@@ -48,10 +50,54 @@ fun RecipeDetails(
                 .verticalScroll(scrollState)
         ) {
             var checked by remember { mutableStateOf<Map<Int, Boolean>>(mapOf()) }
+
+            val nonEmptySections: MutableList<Int> = mutableListOf()
+            recipe.recipeSections.forEachIndexed { i, r ->
+                if (r.items.isNotEmpty()) {
+                    nonEmptySections += i
+                }
+            }
+
+            if (nonEmptySections.size == 1) {
+                Section(
+                    title = "Ingredients",
+                    collapsable = true,
+                    startExpanded = true,
+                    indentLevel = 1
+                ) {
+                    recipe.recipeSections[nonEmptySections.first()].items.forEach { i ->
+                        Row(
+                                modifier = Modifier
+                                    .clickable {  checked += Pair(i.recipeEntryId,
+                                        checked[i.recipeEntryId] != true
+                                    ) }
+                                    .padding(vertical = 12.dp)
+                                    .padding(start = 32.dp, end = 16.dp)
+                                    .fillMaxWidth()
+                            ) {
+                                Text(text = i.itemName)
+                                if (i.itemPrep != null) {
+                                    Text(
+                                        text = " (${i.itemPrep.prepName})",
+                                        color = MaterialTheme.colorScheme.primary,
+                                        fontSize = 14.sp
+                                    )
+                                }
+                                Spacer(Modifier.weight(1f))
+                                Checkbox(
+                                    modifier = Modifier.padding(0.dp),
+                                    checked = checked[i.recipeEntryId] == true,
+                                    onCheckedChange = null
+                                )
+                            }
+                    }
+                }
+            }
+            else {
             Section(
                 title = "Ingredients",
                 collapsable = true,
-                startExpanded = false,
+                startExpanded = true,
                 indentLevel = 1,
                 subContent = recipe.recipeSections.filter { r -> r.items.isNotEmpty() }.map { r ->
                     Pair(
@@ -69,7 +115,11 @@ fun RecipeDetails(
                             ) {
                                 Text(text = i.itemName)
                                 if (i.itemPrep != null) {
-                                    Text(text = " (${i.itemPrep.prepName})")
+                                    Text(
+                                        text = " (${i.itemPrep.prepName})",
+                                        color = MaterialTheme.colorScheme.primary,
+                                        fontSize = 14.sp
+                                    )
                                 }
                                 Spacer(Modifier.weight(1f))
                                 Checkbox(
@@ -83,6 +133,7 @@ fun RecipeDetails(
                     }
                 }
             ) {}
+            }
             Section(
                 title = "Steps",
                 collapsable = true,
