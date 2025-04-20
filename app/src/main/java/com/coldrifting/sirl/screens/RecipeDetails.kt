@@ -62,8 +62,7 @@ fun RecipeDetails(
                 Section(
                     title = "Ingredients",
                     collapsable = true,
-                    startExpanded = true,
-                    indentLevel = 1
+                    startExpanded = true
                 ) {
                     recipe.recipeSections[nonEmptySections.first()].items.forEach { i ->
                         Row(

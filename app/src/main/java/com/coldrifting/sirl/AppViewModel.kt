@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.coldrifting.sirl.data.AppApplication
 import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.CartAisleEntry
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.RecipeX
@@ -200,6 +201,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
     suspend fun getUsedItemPreps(itemPrepId: Int): List<String> {
         return repository.getUsedItemPreps(itemPrepId)
+    }
+
+    suspend fun getShoppingList(): List<CartAisleEntry>? {
+        return repository.getShoppingList()
     }
 
     companion object AppViewModelProvider {

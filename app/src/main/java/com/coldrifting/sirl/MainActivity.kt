@@ -67,6 +67,7 @@ class MainActivity : ComponentActivity() {
             startDestination = Recipes
         )
         {
+            // TODO - Move to header of ingredient screen?
             navigation<Stores>(startDestination = StoreList) {
                 composable<StoreList> {
 
@@ -199,7 +200,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
             composable<Cart> {
-                Cart(navController)
+                Cart(
+                    navHostController = navController,
+                    getShoppingList = viewModel::getShoppingList
+                )
             }
         }
     }

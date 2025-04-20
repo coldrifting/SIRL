@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.coldrifting.sirl.data.access.base.BaseDAO
+import com.coldrifting.sirl.data.entities.RawCartEntry
 import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.RecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeEntryResult
@@ -110,4 +111,31 @@ interface RecipeDAO: BaseDAO<Recipe> {
             "WHERE ItemPreps.itemPrepId = :itemPrepId " +
             "ORDER BY Recipes.recipeName")
     suspend fun getUsedItemPreps(itemPrepId: Int): List<String>
+
+    @Query(
+        "SELECT " +
+        "Aisles.aisleId, " +
+        "Aisles.aisleName, " +
+        "Items.itemId, " +
+        "Items.itemName, " +
+        "ItemPreps.prepName, " +
+        "RecipeEntries.unitType, " +
+        "SUM(RecipeEntries.amount) as totalAmount " +
+        "FROM Recipes " +
+        "NATURAL JOIN RecipeSections " +
+        "NATURAL JOIN RecipeEntries " +
+        "NATURAL JOIN Items " +
+        "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
+        "LEFT OUTER JOIN ItemAisles ON Items.itemId = ItemAisles.itemId AND ItemAisles.storeId = :storeId " +
+        "LEFT OUTER JOIN Aisles ON Aisles.aisleId = ItemAisles.aisleId " +
+        "WHERE Recipes.pinned = true " +
+        "GROUP BY Items.itemName, ItemPreps.prepName " +
+        "ORDER BY Aisles.sortingPrefix, " +
+                "case when ItemAisles.bay = 'Start' then 1 " +
+                    "when ItemAisles.bay = 'Middle' then 2 " +
+                    "when ItemAisles.bay = 'End' then 3 end asc, " +
+                "Items.itemName, " +
+                "ItemPreps.prepName "
+    )
+    suspend fun getRawShoppingList(storeId: Int): List<RawCartEntry>
 }

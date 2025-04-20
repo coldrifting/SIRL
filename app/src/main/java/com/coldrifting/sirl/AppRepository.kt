@@ -12,6 +12,7 @@ import com.coldrifting.sirl.data.access.ItemPrepDAO
 import com.coldrifting.sirl.data.access.RecipeDAO
 import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.CartAisleEntry
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Recipe
@@ -22,6 +23,7 @@ import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
 import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.entities.toHierarchy
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
@@ -421,5 +423,10 @@ class AppRepository(
 
     suspend fun getUsedItemPreps(itemPrepId: Int): List<String> {
         return recipeDao.getUsedItemPreps(itemPrepId)
+    }
+
+    suspend fun getShoppingList(): List<CartAisleEntry> {
+        val rawEntries = recipeDao.getRawShoppingList(selectedStoreId.value)
+        return rawEntries.toHierarchy()
     }
 }
