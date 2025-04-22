@@ -38,6 +38,7 @@ import com.coldrifting.sirl.screens.RecipeList
 import com.coldrifting.sirl.screens.StoreAisleList
 import com.coldrifting.sirl.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
+import com.coldrifting.sirl.view.AppViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,31 +56,25 @@ class MainActivity : ComponentActivity() {
     fun MainContent() {
         val viewModel: AppViewModel by viewModels { AppViewModel.Factory }
 
-         LaunchedEffect(Unit) {
-             viewModel.trySelectStore()
-         }
-
         val navController = rememberNavController()
         NavHost(
             navController = navController,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
             startDestination = RouteStores
-        )
-        {
-            // TODO - Move to header of ingredient screen?
+        ) {
             navigation<RouteStores>(startDestination = RouteStoreList) {
                 composable<RouteStoreList> {
-                    val selectedStore by viewModel.selectedStore.collectAsState()
-                    val storeList by viewModel.stores.collectAsState()
+                    val selectedStore by viewModel.stores.selected.collectAsState()
+                    val storeList by viewModel.stores.all.collectAsState()
 
                     StoreList(
                         navHostController = navController,
-                        addStore = viewModel::addStore,
-                        renameStore = viewModel::renameStore,
-                        deleteStore = viewModel::deleteStore,
-                        selectStore = viewModel::selectStore,
-                        getStoreName = viewModel::getStoreName,
+                        addStore = viewModel.stores::add,
+                        renameStore = viewModel.stores::rename,
+                        deleteStore = viewModel.stores::delete,
+                        selectStore = viewModel.stores::select,
+                        getStoreName = viewModel.stores::getName,
                         selectedStore = selectedStore,
                         storeList = storeList
                     )
@@ -87,21 +82,21 @@ class MainActivity : ComponentActivity() {
                 composable<RouteStoreAisleList> { backStackEntry ->
                     val aisleList = backStackEntry.toRoute<RouteStoreAisleList>()
 
-                    val storeList by viewModel.stores.collectAsState()
+                    val storeList by viewModel.stores.all.collectAsState()
                     val store = storeList.first {s -> s.storeId == aisleList.id }
 
-                    val aisles by viewModel.getAislesAtStore(aisleList.id).collectAsState()
+                    val aisles by viewModel.stores.getAisles(aisleList.id).collectAsState()
 
-                    val scrollTo by viewModel.firstItemIndexState.collectAsState()
+                    val scrollTo by viewModel.stores.firstItemIndexState.collectAsState()
 
                     StoreAisleList(
                         navHostController = navController,
                         store = store,
-                        addAisle = viewModel::addAisle,
-                        renameAisle = viewModel::renameAisle,
-                        deleteAisle = viewModel::deleteAisle,
-                        getAisleName = viewModel::getAisleName,
-                        syncAisles = viewModel::syncAisles,
+                        addAisle = viewModel.stores::addAisle,
+                        renameAisle = viewModel.stores::renameAisle,
+                        deleteAisle = viewModel.stores::deleteAisle,
+                        getAisleName = viewModel.stores::getAisleName,
+                        syncAisles = viewModel.stores::syncAisles,
                         aisles = aisles,
                         scrollTo = scrollTo
                     )
@@ -109,29 +104,29 @@ class MainActivity : ComponentActivity() {
             }
             navigation<RouteIngredients>(startDestination = RouteIngredientList) {
                 composable<RouteIngredientList> {
-                    val sortingMode by viewModel.itemsSortingModeState.collectAsState()
-                    val items by viewModel.itemsWithFilter.collectAsState()
-                    val searchText by viewModel.itemsFilterTextState.collectAsState()
+                    val sortingMode by viewModel.items.sortingModeState.collectAsState()
+                    val items by viewModel.items.filtered.collectAsState()
+                    val searchText by viewModel.items.filterTextState.collectAsState()
                     IngredientList(
                         navHostController = navController,
-                        addItem = viewModel::addItem,
-                        deleteItem = viewModel::deleteItem,
-                        checkDeleteItem = viewModel::getUsedItems,
+                        addItem = viewModel.items::add,
+                        deleteItem = viewModel.items::delete,
+                        checkDeleteItem = viewModel.items::getUsedItems,
                         items = items,
-                        onFilterTextChanged = viewModel::updateItemFilter,
-                        setItemSort = viewModel::toggleItemSorting,
+                        onFilterTextChanged = viewModel.items::updateFilter,
+                        setItemSort = viewModel.items::toggleItemSorting,
                         sortMode = sortingMode.name,
                         searchText = searchText)
                 }
                 composable<RouteIngredientDetails> { backStackEntry ->
                     val routeIngredientDetails = backStackEntry.toRoute<RouteIngredientDetails>()
-                    val item by viewModel.getItem(routeIngredientDetails.id).collectAsState()
-                    val itemAisle by viewModel.getItemAisle(item.itemId).collectAsState()
-                    val currentStore by viewModel.selectedStore.collectAsState()
-                    val stores by viewModel.stores.collectAsState()
+                    val item by viewModel.items.get(routeIngredientDetails.id).collectAsState()
+                    val itemAisle by viewModel.items.getAisle(item.itemId).collectAsState()
+                    val currentStore by viewModel.stores.selected.collectAsState()
+                    val stores by viewModel.stores.all.collectAsState()
                     val store = stores.first {s -> s.storeId == currentStore}
-                    val aisles by viewModel.getAislesAtStore(currentStore).collectAsState()
-                    val prep by viewModel.getItemPreparations(item.itemId).collectAsState()
+                    val aisles by viewModel.stores.getAisles(currentStore).collectAsState()
+                    val prep by viewModel.items.getPreps(item.itemId).collectAsState()
                     IngredientDetails(
                         navHostController = navController,
                         item = item,
@@ -139,72 +134,72 @@ class MainActivity : ComponentActivity() {
                         aisles = aisles,
                         prep = prep,
                         currentStore = store,
-                        setStore = viewModel::selectStore,
-                        updatePrep = viewModel::updateItemPrep,
-                        addPrep = viewModel::addItemPrep,
-                        deletePrep = viewModel::deleteItemPrep,
-                        checkDeletePrep = viewModel::getUsedItemPreps,
-                        setItemName = viewModel::setItemName,
-                        setItemAisle = viewModel::updateItemAisle,
-                        setItemTemp = viewModel::setItemTemp,
-                        setItemDefaultUnits = viewModel::setItemDefaultUnits,
+                        setStore = viewModel.stores::select,
+                        updatePrep = viewModel.items::renamePrep,
+                        addPrep = viewModel.items::addPrep,
+                        deletePrep = viewModel.items::deletePrep,
+                        checkDeletePrep = viewModel.items::getUsedItemPreps,
+                        setItemName = viewModel.items::rename,
+                        setItemAisle = viewModel.items::setAisle,
+                        setItemTemp = viewModel.items::setTemp,
+                        setItemDefaultUnits = viewModel.items::setDefaultUnits,
                         stores = stores)
                 }
             }
             navigation<RouteRecipes>(startDestination = RouteRecipeList) {
                 composable<RouteRecipeList> {
-                    val recipes by viewModel.allRecipes.collectAsState()
+                    val recipes by viewModel.recipes.all.collectAsState()
                     RecipeList(
                         navHostController = navController,
                         recipes = recipes,
-                        toggleRecipePin = viewModel::toggleRecipePin,
-                        addRecipe = viewModel::addRecipe,
-                        deleteRecipe = viewModel::deleteRecipe
+                        toggleRecipePin = viewModel.recipes::pin,
+                        addRecipe = viewModel.recipes::add,
+                        deleteRecipe = viewModel.recipes::delete
                     )
                 }
                 composable<RouteRecipeDetails> { backStackEntry ->
                     val routeRecipeEdit = backStackEntry.toRoute<RouteRecipeEdit>()
-                    val recipe by viewModel.getRecipes(routeRecipeEdit.recipeId).collectAsState()
+                    val recipe by viewModel.recipes.get(routeRecipeEdit.recipeId).collectAsState()
                     RecipeDetails(
                         navHostController = navController,
                         recipe = recipe
                     )
                 }
                 composable<RouteRecipeEdit> { backStackEntry ->
-                    val itemsWithPrep by viewModel.allItemsWithPrep.collectAsState()
+                    val itemsWithPrep by viewModel.items.allWithPrep.collectAsState()
                     val routeRecipeEdit = backStackEntry.toRoute<RouteRecipeEdit>()
-                    val recipe by viewModel.getRecipes(routeRecipeEdit.recipeId).collectAsState()
+                    val recipe by viewModel.recipes.get(routeRecipeEdit.recipeId).collectAsState()
                     RecipeEdit(
                         navHostController = navController,
                         itemsWithPrep = itemsWithPrep,
                         recipe = recipe,
-                        addSection = viewModel::addRecipeSection,
-                        deleteSection = viewModel::deleteRecipeSection,
-                        setRecipeSectionName = viewModel::setRecipeSectionName,
-                        setRecipeItemAmount = viewModel::setRecipeItemAmount,
-                        addRecipeEntry = viewModel::addRecipeSectionItem,
-                        deleteRecipeEntry = viewModel::deleteRecipeSectionEntry
+                        addSection = viewModel.recipes::addSection,
+                        deleteSection = viewModel.recipes::deleteSection,
+                        setRecipeSectionName = viewModel.recipes::renameSection,
+                        setRecipeItemAmount = viewModel.recipes::setItemAmount,
+                        addRecipeEntry = viewModel.recipes::addItem,
+                        deleteRecipeEntry = viewModel.recipes::deleteItem
                     )
                 }
                 composable<RouteRecipeEditSteps> { backStackEntry ->
                     val routeRecipeEditSteps = backStackEntry.toRoute<RouteRecipeEditSteps>()
-                    val recipe by viewModel.getRecipes(routeRecipeEditSteps.recipeId).collectAsState()
+                    val recipe by viewModel.recipes.get(routeRecipeEditSteps.recipeId).collectAsState()
                     com.coldrifting.sirl.screens.RecipeEditSteps(
                         navHostController = navController,
                         recipe = recipe,
-                        setRecipeName = viewModel::setRecipeName,
-                        setRecipeSteps = viewModel::setRecipeSteps
+                        setRecipeName = viewModel.recipes::rename,
+                        setRecipeSteps = viewModel.recipes::editSteps
                     )
                 }
             }
             composable<RouteCart> {
-                val list by viewModel.cartList.collectAsState()
+                val list by viewModel.cart.list.collectAsState()
                 Cart(
                     navHostController = navController,
                     list = list,
-                    getShoppingList = viewModel::getShoppingList,
-                    onHeaderClicked = viewModel::cartHeaderClicked,
-                    onItemClicked = viewModel::cartItemClicked
+                    getShoppingList = viewModel.cart::getList,
+                    onHeaderClicked = viewModel.cart::cartHeaderClicked,
+                    onItemClicked = viewModel.cart::cartItemClicked
                 )
             }
         }

@@ -1,7 +1,8 @@
 [
   {
     "storeId": 1,
-    "storeName": "Macey's (1700 S)"
+    "storeName": "Macey's (1700 S)",
+    "selected": true
   },
   {
     "storeId": 2,

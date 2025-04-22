@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 interface BaseDAO<T> {
     // insert single
     @Upsert
-    fun insert(obj: T): Long
+    suspend fun insert(obj: T): Long
 
     // insert List
     @Upsert

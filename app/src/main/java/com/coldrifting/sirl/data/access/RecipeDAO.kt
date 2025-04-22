@@ -65,7 +65,7 @@ interface RecipeDAO: BaseDAO<Recipe> {
     }
 
     @Query("UPDATE RecipeSections SET sectionName = :sectionName WHERE recipeSectionId = :recipeSectionId")
-    fun setSectionName(recipeSectionId: Int, sectionName: String)
+    fun renameSection(recipeSectionId: Int, sectionName: String)
 
     @Delete
     fun deleteSection(section: RecipeSection)
@@ -89,28 +89,6 @@ interface RecipeDAO: BaseDAO<Recipe> {
 
     @Query("UPDATE RecipeEntries SET unitType = :unitType WHERE RecipeEntries.recipeEntryId = :recipeItemEntryId")
     fun setRecipeItemEntryUnitType(recipeItemEntryId: Int, unitType: UnitType)
-
-    @Query("SELECT  " +
-            "Recipes.recipeName " +
-            "FROM Recipes " +
-            "NATURAL JOIN RecipeSections " +
-            "LEFT JOIN RecipeEntries ON RecipeEntries.recipeSectionId = RecipeSections.recipeSectionId " +
-            "LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId " +
-            "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
-            "WHERE Items.itemId = :itemId " +
-            "ORDER BY Recipes.recipeName")
-    suspend fun getUsedItems(itemId: Int): List<String>
-
-    @Query("SELECT  " +
-            "Recipes.recipeName " +
-            "FROM Recipes " +
-            "NATURAL JOIN RecipeSections " +
-            "LEFT JOIN RecipeEntries ON RecipeEntries.recipeSectionId = RecipeSections.recipeSectionId " +
-            "LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId " +
-            "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
-            "WHERE ItemPreps.itemPrepId = :itemPrepId " +
-            "ORDER BY Recipes.recipeName")
-    suspend fun getUsedItemPreps(itemPrepId: Int): List<String>
 
     @Query(
         "SELECT " +

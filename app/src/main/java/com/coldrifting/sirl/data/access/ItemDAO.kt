@@ -27,4 +27,26 @@ interface ItemDAO: BaseDAO<Item> {
 
     @Query("UPDATE Items SET defaultUnits = :defaultUnits WHERE itemId = :itemId")
     fun updateItemDefaultUnits(itemId: Int, defaultUnits: UnitType)
+
+    @Query("SELECT  " +
+            "Recipes.recipeName " +
+            "FROM Recipes " +
+            "NATURAL JOIN RecipeSections " +
+            "LEFT JOIN RecipeEntries ON RecipeEntries.recipeSectionId = RecipeSections.recipeSectionId " +
+            "LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId " +
+            "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
+            "WHERE Items.itemId = :itemId " +
+            "ORDER BY Recipes.recipeName")
+    suspend fun getUsedItems(itemId: Int): List<String>
+
+    @Query("SELECT  " +
+            "Recipes.recipeName " +
+            "FROM Recipes " +
+            "NATURAL JOIN RecipeSections " +
+            "LEFT JOIN RecipeEntries ON RecipeEntries.recipeSectionId = RecipeSections.recipeSectionId " +
+            "LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId " +
+            "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
+            "WHERE ItemPreps.itemPrepId = :itemPrepId " +
+            "ORDER BY Recipes.recipeName")
+    suspend fun getUsedItemPreps(itemPrepId: Int): List<String>
 }

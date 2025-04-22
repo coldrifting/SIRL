@@ -9,4 +9,5 @@ import kotlinx.serialization.Serializable
 data class Store(
     @PrimaryKey(autoGenerate = true)
     var storeId: Int = 0,
-    var storeName: String)
+    var storeName: String,
+    val selected: Boolean = false)

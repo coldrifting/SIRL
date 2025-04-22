@@ -11,6 +11,9 @@ interface StoreDAO: BaseDAO<Store> {
     @Query("SELECT * FROM Stores")
     fun all() : Flow<List<Store>>
 
-    @Query("SELECT COALESCE((SELECT MIN(storeId) FROM Stores), -1)")
-    fun firstStoreIdOrDefault() : Int
+    @Query("SELECT Stores.StoreId FROM Stores WHERE Stores.selected = true LIMIT 1")
+    fun selected() : Flow<Int>
+
+    @Query("UPDATE Stores SET selected = (Stores.storeId = :storeId)")
+    fun select(storeId: Int)
 }

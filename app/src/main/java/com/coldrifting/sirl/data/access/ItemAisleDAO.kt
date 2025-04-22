@@ -22,6 +22,6 @@ interface ItemAisleDAO: BaseDAO<ItemAisle> {
             "x.sortingPrefix " )
     fun details(storeId: Int, sortingMode: String, itemName: String = ""): Flow<Map<Item, Aisle?>>
 
-    @Query("SELECT * FROM ItemAisles WHERE itemId = :itemId AND storeId = :storeId")
-    fun getByItem(itemId: Int, storeId: Int): Flow<ItemAisle?>
+    @Query("SELECT * FROM ItemAisles WHERE itemId = :itemId AND storeId = COALESCE(:storeId, -1)")
+    fun getByItem(itemId: Int, storeId: Int?): Flow<ItemAisle?>
 }

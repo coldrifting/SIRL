@@ -6,7 +6,6 @@ import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.coldrifting.sirl.routes.top.RouteStores
 
 data class TopLevelRoute<T : Any>(val route: T, val icon: ImageVector) {
 

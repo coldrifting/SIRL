@@ -57,7 +57,7 @@ abstract class AppDatabase : RoomDatabase() {
                 context.assets.open("database/$fileName.json")
                     .bufferedReader()
                     .use { it.readText() }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 "[]"
             }
         }
@@ -84,7 +84,7 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java, "Sample.db"
             )
                 // prepopulate the database after onCreate was called
-                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration(true)
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
