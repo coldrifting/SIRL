@@ -28,7 +28,7 @@ import com.coldrifting.sirl.components.checklist.CartChecklist
 import com.coldrifting.sirl.components.checklist.CheckHeader
 import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeCart
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeCart
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable

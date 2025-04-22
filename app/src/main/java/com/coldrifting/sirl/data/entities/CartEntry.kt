@@ -18,7 +18,6 @@ fun List<RawCartEntry>.toHierarchy(): List<CartAisleEntry> {
 
     this.forEach {  entry ->
         var aisleEntries = entries[entry.aisleName]?.entries ?: emptyList()
-        // TODO - Convert to ounces if relevant (Cups, Tbsp, Tsp)
         val amount = entry.unitType.getPrepAbbreviation(entry.totalAmount)
         val newEntry = CartAisleEntry(
             entry.aisleId,

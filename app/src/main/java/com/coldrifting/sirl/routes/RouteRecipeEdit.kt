@@ -3,4 +3,4 @@ package com.coldrifting.sirl.routes
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Ingredients
+data class RouteRecipeEdit(val recipeId: Int)

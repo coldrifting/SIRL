@@ -57,8 +57,8 @@ import com.coldrifting.sirl.data.entities.ItemX
 import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.data.enums.getPrepAbbreviation
-import com.coldrifting.sirl.routes.RecipeEditSteps
-import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
+import com.coldrifting.sirl.routes.RouteRecipeEditSteps
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -102,7 +102,7 @@ fun RecipeEdit(
                 navHostController,
                 "Edit Recipe Ingredients",
                 {
-                    IconButton(onClick = { navHostController.navigate(RecipeEditSteps(recipe.recipeId)) }) {
+                    IconButton(onClick = { navHostController.navigate(RouteRecipeEditSteps(recipe.recipeId)) }) {
                         Icon(
                             Icons.Default.Edit,
                             "Edit Steps"

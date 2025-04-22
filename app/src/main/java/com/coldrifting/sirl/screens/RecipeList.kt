@@ -33,8 +33,8 @@ import com.coldrifting.sirl.components.TextDialog
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.data.entities.Recipe
-import com.coldrifting.sirl.routes.RecipeDetails
-import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
+import com.coldrifting.sirl.routes.RouteRecipeDetails
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 import com.coldrifting.sirl.ui.theme.PinColor
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.coroutines.delay
@@ -86,7 +86,7 @@ fun RecipeList(
                 listItems = recipes,
                 getKey = { it.recipeId },
                 rightAction = swipeDeleteAction(deleteRecipe),
-                tapAction = { navHostController.navigate(RecipeDetails(it)) }
+                tapAction = { navHostController.navigate(RouteRecipeDetails(it)) }
             ) {
                 Text(
                     text = it.recipeName

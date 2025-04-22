@@ -25,7 +25,7 @@ import com.coldrifting.sirl.components.swipeDeleteAction
 import com.coldrifting.sirl.components.swipeEditAction
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeStores
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeStores
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable

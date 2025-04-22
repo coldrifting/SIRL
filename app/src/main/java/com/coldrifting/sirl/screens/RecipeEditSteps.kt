@@ -13,7 +13,7 @@ import com.coldrifting.sirl.components.NavBar
 import com.coldrifting.sirl.components.TextFieldWithDebounce
 import com.coldrifting.sirl.components.TopBar
 import com.coldrifting.sirl.data.entities.RecipeX
-import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 
 @Composable
 fun RecipeEditSteps(

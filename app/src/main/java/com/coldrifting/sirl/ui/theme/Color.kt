@@ -4,10 +4,10 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-val primaryLight = Color(0xFF8E4956)
-val onPrimaryLight = Color(0xFFFFFFFF)
-val primaryContainerLight = Color(0xFFFFD9DD)
-val onPrimaryContainerLight = Color(0xFF72333F)
+val primaryLight = Color(0xFFEF914D)
+val onPrimaryLight = Color(0xFF2C2C2C)
+val primaryContainerLight = Color(0xFFFFB16E)
+val onPrimaryContainerLight = Color(0xFF101010)
 val secondaryLight = Color(0xFF5F5790)
 val onSecondaryLight = Color(0xFFFFFFFF)
 val secondaryContainerLight = Color(0xFFE5DEFF)

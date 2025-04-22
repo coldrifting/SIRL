@@ -56,7 +56,7 @@ import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
-import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeIngredients
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.coroutines.launch
 

@@ -18,7 +18,7 @@ import com.coldrifting.sirl.components.checklist.CheckItem
 import com.coldrifting.sirl.components.checklist.RecipeDetailsChecklist
 import com.coldrifting.sirl.data.entities.RecipeX
 import com.coldrifting.sirl.data.enums.getPrepAbbreviation
-import com.coldrifting.sirl.routes.TopLevelRoute.Companion.routeRecipes
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 
 @Composable
 fun RecipeDetails(
@@ -49,7 +49,7 @@ fun RecipeDetails(
             TopBar(navHostController, recipe.recipeName, {
                 IconButton({
                     navHostController.navigate(
-                        com.coldrifting.sirl.routes.RecipeEdit(recipe.recipeId)
+                        com.coldrifting.sirl.routes.RouteRecipeEdit(recipe.recipeId)
                     )
                 }) { Icon(Icons.Default.Edit, "Edit") }
             })
