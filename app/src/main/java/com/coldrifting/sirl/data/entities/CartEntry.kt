@@ -23,7 +23,7 @@ fun List<RawCartEntry>.toHierarchy(): List<CartAisleEntry> {
         val newEntry = CartAisleEntry(
             entry.aisleId,
             entry.aisleName,
-            aisleEntries + CartAisleItemEntry(entry.itemId, entry.itemName, amount, false))
+            aisleEntries + CartAisleItemEntry(entry.itemId, entry.itemName, amount))
         entries[entry.aisleName] = newEntry
     }
 
@@ -39,6 +39,5 @@ data class CartAisleEntry(
 data class CartAisleItemEntry(
     val itemId: Int,
     val itemName: String,
-    val amount: String,
-    val checked: Boolean
+    val amount: String
 )

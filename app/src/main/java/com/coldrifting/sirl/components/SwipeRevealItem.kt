@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.components
 
-import android.util.Log
 import android.view.View
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
@@ -30,7 +29,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableIntState
@@ -163,7 +162,6 @@ fun SwipeRevealItem(
         LaunchedEffect(key1 = "SwipeFromLeftFull") {
             coroutineScope.launch {
                 state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
-                Log.d("TEST", "Settled Left")
 
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_START)
                 leftAction.action.invoke(index)
@@ -177,7 +175,6 @@ fun SwipeRevealItem(
         LaunchedEffect(key1 = "SwipeFromRightFull") {
             coroutineScope.launch {
                 state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
-                Log.d("TEST", "Settled Right")
 
                 ViewCompat.performHapticFeedback(view, HapticFeedbackConstantsCompat.GESTURE_START)
                 rightAction.action.invoke(index)
@@ -191,7 +188,6 @@ fun SwipeRevealItem(
         snapshotFlow { state.settledValue }.collect { value ->
             if (value != SwipeToRevealValue.Center) {
                 curIndex?.intValue = index
-                Log.d("TEST", "Anchor reached for: $index")
             }
         }
     }
@@ -201,7 +197,6 @@ fun SwipeRevealItem(
         LaunchedEffect(state) {
             snapshotFlow { curIndex.intValue }.collect { value ->
                 if (value != index && state.settledValue != SwipeToRevealValue.Center) {
-                    Log.d("TEST", "Hide Anchor for: $index")
                     state.animateTo(SwipeToRevealValue.Center, animationSpec = tween(animTime))
                 }
             }
@@ -232,10 +227,13 @@ fun SwipeRevealItem(
                     )
                 }
         ) {
-            Box(modifier = Modifier
+            Surface(
+                tonalElevation = 2.dp,
+                shadowElevation = 2.dp,
+                modifier = Modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(cornerRadius))
-                .background(MaterialTheme.colorScheme.inverseOnSurface)) {
+            ) {
                 content.invoke()
             }
         }

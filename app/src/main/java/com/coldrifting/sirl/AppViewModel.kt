@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.coldrifting.sirl.components.checklist.CheckHeader
+import com.coldrifting.sirl.components.checklist.CheckItem
 import com.coldrifting.sirl.data.AppApplication
 import com.coldrifting.sirl.data.entities.Aisle
-import com.coldrifting.sirl.data.entities.CartAisleEntry
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.RecipeX
@@ -15,9 +16,12 @@ import com.coldrifting.sirl.data.entities.joined.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class AppViewModel(private val repository: AppRepository) : ViewModel() {
     // StateFlows
@@ -29,6 +33,9 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
     val allItemsWithPrep = repository.allItemsWithPrep
 
     val allRecipes = repository.allRecipes
+
+    private val _cartList = MutableStateFlow<List<CheckHeader>?>(null)
+    val cartList = _cartList.asStateFlow()
 
     val itemsSortingModeState: StateFlow<AppRepository.ItemsSortingMode> = repository.itemsSortingModeState
     val itemsFilterTextState: StateFlow<String> = repository.itemsFilterTextState
@@ -203,8 +210,71 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         return repository.getUsedItemPreps(itemPrepId)
     }
 
-    suspend fun getShoppingList(): List<CartAisleEntry>? {
-        return repository.getShoppingList()
+    fun getShoppingList() {
+        repository.scope.launch {
+            val rawList = repository.getShoppingList()
+            val updatedList = rawList.map { entry ->
+                CheckHeader(
+                    id = entry.aisleId,
+                    name = entry.aisleName,
+                    expanded = true,
+                    items = entry.entries.map { items ->
+                        CheckItem(
+                            id = items.itemId,
+                            name = items.itemName,
+                            details = items.amount
+                        )
+                    })
+            }
+
+            _cartList.update {
+                return@update updatedList
+            }
+        }
+    }
+
+    fun cartHeaderClicked(headerIndex: Int) {
+        _cartList.update { list ->
+            if (list == null) {
+                return@update null
+            }
+
+            val newList = list.toMutableList()
+            newList[headerIndex] = list[headerIndex].copy(expanded = !list[headerIndex].expanded)
+
+            return@update newList
+        }
+    }
+
+    fun cartItemClicked(headerIndex: Int, itemIndex: Int) {
+        _cartList.update { list ->
+            if (list == null) {
+                return@update null
+            }
+
+            var items = list[headerIndex].items.toMutableList()
+            items[itemIndex] = items[itemIndex].copy(checked = !items[itemIndex].checked)
+
+            var newList = list.toMutableList()
+            newList[headerIndex] = newList[headerIndex].copy(items = items)
+            if (newList[headerIndex].items.all { i -> i.checked }) {
+                // Collapse header after delay
+                repository.scope.launch {
+                    delay(200)
+                    _cartList.update { list ->
+                        if (list == null) {
+                            return@update null
+                        }
+
+                        var newNewList = list.toMutableList()
+                        newNewList[headerIndex] = list[headerIndex].copy(expanded = false)
+                        newNewList
+                    }
+                }
+            }
+
+            return@update newList
+        }
     }
 
     companion object AppViewModelProvider {

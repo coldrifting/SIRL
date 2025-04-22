@@ -116,13 +116,13 @@
   {
     "aisleId": 20,
     "storeId": 1,
-    "aisleName": "Aisle 1 End cap",
+    "aisleName": "Aisle 01 End cap",
     "sortingPrefix": 20
   },
   {
     "aisleId": 21,
     "storeId": 1,
-    "aisleName": "Aisle 1",
+    "aisleName": "Aisle 01",
     "sortingPrefix": 21
   },
   {

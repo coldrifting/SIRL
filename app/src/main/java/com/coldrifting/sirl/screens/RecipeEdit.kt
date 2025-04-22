@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -26,6 +25,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
@@ -39,6 +39,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -277,7 +278,9 @@ fun RecipeEdit(
                             )
                             if (section.items.isEmpty()) {
                                 Row(
-                                    modifier = Modifier.padding(top = 32.dp).fillMaxWidth(),
+                                    modifier = Modifier
+                                        .padding(top = 32.dp)
+                                        .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
                                     Text("No Ingredients Added")
@@ -287,7 +290,9 @@ fun RecipeEdit(
                     } else if (section.items.isEmpty()) {
                         {
                             Row(
-                                modifier = Modifier.padding(top = 32.dp).fillMaxWidth(),
+                                modifier = Modifier
+                                    .padding(top = 32.dp)
+                                    .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
                                 Text("No Ingredients Added")
@@ -336,23 +341,28 @@ fun RecipeEdit(
                     }
 
                     Spacer(Modifier.width(8.dp))
-                    Button(
-                        modifier = Modifier.width(80.dp),
-                        colors = ButtonDefaults.elevatedButtonColors().copy(
-                            contentColor = MaterialTheme.colorScheme.onSurface,
-                            containerColor = MaterialTheme.colorScheme.surface
-                        ),
-                        shape = RoundedCornerShape(CornerSize(6.dp)),
-                        contentPadding = PaddingValues(horizontal = 0.dp),
-                        onClick = {
-                            selectedRecipeItem = it.recipeEntryId
-                            selectedRecipeItemAmount = it.amount
-                            selectedRecipeItemUnitType = it.unitType
 
-                            showAmountEditDialog = true
-                        }
+                        Surface(
+                            modifier = Modifier
+                                .width(80.dp)
+                                .fillMaxHeight()
+                                .padding(vertical = 8.dp),
+                            tonalElevation = 4.dp,
+                            shape = RoundedCornerShape(8.dp),
+                            onClick = {
+                                    selectedRecipeItem = it.recipeEntryId
+                                    selectedRecipeItemAmount = it.amount
+                                    selectedRecipeItemUnitType = it.unitType
+
+                                    showAmountEditDialog = true
+                            }
+                        ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
-                        Text(it.unitType.getPrepAbbreviation(it.amount))
+                            Text(it.unitType.getPrepAbbreviation(it.amount))
+                        }
                     }
                 }
 

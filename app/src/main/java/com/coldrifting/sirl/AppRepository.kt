@@ -45,7 +45,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 class AppRepository(
-    private val scope: CoroutineScope,
+    internal val scope: CoroutineScope,
     private val storeDao: StoreDAO,
     private val aisleDao: AisleDAO,
     private val itemDao: ItemDAO,
@@ -323,7 +323,8 @@ class AppRepository(
     fun addRecipe(recipeName: String) {
         val recipe = Recipe(recipeName = recipeName)
         scope.launch {
-            recipeDao.insert(recipe)
+            val id = recipeDao.insert(recipe)
+            recipeDao.insertSection(RecipeSection(recipeId = id.toInt(), sectionName = "Main"))
         }
     }
 

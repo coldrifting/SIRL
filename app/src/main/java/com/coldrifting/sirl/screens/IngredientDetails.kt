@@ -91,11 +91,15 @@ fun IngredientDetails(
         AlertDialog(
             title = "Delete Ingredient Preparation?",
             confirmText = "Delete",
-            onConfirm = {deletePrep(deleteDialogItemPrepId)},
-            onDismiss = {deleteDialogConflicts = listOf<String>(); deleteDialogItemPrepId = -1; showDeleteDialog = false}
+            onConfirm = { deletePrep(deleteDialogItemPrepId) },
+            onDismiss = {
+                deleteDialogConflicts = listOf<String>(); deleteDialogItemPrepId =
+                -1; showDeleteDialog = false
+            }
         ) {
-            Text("The ingredient and preparation will be removed from these recipes:\n\n" +
-                deleteDialogConflicts.reduce { initial, element -> "$initial\n$element" }
+            Text(
+                "The ingredient and preparation will be removed from these recipes:\n\n" +
+                        deleteDialogConflicts.reduce { initial, element -> "$initial\n$element" }
             )
         }
     }
@@ -132,7 +136,7 @@ fun IngredientDetails(
 
     LaunchedEffect(prep) {
         if (userInteraction) {
-            scrollState.scrollTo(9990)
+            scrollState.scrollTo(Int.MAX_VALUE)
         }
     }
 
@@ -163,8 +167,9 @@ fun IngredientDetails(
                     setName = setItemName
                 )
 
-                Section(title = "Location") {
-
+                Section(
+                    title = "Location"
+                ) {
                     DropDown(
                         list = stores,
                         label = "Current Store",
@@ -215,8 +220,9 @@ fun IngredientDetails(
                     }
                 }
 
-                Section(title = "Temperature and Units") {
-
+                Section(
+                    title = "Temperature and Units"
+                ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -241,7 +247,9 @@ fun IngredientDetails(
                     }
                 }
 
-                Section(title = "Preparations") {
+                Section(
+                    title = "Preparations"
+                ) {
                     val isDefault = prep.isEmpty()
                     val normalColor = MaterialTheme.colorScheme.onSurface
                     val defaultColor = normalColor.copy(alpha = 0.38f)
@@ -270,8 +278,7 @@ fun IngredientDetails(
                                         val conflicts = checkDeletePrep(it)
                                         if (conflicts.isEmpty()) {
                                             deletePrep(it)
-                                        }
-                                        else {
+                                        } else {
                                             deleteDialogConflicts = conflicts
                                             deleteDialogItemPrepId = it
                                             showDeleteDialog = true
@@ -291,7 +298,7 @@ fun IngredientDetails(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(96.dp))
                 }
             }
         }
@@ -318,7 +325,7 @@ fun IngredientDetailsPreview() {
             addPrep = { _, _ -> },
             updatePrep = { _, _ -> },
             deletePrep = { _ -> },
-            checkDeletePrep = {i -> listOf("")}
+            checkDeletePrep = { i -> listOf("") }
         )
     }
 }

@@ -1,12 +1,11 @@
 package com.coldrifting.sirl.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,9 +30,8 @@ fun HtmlView(html: String?) {
         .map{s -> s.trim()}
         .filter{s -> s.isNotEmpty()}
 
-
     Box(
-        Modifier.background(color = MaterialTheme.colorScheme.surface)
+        Modifier.padding(top = 12.dp).fillMaxWidth()
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 12.dp),

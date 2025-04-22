@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
             navController = navController,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
-            startDestination = Recipes
+            startDestination = Stores
         )
         {
             // TODO - Move to header of ingredient screen?
@@ -109,7 +109,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
-            navigation<Ingredients>(startDestination = IngredientList) {
+            navigation<Ingredients>(startDestination = IngredientDetails(1)) {
                 composable<IngredientList> {
                     val sortingMode by viewModel.itemsSortingModeState.collectAsState()
                     val items by viewModel.itemsWithFilter.collectAsState()
@@ -200,9 +200,13 @@ class MainActivity : ComponentActivity() {
                 }
             }
             composable<Cart> {
+                val list by viewModel.cartList.collectAsState()
                 Cart(
                     navHostController = navController,
-                    getShoppingList = viewModel::getShoppingList
+                    list = list,
+                    getShoppingList = viewModel::getShoppingList,
+                    onHeaderClicked = viewModel::cartHeaderClicked,
+                    onItemClicked = viewModel::cartItemClicked
                 )
             }
         }
