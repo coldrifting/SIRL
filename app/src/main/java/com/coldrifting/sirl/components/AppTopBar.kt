@@ -25,7 +25,7 @@ import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(navHostController: NavHostController, title: String, topAction: @Composable (() -> Unit)? = null) {
+fun AppTopBar(navHostController: NavHostController, title: String, topAction: @Composable (() -> Unit)? = null) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 
     TopAppBar(
@@ -54,8 +54,8 @@ fun TopBar(navHostController: NavHostController, title: String, topAction: @Comp
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun TopBarPreview() {
+fun AppTopBarPreview() {
     SIRLTheme {
-        TopBar(navHostController = rememberNavController(), title = "Cart")
+        AppTopBar(navHostController = rememberNavController(), title = "Cart")
     }
 }

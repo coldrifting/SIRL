@@ -46,14 +46,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.components.AlertDialog
-import com.coldrifting.sirl.components.NavBar
-import com.coldrifting.sirl.components.SwipeList
-import com.coldrifting.sirl.components.TextDialog
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.components.swipeDeleteAction
+import com.coldrifting.sirl.components.dialogs.AlertDialog
+import com.coldrifting.sirl.components.AppNavBar
+import com.coldrifting.sirl.components.swipe.SwipeList
+import com.coldrifting.sirl.components.dialogs.TextDialog
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.data.entities.Item
-import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
+import com.coldrifting.sirl.data.helper.ItemWithAisleName
 import com.coldrifting.sirl.routes.RouteIngredientDetails
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
@@ -112,7 +112,7 @@ fun IngredientList(
 
     Scaffold(
         topBar = @Composable {
-            TopBar(navHostController, "Ingredients by $sortMode") {
+            AppTopBar(navHostController, "Ingredients by $sortMode") {
                 IconButton(onClick = setItemSort) {
                     Icon(
                         Icons.Default.Menu,
@@ -156,7 +156,7 @@ fun IngredientList(
                         }
                     })
 
-                NavBar(navHostController, routeIngredients)
+                AppNavBar(navHostController, routeIngredients)
             }
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),

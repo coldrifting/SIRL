@@ -17,13 +17,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.coldrifting.sirl.components.HtmlView
+import com.coldrifting.sirl.data.helper.ChecklistHeader
+import com.coldrifting.sirl.data.helper.ChecklistHeader.Companion.toggleHeader
+import com.coldrifting.sirl.data.helper.ChecklistHeader.Companion.toggleItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun RecipeDetailsChecklist(
     modifier: Modifier = Modifier,
-    entries: List<CheckHeader>,
+    entries: List<ChecklistHeader>,
     steps: String
 ) {
     var coroutineScope = rememberCoroutineScope()

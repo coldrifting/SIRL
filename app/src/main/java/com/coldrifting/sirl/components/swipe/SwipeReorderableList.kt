@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.components
+package com.coldrifting.sirl.components.swipe
 
 import android.util.Log
 import androidx.compose.animation.core.animateDpAsState

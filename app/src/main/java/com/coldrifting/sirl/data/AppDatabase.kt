@@ -19,7 +19,7 @@ import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.RecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeSection
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.entities.ItemAisle
 import java.util.concurrent.Executors
 
 @Database(

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.coldrifting.sirl.data.access.base.BaseDAO
 import com.coldrifting.sirl.data.entities.ItemPrep
-import com.coldrifting.sirl.data.entities.ItemWithPrepResult
+import com.coldrifting.sirl.data.helper.ItemWithPrepResult
 import kotlinx.coroutines.flow.Flow
 
 @Dao

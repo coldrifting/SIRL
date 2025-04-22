@@ -44,17 +44,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.coldrifting.sirl.components.AlertDialog
-import com.coldrifting.sirl.components.IngredientAmountEdit
-import com.coldrifting.sirl.components.IngredientSearchDialog
-import com.coldrifting.sirl.components.NavBar
-import com.coldrifting.sirl.components.SwipeList
-import com.coldrifting.sirl.components.TextDialog
+import com.coldrifting.sirl.components.dialogs.AlertDialog
+import com.coldrifting.sirl.components.dialogs.IngredientAmountEdit
+import com.coldrifting.sirl.components.dialogs.IngredientSearchDialog
+import com.coldrifting.sirl.components.AppNavBar
+import com.coldrifting.sirl.components.swipe.SwipeList
+import com.coldrifting.sirl.components.dialogs.TextDialog
 import com.coldrifting.sirl.components.TextFieldWithDebounce
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.components.swipeDeleteAction
-import com.coldrifting.sirl.data.entities.ItemX
-import com.coldrifting.sirl.data.entities.RecipeX
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.components.swipe.swipeDeleteAction
+import com.coldrifting.sirl.data.helper.RecipeTreeItem
+import com.coldrifting.sirl.data.helper.RecipeTree
 import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.data.enums.getPrepAbbreviation
 import com.coldrifting.sirl.routes.RouteRecipeEditSteps
@@ -65,8 +65,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun RecipeEdit(
     navHostController: NavHostController,
-    itemsWithPrep: List<ItemX>,
-    recipe: RecipeX,
+    itemsWithPrep: List<RecipeTreeItem>,
+    recipe: RecipeTree,
     addSection: (Int, String) -> Unit,
     deleteSection: (Int) -> Unit,
     setRecipeSectionName: (Int, String) -> Unit,
@@ -98,7 +98,7 @@ fun RecipeEdit(
 
     Scaffold(
         topBar = {
-            TopBar(
+            AppTopBar(
                 navHostController,
                 "Edit Recipe Ingredients",
                 {
@@ -110,7 +110,7 @@ fun RecipeEdit(
                     }
                 })
         },
-        bottomBar = { NavBar(navHostController, routeRecipes) },
+        bottomBar = { AppNavBar(navHostController, routeRecipes) },
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 currentSectionId = recipe.recipeSections[selectedTabIndex].sectionId

@@ -12,21 +12,21 @@ import com.coldrifting.sirl.data.access.ItemPrepDAO
 import com.coldrifting.sirl.data.access.RecipeDAO
 import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.entities.Aisle
-import com.coldrifting.sirl.data.entities.CartAisleEntry
+import com.coldrifting.sirl.data.helper.CartAisleEntry
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.RecipeEntry
-import com.coldrifting.sirl.data.entities.RecipeEntryResult
+import com.coldrifting.sirl.data.helper.RawRecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeSection
-import com.coldrifting.sirl.data.entities.RecipeX
+import com.coldrifting.sirl.data.helper.RecipeTree
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.data.entities.helper.ItemWithAisleName
-import com.coldrifting.sirl.data.entities.joined.ItemAisle
-import com.coldrifting.sirl.data.entities.toHierarchy
+import com.coldrifting.sirl.data.helper.ItemWithAisleName
+import com.coldrifting.sirl.data.entities.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
+import com.coldrifting.sirl.data.helper.CartAisleEntry.Companion.toHierarchy
 import com.coldrifting.sirl.proto.UserPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -348,10 +348,10 @@ class AppRepository(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun getAllRecipesWithData(recipeId: Int): StateFlow<RecipeX> {
+    fun getAllRecipesWithData(recipeId: Int): StateFlow<RecipeTree> {
         return recipeDao.getRecipes(recipeId).transformLatest { x ->
-            emit(RecipeEntryResult.toHierarchy(x))
-        }.toStateFlow(RecipeX())
+            emit(RawRecipeEntry.toHierarchy(x))
+        }.toStateFlow(RecipeTree())
     }
 
     fun setRecipeSectionName(recipeSectionId: Int, recipeSectionName: String) {

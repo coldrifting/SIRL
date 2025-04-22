@@ -19,13 +19,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.routes.RouteStoreAisleList
-import com.coldrifting.sirl.components.AuxButtonData
-import com.coldrifting.sirl.components.NavBar
-import com.coldrifting.sirl.components.SwipeRadioButtonList
-import com.coldrifting.sirl.components.TextDialog
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.components.swipeDeleteAction
-import com.coldrifting.sirl.components.swipeEditAction
+import com.coldrifting.sirl.components.swipe.AuxButtonData
+import com.coldrifting.sirl.components.AppNavBar
+import com.coldrifting.sirl.components.swipe.SwipeRadioButtonList
+import com.coldrifting.sirl.components.dialogs.TextDialog
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.components.swipe.swipeDeleteAction
+import com.coldrifting.sirl.components.swipe.swipeEditAction
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeStores
 import com.coldrifting.sirl.ui.theme.SIRLTheme
@@ -68,8 +68,8 @@ fun StoreList(
     }
 
     Scaffold(
-        topBar = { TopBar(navHostController, "Stores") },
-        bottomBar = { NavBar(navHostController, routeStores) },
+        topBar = { AppTopBar(navHostController, "Stores") },
+        bottomBar = { AppNavBar(navHostController, routeStores) },
         floatingActionButton = {
             FloatingActionButton(onClick = {showNewAlertDialog = true}) {
                 Icon(Icons.Filled.Add, "Add")

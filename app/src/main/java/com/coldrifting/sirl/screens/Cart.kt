@@ -23,18 +23,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.components.AlertDialog
+import com.coldrifting.sirl.components.dialogs.AlertDialog
 import com.coldrifting.sirl.components.checklist.CartChecklist
-import com.coldrifting.sirl.components.checklist.CheckHeader
-import com.coldrifting.sirl.components.NavBar
-import com.coldrifting.sirl.components.TopBar
+import com.coldrifting.sirl.data.helper.ChecklistHeader
+import com.coldrifting.sirl.components.AppNavBar
+import com.coldrifting.sirl.components.AppTopBar
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeCart
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
 fun Cart(
     navHostController: NavHostController,
-    list: List<CheckHeader>?,
+    list: List<ChecklistHeader>?,
     getShoppingList: () -> Unit,
     onHeaderClicked: (Int) -> Unit,
     onItemClicked: (Int, Int) -> Unit
@@ -57,7 +57,7 @@ fun Cart(
 
     Scaffold(
         topBar = {
-            TopBar(
+            AppTopBar(
                 navHostController,
                 "Cart" + if (complete) " (Complete)" else if (total != null) " ($inProgress / $total)" else "",
                 topAction = if (list != null) {
@@ -78,7 +78,7 @@ fun Cart(
                 } else null
             )
         },
-        bottomBar = { NavBar(navHostController, routeCart) },
+        bottomBar = { AppNavBar(navHostController, routeCart) },
         content = { innerPadding ->
             if (list != null) {
                 Box(

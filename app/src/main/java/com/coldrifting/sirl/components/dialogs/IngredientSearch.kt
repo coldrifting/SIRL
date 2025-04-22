@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.components
+package com.coldrifting.sirl.components.dialogs
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.heightIn
@@ -23,15 +23,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.coldrifting.sirl.data.entities.ItemX
+import com.coldrifting.sirl.data.helper.RecipeTreeItem
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IngredientSearchDialog(
     title: String = "Add Ingredient",
-    entries: List<ItemX>,
-    onSuccess: (ItemX) -> Unit,
+    entries: List<RecipeTreeItem>,
+    onSuccess: (RecipeTreeItem) -> Unit,
     onDismiss: () -> Unit
 ) {
     var dropDownExpanded by remember { mutableStateOf(false) }

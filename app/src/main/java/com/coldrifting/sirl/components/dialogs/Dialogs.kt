@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.components
+package com.coldrifting.sirl.components.dialogs
 
 import android.view.Gravity
 import androidx.compose.foundation.layout.Arrangement

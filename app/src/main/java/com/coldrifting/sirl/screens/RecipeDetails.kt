@@ -11,27 +11,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.coldrifting.sirl.components.NavBar
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.components.checklist.CheckHeader
-import com.coldrifting.sirl.components.checklist.CheckItem
+import com.coldrifting.sirl.components.AppNavBar
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.data.helper.ChecklistHeader
+import com.coldrifting.sirl.data.helper.ChecklistItem
 import com.coldrifting.sirl.components.checklist.RecipeDetailsChecklist
-import com.coldrifting.sirl.data.entities.RecipeX
+import com.coldrifting.sirl.data.helper.RecipeTree
 import com.coldrifting.sirl.data.enums.getPrepAbbreviation
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 
 @Composable
 fun RecipeDetails(
     navHostController: NavHostController,
-    recipe: RecipeX
+    recipe: RecipeTree
 ) {
-    val ingredients = recipe.recipeSections.fold(mutableListOf<CheckHeader>()) { l, s ->
+    val ingredients = recipe.recipeSections.fold(mutableListOf<ChecklistHeader>()) { l, s ->
         l.add(
-            CheckHeader(
+            ChecklistHeader(
                 id = s.sectionId,
                 name = s.sectionName,
-                items = s.items.fold(mutableListOf<CheckItem>()){ lx, i ->
-                    lx.add(CheckItem(
+                items = s.items.fold(mutableListOf<ChecklistItem>()){ lx, i ->
+                    lx.add(ChecklistItem(
                         id = i.itemId,
                         name = i.itemName,
                         info = i.itemPrep?.prepName,
@@ -46,7 +46,7 @@ fun RecipeDetails(
 
     Scaffold(
         topBar = {
-            TopBar(navHostController, recipe.recipeName, {
+            AppTopBar(navHostController, recipe.recipeName, {
                 IconButton({
                     navHostController.navigate(
                         com.coldrifting.sirl.routes.RouteRecipeEdit(recipe.recipeId)
@@ -54,7 +54,7 @@ fun RecipeDetails(
                 }) { Icon(Icons.Default.Edit, "Edit") }
             })
         },
-        bottomBar = { NavBar(navHostController, routeRecipes) },
+        bottomBar = { AppNavBar(navHostController, routeRecipes) },
     ) { innerPadding ->
         Box(
             modifier = Modifier.padding(innerPadding)

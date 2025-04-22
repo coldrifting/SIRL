@@ -27,11 +27,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.R
-import com.coldrifting.sirl.components.NavBar
-import com.coldrifting.sirl.components.SwipeList
-import com.coldrifting.sirl.components.TextDialog
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.components.swipeDeleteAction
+import com.coldrifting.sirl.components.AppNavBar
+import com.coldrifting.sirl.components.swipe.SwipeList
+import com.coldrifting.sirl.components.dialogs.TextDialog
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.routes.RouteRecipeDetails
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
@@ -71,8 +71,8 @@ fun RecipeList(
     }
 
     Scaffold(
-        topBar = { TopBar(navHostController, "Recipes") },
-        bottomBar = { NavBar(navHostController, routeRecipes) },
+        topBar = { AppTopBar(navHostController, "Recipes") },
+        bottomBar = { AppNavBar(navHostController, routeRecipes) },
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 showNewAlertDialog = true

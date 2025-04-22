@@ -39,20 +39,20 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.components.AlertDialog
-import com.coldrifting.sirl.components.NavBar
+import com.coldrifting.sirl.components.dialogs.AlertDialog
+import com.coldrifting.sirl.components.AppNavBar
 import com.coldrifting.sirl.components.Section
-import com.coldrifting.sirl.components.SwipeList
-import com.coldrifting.sirl.components.TextDialog
+import com.coldrifting.sirl.components.swipe.SwipeList
+import com.coldrifting.sirl.components.dialogs.TextDialog
 import com.coldrifting.sirl.components.TextFieldWithDebounce
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.components.swipeDeleteAction
-import com.coldrifting.sirl.components.swipeEditAction
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.components.swipe.swipeDeleteAction
+import com.coldrifting.sirl.components.swipe.swipeEditAction
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.entities.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
@@ -141,8 +141,8 @@ fun IngredientDetails(
     }
 
     Scaffold(
-        topBar = { TopBar(navHostController, "Ingredient Details") },
-        bottomBar = { NavBar(navHostController, routeIngredients) },
+        topBar = { AppTopBar(navHostController, "Ingredient Details") },
+        bottomBar = { AppNavBar(navHostController, routeIngredients) },
         floatingActionButton = {
             FloatingActionButton(onClick = { showNewAlertDialog = true }) {
                 Icon(Icons.Filled.Add, "Add")

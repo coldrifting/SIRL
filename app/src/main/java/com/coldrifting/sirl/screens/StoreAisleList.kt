@@ -17,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.components.NavBar
-import com.coldrifting.sirl.components.SwipeReorderableList
-import com.coldrifting.sirl.components.TextDialog
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.components.swipeDeleteAction
-import com.coldrifting.sirl.components.swipeEditAction
+import com.coldrifting.sirl.components.AppNavBar
+import com.coldrifting.sirl.components.swipe.SwipeReorderableList
+import com.coldrifting.sirl.components.dialogs.TextDialog
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.components.swipe.swipeDeleteAction
+import com.coldrifting.sirl.components.swipe.swipeEditAction
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeStores
@@ -67,8 +67,8 @@ fun StoreAisleList(
     }
 
     Scaffold(
-        topBar = { TopBar(navHostController, "${store.storeName} - Aisles") },
-        bottomBar = { NavBar(navHostController, routeStores) },
+        topBar = { AppTopBar(navHostController, "${store.storeName} - Aisles") },
+        bottomBar = { AppNavBar(navHostController, routeStores) },
         floatingActionButton = {
             FloatingActionButton(onClick = {showNewAlertDialog = true}) {
                 Icon(Icons.Filled.Add, "Add")

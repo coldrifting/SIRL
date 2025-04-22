@@ -5,10 +5,10 @@ import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.coldrifting.sirl.data.access.base.BaseDAO
-import com.coldrifting.sirl.data.entities.RawCartEntry
+import com.coldrifting.sirl.data.helper.RawCartEntry
 import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.RecipeEntry
-import com.coldrifting.sirl.data.entities.RecipeEntryResult
+import com.coldrifting.sirl.data.helper.RawRecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeSection
 import com.coldrifting.sirl.data.enums.UnitType
 import kotlinx.coroutines.flow.Flow
@@ -50,7 +50,7 @@ interface RecipeDAO: BaseDAO<Recipe> {
             "LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId " +
             "WHERE Recipes.recipeId = :recipeId " +
             "ORDER BY RecipeSections.recipeSectionId ASC, RecipeEntries.recipeEntryId")
-    fun getRecipes(recipeId: Int): Flow<List<RecipeEntryResult>>
+    fun getRecipes(recipeId: Int): Flow<List<RawRecipeEntry>>
 
 
     @Upsert

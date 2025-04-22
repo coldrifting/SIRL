@@ -4,15 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.coldrifting.sirl.components.checklist.CheckHeader
-import com.coldrifting.sirl.components.checklist.CheckItem
+import com.coldrifting.sirl.data.helper.ChecklistHeader
+import com.coldrifting.sirl.data.helper.ChecklistItem
 import com.coldrifting.sirl.data.AppApplication
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemPrep
-import com.coldrifting.sirl.data.entities.RecipeX
+import com.coldrifting.sirl.data.helper.RecipeTree
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.entities.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
@@ -34,7 +34,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
     val allRecipes = repository.allRecipes
 
-    private val _cartList = MutableStateFlow<List<CheckHeader>?>(null)
+    private val _cartList = MutableStateFlow<List<ChecklistHeader>?>(null)
     val cartList = _cartList.asStateFlow()
 
     val itemsSortingModeState: StateFlow<AppRepository.ItemsSortingMode> = repository.itemsSortingModeState
@@ -173,7 +173,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.setRecipeSteps(recipeId, recipeSteps)
     }
 
-    fun getRecipes(recipeId: Int): StateFlow<RecipeX> {
+    fun getRecipes(recipeId: Int): StateFlow<RecipeTree> {
         return repository.getAllRecipesWithData(recipeId)
     }
 
@@ -214,12 +214,12 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         repository.scope.launch {
             val rawList = repository.getShoppingList()
             val updatedList = rawList.map { entry ->
-                CheckHeader(
+                ChecklistHeader(
                     id = entry.aisleId,
                     name = entry.aisleName,
                     expanded = true,
                     items = entry.entries.map { items ->
-                        CheckItem(
+                        ChecklistItem(
                             id = items.itemId,
                             name = items.itemName,
                             details = items.amount

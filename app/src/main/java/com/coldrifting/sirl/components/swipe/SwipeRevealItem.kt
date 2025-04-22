@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.components
+package com.coldrifting.sirl.components.swipe
 
 import android.view.View
 import androidx.compose.animation.animateColorAsState

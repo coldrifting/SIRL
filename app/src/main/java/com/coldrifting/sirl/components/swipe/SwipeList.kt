@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.components
+package com.coldrifting.sirl.components.swipe
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

@@ -4,7 +4,7 @@ import androidx.room.Query
 import com.coldrifting.sirl.data.access.base.BaseDAO
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
-import com.coldrifting.sirl.data.entities.joined.ItemAisle
+import com.coldrifting.sirl.data.entities.ItemAisle
 import kotlinx.coroutines.flow.Flow
 
 @Dao

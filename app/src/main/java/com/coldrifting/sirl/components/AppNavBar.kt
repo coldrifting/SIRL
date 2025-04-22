@@ -15,7 +15,7 @@ import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.topLevelRoutes
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
-fun NavBar(navController: NavHostController, selectedRoute: TopLevelRoute<out Any>) {
+fun AppNavBar(navController: NavHostController, selectedRoute: TopLevelRoute<out Any>) {
     NavigationBar {
         topLevelRoutes.forEach { topLevelRoute ->
             val routeName: String = topLevelRoute.route.javaClass.simpleName.replace("Route", "")
@@ -37,8 +37,8 @@ fun NavBar(navController: NavHostController, selectedRoute: TopLevelRoute<out An
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun NavBarPreview() {
+fun AppNavBarPreview() {
     SIRLTheme {
-        NavBar(rememberNavController(), routeIngredients)
+        AppNavBar(rememberNavController(), routeIngredients)
     }
 }

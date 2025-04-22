@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.components
+package com.coldrifting.sirl.components.swipe
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

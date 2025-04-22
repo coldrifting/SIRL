@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.data.entities.helper
+package com.coldrifting.sirl.data.helper
 
 import com.coldrifting.sirl.data.entities.Item
 

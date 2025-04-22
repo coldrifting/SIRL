@@ -9,22 +9,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.coldrifting.sirl.components.NavBar
+import com.coldrifting.sirl.components.AppNavBar
 import com.coldrifting.sirl.components.TextFieldWithDebounce
-import com.coldrifting.sirl.components.TopBar
-import com.coldrifting.sirl.data.entities.RecipeX
+import com.coldrifting.sirl.components.AppTopBar
+import com.coldrifting.sirl.data.helper.RecipeTree
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 
 @Composable
 fun RecipeEditSteps(
     navHostController: NavHostController,
-    recipe: RecipeX,
+    recipe: RecipeTree,
     setRecipeName: (Int, String) -> Unit,
     setRecipeSteps: (Int, String) -> Unit
 ) {
     Scaffold(
-        topBar = { TopBar(navHostController, "Edit Recipe Name & Steps") },
-        bottomBar = { NavBar(navHostController, routeRecipes) }
+        topBar = { AppTopBar(navHostController, "Edit Recipe Name & Steps") },
+        bottomBar = { AppNavBar(navHostController, routeRecipes) }
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             TextFieldWithDebounce(
