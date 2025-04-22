@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.repo
 
-import android.content.Context
 import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.StoreDAO
 import com.coldrifting.sirl.data.entities.Aisle
@@ -14,10 +13,8 @@ class StoreRepository(
     val scope: CoroutineScope,
     val storeDao: StoreDAO,
     val aisleDao: AisleDAO,
-    val context: Context,
     val selectedStoreId: StateFlow<Int>
 ) {
-
     val all = storeDao.all().toStateFlow(scope)
 
     private val allAisles = aisleDao.all().toStateFlow(scope)

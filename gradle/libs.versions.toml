@@ -1,11 +1,12 @@
 [versions]
 activityCompose = "1.10.1"
 agp = "8.9.1"
+androidDriver = "2.0.2"
 coilCompose = "2.2.2"
 composeBom = "2025.04.00"
 coreKtx = "1.16.0"
 coreSplashscreen = "1.0.1"
-datastore = "1.1.4"
+coroutinesExtensions = "2.0.2"
 espressoCore = "3.6.1"
 foundation = "1.8.0-rc03"
 junit = "4.13.2"
@@ -16,18 +17,18 @@ ksp = "2.1.0-1.0.29"
 lifecycleRuntimeKtx = "2.8.7"
 material = "1.7.8"
 navigationCompose = "2.8.9"
-protobuf-javalite = "3.23.3"
-protobuf-plugin = "0.9.3"
+primitiveAdapters = "2.0.2"
 reorderable = "2.4.3"
 room = "2.7.0"
 serialization = "2.1.10"
+sqldelight = "2.0.2"
 
 [libraries]
+android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "androidDriver" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
-androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -47,8 +48,9 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
-protobuf-javalite = {module = "com.google.protobuf:protobuf-javalite", version.ref = "protobuf-javalite"}
 reorderable = { module = "sh.calvin.reorderable:reorderable", version.ref = "reorderable" }
+sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "coroutinesExtensions" }
+sqldelight-primitive-adapters = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "primitiveAdapters" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -56,5 +58,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
 kotlin-serialzation = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
-protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin"}
+sqldelight = { id = "app.cash.sqldelight" , version.ref = "sqldelight" }
 

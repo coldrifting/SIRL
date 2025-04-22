@@ -4,12 +4,10 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.serialzation)
-    alias(libs.plugins.protobuf)
+    alias(libs.plugins.sqldelight)
 }
 
 dependencies {
-    implementation(libs.reorderable)
-
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.material)
@@ -31,39 +29,31 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //Room
+    // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
-    // ProtoBuf (For DataStore)
-    implementation(libs.protobuf.javalite)
-
-    // DataStore
-    implementation(libs.androidx.datastore)
+    // SQLDelight
+    implementation(libs.android.driver)
+    implementation(libs.sqldelight.coroutines.extensions)
+    implementation(libs.sqldelight.primitive.adapters)
 
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
 
     // External Image Loading
     implementation(libs.coil.compose)
+
+    // Draggable Reorderable Lists
+    implementation(libs.reorderable)
 }
 
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.23.2"
-    }
-
-    // Generates the java Protobuf-lite code for the Protobufs in this project. See
-    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
-    // for more information.
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                create("java") {
-                    option("lite")
-                }
-            }
+sqldelight {
+    databases {
+        create("Database") {
+            srcDirs.setFrom("src/main/assets/db")
+            packageName.set("com.coldrifting.sirl")
         }
     }
 }

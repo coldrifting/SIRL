@@ -1,16 +1,22 @@
 package com.coldrifting.sirl.repo
 
 import android.content.Context
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToOne
+import com.coldrifting.sirl.Database
 import com.coldrifting.sirl.data.access.AisleDAO
 import com.coldrifting.sirl.data.access.ItemAisleDAO
 import com.coldrifting.sirl.data.access.ItemDAO
 import com.coldrifting.sirl.data.access.ItemPrepDAO
 import com.coldrifting.sirl.data.access.RecipeDAO
 import com.coldrifting.sirl.data.access.StoreDAO
+import com.coldrifting.sirl.db.StoresRepo
 import com.coldrifting.sirl.util.toStateFlow
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.map
 
 class AppRepository(
+    database: Database,
     internal val scope: CoroutineScope,
     storeDao: StoreDAO,
     aisleDao: AisleDAO,
@@ -20,11 +26,21 @@ class AppRepository(
     recipeDao: RecipeDAO,
     context: Context
 ) {
-    val selectedStoreId = storeDao.selected().toStateFlow(scope, 0)
+    val selectedStoreId = database.storesQueries.selected()
+        .asFlow()
+        .mapToOne(scope.coroutineContext)
+        .map{s -> s.toInt()}
+        .toStateFlow(scope, 0)
 
-    val store = StoreRepository(
+    val store = StoresRepo(
         scope = scope,
-        context = context,
+        storesQueries = database.storesQueries,
+        aislesQueries = database.aislesQueries,
+        selectedStoreId = selectedStoreId
+    )
+
+    val storeOld = StoreRepository(
+        scope = scope,
         storeDao = storeDao,
         aisleDao = aisleDao,
         selectedStoreId = selectedStoreId
@@ -44,7 +60,6 @@ class AppRepository(
     )
 
     val cart = CartRepository(
-        scope = scope,
         recipeDao = recipeDao,
         selectedStoreId = selectedStoreId
     )

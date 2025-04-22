@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -17,6 +16,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
+import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.routes.top.RouteCart
 import com.coldrifting.sirl.routes.RouteIngredientDetails
 import com.coldrifting.sirl.routes.RouteIngredientList
@@ -76,7 +77,7 @@ class MainActivity : ComponentActivity() {
                         selectStore = viewModel.stores::select,
                         getStoreName = viewModel.stores::getName,
                         selectedStore = selectedStore,
-                        storeList = storeList
+                        storeList = storeList.map{s -> Store(s.storeId, s.storeName, s.selected)}
                     )
                 }
                 composable<RouteStoreAisleList> { backStackEntry ->
@@ -91,13 +92,13 @@ class MainActivity : ComponentActivity() {
 
                     StoreAisleList(
                         navHostController = navController,
-                        store = store,
+                        store = Store(store.storeId, store.storeName, store.selected),
                         addAisle = viewModel.stores::addAisle,
                         renameAisle = viewModel.stores::renameAisle,
                         deleteAisle = viewModel.stores::deleteAisle,
                         getAisleName = viewModel.stores::getAisleName,
                         syncAisles = viewModel.stores::syncAisles,
-                        aisles = aisles,
+                        aisles = aisles.map{ Aisle(it.aisleId, it.storeId, it.aisleName, it.sortingPrefix)},
                         scrollTo = scrollTo
                     )
                 }
@@ -131,9 +132,9 @@ class MainActivity : ComponentActivity() {
                         navHostController = navController,
                         item = item,
                         itemAisle = itemAisle,
-                        aisles = aisles,
+                        aisles = aisles.map{ Aisle(it.aisleId, it.storeId, it.aisleName, it.sortingPrefix)},
                         prep = prep,
-                        currentStore = store,
+                        currentStore = Store(store.storeId, store.storeName, store.selected),
                         setStore = viewModel.stores::select,
                         updatePrep = viewModel.items::renamePrep,
                         addPrep = viewModel.items::addPrep,
@@ -143,7 +144,7 @@ class MainActivity : ComponentActivity() {
                         setItemAisle = viewModel.items::setAisle,
                         setItemTemp = viewModel.items::setTemp,
                         setItemDefaultUnits = viewModel.items::setDefaultUnits,
-                        stores = stores)
+                        stores = stores.map{s -> Store(s.storeId, s.storeName, s.selected)})
                 }
             }
             navigation<RouteRecipes>(startDestination = RouteRecipeList) {

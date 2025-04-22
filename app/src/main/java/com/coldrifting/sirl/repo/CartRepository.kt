@@ -3,11 +3,9 @@ package com.coldrifting.sirl.repo
 import com.coldrifting.sirl.data.access.RecipeDAO
 import com.coldrifting.sirl.data.helper.CartAisleEntry
 import com.coldrifting.sirl.data.helper.CartAisleEntry.Companion.toHierarchy
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 
 class CartRepository(
-    val scope: CoroutineScope,
     val recipeDao: RecipeDAO,
     val selectedStoreId: StateFlow<Int?>
 ) {

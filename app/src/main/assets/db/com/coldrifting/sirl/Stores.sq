@@ -1,0 +1,31 @@
+import kotlin.Boolean;
+import kotlin.Int;
+
+CREATE TABLE Stores (
+    storeId INTEGER AS Int PRIMARY KEY AUTOINCREMENT,
+    storeName TEXT NOT NULL,
+    selected INTEGER AS Boolean NOT NULL
+);
+
+INSERT INTO Stores (storeName, selected)
+VALUES ("Macey's (1700 S)", 1),
+ ("WinCo (2100 S)", 0);
+
+getAll:
+SELECT * FROM Stores ORDER BY storeName;
+
+add:
+INSERT INTO Stores (storeName, selected)
+VALUES (?, 0);
+
+rename:
+UPDATE Stores SET storeName = ? WHERE storeId = ?;
+
+delete:
+DELETE FROM Stores WHERE storeId = ?;
+
+selected:
+SELECT COALESCE( (SELECT Stores.storeId FROM Stores WHERE Stores.selected = 1 LIMIT 1), 0);
+
+select:
+UPDATE Stores SET selected = (Stores.storeId = :storeId);
