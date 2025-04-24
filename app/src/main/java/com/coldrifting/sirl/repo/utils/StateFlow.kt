@@ -21,11 +21,14 @@ fun <T> Flow<T>.toNullableStateFlow(scope: CoroutineScope, initialValue: T?): St
 fun <T> Flow<List<T>>.toStateFlow(scope: CoroutineScope): StateFlow<List<T>> =
     this.toStateFlow(scope, listOf())
 
+/*
 fun <T : Any> Query<T>.toStateFlow(scope: CoroutineScope, initialValue: T): StateFlow<T> =
     this.asFlow().mapToOne(scope.coroutineContext).toStateFlow(scope, initialValue)
 
 fun <T : Any> Query<T>.toNullableStateFlow(scope: CoroutineScope, initialValue: T?): StateFlow<T?> =
     this.asFlow().mapToOneOrNull(scope.coroutineContext).toNullableStateFlow(scope, initialValue)
+
+ */
 
 fun <T : Any, R> Query<T>.toStateFlow(
     scope: CoroutineScope,
