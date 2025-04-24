@@ -33,7 +33,7 @@ import com.coldrifting.sirl.ui.theme.SIRLTheme
 @Composable
 fun StoreList(
     navHostController: NavHostController,
-    addStore: (String) -> Unit,
+    addStore: (String, Boolean) -> Unit,
     renameStore: (Int, String) -> Unit,
     deleteStore: (Int) -> Unit,
     selectStore: (Int) -> Unit,
@@ -62,7 +62,7 @@ fun StoreList(
             title = "Add Store",
             placeholder = "Store Name",
             action = "Add",
-            onSuccess = { addStore(it) },
+            onSuccess = { addStore(it, storeList.isEmpty()) },
             onDismiss = { showNewAlertDialog = false }
         )
     }
@@ -108,7 +108,7 @@ fun StoreListPreview() {
     SIRLTheme {
         StoreList(
             navHostController = rememberNavController(),
-            addStore = { },
+            addStore = { _, _ -> },
             renameStore = { _, _ -> },
             deleteStore = { },
             selectStore = { },

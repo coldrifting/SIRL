@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
             navController = navController,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
-            startDestination = RouteIngredients
+            startDestination = RouteRecipes
         ) {
             navigation<RouteIngredients>(startDestination = RouteIngredientList) {
                 composable<RouteIngredientList> {
@@ -86,7 +86,9 @@ class MainActivity : ComponentActivity() {
                     val itemAisle by viewModel.items.getAisle(item.itemId).collectAsState()
                     val currentStore by viewModel.stores.selected.collectAsState()
                     val stores by viewModel.stores.all.collectAsState()
-                    val store = stores.first {s -> s.storeId == currentStore}
+                    val store = stores.firstOrNull {s -> s.storeId == currentStore}?.let {
+                        Store(it.storeId, it.storeName, it.selected)
+                    }
                     val aisles by viewModel.stores.getAisles(currentStore).collectAsState()
                     val prep by viewModel.items.getPreps(item.itemId).collectAsState()
                     IngredientDetails(
@@ -95,7 +97,7 @@ class MainActivity : ComponentActivity() {
                         itemAisle = itemAisle,
                         aisles = aisles.map{ Aisle(it.aisleId, it.storeId, it.aisleName, it.sortingPrefix)},
                         prep = prep,
-                        currentStore = Store(store.storeId, store.storeName, store.selected),
+                        currentStore = store,
                         setStore = viewModel.stores::select,
                         updatePrep = viewModel.items::renamePrep,
                         addPrep = viewModel.items::addPrep,

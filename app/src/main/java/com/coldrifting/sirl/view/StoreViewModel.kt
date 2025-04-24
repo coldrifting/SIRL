@@ -16,8 +16,8 @@ class StoreViewModel(private val repository: AppRepo) {
         repository.store.select(storeId)
 
     // Stores
-    fun add(storeName: String) =
-        repository.store.add(storeName)
+    fun add(storeName: String, select: Boolean) =
+        repository.store.add(storeName, select)
 
     fun delete(storeId: Int) =
         repository.store.delete(storeId)

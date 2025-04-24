@@ -18,7 +18,7 @@ VALUES (?, ?, ?);
 
 addStore:
 INSERT INTO Stores (storeName, selected)
-VALUES (?, 0);
+VALUES (?, ?);
 
 renameStore:
 UPDATE Stores SET storeName = ? WHERE storeId = ?;

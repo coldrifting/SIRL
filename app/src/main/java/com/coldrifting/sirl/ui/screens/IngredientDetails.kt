@@ -67,7 +67,7 @@ fun IngredientDetails(
     itemAisle: ItemAisle?,
     aisles: List<Aisle>,
     stores: List<Store>,
-    currentStore: Store,
+    currentStore: Store?,
     prep: List<ItemPrep>,
     setStore: (Int) -> Unit,
     setItemName: (Int, String) -> Unit,
@@ -174,7 +174,7 @@ fun IngredientDetails(
                         list = stores,
                         label = "Current Store",
                         toString = { it.storeName },
-                        value = currentStore,
+                        value = currentStore ?: Store(-1, if (stores.isEmpty()) "(No Stores Available)" else "(Select a Store)"),
                         select = { setStore(it.storeId) }
                     )
 
