@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import com.coldrifting.sirl.components.AppNavBar
 import com.coldrifting.sirl.components.TextFieldWithDebounce
 import com.coldrifting.sirl.components.AppTopBar
-import com.coldrifting.sirl.data.helper.RecipeTree
+import com.coldrifting.sirl.data.objects.RecipeTree
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 
 @Composable

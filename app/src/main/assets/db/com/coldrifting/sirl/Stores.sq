@@ -2,17 +2,17 @@ import kotlin.Boolean;
 import kotlin.Int;
 
 CREATE TABLE Stores (
-    storeId INTEGER AS Int PRIMARY KEY AUTOINCREMENT,
+    storeId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
     storeName TEXT NOT NULL,
     selected INTEGER AS Boolean NOT NULL
 );
 
-INSERT INTO Stores (storeName, selected)
-VALUES ("Macey's (1700 S)", 1),
- ("WinCo (2100 S)", 0);
-
 getAll:
 SELECT * FROM Stores ORDER BY storeName;
+
+insert:
+INSERT INTO Stores (storeId, storeName, selected)
+VALUES (?, ?, ?);
 
 add:
 INSERT INTO Stores (storeName, selected)

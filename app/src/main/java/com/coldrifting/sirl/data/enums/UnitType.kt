@@ -1,9 +1,5 @@
 package com.coldrifting.sirl.data.enums
 
-import java.math.BigDecimal
-import java.math.RoundingMode
-import kotlin.math.round
-
 enum class UnitType {
     EACHES,
     Teaspoons,
@@ -16,43 +12,40 @@ enum class UnitType {
     Pounds
 }
 
-fun UnitType.getPrepAbbreviation(amount: Float): String {
-    // Halves -> 0.5
-    // Thirds -> 0.33, 0.66
-    // Fourths -> 0.25, 0.75,
-    // Fifths -> 0.2, 0.4, 0.6, 0.8
-    // Sixths -> 0.166, 0.833
-    // Eights -> 0.125, 0.325, 0.625, 0.875
-    val amountInt: String = if (amount.toInt() >= 1) amount.toInt().toString() + " " else ""
-    val amountFraction: Float = amount - amount.toInt()
-    val amountAbbrev = when (round(amountFraction * 1000).toInt()) {
-        500 -> "$amountInt½"
+fun UnitType.getPrepAbbreviation(amount: Int): String {
+    var nonFraction = amount / 1000
+    val leading = if (nonFraction >= 1) "$nonFraction " else ""
 
-        330 -> "$amountInt⅓"
-        660 -> "$amountInt⅔"
+    val amountFraction = amount % 1000
+    val amountAbbrev = when (amountFraction) {
+        500 -> "$leading½"
 
-        250 -> "$amountInt¼"
-        750 -> "$amountInt¾"
+        330 -> "$leading⅓"
+        333 -> "$leading⅓"
+        660 -> "$leading⅔"
+        666 -> "$leading⅔"
 
-        200 -> "$amountInt⅕"
-        400 -> "$amountInt⅖"
-        600 -> "$amountInt⅗"
-        800 -> "$amountInt⅘"
+        250 -> "$leading¼"
+        750 -> "$leading¾"
 
-        166 -> "$amountInt⅙"
-        833 -> "$amountInt⅚"
+        200 -> "$leading⅕"
+        400 -> "$leading⅖"
+        600 -> "$leading⅗"
+        800 -> "$leading⅘"
 
-        125 -> "$amountInt⅛"
-        325 -> "$amountInt⅜"
-        625 -> "$amountInt⅝"
-        875 -> "$amountInt⅞"
+        166 -> "$leading⅙"
+        833 -> "$leading⅚"
 
-        // Trim leading 0
-        else -> BigDecimal(amount.toString()).setScale(3, RoundingMode.HALF_UP).toString()
-            .trimEnd { it == '0' }.trimEnd { it == '.' }
+        125 -> "$leading⅛"
+        325 -> "$leading⅜"
+        625 -> "$leading⅝"
+        875 -> "$leading⅞"
+
+        // Trim leading and trailing 0 and dot
+        else -> "$leading.$amountFraction".trimEnd { it == '0' }.trimEnd { it == '.' }.replace(Regex("^\\."), "0.")
     }
 
-    val plural = amount > 1
+    val plural = amount > 1000
 
     val unitAbbrev: String = when (this) {
         UnitType.EACHES -> "ea."

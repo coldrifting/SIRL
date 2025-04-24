@@ -50,9 +50,9 @@ import com.coldrifting.sirl.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.components.swipe.swipeEditAction
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.ItemAisle
 import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.data.entities.ItemAisle
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
@@ -77,7 +77,7 @@ fun IngredientDetails(
     addPrep: (Int, String) -> Unit,
     updatePrep: (Int, String) -> Unit,
     deletePrep: (Int) -> Unit,
-    checkDeletePrep: suspend (Int) -> List<String>,
+    checkDeletePrep: (Int) -> List<String>,
 ) {
     var coroutineScope = rememberCoroutineScope()
 
@@ -184,17 +184,14 @@ fun IngredientDetails(
                             .padding(vertical = 12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        val aisle =
-                            aisles.firstOrNull { a -> a.aisleId == (itemAisle?.aisleId ?: "_") }
-                                ?: Aisle(storeId = 0, aisleName = "(Select an Aisle)")
+                        val aisle: Aisle? = aisles.firstOrNull { a -> a.aisleId == (itemAisle?.aisleId ?: -1) }
 
                         DropDown(
-                            modifier = Modifier.padding(end = 12.dp),
                             list = aisles,
                             label = "Aisle",
-                            width = 260.dp,
+                            width = if (aisle != null) 260.dp else null,
                             toString = { it.aisleName },
-                            value = aisle,
+                            value = aisle ?: Aisle(-1, -1, "(Select an Aisle)") ,
                             select = {
                                 setItemAisle(
                                     item.itemId,
@@ -204,19 +201,22 @@ fun IngredientDetails(
                             }
                         )
 
-                        DropDown(
-                            list = BayType.entries,
-                            label = "Bay",
-                            width = 100.dp,
-                            value = itemAisle?.bay ?: BayType.Middle,
-                            select = {
-                                setItemAisle(
-                                    item.itemId,
-                                    itemAisle?.aisleId ?: aisles[0].aisleId,
-                                    it
-                                )
-                            }
-                        )
+                        if (aisle != null) {
+                            Spacer(Modifier.width(12.dp))
+                            DropDown(
+                                list = BayType.entries,
+                                label = "Bay",
+                                width = 100.dp,
+                                value = itemAisle?.bay ?: BayType.Middle,
+                                select = {
+                                    setItemAisle(
+                                        item.itemId,
+                                        itemAisle?.aisleId ?: aisles[0].aisleId,
+                                        it
+                                    )
+                                }
+                            )
+                        }
                     }
                 }
 
@@ -258,6 +258,7 @@ fun IngredientDetails(
                             listItems = prep.ifEmpty {
                                 listOf(
                                     ItemPrep(
+                                        itemPrepId = -1,
                                         itemId = item.itemId,
                                         prepName = "Default"
                                     )
@@ -321,7 +322,10 @@ fun IngredientDetailsPreview() {
             stores = listOf(Store(1, "Store 1")),
             currentStore = Store(1, "Store 1"),
             setStore = { _ -> },
-            prep = listOf(ItemPrep(itemId = 0, prepName = "Prep 1")),
+            prep = listOf(ItemPrep(
+                itemId = 0, prepName = "Prep 1",
+                itemPrepId = -1
+            )),
             addPrep = { _, _ -> },
             updatePrep = { _, _ -> },
             deletePrep = { _ -> },

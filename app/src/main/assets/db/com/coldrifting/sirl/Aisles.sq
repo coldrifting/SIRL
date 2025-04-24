@@ -1,11 +1,11 @@
 import kotlin.Int;
 
 CREATE TABLE Aisles (
-    aisleId INTEGER AS Int PRIMARY KEY AUTOINCREMENT,
+    aisleId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
     storeId INTEGER AS Int NOT NULL,
     aisleName TEXT NOT NULL,
     sortingPrefix INTEGER AS Int NOT NULL,
-    FOREIGN KEY (storeId) REFERENCES Stores(storeId)
+    FOREIGN KEY (storeId) REFERENCES Stores(storeId) ON DELETE CASCADE
 );
 
 getAll:
@@ -13,6 +13,10 @@ SELECT * FROM Aisles ORDER BY sortingPrefix;
 
 getAllFromStore:
 SELECT * FROM Aisles WHERE Aisles.storeId = ? ORDER BY sortingPrefix;
+
+insert:
+INSERT INTO Aisles (aisleId, storeId, aisleName, sortingPrefix)
+VALUES (?, ?, ?, ?);
 
 add:
 INSERT INTO Aisles (storeId, aisleName, sortingPrefix)

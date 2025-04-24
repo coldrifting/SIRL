@@ -1,11 +1,11 @@
 package com.coldrifting.sirl.view
 
-import com.coldrifting.sirl.repo.AppRepository
 import com.coldrifting.sirl.data.entities.Aisle
+import com.coldrifting.sirl.repo.AppRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
-class StoreViewModel(private val repository: AppRepository) {
+class StoreViewModel(private val repository: AppRepo) {
 
     val all = repository.store.all
 

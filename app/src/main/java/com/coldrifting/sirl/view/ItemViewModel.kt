@@ -1,19 +1,19 @@
 package com.coldrifting.sirl.view
 
-import com.coldrifting.sirl.repo.AppRepository
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemAisle
 import com.coldrifting.sirl.data.entities.ItemPrep
+import com.coldrifting.sirl.repo.AppRepo
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
-import com.coldrifting.sirl.repo.ItemRepository
+import com.coldrifting.sirl.repo.ItemRepo
 import kotlinx.coroutines.flow.StateFlow
 
-class ItemViewModel(private val repository: AppRepository) {
+class ItemViewModel(private val repository: AppRepo) {
 
     // UI Sort and Filter
-    val sortingModeState: StateFlow<ItemRepository.ItemsSortingMode> =
+    val sortingModeState: StateFlow<ItemRepo.ItemsSortingMode> =
         repository.items.itemsSortingModeState
 
     val filterTextState: StateFlow<String> =
@@ -70,9 +70,9 @@ class ItemViewModel(private val repository: AppRepository) {
         repository.items.deleteItemPrep(prepId)
 
     // Delete Precautions
-    suspend fun getUsedItems(itemId: Int): List<String> =
+    fun getUsedItems(itemId: Int): List<String> =
         repository.items.getUsedItems(itemId)
 
-    suspend fun getUsedItemPreps(itemPrepId: Int): List<String> =
+    fun getUsedItemPreps(itemPrepId: Int): List<String> =
         repository.items.getUsedItemPreps(itemPrepId)
 }

@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.coldrifting.sirl.data.AppApplication
-import com.coldrifting.sirl.repo.AppRepository
+import com.coldrifting.sirl.AppApplication
+import com.coldrifting.sirl.repo.AppRepo
 
-class AppViewModel(repository: AppRepository) : ViewModel() {
+class AppViewModel(repository: AppRepo) : ViewModel() {
     val items: ItemViewModel = ItemViewModel(repository)
     val recipes: RecipeViewModel = RecipeViewModel(repository)
     val stores: StoreViewModel = StoreViewModel(repository)

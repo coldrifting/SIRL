@@ -1,0 +1,27 @@
+import com.coldrifting.sirl.data.enums.BayType;
+import kotlin.Int;
+
+CREATE TABLE ItemAisles (
+    itemId INTEGER AS Int NOT NULL,
+    storeId INTEGER AS Int NOT NULL,
+    aisleId INTEGER AS Int NOT NULL,
+    bay TEXT AS BayType NOT NULL,
+    FOREIGN KEY (itemId) REFERENCES Items(itemId) ON DELETE CASCADE,
+    FOREIGN KEY (storeId) REFERENCES Stores(storeId) ON DELETE CASCADE,
+    FOREIGN KEY (aisleId) REFERENCES Aisles(aisleId) ON DELETE CASCADE,
+    PRIMARY KEY (itemId, storeId)
+);
+
+getAll:
+SELECT * FROM ItemAisles;
+
+get:
+SELECT * FROM ItemAisles WHERE itemId = :itemId AND storeId = COALESCE(:storeId, -1);
+
+insert:
+INSERT INTO ItemAisles (itemId, storeId, aisleId, bay)
+VALUES (?, ?, ?, ?);
+
+update:
+REPLACE INTO ItemAisles (itemId, storeId, aisleId, bay)
+VALUES (?, ?, ?, ?);

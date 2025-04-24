@@ -10,7 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.coldrifting.sirl.data.helper.ChecklistHeader
+import com.coldrifting.sirl.data.objects.ChecklistHeader
 
 @Composable
 fun CartChecklist(

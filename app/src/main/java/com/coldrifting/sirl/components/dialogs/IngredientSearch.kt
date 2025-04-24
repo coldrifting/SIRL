@@ -23,7 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.coldrifting.sirl.data.helper.RecipeTreeItem
+import com.coldrifting.sirl.data.objects.RecipeTreeItem
 
 
 @OptIn(ExperimentalMaterial3Api::class)

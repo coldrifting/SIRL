@@ -14,7 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,15 +26,15 @@ import com.coldrifting.sirl.data.enums.UnitType
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IngredientAmountEdit(
-    placeholderAmount: Float,
+    placeholderAmount: Int,
     placeholderUnitType: UnitType,
-    onSuccess: (UnitType, Float) -> Unit,
+    onSuccess: (UnitType, Int) -> Unit,
     onDismiss: () -> Unit
 ) {
     var unitType by remember { mutableStateOf(placeholderUnitType) }
 
-    var amount by remember { mutableFloatStateOf(placeholderAmount) }
-    var amountAsText by remember { mutableStateOf(placeholderAmount.toString().trimEnd{it == '0'}.trimEnd{it == '.'})}
+    var amount by remember { mutableIntStateOf(placeholderAmount) }
+    var amountAsText by remember { mutableStateOf((placeholderAmount / 1000.0f).toString().trimEnd{it == '0'}.trimEnd{it == '.'})}
 
     var dropDownExpanded by remember {mutableStateOf(false)}
 
@@ -45,7 +45,7 @@ fun IngredientAmountEdit(
         bottomPadding = 80,
         onDismiss = {
             unitType = UnitType.EACHES
-            amount = 0.0f
+            amount = 0
             amountAsText = ""
             dropDownExpanded = false
 
@@ -93,7 +93,7 @@ fun IngredientAmountEdit(
                     val output = it.replace(Regex("[^0-9.]"), "")
                     if ( output.filter { char -> char == ".".first()}.length <= 1 ) {
                         amountAsText = output
-                        amount = amountAsText.trim().toFloatOrNull() ?: 0.0f
+                        amount = ((amountAsText.toFloatOrNull() ?: 0.0f) * 1000).toInt()
                     }
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Decimal)

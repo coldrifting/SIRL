@@ -6,7 +6,7 @@
    "itemId": 45,
    "itemPrepId": null,
    "unitType": "Ounces",
-   "amount": 12.0
+   "amount": 12000
  },
  {
    "recipeEntryId": 2,
@@ -15,7 +15,7 @@
    "itemId": 195,
    "itemPrepId": null,
    "unitType": "Cups",
-   "amount": 4.0
+   "amount": 4000
  },
  {
    "recipeEntryId": 3,
@@ -24,7 +24,7 @@
    "itemId": 150,
    "itemPrepId": null,
    "unitType": "Tablespoons",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 4,
@@ -33,7 +33,7 @@
    "itemId": 209,
    "itemPrepId": "1",
    "unitType": "EACHES",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 5,
@@ -42,7 +42,7 @@
    "itemId": 148,
    "itemPrepId": null,
    "unitType": "Cups",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 6,
@@ -51,7 +51,7 @@
    "itemId": 178,
    "itemPrepId": null,
    "unitType": "Ounces",
-   "amount": 6.0
+   "amount": 6000
  },
  {
    "recipeEntryId": 7,
@@ -60,7 +60,7 @@
    "itemId": 177,
    "itemPrepId": null,
    "unitType": "Cups",
-   "amount": 0.75
+   "amount": 750
  },
  {
    "recipeEntryId": 8,
@@ -69,7 +69,7 @@
    "itemId": 89,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.25
+   "amount": 250
  },
  {
    "recipeEntryId": 9,
@@ -78,7 +78,7 @@
    "itemId": 67,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.125
+   "amount": 125
  },
  {
    "recipeEntryId": 10,
@@ -87,7 +87,7 @@
    "itemId": 47,
    "itemPrepId": null,
    "unitType": "Pounds",
-   "amount": 0.5
+   "amount": 500
  },
  {
    "recipeEntryId": 11,
@@ -96,7 +96,7 @@
    "itemId": 150,
    "itemPrepId": null,
    "unitType": "Tablespoons",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 12,
@@ -105,7 +105,7 @@
    "itemId": 101,
    "itemPrepId": null,
    "unitType": "Tablespoons",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 13,
@@ -114,7 +114,7 @@
    "itemId": 100,
    "itemPrepId": null,
    "unitType": "Cups",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 14,
@@ -123,7 +123,7 @@
    "itemId": 181,
    "itemPrepId": "2",
    "unitType": "Ounces",
-   "amount": 8.0
+   "amount": 8000
  },
  {
    "recipeEntryId": 15,
@@ -132,7 +132,7 @@
    "itemId": 64,
    "itemPrepId": null,
    "unitType": "Ounces",
-   "amount": 8.0
+   "amount": 8000
  },
  {
    "recipeEntryId": 16,
@@ -141,7 +141,7 @@
    "itemId": 75,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.5
+   "amount": 500
  },
  {
    "recipeEntryId": 17,
@@ -150,7 +150,7 @@
    "itemId": 74,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.125
+   "amount": 125
  },
  {
    "recipeEntryId": 18,
@@ -159,7 +159,7 @@
    "itemId": 89,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.25
+   "amount": 250
  },
  {
    "recipeEntryId": 19,
@@ -168,7 +168,7 @@
    "itemId": 207,
    "itemPrepId": "6",
    "unitType": "EACHES",
-   "amount": 0.5
+   "amount": 500
  },
  {
    "recipeEntryId": 20,
@@ -177,7 +177,7 @@
    "itemId": 211,
    "itemPrepId": "5",
    "unitType": "Cups",
-   "amount": 1.0
+   "amount": 1000
  },
  {
    "recipeEntryId": 21,
@@ -186,7 +186,7 @@
    "itemId": 219,
    "itemPrepId": null,
    "unitType": "EACHES",
-   "amount": 0.25
+   "amount": 250
  },
  {
    "recipeEntryId": 22,
@@ -195,7 +195,7 @@
    "itemId": 24,
    "itemPrepId": null,
    "unitType": "EACHES",
-   "amount": 8.0
+   "amount": 8000
  },
  {
    "recipeEntryId": 23,
@@ -204,7 +204,7 @@
    "itemId": 179,
    "itemPrepId": "3",
    "unitType": "Ounces",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 24,
@@ -213,7 +213,7 @@
    "itemId": 176,
    "itemPrepId": null,
    "unitType": "EACHES",
-   "amount": 4.0
+   "amount": 4000
  },
  {
    "recipeEntryId": 25,
@@ -222,7 +222,7 @@
    "itemId": 189,
    "itemPrepId": null,
    "unitType": "Cups",
-   "amount": 1.0
+   "amount": 1000
  },
  {
    "recipeEntryId": 26,
@@ -231,7 +231,7 @@
    "itemId": 6,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 27,
@@ -240,7 +240,7 @@
    "itemId": 89,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.125
+   "amount": 125
  },
  {
    "recipeEntryId": 28,
@@ -249,7 +249,7 @@
    "itemId": 67,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.125
+   "amount": 125
  },
  {
    "recipeEntryId": 29,
@@ -258,7 +258,7 @@
    "itemId": 217,
    "itemPrepId": "7",
    "unitType": "EACHES",
-   "amount": 4.0
+   "amount": 4000
  },
  {
    "recipeEntryId": 30,
@@ -267,7 +267,7 @@
    "itemId": 233,
    "itemPrepId": null,
    "unitType": "Tablespoons",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 32,
@@ -276,7 +276,7 @@
    "itemId": 219,
    "itemPrepId": "4",
    "unitType": "EACHES",
-   "amount": 0.33
+   "amount": 333
  },
  {
    "recipeEntryId": 34,
@@ -285,7 +285,7 @@
    "itemId": 218,
    "itemPrepId": "8",
    "unitType": "EACHES",
-   "amount": 0.5
+   "amount": 500
  },
  {
    "recipeEntryId": 35,
@@ -294,7 +294,7 @@
    "itemId": 75,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.5
+   "amount": 500
  },
  {
    "recipeEntryId": 36,
@@ -303,7 +303,7 @@
    "itemId": 73,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.5
+   "amount": 500
  },
  {
    "recipeEntryId": 37,
@@ -312,7 +312,7 @@
    "itemId": 86,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.5
+   "amount": 500
  },
  {
    "recipeEntryId": 38,
@@ -321,7 +321,7 @@
    "itemId": 209,
    "itemPrepId": "1",
    "unitType": "EACHES",
-   "amount": 1.0
+   "amount": 1000
  },
  {
    "recipeEntryId": 39,
@@ -330,7 +330,7 @@
    "itemId": 31,
    "itemPrepId": null,
    "unitType": "Ounces",
-   "amount": 8.0
+   "amount": 8000
  },
  {
    "recipeEntryId": 40,
@@ -339,7 +339,7 @@
    "itemId": 57,
    "itemPrepId": "9",
    "unitType": "Cups",
-   "amount": 1.0
+   "amount": 1000
  },
  {
    "recipeEntryId": 41,
@@ -348,7 +348,7 @@
    "itemId": 195,
    "itemPrepId": null,
    "unitType": "Cups",
-   "amount": 3.0
+   "amount": 3000
  },
  {
    "recipeEntryId": 42,
@@ -357,7 +357,7 @@
    "itemId": 62,
    "itemPrepId": null,
    "unitType": "Tablespoons",
-   "amount": 2.0
+   "amount": 2000
  },
  {
    "recipeEntryId": 43,
@@ -366,7 +366,7 @@
    "itemId": 65,
    "itemPrepId": null,
    "unitType": "Cups",
-   "amount": 0.25
+   "amount": 250
  },
  {
    "recipeEntryId": 44,
@@ -375,7 +375,7 @@
    "itemId": 89,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.25
+   "amount": 250
  },
  {
    "recipeEntryId": 45,
@@ -384,7 +384,7 @@
    "itemId": 67,
    "itemPrepId": null,
    "unitType": "Teaspoons",
-   "amount": 0.25
+   "amount": 250
  },
  {
    "recipeEntryId": 46,
@@ -393,6 +393,6 @@
    "itemId": 181,
    "itemPrepId": "2",
    "unitType": "Cups",
-   "amount": 1.0
+   "amount": 1000
  }
 ]

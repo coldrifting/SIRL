@@ -1,0 +1,111 @@
+import kotlin.Boolean;
+import kotlin.Int;
+
+CREATE TABLE Recipes (
+    recipeId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    recipeName TEXT NOT NULL,
+    url TEXT,
+    pinned INTEGER AS Boolean NOT NULL,
+    steps TEXT
+);
+
+getAll:
+SELECT * FROM Recipes ORDER BY pinned DESC, LOWER(recipeName);
+
+insert:
+INSERT INTO Recipes (recipeId, recipeName, url, pinned, steps)
+VALUES (?, ?, ?, ?, ?);
+
+add:
+INSERT INTO Recipes (recipeName, url, pinned, steps)
+VALUES (?, NULL, 0, NULL);
+
+lastInsertRowId:
+SELECT last_insert_rowid();
+
+rename:
+UPDATE Recipes
+SET recipeName = :recipeName
+WHERE recipeId = :recipeId;
+
+setSteps:
+UPDATE Recipes
+SET steps = :steps
+WHERE recipeId = :recipeId;
+
+delete:
+DELETE FROM Recipes
+WHERE recipeId = :recipeId;
+
+togglePinned:
+UPDATE Recipes
+SET pinned = CASE pinned WHEN 1 THEN 0 ELSE 1 END
+WHERE recipeId = :recipeId;
+
+getDetails:
+SELECT
+    RecipeDetails.recipeId,
+    RecipeDetails.recipeName,
+    RecipeDetails.url,
+    RecipeDetails.steps,
+    RecipeDetails.recipeSectionId,
+    RecipeDetails.recipeSectionName,
+    RecipeDetails.sortIndex,
+    RecipeEntries.recipeEntryId,
+    RecipeEntries.unitType,
+    RecipeEntries.amount,
+    Items.itemId,
+    Items.itemName,
+    ItemPreps.itemPrepId,
+    ItemPreps.prepName
+    FROM (SELECT
+        Recipes.recipeId,
+        Recipes.recipeName,
+        Recipes.url,
+        Recipes.steps,
+        RecipeSections.recipeSectionId,
+        RecipeSections.recipeSectionName,
+        RecipeSections.sortIndex
+        FROM Recipes
+    NATURAL JOIN RecipeSections) AS RecipeDetails
+    LEFT JOIN RecipeEntries ON RecipeDetails.recipeSectionId = RecipeEntries.recipeSectionId
+    LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId
+    LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId
+    WHERE RecipeDetails.recipeId = :recipeId
+    ORDER BY RecipeDetails.recipeSectionId ASC, RecipeEntries.recipeEntryId;
+
+
+getShoppingList:
+SELECT
+Aisles.aisleId,
+Aisles.aisleName,
+RecipeEntryItems.itemId,
+RecipeEntryItems.itemName,
+ItemPreps.prepName,
+RecipeEntryItems.unitType,
+SUM(RecipeEntryItems.amount) AS totalAmount
+FROM (SELECT
+        Recipes.recipeId,
+        Recipes.recipeName,
+        Recipes.pinned,
+        RecipeSections.recipeSectionId,
+        RecipeEntries.amount,
+        RecipeEntries.unitType,
+        RecipeEntries.itemPrepId,
+        Items.itemId,
+        Items.itemName
+        FROM Recipes
+NATURAL JOIN RecipeSections
+NATURAL JOIN RecipeEntries
+NATURAL JOIN Items) AS RecipeEntryItems
+LEFT JOIN ItemAisles ON RecipeEntryItems.itemId = ItemAisles.itemId AND ItemAisles.storeId = :storeId
+LEFT JOIN Aisles ON ItemAisles.aisleId = Aisles.aisleId
+LEFT JOIN ItemPreps ON RecipeEntryItems.itemPrepId = ItemPreps.itemPrepId
+WHERE RecipeEntryItems.pinned = 1
+GROUP BY RecipeEntryItems.itemName, ItemPreps.prepName
+ORDER BY Aisles.sortingPrefix,
+        CASE WHEN ItemAisles.bay = 'Start' THEN 1
+            WHEN ItemAisles.bay = 'Middle' THEN 2
+            WHEN ItemAisles.bay = 'End' THEN 3 END ASC,
+        RecipeEntryItems.itemName,
+        ItemPreps.prepName;

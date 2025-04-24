@@ -33,7 +33,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,8 +52,8 @@ import com.coldrifting.sirl.components.dialogs.TextDialog
 import com.coldrifting.sirl.components.TextFieldWithDebounce
 import com.coldrifting.sirl.components.AppTopBar
 import com.coldrifting.sirl.components.swipe.swipeDeleteAction
-import com.coldrifting.sirl.data.helper.RecipeTreeItem
-import com.coldrifting.sirl.data.helper.RecipeTree
+import com.coldrifting.sirl.data.objects.RecipeTreeItem
+import com.coldrifting.sirl.data.objects.RecipeTree
 import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.data.enums.getPrepAbbreviation
 import com.coldrifting.sirl.routes.RouteRecipeEditSteps
@@ -70,12 +69,12 @@ fun RecipeEdit(
     addSection: (Int, String) -> Unit,
     deleteSection: (Int) -> Unit,
     setRecipeSectionName: (Int, String) -> Unit,
-    setRecipeItemAmount: (Int, UnitType, Float) -> Unit,
-    addRecipeEntry: (Int?, Int, Int, Int, Int?, UnitType, Float) -> Unit,
+    setRecipeItemAmount: (Int, UnitType, Int) -> Unit,
+    addRecipeEntry: (Int?, Int, Int, Int, Int?, UnitType, Int) -> Unit,
     deleteRecipeEntry: (Int) -> Unit,
 ) {
     var selectedRecipeItem by remember { mutableIntStateOf(-1) }
-    var selectedRecipeItemAmount by remember { mutableFloatStateOf(0.0f) }
+    var selectedRecipeItemAmount by remember { mutableIntStateOf(0) }
     var selectedRecipeItemUnitType by remember { mutableStateOf(UnitType.EACHES) }
 
     var showAmountEditDialog by remember { mutableStateOf(false) }
@@ -180,7 +179,7 @@ fun RecipeEdit(
                         itemWithPrep.itemId,
                         itemWithPrep.itemPrep?.itemPrepId,
                         itemWithPrep.defaultUnits,
-                        1.0f
+                        1000
                     )
                 },
                 onDismiss = { showAddIngredientDialog = false }

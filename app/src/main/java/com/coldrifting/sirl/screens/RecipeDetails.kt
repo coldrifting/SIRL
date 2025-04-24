@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.coldrifting.sirl.components.AppNavBar
 import com.coldrifting.sirl.components.AppTopBar
-import com.coldrifting.sirl.data.helper.ChecklistHeader
-import com.coldrifting.sirl.data.helper.ChecklistItem
+import com.coldrifting.sirl.data.objects.ChecklistHeader
+import com.coldrifting.sirl.data.objects.ChecklistItem
 import com.coldrifting.sirl.components.checklist.RecipeDetailsChecklist
-import com.coldrifting.sirl.data.helper.RecipeTree
+import com.coldrifting.sirl.data.objects.RecipeTree
 import com.coldrifting.sirl.data.enums.getPrepAbbreviation
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 

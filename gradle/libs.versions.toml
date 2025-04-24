@@ -3,23 +3,21 @@ activityCompose = "1.10.1"
 agp = "8.9.2"
 androidDriver = "2.0.2"
 coilCompose = "2.2.2"
-composeBom = "2025.04.00"
+composeBom = "2025.04.01"
 coreKtx = "1.16.0"
 coreSplashscreen = "1.0.1"
 coroutinesExtensions = "2.0.2"
 espressoCore = "3.6.1"
-foundation = "1.8.0-rc03"
+foundation = "1.8.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.1.0"
 kotlinxSerializationJson = "1.8.0"
-ksp = "2.1.0-1.0.29"
 lifecycleRuntimeKtx = "2.8.7"
-material = "1.7.8"
+material = "1.8.0"
 navigationCompose = "2.8.9"
 primitiveAdapters = "2.0.2"
 reorderable = "2.4.3"
-room = "2.7.0"
 serialization = "2.1.10"
 sqldelight = "2.0.2"
 
@@ -36,9 +34,6 @@ androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecyc
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
@@ -56,7 +51,6 @@ sqldelight-primitive-adapters = { module = "app.cash.sqldelight:primitive-adapte
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
 kotlin-serialzation = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
 sqldelight = { id = "app.cash.sqldelight" , version.ref = "sqldelight" }
 

@@ -25,7 +25,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.components.dialogs.AlertDialog
 import com.coldrifting.sirl.components.checklist.CartChecklist
-import com.coldrifting.sirl.data.helper.ChecklistHeader
+import com.coldrifting.sirl.data.objects.ChecklistHeader
 import com.coldrifting.sirl.components.AppNavBar
 import com.coldrifting.sirl.components.AppTopBar
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeCart

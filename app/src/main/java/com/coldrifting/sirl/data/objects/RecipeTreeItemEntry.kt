@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.data.helper
+package com.coldrifting.sirl.data.objects
 
 import com.coldrifting.sirl.data.enums.UnitType
 
@@ -8,5 +8,5 @@ data class RecipeTreeItemEntry(
     val itemName: String,
     val itemPrep: RecipeTreeItemPrep?,
     val unitType: UnitType,
-    val amount: Float
+    val amount: Int
 )

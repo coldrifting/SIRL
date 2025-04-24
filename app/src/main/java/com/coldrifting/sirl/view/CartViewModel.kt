@@ -1,39 +1,37 @@
 package com.coldrifting.sirl.view
 
-import com.coldrifting.sirl.repo.AppRepository
-import com.coldrifting.sirl.data.helper.ChecklistHeader
-import com.coldrifting.sirl.data.helper.ChecklistItem
+import com.coldrifting.sirl.repo.AppRepo
+import com.coldrifting.sirl.data.objects.ChecklistHeader
+import com.coldrifting.sirl.data.objects.ChecklistItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CartViewModel(private val repository: AppRepository) {
+class CartViewModel(private val repository: AppRepo) {
     // TODO - Move to DB for persistence
     private val _list = MutableStateFlow<List<ChecklistHeader>?>(null)
     val list = _list.asStateFlow()
 
     fun getList() {
-        repository.scope.launch {
-            val rawList = repository.cart.getList()
-            val updatedList = rawList.map { entry ->
-                ChecklistHeader(
-                    id = entry.aisleId,
-                    name = entry.aisleName,
-                    expanded = true,
-                    items = entry.entries.map { items ->
-                        ChecklistItem(
-                            id = items.itemId,
-                            name = items.itemName,
-                            details = items.amount
-                        )
-                    })
-            }
+        val rawList = repository.cart.getList()
+        val updatedList = rawList.map { entry ->
+            ChecklistHeader(
+                id = entry.aisleId,
+                name = entry.aisleName,
+                expanded = true,
+                items = entry.entries.map { items ->
+                    ChecklistItem(
+                        id = items.itemId,
+                        name = items.itemName,
+                        details = items.amount
+                    )
+                })
+        }
 
-            _list.update {
-                return@update updatedList
-            }
+        _list.update {
+            return@update updatedList
         }
     }
 

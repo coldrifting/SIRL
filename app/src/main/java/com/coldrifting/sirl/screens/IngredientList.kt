@@ -53,7 +53,7 @@ import com.coldrifting.sirl.components.dialogs.TextDialog
 import com.coldrifting.sirl.components.AppTopBar
 import com.coldrifting.sirl.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.data.entities.Item
-import com.coldrifting.sirl.data.helper.ItemWithAisleName
+import com.coldrifting.sirl.data.objects.ItemWithAisleName
 import com.coldrifting.sirl.routes.RouteIngredientDetails
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme

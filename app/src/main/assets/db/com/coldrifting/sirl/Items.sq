@@ -1,0 +1,77 @@
+import com.coldrifting.sirl.data.enums.ItemTemp;
+import com.coldrifting.sirl.data.enums.UnitType;
+import kotlin.Int;
+
+CREATE TABLE Items (
+    itemId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    itemName TEXT NOT NULL,
+    temperature TEXT AS ItemTemp NOT NULL,
+    defaultUnits TEXT AS UnitType NOT NULL
+);
+
+getAll:
+SELECT * FROM Items;
+
+getAllWithPrep:
+SELECT * FROM Items LEFT JOIN ItemPreps ON Items.itemId = ItemPreps.itemId ORDER BY Items.itemName, ItemPreps.prepName;
+
+get:
+SELECT * FROM Items WHERE itemId = ?;
+
+getAllDetailsFiltered:
+SELECT Items.itemId, Items.itemName, Items.temperature, Items.defaultUnits,
+    ItemAisles.aisleId, Aisles.aisleName, Aisles.sortingPrefix FROM Items
+    LEFT JOIN ItemAisles ON Items.itemId = ItemAisles.itemId AND ItemAisles.storeId = :storeId
+    LEFT JOIN Aisles ON Aisles.aisleId = ItemAisles.aisleId
+    WHERE Items.itemName LIKE '%' || :itemFilter || '%'
+    ORDER BY
+    CASE WHEN :sortingMode = 'Name' THEN LOWER(Items.itemName) END,
+    CASE WHEN :sortingMode = 'Temp' THEN Items.temperature END,
+    Aisles.sortingPrefix;
+
+add:
+INSERT INTO Items (itemName, temperature, defaultUnits)
+VALUES (?, ?, ?);
+
+insert:
+INSERT INTO Items (itemId, itemName, temperature, defaultUnits)
+VALUES (?, ?, ?, ?);
+
+rename:
+UPDATE Items
+SET itemName = ?
+WHERE itemId = ?;
+
+setTemp:
+UPDATE Items
+SET temperature = ?
+WHERE itemId = ?;
+
+setUnits:
+UPDATE Items
+SET defaultUnits = ?
+WHERE itemId = ?;
+
+delete:
+DELETE FROM Items WHERE itemId = ?;
+
+getRecipesContainingItem:
+SELECT
+    Recipes.recipeName
+    FROM Recipes
+    LEFT JOIN RecipeSections ON Recipes.recipeId = RecipeSections.recipeId
+    LEFT JOIN RecipeEntries ON RecipeSections.recipeSectionId = RecipeEntries.recipeSectionId
+    LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId
+    WHERE Items.itemId = :itemId
+    ORDER BY Recipes.recipeName;
+
+getRecipesContainingItemPrep:
+SELECT
+    Recipes.recipeName
+    FROM Recipes
+    LEFT JOIN RecipeSections ON Recipes.recipeId = RecipeSections.recipeId
+    LEFT JOIN RecipeEntries ON RecipeSections.recipeSectionId = RecipeEntries.recipeSectionId
+    LEFT JOIN Items ON Items.itemId = RecipeEntries.itemId
+    LEFT JOIN ItemPreps ON RecipeEntries.itemPrepId = ItemPreps.itemPrepId
+    WHERE ItemPreps.itemPrepId = :itemPrepId
+    ORDER BY Recipes.recipeName;

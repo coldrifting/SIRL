@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.data.helper
+package com.coldrifting.sirl.data.objects
 
 import com.coldrifting.sirl.data.enums.UnitType
 
@@ -6,7 +6,7 @@ data class RawRecipeEntry(
     val recipeEntryId: Int = 0,
     val recipeId: Int = 0,
     val recipeName: String = "",
-    val recipeUrl: String = "",
+    val recipeUrl: String? = null,
 
     val recipeSectionId: Int = 0,
     val recipeSteps: String? = null,
@@ -16,7 +16,7 @@ data class RawRecipeEntry(
     val itemId: Int? = 0,
     val itemName: String? = "",
     val unitType: UnitType? = UnitType.EACHES,
-    val amount: Float? = 0.0f,
+    val amount: Int? = 0,
 
     val itemPrepId: Int? = null,
     val prepName: String? = null

@@ -1,36 +1,43 @@
-package com.coldrifting.sirl.db
+package com.coldrifting.sirl.repo
 
-import android.util.Log
+import app.cash.sqldelight.Query
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
-import app.cash.sqldelight.coroutines.mapToOne
-import com.coldrifting.sirl.AislesQueries
-import com.coldrifting.sirl.StoresQueries
+import com.coldrifting.sirl.Database
 import com.coldrifting.sirl.data.entities.Aisle
-import com.coldrifting.sirl.util.toStateFlow
+import com.coldrifting.sirl.repo.utils.toStateFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
-class StoresRepo(
+class StoreRepo(
+    val db: Database,
     val scope: CoroutineScope,
-    private val storesQueries: StoresQueries,
-    private val aislesQueries: AislesQueries,
     val selectedStoreId: StateFlow<Int>
 ) {
-    val all = storesQueries.getAll().asFlow().mapToList(scope.coroutineContext).toStateFlow(scope)
+fun <T> Flow<T>.toStateFlow(scope: CoroutineScope, initialValue: T): StateFlow<T> =
+    this.stateIn(scope, SharingStarted.Eagerly, initialValue)
+
+fun <T> Flow<List<T>>.toStateFlow(scope: CoroutineScope): StateFlow<List<T>> =
+    this.toStateFlow(scope, listOf())
+
+fun <T: Any> Query<T>.toListStateFlow(scope: CoroutineScope): StateFlow<List<T>> =
+    this.asFlow().mapToList(scope.coroutineContext).toStateFlow(scope)
+
+    val all = db.storesQueries.getAll().toListStateFlow(scope)
 
     fun add(name: String) {
-        storesQueries.add(name)
+        db.storesQueries.add(name)
     }
 
     fun rename(storeId: Int, name: String) {
-        storesQueries.rename(name, storeId)
+        db.storesQueries.rename(name, storeId)
     }
 
     fun delete(storeId: Int) {
-        storesQueries.delete(storeId)
+        db.storesQueries.delete(storeId)
     }
 
     fun getName(storeId: Int): String {
@@ -38,49 +45,40 @@ class StoresRepo(
     }
 
     fun select(storeId: Int) {
-        storesQueries.select(storeId)
+        db.storesQueries.select(storeId)
     }
 
     fun selected(): Flow<Int> {
-        return storesQueries.selected()
-            .asFlow()
-            .mapToOne(scope.coroutineContext)
-            .map { s -> s.toInt() }
-            .toStateFlow(scope, -1)
+        return db.storesQueries.selected().toStateFlow(scope, -1) { selectedStore ->
+            selectedStore.toInt()
+        }
     }
 
     // Aisles
-    private val allAisles = aislesQueries.getAll()
-        .asFlow()
-        .mapToList(scope.coroutineContext)
-        .toStateFlow(scope)
+    private val allAisles = db.aislesQueries.getAll().toListStateFlow(scope)
 
-    fun getAisles(storeId: Int) = aislesQueries.getAllFromStore(storeId)
-        .asFlow()
-        .mapToList(scope.coroutineContext)
-        .toStateFlow(scope)
+    fun getAisles(storeId: Int) = db.aislesQueries.getAllFromStore(storeId).toListStateFlow(scope)
 
     fun addAisle(storeId: Int, aisleName: String) {
-        aislesQueries.transaction {
-            val max = (aislesQueries.getMaxSort().executeAsOne().expr?.toInt() ?: 0) + 1
-            aislesQueries.add(storeId, aisleName, max)
+        db.aislesQueries.transaction {
+            val max = (db.aislesQueries.getMaxSort().executeAsOne().expr?.toInt() ?: 0) + 1
+            db.aislesQueries.add(storeId, aisleName, max)
         }
     }
 
     fun renameAisle(aisleId: Int, newAisleName: String) {
-        aislesQueries.rename(newAisleName, aisleId)
+        db.aislesQueries.rename(newAisleName, aisleId)
     }
 
     fun deleteAisle(aisleId: Int) {
-        aislesQueries.delete(aisleId)
+        db.aislesQueries.delete(aisleId)
     }
 
     fun reorderAisles(items: List<Aisle>) {
         val list = getReorderedItems(items)
-        Log.d("TEST", "ReORDER")
-        aislesQueries.transaction {
+        db.aislesQueries.transaction {
             list.forEach { aisle ->
-                aislesQueries.updateSort(aisle.sortingPrefix, aisle.aisleId)
+                db.aislesQueries.updateSort(aisle.sortingPrefix, aisle.aisleId)
             }
         }
     }

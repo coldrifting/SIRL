@@ -27,12 +27,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.R
+import com.coldrifting.sirl.Recipes
 import com.coldrifting.sirl.components.AppNavBar
 import com.coldrifting.sirl.components.swipe.SwipeList
 import com.coldrifting.sirl.components.dialogs.TextDialog
 import com.coldrifting.sirl.components.AppTopBar
 import com.coldrifting.sirl.components.swipe.swipeDeleteAction
-import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.routes.RouteRecipeDetails
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 import com.coldrifting.sirl.ui.theme.PinColor
@@ -43,7 +43,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun RecipeList(
     navHostController: NavHostController,
-    recipes: List<Recipe>,
+    recipes: List<Recipes>,
     toggleRecipePin: (Int) -> Unit,
     addRecipe: (String) -> Unit,
     deleteRecipe: (Int) -> Unit
@@ -134,7 +134,7 @@ fun RecipeListPreview() {
     SIRLTheme {
         RecipeList(
             navHostController = rememberNavController(),
-            recipes = listOf(Recipe(1, "Recipe 1")),
+            recipes = listOf(Recipes(1, "Recipe 1", null, false, null)),
             toggleRecipePin = {},
             addRecipe = {},
             deleteRecipe = {}
