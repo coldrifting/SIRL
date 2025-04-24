@@ -14,6 +14,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,6 +41,43 @@ fun Cart(
     onItemClicked: (Int, Int) -> Unit
 ) {
     var complete = list?.flatMap { i -> i.items }?.all { e -> e.checked } == true
+
+    var showNoLocationDialog by remember { mutableStateOf(false) }
+    var noLocationItems by remember { mutableStateOf(listOf<String>()) }
+    if (showNoLocationDialog) {
+        AlertDialog(
+            title = "Missing Item Locations",
+            showDismissButton = false,
+            confirmText = "OK",
+            onConfirm = {},
+            onDismiss = { showNoLocationDialog = false }
+        ) {
+            Text("The following items do not have aisle information entered " +
+                    "for the currently selected store: \n")
+            Column {
+                noLocationItems.forEachIndexed { index, item ->
+                    if (index < 5) {
+                        Text(item)
+                    }
+                    else if (index == 5) {
+                        Text("...")
+                    }
+                    else {
+                        return@forEachIndexed
+                    }
+                }
+            }
+        }
+    }
+
+    if (list != null) {
+        noLocationItems = list.find { i -> i.id == -1 }?.items?.map{ i -> i.name} ?: listOf()
+        if (noLocationItems.isNotEmpty()) {
+            LaunchedEffect(noLocationItems) {
+                showNoLocationDialog = true
+            }
+        }
+    }
 
     var showResetListDialog by remember { mutableStateOf(false) }
     if (showResetListDialog) {

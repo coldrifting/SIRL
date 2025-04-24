@@ -83,6 +83,7 @@ fun AlertDialog(
     confirmText: String = "Confirm",
     confirmButtonEnabled: Boolean = true,
     showConfirmButton: Boolean = true,
+    showDismissButton: Boolean = true,
     bottomPadding: Int = 0,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
@@ -122,12 +123,14 @@ fun AlertDialog(
                         .fillMaxWidth(),
                     Arrangement.spacedBy(8.dp, Alignment.End),
                 ) {
-                    TextButton(
-                        onClick = {
-                            onDismiss.invoke()
-                        },
-                        content = { Text(dismissText, color = MaterialTheme.colorScheme.outline) }
-                    )
+                    if (showDismissButton) {
+                        TextButton(
+                            onClick = {
+                                onDismiss.invoke()
+                            },
+                            content = { Text(dismissText, color = MaterialTheme.colorScheme.outline) }
+                        )
+                    }
                     if (showConfirmButton) {
                         TextButton(
                             enabled = confirmButtonEnabled,

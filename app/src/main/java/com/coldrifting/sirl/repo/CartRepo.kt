@@ -16,7 +16,6 @@ class CartRepo(
             return emptyList()
         }
 
-        // TODO - Add pop up if any aisles are missing
         val rawEntries = db.cartQueries.getShoppingList(selectedStore).executeAsList().map {
             RawCartEntry(
                 it.aisleId ?: -1,
