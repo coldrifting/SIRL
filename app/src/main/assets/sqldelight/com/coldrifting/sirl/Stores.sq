@@ -30,7 +30,7 @@ selectedStore:
 SELECT COALESCE( (SELECT Stores.storeId FROM Stores WHERE Stores.selected = 1 LIMIT 1), 0);
 
 selectStore:
-UPDATE Stores SET selected = (Stores.storeId = :storeId);
+UPDATE Stores SET selected = :selected WHERE Stores.storeId = :storeId;
 
 -- Aisles --
 

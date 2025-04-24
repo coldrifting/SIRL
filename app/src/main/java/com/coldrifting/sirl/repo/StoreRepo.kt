@@ -45,7 +45,15 @@ fun <T: Any> Query<T>.toListStateFlow(scope: CoroutineScope): StateFlow<List<T>>
     }
 
     fun select(storeId: Int) {
-        db.storesQueries.selectStore(storeId)
+        all.value.forEach {
+            if (it.selected && it.storeId != storeId) {
+                db.storesQueries.transaction {
+                    db.storesQueries.selectStore(false, it.storeId)
+                    db.storesQueries.selectStore(true, storeId)
+                }
+            }
+            return@forEach
+        }
     }
 
     fun selected(): Flow<Int> {
