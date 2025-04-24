@@ -99,7 +99,7 @@ fun RecipeEdit(
             AppTopBar(
                 navHostController,
                 "Edit Recipe Ingredients",
-                {
+                topAction = {
                     IconButton(onClick = { navHostController.navigate(RouteRecipeEditSteps(recipe.recipeId)) }) {
                         Icon(
                             Icons.Default.Edit,

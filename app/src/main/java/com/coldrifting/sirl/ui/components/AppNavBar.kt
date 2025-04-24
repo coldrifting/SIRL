@@ -19,7 +19,8 @@ fun AppNavBar(navController: NavHostController, selectedRoute: TopLevelRoute<out
     NavigationBar {
         topLevelRoutes.forEach { topLevelRoute ->
             val routeName: String = topLevelRoute.route.javaClass.simpleName.replace("Route", "")
-            NavigationBarItem(label = { Text(routeName) },
+            NavigationBarItem(
+                label = { Text(routeName) },
                 icon = { Icon(topLevelRoute.icon, contentDescription = routeName) },
                 selected = topLevelRoute == selectedRoute,
                 onClick = {

@@ -46,7 +46,7 @@ fun RecipeDetails(
 
     Scaffold(
         topBar = {
-            AppTopBar(navHostController, recipe.recipeName, {
+            AppTopBar(navHostController, recipe.recipeName, topAction = {
                 IconButton({
                     navHostController.navigate(
                         RouteRecipeEdit(recipe.recipeId)

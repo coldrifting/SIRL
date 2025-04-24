@@ -1,6 +1,7 @@
 package com.coldrifting.sirl.ui.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -25,17 +26,27 @@ import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTopBar(navHostController: NavHostController, title: String, topAction: @Composable (() -> Unit)? = null) {
+fun AppTopBar(
+    navHostController: NavHostController,
+    title: String,
+    titleAction: (() -> Unit)? = null,
+    topAction: @Composable (() -> Unit)? = null
+) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 
     TopAppBar(
         title = {
-            Box(modifier = Modifier.padding(4.dp)) { Text(title) }
+            Box(
+                modifier = (if (titleAction != null)
+                                Modifier.clickable { titleAction.invoke() }
+                            else Modifier).padding(4.dp)
+            ) { Text(title) }
         },
         navigationIcon = {
             key(navBackStackEntry) {
                 if (navHostController.previousBackStackEntry != null) {
-                    IconButton(modifier = Modifier.padding(4.dp),
+                    IconButton(
+                        modifier = Modifier.padding(4.dp),
                         onClick = { navHostController.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
                     }

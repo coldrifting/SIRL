@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
@@ -55,6 +56,7 @@ import com.coldrifting.sirl.ui.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.objects.ItemWithAisleName
 import com.coldrifting.sirl.routes.RouteIngredientDetails
+import com.coldrifting.sirl.routes.RouteStoreList
 import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.coroutines.launch
@@ -111,15 +113,17 @@ fun IngredientList(
     }
 
     Scaffold(
-        topBar = @Composable {
-            AppTopBar(navHostController, "Ingredients by $sortMode") {
-                IconButton(onClick = setItemSort) {
-                    Icon(
-                        Icons.Default.Menu,
-                        "Sorting"
-                    )
+        topBar = {
+            AppTopBar(
+                navHostController = navHostController,
+                title = "Ingredients by $sortMode",
+                titleAction = setItemSort,
+                topAction = {
+                    IconButton(onClick = { navHostController.navigate(RouteStoreList) }) {
+                        Icon(Icons.Default.Place, "Stores")
+                    }
                 }
-            }
+            )
         },
         bottomBar = {
             Column(Modifier.background(MaterialTheme.colorScheme.surfaceContainer)) {

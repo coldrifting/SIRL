@@ -27,7 +27,7 @@ import com.coldrifting.sirl.ui.components.AppTopBar
 import com.coldrifting.sirl.ui.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.ui.components.swipe.swipeEditAction
 import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeStores
+import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
@@ -69,7 +69,7 @@ fun StoreList(
 
     Scaffold(
         topBar = { AppTopBar(navHostController, "Stores") },
-        bottomBar = { AppNavBar(navHostController, routeStores) },
+        bottomBar = { AppNavBar(navHostController, routeIngredients) },
         floatingActionButton = {
             FloatingActionButton(onClick = {showNewAlertDialog = true}) {
                 Icon(Icons.Filled.Add, "Add")

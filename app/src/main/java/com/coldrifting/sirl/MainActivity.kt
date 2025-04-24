@@ -29,7 +29,6 @@ import com.coldrifting.sirl.routes.RouteRecipeList
 import com.coldrifting.sirl.routes.top.RouteRecipes
 import com.coldrifting.sirl.routes.RouteStoreAisleList
 import com.coldrifting.sirl.routes.RouteStoreList
-import com.coldrifting.sirl.routes.top.RouteStores
 import com.coldrifting.sirl.ui.screens.Cart
 import com.coldrifting.sirl.ui.screens.IngredientDetails
 import com.coldrifting.sirl.ui.screens.IngredientList
@@ -63,47 +62,8 @@ class MainActivity : ComponentActivity() {
             navController = navController,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
-            startDestination = RouteStores
+            startDestination = RouteIngredients
         ) {
-            navigation<RouteStores>(startDestination = RouteStoreList) {
-                composable<RouteStoreList> {
-                    val selectedStore by viewModel.stores.selected.collectAsState()
-                    val storeList by viewModel.stores.all.collectAsState()
-
-                    StoreList(
-                        navHostController = navController,
-                        addStore = viewModel.stores::add,
-                        renameStore = viewModel.stores::rename,
-                        deleteStore = viewModel.stores::delete,
-                        selectStore = viewModel.stores::select,
-                        getStoreName = viewModel.stores::getName,
-                        selectedStore = selectedStore,
-                        storeList = storeList.map{s -> Store(s.storeId, s.storeName, s.selected)}
-                    )
-                }
-                composable<RouteStoreAisleList> { backStackEntry ->
-                    val aisleList = backStackEntry.toRoute<RouteStoreAisleList>()
-
-                    val storeList by viewModel.stores.all.collectAsState()
-                    val store = storeList.first {s -> s.storeId == aisleList.id }
-
-                    val aisles by viewModel.stores.getAisles(aisleList.id).collectAsState()
-
-                    val scrollTo by viewModel.stores.firstItemIndexState.collectAsState()
-
-                    StoreAisleList(
-                        navHostController = navController,
-                        store = Store(store.storeId, store.storeName, store.selected),
-                        addAisle = viewModel.stores::addAisle,
-                        renameAisle = viewModel.stores::renameAisle,
-                        deleteAisle = viewModel.stores::deleteAisle,
-                        getAisleName = viewModel.stores::getAisleName,
-                        syncAisles = viewModel.stores::syncAisles,
-                        aisles = aisles.map{ Aisle(it.aisleId, it.storeId, it.aisleName, it.sortingPrefix)},
-                        scrollTo = scrollTo
-                    )
-                }
-            }
             navigation<RouteIngredients>(startDestination = RouteIngredientList) {
                 composable<RouteIngredientList> {
                     val sortingMode by viewModel.items.sortingModeState.collectAsState()
@@ -146,6 +106,43 @@ class MainActivity : ComponentActivity() {
                         setItemTemp = viewModel.items::setTemp,
                         setItemDefaultUnits = viewModel.items::setDefaultUnits,
                         stores = stores.map{s -> Store(s.storeId, s.storeName, s.selected)})
+                }
+                composable<RouteStoreList> {
+                    val selectedStore by viewModel.stores.selected.collectAsState()
+                    val storeList by viewModel.stores.all.collectAsState()
+
+                    StoreList(
+                        navHostController = navController,
+                        addStore = viewModel.stores::add,
+                        renameStore = viewModel.stores::rename,
+                        deleteStore = viewModel.stores::delete,
+                        selectStore = viewModel.stores::select,
+                        getStoreName = viewModel.stores::getName,
+                        selectedStore = selectedStore,
+                        storeList = storeList.map{s -> Store(s.storeId, s.storeName, s.selected)}
+                    )
+                }
+                composable<RouteStoreAisleList> { backStackEntry ->
+                    val aisleList = backStackEntry.toRoute<RouteStoreAisleList>()
+
+                    val storeList by viewModel.stores.all.collectAsState()
+                    val store = storeList.first {s -> s.storeId == aisleList.id }
+
+                    val aisles by viewModel.stores.getAisles(aisleList.id).collectAsState()
+
+                    val scrollTo by viewModel.stores.firstItemIndexState.collectAsState()
+
+                    StoreAisleList(
+                        navHostController = navController,
+                        store = Store(store.storeId, store.storeName, store.selected),
+                        addAisle = viewModel.stores::addAisle,
+                        renameAisle = viewModel.stores::renameAisle,
+                        deleteAisle = viewModel.stores::deleteAisle,
+                        getAisleName = viewModel.stores::getAisleName,
+                        syncAisles = viewModel.stores::syncAisles,
+                        aisles = aisles.map{ Aisle(it.aisleId, it.storeId, it.aisleName, it.sortingPrefix)},
+                        scrollTo = scrollTo
+                    )
                 }
             }
             navigation<RouteRecipes>(startDestination = RouteRecipeList) {
