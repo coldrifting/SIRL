@@ -46,7 +46,7 @@ dependencies {
 sqldelight {
     databases {
         create("Database") {
-            srcDirs.setFrom("src/main/assets/db")
+            srcDirs.setFrom("src/main/assets/sqldelight")
             packageName.set("com.coldrifting.sirl")
         }
     }

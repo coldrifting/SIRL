@@ -1,7 +1,5 @@
 package com.coldrifting.sirl.data.objects
 
-import com.coldrifting.sirl.data.enums.getPrepAbbreviation
-
 data class CartAisleEntry(
     val aisleId: Int,
     val aisleName: String,

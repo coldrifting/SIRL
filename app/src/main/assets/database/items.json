@@ -39,13 +39,13 @@
     "itemId": 7,
     "itemName": "Bagels",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 8,
     "itemName": "Bread",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 9,
@@ -57,13 +57,13 @@
     "itemId": 10,
     "itemName": "English Muffins",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 11,
     "itemName": "Hamburger Buns",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 12,
@@ -141,19 +141,19 @@
     "itemId": 24,
     "itemName": "Kalamata Olives",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 25,
     "itemName": "Olives",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 26,
     "itemName": "Pickels",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 27,
@@ -165,19 +165,19 @@
     "itemId": 28,
     "itemName": "Tortillas",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 29,
     "itemName": "Tortillas (Small)",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 30,
     "itemName": "Ramen",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 31,
@@ -273,7 +273,7 @@
     "itemId": 46,
     "itemName": "Boxed Mac & Cheese",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 47,
@@ -309,7 +309,7 @@
     "itemId": 52,
     "itemName": "Soup",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 53,
@@ -321,13 +321,13 @@
     "itemId": 54,
     "itemName": "Candy",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 55,
     "itemName": "Lo Mein Noodles",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 56,
@@ -663,13 +663,13 @@
     "itemId": 111,
     "itemName": "Pancakes",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 112,
     "itemName": "Maple Syrup",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 113,
@@ -687,37 +687,37 @@
     "itemId": 115,
     "itemName": "Brownie Mix",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 116,
     "itemName": "Mashed Potatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 117,
     "itemName": "Breakfast Bars",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 118,
     "itemName": "Cereal",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 119,
     "itemName": "Oatmeal",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 120,
     "itemName": "Poptarts",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 121,
@@ -753,7 +753,7 @@
     "itemId": 126,
     "itemName": "Frozen Pizza",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 127,
@@ -831,43 +831,43 @@
     "itemId": 139,
     "itemName": "Frozen Meals",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 140,
     "itemName": "Orange Juice Concentrate",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 141,
     "itemName": "Black Bean Burgers",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 142,
     "itemName": "Chick'n Patties",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 143,
     "itemName": "Ice Cream",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 144,
     "itemName": "Breakfast Burritos",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 145,
     "itemName": "Breakfast Sandwiches",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 146,
@@ -939,7 +939,7 @@
     "itemId": 157,
     "itemName": "Eggs",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 158,
@@ -951,19 +951,19 @@
     "itemId": 159,
     "itemName": "Orange Juice",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 160,
     "itemName": "Iced Coffee",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 161,
     "itemName": "Bacon",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 162,
@@ -1023,37 +1023,37 @@
     "itemId": 171,
     "itemName": "Frozen Fish",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 172,
     "itemName": "Frozen Meatballs",
     "itemTemp": "Frozen",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 173,
     "itemName": "Tempeh",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 174,
     "itemName": "Tofu",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 175,
     "itemName": "Flatbread",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 176,
     "itemName": "Pita Bread",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 177,
@@ -1119,7 +1119,7 @@
     "itemId": 188,
     "itemName": "Rotisserie Chicken",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 189,
@@ -1173,85 +1173,85 @@
     "itemId": 197,
     "itemName": "Apples",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 198,
     "itemName": "Avocados",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 199,
     "itemName": "Bananas",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 200,
     "itemName": "Bay Leaf",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 201,
     "itemName": "Bok Choy",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 202,
     "itemName": "Broccoli",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 203,
     "itemName": "Cabbage",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 204,
     "itemName": "Carrots",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 205,
     "itemName": "Celery",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 206,
     "itemName": "Coleslaw Mix",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 207,
     "itemName": "Cucumbers",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 208,
     "itemName": "Eggplant",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 209,
     "itemName": "Garlic",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 210,
     "itemName": "Ginger",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 211,
@@ -1263,127 +1263,127 @@
     "itemId": 212,
     "itemName": "Green Bell Peppers",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 213,
     "itemName": "Green Onions",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 214,
     "itemName": "Jalapenos",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 215,
     "itemName": "Lemons",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 216,
     "itemName": "Limes",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 217,
     "itemName": "Poblano Peppers",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 218,
     "itemName": "Red Bell Pepper",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 219,
     "itemName": "Red Onions",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 220,
     "itemName": "Red Potatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 221,
     "itemName": "Roma Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 222,
     "itemName": "Salad Kit",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 223,
     "itemName": "Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 224,
     "itemName": "White Onions",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 225,
     "itemName": "Yellow Onions",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 226,
     "itemName": "Yellow Squash",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 227,
     "itemName": "Zucchini",
     "itemTemp": "Chilled",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 228,
     "itemName": "Cinnamon Rolls",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 229,
     "itemName": "French Bread",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 230,
     "itemName": "Garlic Bread",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 231,
     "itemName": "Muffins",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 232,
     "itemName": "Rolls",
     "itemTemp": "Ambient",
-    "defaultUnits": "EACHES"
+    "defaultUnits": "Count"
   },
   {
     "itemId": 233,

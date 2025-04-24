@@ -16,35 +16,35 @@ class RecipeRepo(
     val scope: CoroutineScope,
     val db: Database
 ) {
-    val all = db.recipesQueries.getAll().toListStateFlow(scope)
+    val all = db.recipesQueries.allRecipes().toListStateFlow(scope)
 
     fun togglePin(recipeId: Int) {
-        db.recipesQueries.togglePinned(recipeId)
+        db.recipesQueries.toggleRecipePin(recipeId)
     }
 
     fun add(recipeName: String) {
-        db.recipesQueries.add(recipeName)
+        db.recipesQueries.addRecipe(recipeName)
         val recipeId = db.recipesQueries.lastInsertRowId().executeAsOne().toInt()
-        db.recipeSectionsQueries.add(recipeId, "Main")
+        db.recipesQueries.addRecipeSection(recipeId, "Main")
     }
 
     fun rename(recipeId: Int, recipeName: String) {
-        db.recipesQueries.rename(recipeName, recipeId)
+        db.recipesQueries.renameRecipe(recipeName, recipeId)
     }
 
     fun delete(recipeId: Int) {
-        db.recipesQueries.delete(recipeId)
+        db.recipesQueries.deleteRecipe(recipeId)
     }
 
     fun setSteps(recipeId: Int, recipeSteps: String) {
-        db.recipesQueries.setSteps(recipeSteps, recipeId)
+        db.recipesQueries.setRecipeSteps(recipeSteps, recipeId)
     }
 
     fun getAllWithData(recipeId: Int): StateFlow<RecipeTree> {
-        return db.recipesQueries.getDetails(recipeId)
+        return db.recipesQueries.recipeDetails(recipeId)
             .asFlow()
             .mapToList(scope.coroutineContext)
-            .map{ RawRecipeEntry.toHierarchy(it.map {  RawRecipeEntry(
+            .map{ RawRecipeEntry.toTree(it.map {  RawRecipeEntry(
                 recipeEntryId = it.recipeEntryId ?: 0,
                 recipeId = it.recipeId,
                 recipeName = it.recipeName,
@@ -63,13 +63,27 @@ class RecipeRepo(
             .toStateFlow(scope, RecipeTree())
     }
 
+
+    fun addSection(recipeId: Int, recipeSectionName: String) {
+        db.recipesQueries.addRecipeSection(recipeId, recipeSectionName)
+    }
+
+    fun renameSection(recipeSectionId: Int, recipeSectionName: String) {
+        db.recipesQueries.renameRecipeSection(recipeSectionName, recipeSectionId)
+    }
+
+    fun deleteSection(recipeSectionId: Int) {
+        db.recipesQueries.deleteRecipeSection(recipeSectionId)
+    }
+
+
     fun setEntryAmount(recipeItemEntryId: Int, unitType: UnitType, amount: Int) {
-        db.recipeEntriesQueries.updateAmountAndType(amount, unitType, recipeItemEntryId)
+        db.recipesQueries.updateRecipeEntryUnits(amount, unitType, recipeItemEntryId)
     }
 
     fun addEntry(recipeSectionEntryId: Int?, recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, unitType: UnitType, amount: Int) {
         if (recipeSectionEntryId != null) {
-            db.recipeEntriesQueries.insert(
+            db.recipesQueries.insertRecipeEntry(
                 recipeSectionEntryId,
                 recipeId,
                 recipeSectionId,
@@ -79,7 +93,7 @@ class RecipeRepo(
                 amount)
         }
         else {
-            db.recipeEntriesQueries.add(
+            db.recipesQueries.addRecipeEntry(
                 recipeId,
                 recipeSectionId,
                 itemId,
@@ -90,18 +104,6 @@ class RecipeRepo(
     }
 
     fun deleteEntry(recipeSectionEntryId: Int) {
-        db.recipeEntriesQueries.delete(recipeSectionEntryId)
-    }
-
-    fun addSection(recipeId: Int, recipeSectionName: String) {
-        db.recipeSectionsQueries.add(recipeId, recipeSectionName)
-    }
-
-    fun renameSection(recipeSectionId: Int, recipeSectionName: String) {
-        db.recipeSectionsQueries.rename(recipeSectionName, recipeSectionId)
-    }
-
-    fun deleteSection(recipeSectionId: Int) {
-        db.recipeSectionsQueries.delete(recipeSectionId)
+        db.recipesQueries.deleteRecipeEntry(recipeSectionEntryId)
     }
 }

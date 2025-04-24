@@ -15,14 +15,14 @@ data class RawRecipeEntry(
 
     val itemId: Int? = 0,
     val itemName: String? = "",
-    val unitType: UnitType? = UnitType.EACHES,
+    val unitType: UnitType? = UnitType.Count,
     val amount: Int? = 0,
 
     val itemPrepId: Int? = null,
     val prepName: String? = null
 ) {
     companion object {
-        fun toHierarchy(entries: List<RawRecipeEntry>): RecipeTree {
+        fun toTree(entries: List<RawRecipeEntry>): RecipeTree {
             if (entries.isEmpty()) {
                 return RecipeTree()
             }

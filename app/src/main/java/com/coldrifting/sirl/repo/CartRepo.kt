@@ -17,7 +17,7 @@ class CartRepo(
         }
 
         // TODO - Add pop up if any aisles are missing
-        val rawEntries = db.recipesQueries.getShoppingList(selectedStore).executeAsList().map {
+        val rawEntries = db.cartQueries.getShoppingList(selectedStore).executeAsList().map {
             RawCartEntry(
                 it.aisleId ?: -1,
                 it.aisleName ?: "No Aisle Set",

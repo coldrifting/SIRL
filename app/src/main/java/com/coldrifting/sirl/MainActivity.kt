@@ -30,14 +30,15 @@ import com.coldrifting.sirl.routes.top.RouteRecipes
 import com.coldrifting.sirl.routes.RouteStoreAisleList
 import com.coldrifting.sirl.routes.RouteStoreList
 import com.coldrifting.sirl.routes.top.RouteStores
-import com.coldrifting.sirl.screens.Cart
-import com.coldrifting.sirl.screens.IngredientDetails
-import com.coldrifting.sirl.screens.IngredientList
-import com.coldrifting.sirl.screens.RecipeDetails
-import com.coldrifting.sirl.screens.RecipeEdit
-import com.coldrifting.sirl.screens.RecipeList
-import com.coldrifting.sirl.screens.StoreAisleList
-import com.coldrifting.sirl.screens.StoreList
+import com.coldrifting.sirl.ui.screens.Cart
+import com.coldrifting.sirl.ui.screens.IngredientDetails
+import com.coldrifting.sirl.ui.screens.IngredientList
+import com.coldrifting.sirl.ui.screens.RecipeDetails
+import com.coldrifting.sirl.ui.screens.RecipeEdit
+import com.coldrifting.sirl.ui.screens.RecipeList
+import com.coldrifting.sirl.ui.screens.StoreAisleList
+import com.coldrifting.sirl.ui.screens.StoreList
+import com.coldrifting.sirl.ui.screens.RecipeEditSteps
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import com.coldrifting.sirl.view.AppViewModel
 
@@ -185,7 +186,7 @@ class MainActivity : ComponentActivity() {
                 composable<RouteRecipeEditSteps> { backStackEntry ->
                     val routeRecipeEditSteps = backStackEntry.toRoute<RouteRecipeEditSteps>()
                     val recipe by viewModel.recipes.get(routeRecipeEditSteps.recipeId).collectAsState()
-                    com.coldrifting.sirl.screens.RecipeEditSteps(
+                    RecipeEditSteps(
                         navHostController = navController,
                         recipe = recipe,
                         setRecipeName = viewModel.recipes::rename,

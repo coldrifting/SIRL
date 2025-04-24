@@ -8,7 +8,7 @@ class AppRepo(
     database: Database,
     internal val scope: CoroutineScope,
 ) {
-    val selectedStoreId = database.storesQueries.selected().toStateFlow(scope, 0) { storeId ->
+    val selectedStoreId = database.storesQueries.selectedStore().toStateFlow(scope, 0) { storeId ->
         storeId.toInt()
     }
 

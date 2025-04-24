@@ -32,7 +32,7 @@
    "recipeSectionId": 1,
    "itemId": 209,
    "itemPrepId": "1",
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 2000
  },
  {
@@ -167,7 +167,7 @@
    "recipeSectionId": 3,
    "itemId": 207,
    "itemPrepId": "6",
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 500
  },
  {
@@ -185,7 +185,7 @@
    "recipeSectionId": 3,
    "itemId": 219,
    "itemPrepId": null,
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 250
  },
  {
@@ -194,7 +194,7 @@
    "recipeSectionId": 3,
    "itemId": 24,
    "itemPrepId": null,
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 8000
  },
  {
@@ -212,7 +212,7 @@
    "recipeSectionId": 3,
    "itemId": 176,
    "itemPrepId": null,
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 4000
  },
  {
@@ -257,7 +257,7 @@
    "recipeSectionId": 4,
    "itemId": 217,
    "itemPrepId": "7",
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 4000
  },
  {
@@ -275,7 +275,7 @@
    "recipeSectionId": 4,
    "itemId": 219,
    "itemPrepId": "4",
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 333
  },
  {
@@ -284,7 +284,7 @@
    "recipeSectionId": 4,
    "itemId": 218,
    "itemPrepId": "8",
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 500
  },
  {
@@ -320,7 +320,7 @@
    "recipeSectionId": 4,
    "itemId": 209,
    "itemPrepId": "1",
-   "unitType": "EACHES",
+   "unitType": "Count",
    "amount": 1000
  },
  {

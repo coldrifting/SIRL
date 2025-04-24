@@ -1,0 +1,131 @@
+import com.coldrifting.sirl.data.enums.BayType;
+import com.coldrifting.sirl.data.enums.ItemTemp;
+import com.coldrifting.sirl.data.enums.UnitType;
+import kotlin.Int;
+
+-- Items --
+
+CREATE TABLE Items (
+    itemId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    itemName TEXT NOT NULL,
+    temperature TEXT AS ItemTemp NOT NULL,
+    defaultUnits TEXT AS UnitType NOT NULL
+);
+
+getItem:
+SELECT * FROM Items WHERE itemId = ?;
+
+getAllItemsWithPrep:
+SELECT * FROM Items
+LEFT JOIN ItemPreps USING (itemId)
+ORDER BY Items.itemName, ItemPreps.prepName;
+
+getAllItemDetailsFiltered:
+SELECT
+    Items.itemId, Items.itemName, Items.temperature, Items.defaultUnits,
+    ItemAisles.aisleId, Aisles.aisleName, Aisles.sortingPrefix
+FROM Items
+LEFT JOIN ItemAisles ON Items.itemId = ItemAisles.itemId AND ItemAisles.storeId = :storeId
+LEFT JOIN Aisles USING (aisleId)
+WHERE Items.itemName LIKE '%' || :itemFilter || '%'
+ORDER BY
+    CASE WHEN :sortingMode = 'Name' THEN LOWER(Items.itemName) END,
+    CASE WHEN :sortingMode = 'Temp' THEN Items.temperature END,
+    Aisles.sortingPrefix;
+
+addItem:
+INSERT INTO Items (itemName, temperature, defaultUnits)
+VALUES (?, ?, ?);
+
+insertItem:
+INSERT INTO Items (itemId, itemName, temperature, defaultUnits)
+VALUES (?, ?, ?, ?);
+
+renameItem:
+UPDATE Items
+SET itemName = ?
+WHERE itemId = ?;
+
+setItemTemp:
+UPDATE Items
+SET temperature = ?
+WHERE itemId = ?;
+
+setItemUnits:
+UPDATE Items
+SET defaultUnits = ?
+WHERE itemId = ?;
+
+deleteItem:
+DELETE FROM Items WHERE itemId = ?;
+
+getRecipesContainingItem:
+SELECT
+    Recipes.recipeName
+    FROM Recipes
+    LEFT JOIN RecipeSections USING (recipeId)
+    LEFT JOIN RecipeEntries USING (recipeSectionId)
+    LEFT JOIN Items USING (itemId)
+    WHERE Items.itemId = :itemId
+    ORDER BY Recipes.recipeName;
+
+getRecipesContainingItemPrep:
+SELECT
+    Recipes.recipeName
+    FROM Recipes
+    LEFT JOIN RecipeSections USING (recipeId)
+    LEFT JOIN RecipeEntries USING (recipeSectionId)
+    LEFT JOIN Items USING (itemId)
+    LEFT JOIN ItemPreps USING (itemPrepId)
+    WHERE ItemPreps.itemPrepId = :itemPrepId
+    ORDER BY Recipes.recipeName;
+
+-- Item Preperations --
+
+CREATE TABLE ItemPreps (
+    itemPrepId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    itemId INTEGER AS Int NOT NULL,
+    prepName TEXT NOT NULL,
+    FOREIGN KEY (itemId) REFERENCES Items(itemId) ON DELETE CASCADE
+);
+
+getItemPrep:
+SELECT * FROM ItemPreps WHERE itemId = ?;
+
+addItemPrep:
+INSERT INTO ItemPreps (itemId, prepName)
+VALUES (?, ?);
+
+insertItemPrep:
+INSERT INTO ItemPreps (itemPrepId, itemId, prepName)
+VALUES (?, ?, ?);
+
+renameItemPrep:
+UPDATE ItemPreps SET prepName = ? WHERE itemPrepId = ?;
+
+deleteItemPrep:
+DELETE FROM ItemPreps WHERE itemPrepId = ?;
+
+-- Item Aisles --
+
+CREATE TABLE ItemAisles (
+    itemId INTEGER AS Int NOT NULL,
+    storeId INTEGER AS Int NOT NULL,
+    aisleId INTEGER AS Int NOT NULL,
+    bay TEXT AS BayType NOT NULL,
+    FOREIGN KEY (itemId) REFERENCES Items(itemId) ON DELETE CASCADE,
+    FOREIGN KEY (storeId) REFERENCES Stores(storeId) ON DELETE CASCADE,
+    FOREIGN KEY (aisleId) REFERENCES Aisles(aisleId) ON DELETE CASCADE,
+    PRIMARY KEY (itemId, storeId)
+);
+
+getItemAisleAtStore:
+SELECT * FROM ItemAisles WHERE itemId = :itemId AND storeId = COALESCE(:storeId, -1);
+
+insertItemAisle:
+INSERT INTO ItemAisles (itemId, storeId, aisleId, bay)
+VALUES (?, ?, ?, ?);
+
+updateItemAisle:
+REPLACE INTO ItemAisles (itemId, storeId, aisleId, bay)
+VALUES (?, ?, ?, ?);

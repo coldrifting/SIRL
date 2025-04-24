@@ -38,7 +38,7 @@ class ItemRepo(
         Temp
     }
     val allItemsWithPrep: StateFlow<List<RecipeTreeItem>> =
-        db.itemsQueries.getAllWithPrep().toListStateFlow(scope) { x ->
+        db.itemsQueries.getAllItemsWithPrep().toListStateFlow(scope) { x ->
             x.map { y ->
                 RecipeTreeItem(
                     itemId = y.itemId,
@@ -88,7 +88,10 @@ class ItemRepo(
     ) { filterText: String, curStore: Int, sortMode: ItemsSortingMode ->
         FilterCombine(filterText, curStore, sortMode)
     }.flatMapLatest {
-        db.itemsQueries.getAllDetailsFiltered(it.curStore, it.filterText, it.sortMode.name).asFlow().mapToList(scope.coroutineContext)
+        db.itemsQueries.getAllItemDetailsFiltered(
+                storeId = it.curStore,
+                itemFilter = it.filterText,
+                sortingMode = it.sortMode.name).asFlow().mapToList(scope.coroutineContext)
             .map { map ->
                 map.toList().map { listItem ->
                     ItemWithAisleName(Item(listItem.itemId, listItem.itemName, listItem.temperature, listItem.defaultUnits), listItem.aisleName)
@@ -98,33 +101,33 @@ class ItemRepo(
 
     // Items
     fun addItem(itemName: String) {
-        db.itemsQueries.add(itemName, ItemTemp.Ambient, UnitType.EACHES)
+        db.itemsQueries.addItem(itemName, ItemTemp.Ambient, UnitType.Count)
     }
 
     fun deleteItem(itemId: Int) {
-        db.itemsQueries.delete(itemId)
+        db.itemsQueries.deleteItem(itemId)
     }
 
     fun getItem(itemId: Int): StateFlow<Item> {
-        return db.itemsQueries.get(itemId).toStateFlow(scope, Item()) { item ->
+        return db.itemsQueries.getItem(itemId).toStateFlow(scope, Item()) { item ->
             Item(item.itemId, item.itemName, item.temperature, item.defaultUnits)
         }
     }
 
     fun setItemName(itemId: Int, itemName: String) {
-        db.itemsQueries.rename(itemName, itemId)
+        db.itemsQueries.renameItem(itemName, itemId)
     }
 
     fun setItemTemp(itemId: Int, itemTemp: ItemTemp) {
-        db.itemsQueries.setTemp(itemTemp, itemId)
+        db.itemsQueries.setItemTemp(itemTemp, itemId)
     }
 
     fun setItemDefaultUnits(itemId: Int, unitType: UnitType) {
-        db.itemsQueries.setUnits(unitType, itemId)
+        db.itemsQueries.setItemUnits(unitType, itemId)
     }
 
     fun getItemAisle(itemId: Int): StateFlow<ItemAisle?> {
-        return db.itemAislesQueries.get(itemId, selectedStoreId.value?.toLong()).toNullableStateFlow(scope, null) { itemAisle ->
+        return db.itemsQueries.getItemAisleAtStore(itemId, selectedStoreId.value?.toLong()).toNullableStateFlow(scope, null) { itemAisle ->
             if (itemAisle == null)
                 null
             else
@@ -139,12 +142,12 @@ class ItemRepo(
     fun updateItemAisle(itemId: Int, aisleId: Int, bayType: BayType) {
         val selectedStore = selectedStoreId.value
         if (selectedStore != null) {
-            db.itemAislesQueries.update(itemId, selectedStore, aisleId, bayType)
+            db.itemsQueries.updateItemAisle(itemId, selectedStore, aisleId, bayType)
         }
     }
 
     fun getItemPreparations(itemId: Int): StateFlow<List<ItemPrep>> {
-        return db.itemPrepsQueries.get(itemId).toListStateFlow(scope) { l ->
+        return db.itemsQueries.getItemPrep(itemId).toListStateFlow(scope) { l ->
             l.map { i ->
                 ItemPrep(i.itemPrepId, i.itemId, i.prepName)
             }
@@ -152,15 +155,15 @@ class ItemRepo(
     }
 
     fun addItemPrep(itemId: Int, prepName: String) {
-        db.itemPrepsQueries.add(itemId, prepName)
+        db.itemsQueries.addItemPrep(itemId, prepName)
     }
 
     fun updateItemPrep(prepId: Int, prepName: String) {
-        db.itemPrepsQueries.rename(prepName, prepId)
+        db.itemsQueries.renameItemPrep(prepName, prepId)
     }
 
     fun deleteItemPrep(prepId: Int) {
-        db.itemPrepsQueries.delete(prepId)
+        db.itemsQueries.deleteItemPrep(prepId)
     }
 
     fun getUsedItems(itemId: Int): List<String> {

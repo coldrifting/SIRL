@@ -1,13 +1,8 @@
 package com.coldrifting.sirl
 
 import android.app.Application
-import android.content.Context
-import app.cash.sqldelight.ColumnAdapter
 import app.cash.sqldelight.adapter.primitive.IntColumnAdapter
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
-import com.coldrifting.sirl.data.enums.BayType
-import com.coldrifting.sirl.data.enums.ItemTemp
-import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemAisle
@@ -16,26 +11,14 @@ import com.coldrifting.sirl.data.entities.Recipe
 import com.coldrifting.sirl.data.entities.RecipeEntry
 import com.coldrifting.sirl.data.entities.RecipeSection
 import com.coldrifting.sirl.data.entities.Store
+import com.coldrifting.sirl.data.entities.interfaces.Insertable
+import com.coldrifting.sirl.data.enums.BayType
+import com.coldrifting.sirl.data.enums.ItemTemp
+import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.repo.AppRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
-
-object BayTypeAdapter : ColumnAdapter<BayType, String> {
-    override fun decode(databaseValue: String): BayType = enumValueOf<BayType>(databaseValue)
-    override fun encode(value: BayType): String = value.toString()
-}
-
-object TempAdapter : ColumnAdapter<ItemTemp, String> {
-    override fun decode(databaseValue: String): ItemTemp = enumValueOf<ItemTemp>(databaseValue)
-    override fun encode(value: ItemTemp): String = value.toString()
-}
-
-object UnitTypeAdapter : ColumnAdapter<UnitType, String> {
-    override fun decode(databaseValue: String): UnitType = enumValueOf<UnitType>(databaseValue)
-    override fun encode(value: UnitType): String = value.toString()
-}
-
 
 class AppApplication : Application() {
 
@@ -44,9 +27,9 @@ class AppApplication : Application() {
         explicitNulls = false
     }
 
-    fun getAssetText(context: Context, fileName: String): String {
+    fun getAssetText(fileName: String): String {
         return try {
-            context.assets.open("database/$fileName.json")
+            this.applicationContext.assets.open("database/$fileName.json")
                 .bufferedReader()
                 .use { it.readText() }
         } catch (_: Exception) {
@@ -54,16 +37,27 @@ class AppApplication : Application() {
         }
     }
 
-    inline fun <reified T> populateEntries(context: Context, filename: String, insertAction: (T) -> Unit) {
-        val str = getAssetText(context, filename)
+    inline fun <reified T : Insertable> populateEntries(database: Database) {
+
+        val fileName = T::class.simpleName
+            ?.plus("s")
+            ?.replace(Regex("ys$"), "ies")
+            ?.replaceFirstChar { it.lowercase() }
+
+        if (fileName == null) {
+            return
+        }
+
+        val str = getAssetText(fileName)
+
         val entries = json.decodeFromString<List<T>>(str)
-        entries.forEach(insertAction)
+        entries.forEach { it.insert(database) }
     }
 
     private val scope = CoroutineScope(SupervisorJob())
 
     private val db by lazy {
-        val dbName = "a_test.db"
+        val dbName = "database.db"
         val dbFile = this.applicationContext.getDatabasePath(dbName)
 
         val seedDatabase = !dbFile.exists()
@@ -80,8 +74,8 @@ class AppApplication : Application() {
             ),
             ItemsAdapter = Items.Adapter(
                 itemIdAdapter = IntColumnAdapter,
-                temperatureAdapter = TempAdapter,
-                defaultUnitsAdapter = UnitTypeAdapter,
+                temperatureAdapter = ItemTemp.Adapter,
+                defaultUnitsAdapter = UnitType.Adapter,
             ),
             ItemPrepsAdapter = ItemPreps.Adapter(
                 itemPrepIdAdapter = IntColumnAdapter,
@@ -91,7 +85,7 @@ class AppApplication : Application() {
                 itemIdAdapter = IntColumnAdapter,
                 storeIdAdapter = IntColumnAdapter,
                 aisleIdAdapter = IntColumnAdapter,
-                bayAdapter = BayTypeAdapter
+                bayAdapter = BayType.Adapter
             ),
             RecipesAdapter = Recipes.Adapter(
                 recipeIdAdapter = IntColumnAdapter
@@ -107,28 +101,20 @@ class AppApplication : Application() {
                 recipeSectionIdAdapter = IntColumnAdapter,
                 itemIdAdapter = IntColumnAdapter,
                 itemPrepIdAdapter = IntColumnAdapter,
-                unitTypeAdapter = UnitTypeAdapter,
+                unitTypeAdapter = UnitType.Adapter,
                 amountAdapter = IntColumnAdapter
             )
         )
 
         if (seedDatabase) {
-            populateEntries<Store>(this.applicationContext, "stores") {
-                database.storesQueries.insert(it.storeId, it.storeName, it.selected) }
-            populateEntries<Aisle>(this.applicationContext, "aisles") {
-                database.aislesQueries.insert(it.aisleId, it.storeId, it.aisleName, it.sortingPrefix) }
-            populateEntries<Item>(this.applicationContext, "items") {
-                database.itemsQueries.insert(it.itemId, it.itemName, it.itemTemp, it.defaultUnits) }
-            populateEntries<ItemAisle>(this.applicationContext, "itemAisles") {
-                database.itemAislesQueries.insert(it.itemId, it.storeId, it.aisleId, it.bay) }
-            populateEntries<ItemPrep>(this.applicationContext, "itemPreps") {
-                 database.itemPrepsQueries.insert(it.itemPrepId, it.itemId, it.prepName) }
-            populateEntries<Recipe>(this.applicationContext, "recipes") {
-                 database.recipesQueries.insert(it.recipeId, it.recipeName, it.url, it.pinned, it.steps) }
-            populateEntries<RecipeSection>(this.applicationContext, "recipeSections") {
-                 database.recipeSectionsQueries.insert(it.recipeSectionId, it.recipeId, it.recipeSectionName, it.sortIndex) }
-            populateEntries<RecipeEntry>(this.applicationContext, "recipeEntries") {
-                 database.recipeEntriesQueries.insert(it.recipeEntryId, it.recipeId, it.recipeSectionId, it.itemId, it.itemPrepId, it.unitType, it.amount) }
+            populateEntries<Store>(database)
+            populateEntries<Aisle>(database)
+            populateEntries<Item>(database)
+            populateEntries<ItemAisle>(database)
+            populateEntries<ItemPrep>(database)
+            populateEntries<Recipe>(database)
+            populateEntries<RecipeSection>(database)
+            populateEntries<RecipeEntry>(database)
         }
 
         database

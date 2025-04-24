@@ -1,0 +1,141 @@
+import com.coldrifting.sirl.data.enums.UnitType;
+import kotlin.Boolean;
+import kotlin.Int;
+
+CREATE TABLE Recipes (
+    recipeId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    recipeName TEXT NOT NULL,
+    url TEXT,
+    pinned INTEGER AS Boolean NOT NULL,
+    steps TEXT
+);
+
+lastInsertRowId:
+SELECT last_insert_rowid();
+
+-- Recipes --
+
+allRecipes:
+SELECT * FROM Recipes ORDER BY pinned DESC, LOWER(recipeName);
+
+insertRecipe:
+INSERT INTO Recipes (recipeId, recipeName, url, pinned, steps)
+VALUES (?, ?, ?, ?, ?);
+
+addRecipe:
+INSERT INTO Recipes (recipeName, url, pinned, steps)
+VALUES (?, NULL, 0, NULL);
+
+renameRecipe:
+UPDATE Recipes
+SET recipeName = :recipeName
+WHERE recipeId = :recipeId;
+
+setRecipeSteps:
+UPDATE Recipes
+SET steps = :steps
+WHERE recipeId = :recipeId;
+
+deleteRecipe:
+DELETE FROM Recipes
+WHERE recipeId = :recipeId;
+
+toggleRecipePin:
+UPDATE Recipes
+SET pinned = CASE pinned WHEN 1 THEN 0 ELSE 1 END
+WHERE recipeId = :recipeId;
+
+recipeDetails:
+SELECT
+    RecipeDetails.recipeId,
+    RecipeDetails.recipeName,
+    RecipeDetails.url,
+    RecipeDetails.steps,
+    RecipeDetails.recipeSectionId,
+    RecipeDetails.recipeSectionName,
+    RecipeDetails.sortIndex,
+    RecipeEntries.recipeEntryId,
+    RecipeEntries.unitType,
+    RecipeEntries.amount,
+    Items.itemId,
+    Items.itemName,
+    ItemPreps.itemPrepId,
+    ItemPreps.prepName
+    FROM (SELECT
+        Recipes.recipeId,
+        Recipes.recipeName,
+        Recipes.url,
+        Recipes.steps,
+        RecipeSections.recipeSectionId,
+        RecipeSections.recipeSectionName,
+        RecipeSections.sortIndex
+        FROM Recipes
+    NATURAL JOIN RecipeSections) AS RecipeDetails
+    LEFT JOIN RecipeEntries USING (recipeSectionId)
+    LEFT JOIN Items USING (itemId)
+    LEFT JOIN ItemPreps USING (itemPrepId)
+    WHERE RecipeDetails.recipeId = :recipeId
+    ORDER BY RecipeDetails.recipeSectionId ASC, RecipeEntries.recipeEntryId;
+
+-- Recipe Sections --
+
+CREATE TABLE RecipeSections (
+    recipeSectionId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    recipeId INTEGER AS Int NOT NULL,
+    recipeSectionName TEXT NOT NULL,
+    sortIndex INTEGER AS Int NOT NULL,
+    FOREIGN KEY (recipeId) REFERENCES Recipes(recipeId) ON DELETE CASCADE
+);
+
+insertRecipeSection:
+INSERT INTO RecipeSections (recipeSectionId, recipeId, recipeSectionName, sortIndex)
+VALUES (:recipeSectionId, :recipeId, :recipeSectionName, :sortIndex);
+
+addRecipeSection:
+INSERT INTO RecipeSections (recipeId, recipeSectionName, sortIndex)
+VALUES (:recipeId, :recipeSectionName, 0);
+
+renameRecipeSection:
+UPDATE RecipeSections
+SET recipeSectionName = :recipeSectionName
+WHERE recipeSectionId = :recipeSectionId;
+
+deleteRecipeSection:
+DELETE FROM RecipeSections
+WHERE recipeSectionId = :recipeSectionId;
+
+-- Recipe Entries --
+
+CREATE TABLE RecipeEntries (
+    recipeEntryId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    recipeId INTEGER AS Int NOT NULL,
+    recipeSectionId INTEGER AS Int NOT NULL,
+    itemId INTEGER AS Int NOT NULL,
+    itemPrepId INTEGER AS Int,
+    unitType TEXT AS UnitType NOT NULL,
+    amount INTEGER AS Int NOT NULL,
+    FOREIGN KEY (recipeId) REFERENCES Recipes(recipeId) ON DELETE CASCADE,
+    FOREIGN KEY (recipeSectionId) REFERENCES RecipeSections(recipeSectionId) ON DELETE CASCADE,
+    FOREIGN KEY (itemId) REFERENCES Items(itemId) ON DELETE CASCADE,
+    FOREIGN KEY (itemPrepId) REFERENCES ItemPreps(itemPrepId) ON DELETE CASCADE,
+    UNIQUE(recipeId, recipeSectionId, itemId, itemPrepId)
+);
+
+insertRecipeEntry:
+INSERT INTO RecipeEntries (recipeEntryId, recipeId, recipeSectionId, itemId, itemPrepId, unitType, amount)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+addRecipeEntry:
+INSERT INTO RecipeEntries (recipeId, recipeSectionId, itemId, itemPrepId, unitType, amount)
+VALUES (?, ?, ?, ?, ?, ?);
+
+updateRecipeEntryUnits:
+UPDATE RecipeEntries
+SET amount = :amount, unitType = :unitType
+WHERE RecipeEntries.recipeEntryId = :recipeItemEntryId;
+
+deleteRecipeEntry:
+DELETE FROM RecipeEntries
+WHERE recipeEntryId = :recipeEntryId;
+
+

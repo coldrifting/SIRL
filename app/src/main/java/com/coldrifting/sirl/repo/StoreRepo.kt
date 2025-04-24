@@ -26,18 +26,18 @@ fun <T> Flow<List<T>>.toStateFlow(scope: CoroutineScope): StateFlow<List<T>> =
 fun <T: Any> Query<T>.toListStateFlow(scope: CoroutineScope): StateFlow<List<T>> =
     this.asFlow().mapToList(scope.coroutineContext).toStateFlow(scope)
 
-    val all = db.storesQueries.getAll().toListStateFlow(scope)
+    val all = db.storesQueries.allStores().toListStateFlow(scope)
 
     fun add(name: String) {
-        db.storesQueries.add(name)
+        db.storesQueries.addStore(name)
     }
 
     fun rename(storeId: Int, name: String) {
-        db.storesQueries.rename(name, storeId)
+        db.storesQueries.renameStore(name, storeId)
     }
 
     fun delete(storeId: Int) {
-        db.storesQueries.delete(storeId)
+        db.storesQueries.deleteStore(storeId)
     }
 
     fun getName(storeId: Int): String {
@@ -45,40 +45,40 @@ fun <T: Any> Query<T>.toListStateFlow(scope: CoroutineScope): StateFlow<List<T>>
     }
 
     fun select(storeId: Int) {
-        db.storesQueries.select(storeId)
+        db.storesQueries.selectStore(storeId)
     }
 
     fun selected(): Flow<Int> {
-        return db.storesQueries.selected().toStateFlow(scope, -1) { selectedStore ->
+        return db.storesQueries.selectedStore().toStateFlow(scope, -1) { selectedStore ->
             selectedStore.toInt()
         }
     }
 
     // Aisles
-    private val allAisles = db.aislesQueries.getAll().toListStateFlow(scope)
+    private val allAisles = db.storesQueries.allAisles().toListStateFlow(scope)
 
-    fun getAisles(storeId: Int) = db.aislesQueries.getAllFromStore(storeId).toListStateFlow(scope)
+    fun getAisles(storeId: Int) = db.storesQueries.allAislesFromStore(storeId).toListStateFlow(scope)
 
     fun addAisle(storeId: Int, aisleName: String) {
-        db.aislesQueries.transaction {
-            val max = (db.aislesQueries.getMaxSort().executeAsOne().expr?.toInt() ?: 0) + 1
-            db.aislesQueries.add(storeId, aisleName, max)
+        db.storesQueries.transaction {
+            val max = (db.storesQueries.aisleMaxSortIndex().executeAsOne().expr?.toInt() ?: 0) + 1
+            db.storesQueries.addAisle(storeId, aisleName, max)
         }
     }
 
     fun renameAisle(aisleId: Int, newAisleName: String) {
-        db.aislesQueries.rename(newAisleName, aisleId)
+        db.storesQueries.renameAisle(newAisleName, aisleId)
     }
 
     fun deleteAisle(aisleId: Int) {
-        db.aislesQueries.delete(aisleId)
+        db.storesQueries.deleteAisle(aisleId)
     }
 
     fun reorderAisles(items: List<Aisle>) {
         val list = getReorderedItems(items)
-        db.aislesQueries.transaction {
+        db.storesQueries.transaction {
             list.forEach { aisle ->
-                db.aislesQueries.updateSort(aisle.sortingPrefix, aisle.aisleId)
+                db.storesQueries.updateAisleSort(aisle.sortingPrefix, aisle.aisleId)
             }
         }
     }
