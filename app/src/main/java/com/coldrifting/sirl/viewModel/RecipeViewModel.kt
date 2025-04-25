@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.view
+package com.coldrifting.sirl.viewModel
 
 import com.coldrifting.sirl.repo.AppRepo
 import com.coldrifting.sirl.data.enums.UnitType

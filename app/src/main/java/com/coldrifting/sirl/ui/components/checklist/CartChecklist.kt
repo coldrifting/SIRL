@@ -19,19 +19,21 @@ fun CartChecklist(
     onHeaderClicked: (Int) -> Unit,
     onItemClicked: (Int, Int) -> Unit
 ) {
-    Surface(tonalElevation = 1.dp, shadowElevation = 1.dp) {
-        LazyColumn(
-            modifier = modifier
-        ) {
-            entries.forEachIndexed { headerIndex, header ->
+    Surface(
+        modifier = modifier,
+        tonalElevation = 1.dp,
+        shadowElevation = 1.dp
+    ) {
+        LazyColumn {
+            entries.forEach { header ->
                 item(key = header.id + 100000) {
                     CollapsableHeader(
                         title = header.name,
                         expanded = header.expanded,
-                        onClick = { onHeaderClicked.invoke(headerIndex) }
+                        onClick = { onHeaderClicked.invoke(header.id) }
                     )
                 }
-                header.items.forEachIndexed { itemIndex, item ->
+                header.items.forEach { item ->
                     item(key = item.id) {
                         AnimatedVisibility(
                             visible = header.expanded,
@@ -42,7 +44,7 @@ fun CartChecklist(
                                 name = item.name,
                                 details = item.details,
                                 checked = item.checked,
-                                onClick = { onItemClicked.invoke(headerIndex, itemIndex) }
+                                onClick = { onItemClicked.invoke(header.id, item.id) }
                             )
                         }
                     }

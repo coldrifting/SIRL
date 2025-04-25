@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.view
+package com.coldrifting.sirl.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

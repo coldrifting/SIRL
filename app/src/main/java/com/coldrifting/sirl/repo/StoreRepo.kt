@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class StoreRepo(
-    val db: Database,
-    val scope: CoroutineScope,
+    private val db: Database,
+    private val scope: CoroutineScope,
     val selectedStoreId: StateFlow<Int>
 ) {
 fun <T> Flow<T>.toStateFlow(scope: CoroutineScope, initialValue: T): StateFlow<T> =

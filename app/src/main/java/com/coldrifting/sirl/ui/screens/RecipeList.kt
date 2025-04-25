@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.ui.screens
 
-import android.content.res.Configuration
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -23,20 +22,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.coldrifting.sirl.R
 import com.coldrifting.sirl.Recipes
+import com.coldrifting.sirl.data.RouteRecipeDetails
+import com.coldrifting.sirl.data.TopLevelRoute.Companion.routeRecipes
 import com.coldrifting.sirl.ui.components.AppNavBar
-import com.coldrifting.sirl.ui.components.swipe.SwipeList
-import com.coldrifting.sirl.ui.components.dialogs.TextDialog
 import com.coldrifting.sirl.ui.components.AppTopBar
+import com.coldrifting.sirl.ui.components.dialogs.TextDialog
+import com.coldrifting.sirl.ui.components.swipe.SwipeList
 import com.coldrifting.sirl.ui.components.swipe.swipeDeleteAction
-import com.coldrifting.sirl.routes.RouteRecipeDetails
-import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
 import com.coldrifting.sirl.ui.theme.PinColor
-import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -125,19 +121,4 @@ fun RecipeList(
             }
         }
     )
-}
-
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun RecipeListPreview() {
-    SIRLTheme {
-        RecipeList(
-            navHostController = rememberNavController(),
-            recipes = listOf(Recipes(1, "Recipe 1", null, false, null)),
-            toggleRecipePin = {},
-            addRecipe = {},
-            deleteRecipe = {}
-        )
-    }
 }

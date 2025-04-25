@@ -85,7 +85,7 @@ fun AlertDialog(
     showConfirmButton: Boolean = true,
     showDismissButton: Boolean = true,
     bottomPadding: Int = 0,
-    onConfirm: () -> Unit,
+    onConfirm: (() -> Unit)? = null,
     onDismiss: () -> Unit,
     content: @Composable () -> Unit,
 ) {
@@ -135,7 +135,7 @@ fun AlertDialog(
                         TextButton(
                             enabled = confirmButtonEnabled,
                             onClick = {
-                                onConfirm.invoke()
+                                onConfirm?.invoke()
                                 onDismiss.invoke()
                             },
                             content = { Text(confirmText) }

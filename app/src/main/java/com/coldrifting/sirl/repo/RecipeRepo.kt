@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 
 class RecipeRepo(
-    val scope: CoroutineScope,
-    val db: Database
+    private val scope: CoroutineScope,
+    private val db: Database
 ) {
     val all = db.recipesQueries.allRecipes().toListStateFlow(scope)
 

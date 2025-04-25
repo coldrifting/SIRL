@@ -16,7 +16,8 @@ SELECT last_insert_rowid();
 -- Recipes --
 
 allRecipes:
-SELECT * FROM Recipes ORDER BY pinned DESC, LOWER(recipeName);
+SELECT * FROM Recipes
+ORDER BY pinned DESC, LOWER(recipeName);
 
 insertRecipe:
 INSERT INTO Recipes (recipeId, recipeName, url, pinned, steps)

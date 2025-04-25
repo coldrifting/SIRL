@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.ui.screens
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -15,20 +14,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.routes.RouteStoreAisleList
-import com.coldrifting.sirl.ui.components.swipe.AuxButtonData
+import com.coldrifting.sirl.data.RouteStoreAisleList
+import com.coldrifting.sirl.data.TopLevelRoute.Companion.routeItems
+import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.ui.components.AppNavBar
-import com.coldrifting.sirl.ui.components.swipe.SwipeRadioButtonList
-import com.coldrifting.sirl.ui.components.dialogs.TextDialog
 import com.coldrifting.sirl.ui.components.AppTopBar
+import com.coldrifting.sirl.ui.components.dialogs.TextDialog
+import com.coldrifting.sirl.ui.components.swipe.AuxButtonData
+import com.coldrifting.sirl.ui.components.swipe.SwipeRadioButtonList
 import com.coldrifting.sirl.ui.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.ui.components.swipe.swipeEditAction
-import com.coldrifting.sirl.data.entities.Store
-import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
-import com.coldrifting.sirl.ui.theme.SIRLTheme
 
 @Composable
 fun StoreList(
@@ -69,7 +65,7 @@ fun StoreList(
 
     Scaffold(
         topBar = { AppTopBar(navHostController, "Stores") },
-        bottomBar = { AppNavBar(navHostController, routeIngredients) },
+        bottomBar = { AppNavBar(navHostController, routeItems) },
         floatingActionButton = {
             FloatingActionButton(onClick = {showNewAlertDialog = true}) {
                 Icon(Icons.Filled.Add, "Add")
@@ -100,24 +96,4 @@ fun StoreList(
             )
         }
     )
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun StoreListPreview() {
-    SIRLTheme {
-        StoreList(
-            navHostController = rememberNavController(),
-            addStore = { _, _ -> },
-            renameStore = { _, _ -> },
-            deleteStore = { },
-            selectStore = { },
-            getStoreName = { "Store Name" },
-            selectedStore = 1,
-            storeList = listOf(
-                Store(0, "Macey's"),
-                Store(1, "Harmon's")
-            )
-        )
-    }
 }

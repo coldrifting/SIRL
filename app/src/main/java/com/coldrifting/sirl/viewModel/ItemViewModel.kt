@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.view
+package com.coldrifting.sirl.viewModel
 
 import com.coldrifting.sirl.data.entities.Item
 import com.coldrifting.sirl.data.entities.ItemAisle

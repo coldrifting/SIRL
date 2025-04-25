@@ -10,7 +10,8 @@ CREATE TABLE Stores (
 );
 
 allStores:
-SELECT * FROM Stores ORDER BY storeName;
+SELECT * FROM Stores
+ORDER BY storeName;
 
 insertStore:
 INSERT INTO Stores (storeId, storeName, selected)
@@ -21,16 +22,21 @@ INSERT INTO Stores (storeName, selected)
 VALUES (?, ?);
 
 renameStore:
-UPDATE Stores SET storeName = ? WHERE storeId = ?;
+UPDATE Stores
+SET storeName = ?
+WHERE storeId = ?;
 
 deleteStore:
-DELETE FROM Stores WHERE storeId = ?;
+DELETE FROM Stores
+WHERE storeId = ?;
 
 selectedStore:
 SELECT COALESCE( (SELECT Stores.storeId FROM Stores WHERE Stores.selected = 1 LIMIT 1), 0);
 
 selectStore:
-UPDATE Stores SET selected = :selected WHERE Stores.storeId = :storeId;
+UPDATE Stores
+SET selected = :selected
+WHERE Stores.storeId = :storeId;
 
 -- Aisles --
 
@@ -43,10 +49,13 @@ CREATE TABLE Aisles (
 );
 
 allAisles:
-SELECT * FROM Aisles ORDER BY sortingPrefix;
+SELECT * FROM Aisles
+ORDER BY sortingPrefix;
 
 allAislesFromStore:
-SELECT * FROM Aisles WHERE Aisles.storeId = ? ORDER BY sortingPrefix;
+SELECT * FROM Aisles
+WHERE Aisles.storeId = ?
+ORDER BY sortingPrefix;
 
 insertAisle:
 INSERT INTO Aisles (aisleId, storeId, aisleName, sortingPrefix)
@@ -57,13 +66,18 @@ INSERT INTO Aisles (storeId, aisleName, sortingPrefix)
 VALUES (?, ?, ?);
 
 renameAisle:
-UPDATE Aisles SET aisleName = ? WHERE aisleId = ?;
+UPDATE Aisles
+SET aisleName = ?
+WHERE aisleId = ?;
 
 aisleMaxSortIndex:
 SELECT (SELECT MAX(sortingPrefix) FROM Aisles) + 1;
 
 updateAisleSort:
-UPDATE Aisles SET sortingPrefix = ? WHERE aisleId = ?;
+UPDATE Aisles
+SET sortingPrefix = ?
+WHERE aisleId = ?;
 
 deleteAisle:
-DELETE FROM Aisles WHERE aisleId = ?;
+DELETE FROM Aisles
+WHERE aisleId = ?;

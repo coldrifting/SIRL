@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.ui.screens
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,11 +33,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import com.coldrifting.sirl.data.TopLevelRoute.Companion.routeItems
 import com.coldrifting.sirl.ui.components.dialogs.AlertDialog
 import com.coldrifting.sirl.ui.components.AppNavBar
 import com.coldrifting.sirl.ui.components.Section
@@ -56,12 +54,10 @@ import com.coldrifting.sirl.data.entities.Store
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
-import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
-import com.coldrifting.sirl.ui.theme.SIRLTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun IngredientDetails(
+fun ItemDetails(
     navHostController: NavHostController,
     item: Item,
     itemAisle: ItemAisle?,
@@ -142,7 +138,7 @@ fun IngredientDetails(
 
     Scaffold(
         topBar = { AppTopBar(navHostController, "Ingredient Details") },
-        bottomBar = { AppNavBar(navHostController, routeIngredients) },
+        bottomBar = { AppNavBar(navHostController, routeItems) },
         floatingActionButton = {
             FloatingActionButton(onClick = { showNewAlertDialog = true }) {
                 Icon(Icons.Filled.Add, "Add")
@@ -304,34 +300,6 @@ fun IngredientDetails(
             }
         }
     )
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun IngredientDetailsPreview() {
-    SIRLTheme {
-        IngredientDetails(
-            navHostController = rememberNavController(),
-            item = Item(itemName = "Aisle"),
-            itemAisle = ItemAisle(0, 0, 0),
-            setItemTemp = { _, _ -> },
-            setItemName = { _, _ -> },
-            setItemAisle = { _, _, _ -> },
-            setItemDefaultUnits = { _, _ -> },
-            aisles = listOf(),
-            stores = listOf(Store(1, "Store 1")),
-            currentStore = Store(1, "Store 1"),
-            setStore = { _ -> },
-            prep = listOf(ItemPrep(
-                itemId = 0, prepName = "Prep 1",
-                itemPrepId = -1
-            )),
-            addPrep = { _, _ -> },
-            updatePrep = { _, _ -> },
-            deletePrep = { _ -> },
-            checkDeletePrep = { i -> listOf("") }
-        )
-    }
 }
 
 @Composable

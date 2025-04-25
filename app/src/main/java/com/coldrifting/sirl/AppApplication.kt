@@ -103,6 +103,13 @@ class AppApplication : Application() {
                 itemPrepIdAdapter = IntColumnAdapter,
                 unitTypeAdapter = UnitType.Adapter,
                 amountAdapter = IntColumnAdapter
+            ),
+            CartHeadersAdapter = CartHeaders.Adapter(
+                headerIdAdapter = IntColumnAdapter
+            ),
+            CartItemsAdapter = CartItems.Adapter(
+                cartItemIdAdapter = IntColumnAdapter,
+                headerIdAdapter = IntColumnAdapter
             )
         )
 

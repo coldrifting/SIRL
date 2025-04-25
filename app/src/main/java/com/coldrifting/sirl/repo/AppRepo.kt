@@ -31,6 +31,7 @@ class AppRepo(
 
     val cart = CartRepo(
         db = database,
+        scope = scope,
         selectedStoreId = selectedStoreId
     )
 }

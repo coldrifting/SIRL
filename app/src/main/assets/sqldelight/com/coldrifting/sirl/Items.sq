@@ -57,7 +57,8 @@ SET defaultUnits = ?
 WHERE itemId = ?;
 
 deleteItem:
-DELETE FROM Items WHERE itemId = ?;
+DELETE FROM Items
+WHERE itemId = ?;
 
 getRecipesContainingItem:
 SELECT
@@ -90,7 +91,9 @@ CREATE TABLE ItemPreps (
 );
 
 getItemPrep:
-SELECT * FROM ItemPreps WHERE itemId = ?;
+SELECT *
+FROM ItemPreps
+WHERE itemId = ?;
 
 addItemPrep:
 INSERT INTO ItemPreps (itemId, prepName)
@@ -101,10 +104,13 @@ INSERT INTO ItemPreps (itemPrepId, itemId, prepName)
 VALUES (?, ?, ?);
 
 renameItemPrep:
-UPDATE ItemPreps SET prepName = ? WHERE itemPrepId = ?;
+UPDATE ItemPreps
+SET prepName = ?
+WHERE itemPrepId = ?;
 
 deleteItemPrep:
-DELETE FROM ItemPreps WHERE itemPrepId = ?;
+DELETE FROM ItemPreps
+WHERE itemPrepId = ?;
 
 -- Item Aisles --
 
@@ -120,7 +126,8 @@ CREATE TABLE ItemAisles (
 );
 
 getItemAisleAtStore:
-SELECT * FROM ItemAisles WHERE itemId = :itemId AND storeId = COALESCE(:storeId, -1);
+SELECT * FROM ItemAisles
+WHERE itemId = :itemId AND storeId = COALESCE(:storeId, -1);
 
 insertItemAisle:
 INSERT INTO ItemAisles (itemId, storeId, aisleId, bay)

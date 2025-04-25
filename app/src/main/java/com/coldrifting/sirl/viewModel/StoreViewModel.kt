@@ -1,4 +1,4 @@
-package com.coldrifting.sirl.view
+package com.coldrifting.sirl.viewModel
 
 import com.coldrifting.sirl.data.entities.Aisle
 import com.coldrifting.sirl.repo.AppRepo

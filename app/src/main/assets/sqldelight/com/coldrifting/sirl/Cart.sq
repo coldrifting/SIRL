@@ -1,3 +1,72 @@
+import kotlin.Boolean;
+import kotlin.Int;
+
+CREATE TABLE CartHeaders (
+    headerId INTEGER AS Int NOT NULL PRIMARY KEY,
+    headerName TEXT NOT NULL,
+    headerExpanded INTEGER AS Boolean NOT NULL DEFAULT 1
+);
+
+CREATE TABLE CartItems (
+    cartItemId INTEGER AS Int NOT NULL PRIMARY KEY,
+    headerId INTEGER AS Int NOT NULL,
+    cartItemName TEXT NOT NULL,
+    cartItemDetails TEXT NOT NULL,
+    cartItemChecked INTEGER AS Boolean NOT NULL DEFAULT 0,
+    FOREIGN KEY (headerId) REFERENCES CartHeaders(headerId)
+);
+
+insertCartHeader:
+INSERT INTO CartHeaders (headerId, headerName)
+VALUES (?, ?);
+
+insertCartItem:
+INSERT INTO CartItems (cartItemId, headerId, cartItemName, cartItemDetails)
+VALUES (?, ?, ?, ?);
+
+getCartList:
+SELECT
+CartHeaders.headerId,
+CartHeaders.headerName,
+CartHeaders.headerExpanded,
+CartItems.cartItemId,
+CartItems.cartItemName,
+CartItems.cartItemDetails,
+CartItems.cartItemChecked
+FROM CartHeaders
+NATURAL JOIN CartItems;
+
+getCartItemChecked:
+SELECT cartItemChecked FROM CartItems
+WHERE cartItemId = ?;
+
+toggleCartItemChecked:
+UPDATE CartItems
+SET cartItemChecked = ?
+WHERE cartItemId = ?;
+
+getCartHeaderExpanded:
+SELECT headerExpanded FROM CartHeaders
+WHERE headerId = ?;
+
+toggleCartHeaderExpanded:
+UPDATE CartHeaders
+SET headerExpanded = ?
+WHERE headerId = ?;
+
+getItemsWithUnknownLocation:
+SELECT cartItemName
+FROM CartItems
+WHERE headerId = -1;
+
+-- noinspection MissingWhere
+clearCartItems:
+DELETE FROM CartItems;
+
+-- noinspection MissingWhere
+clearCartHeaders:
+DELETE FROM CartHeaders;
+
 getShoppingList:
 SELECT
 Aisles.aisleId,
@@ -25,7 +94,7 @@ LEFT JOIN ItemAisles ON RecipeEntryItems.itemId = ItemAisles.itemId AND ItemAisl
 LEFT JOIN Aisles USING (aisleId)
 LEFT JOIN ItemPreps USING (itemPrepId)
 WHERE RecipeEntryItems.pinned = 1
-GROUP BY RecipeEntryItems.itemName, ItemPreps.prepName
+GROUP BY RecipeEntryItems.itemName
 ORDER BY Aisles.sortingPrefix,
         CASE WHEN ItemAisles.bay = 'Start' THEN 1
             WHEN ItemAisles.bay = 'Middle' THEN 2

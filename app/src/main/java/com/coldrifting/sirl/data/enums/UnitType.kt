@@ -43,7 +43,7 @@ enum class UnitType {
             833 -> "$leading⅚"
 
             125 -> "$leading⅛"
-            325 -> "$leading⅜"
+            375 -> "$leading⅜"
             625 -> "$leading⅝"
             875 -> "$leading⅞"
 

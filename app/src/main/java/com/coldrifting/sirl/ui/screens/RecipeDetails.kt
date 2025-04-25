@@ -17,8 +17,8 @@ import com.coldrifting.sirl.data.objects.ChecklistHeader
 import com.coldrifting.sirl.data.objects.ChecklistItem
 import com.coldrifting.sirl.ui.components.checklist.RecipeDetailsChecklist
 import com.coldrifting.sirl.data.objects.RecipeTree
-import com.coldrifting.sirl.routes.RouteRecipeEdit
-import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeRecipes
+import com.coldrifting.sirl.data.RouteRecipeEdit
+import com.coldrifting.sirl.data.TopLevelRoute.Companion.routeRecipes
 
 @Composable
 fun RecipeDetails(

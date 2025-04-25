@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.ui.screens
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,23 +40,19 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.coldrifting.sirl.ui.components.dialogs.AlertDialog
-import com.coldrifting.sirl.ui.components.AppNavBar
-import com.coldrifting.sirl.ui.components.swipe.SwipeList
-import com.coldrifting.sirl.ui.components.dialogs.TextDialog
-import com.coldrifting.sirl.ui.components.AppTopBar
-import com.coldrifting.sirl.ui.components.swipe.swipeDeleteAction
-import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.RouteItemDetails
+import com.coldrifting.sirl.data.RouteStoreList
+import com.coldrifting.sirl.data.TopLevelRoute.Companion.routeItems
 import com.coldrifting.sirl.data.objects.ItemWithAisleName
-import com.coldrifting.sirl.routes.RouteIngredientDetails
-import com.coldrifting.sirl.routes.RouteStoreList
-import com.coldrifting.sirl.routes.top.TopLevelRoute.Companion.routeIngredients
-import com.coldrifting.sirl.ui.theme.SIRLTheme
+import com.coldrifting.sirl.ui.components.AppNavBar
+import com.coldrifting.sirl.ui.components.AppTopBar
+import com.coldrifting.sirl.ui.components.dialogs.AlertDialog
+import com.coldrifting.sirl.ui.components.dialogs.TextDialog
+import com.coldrifting.sirl.ui.components.swipe.SwipeList
+import com.coldrifting.sirl.ui.components.swipe.swipeDeleteAction
 import kotlinx.coroutines.launch
 
 fun Modifier.positionAwareImePadding() = composed {
@@ -73,7 +68,7 @@ fun Modifier.positionAwareImePadding() = composed {
 }
 
 @Composable
-fun IngredientList(
+fun ItemList(
     navHostController: NavHostController,
     addItem: (String) -> Unit,
     checkDeleteItem: suspend (Int) -> List<String>,
@@ -159,7 +154,7 @@ fun IngredientList(
                         }
                     })
 
-                AppNavBar(navHostController, routeIngredients)
+                AppNavBar(navHostController, routeItems)
             }
         },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -181,7 +176,7 @@ fun IngredientList(
                         }
                     }
                 },
-                tapAction = { navHostController.navigate(RouteIngredientDetails(it)) },
+                tapAction = { navHostController.navigate(RouteItemDetails(it)) },
                 rowPadding = PaddingValues(start = 0.dp, end = 16.dp)
             ) {
                 val tempColor = it.item.getTempColor()
@@ -204,29 +199,4 @@ fun IngredientList(
             }
         }
     )
-}
-
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun IngredientListPreview() {
-    SIRLTheme {
-        IngredientList(
-            navHostController = rememberNavController(),
-            addItem = {},
-            deleteItem = {},
-            items =
-            listOf(
-                ItemWithAisleName(Item(3, "Red Wine Vinegar"), "Aisle 02"),
-                ItemWithAisleName(Item(44, "Alfredo Sauce"), "Aisle 03"),
-                ItemWithAisleName(Item(74, "Crushed Red Pepper"), null),
-                ItemWithAisleName(Item(103, "Powdered Sugar"), "Aisle 06")
-            ),
-            setItemSort = {},
-            onFilterTextChanged = {},
-            searchText = "Searching",
-            sortMode = "Name",
-            checkDeleteItem = { i: Int -> listOf("") }
-        )
-    }
 }

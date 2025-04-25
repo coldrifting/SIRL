@@ -28,9 +28,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
 class ItemRepo(
+    private val db: Database,
     private val scope: CoroutineScope,
-    val selectedStoreId: StateFlow<Int?>,
-    val db: Database
+    private val selectedStoreId: StateFlow<Int?>
 ) {
     enum class ItemsSortingMode {
         Name,
