@@ -154,7 +154,13 @@ class MainActivity : ComponentActivity() {
 
                     StoreList(
                         navHostController = navController,
-                        addStore = viewModel.stores::add,
+                        addStore = { storeName, select ->
+                            val storeId = viewModel.stores.add(storeName, select)
+                            coroutineScope.launch {
+                                delay(100)
+                                navController.navigate(RouteStoreAisleList(storeId))
+                            }
+                        },
                         renameStore = viewModel.stores::rename,
                         deleteStore = viewModel.stores::delete,
                         selectStore = viewModel.stores::select,

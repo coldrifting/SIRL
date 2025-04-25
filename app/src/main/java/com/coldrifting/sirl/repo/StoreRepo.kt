@@ -28,8 +28,10 @@ fun <T: Any> Query<T>.toListStateFlow(scope: CoroutineScope): StateFlow<List<T>>
 
     val all = db.storesQueries.allStores().toListStateFlow(scope)
 
-    fun add(name: String, select: Boolean) {
+    fun add(name: String, select: Boolean): Int {
         db.storesQueries.addStore(name, select)
+        val storeId = db.storesQueries.lastInsertRowId().executeAsOne().toInt()
+        return storeId
     }
 
     fun rename(storeId: Int, name: String) {

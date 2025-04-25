@@ -9,6 +9,9 @@ CREATE TABLE Stores (
     selected INTEGER AS Boolean NOT NULL
 );
 
+lastInsertRowId:
+SELECT last_insert_rowid();
+
 allStores:
 SELECT * FROM Stores
 ORDER BY storeName;
