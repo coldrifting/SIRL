@@ -34,7 +34,7 @@ class ItemViewModel(private val repository: AppRepo) {
     fun get(itemId: Int): StateFlow<Item> =
         repository.items.getItem(itemId)
 
-    fun add(itemName: String) =
+    fun add(itemName: String): Int =
         repository.items.addItem(itemName)
 
     fun rename(itemId: Int, itemName: String) =

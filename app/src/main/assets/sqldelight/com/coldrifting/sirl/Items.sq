@@ -12,6 +12,9 @@ CREATE TABLE Items (
     defaultUnits TEXT AS UnitType NOT NULL
 );
 
+lastInsertRowId:
+SELECT last_insert_rowid();
+
 getItem:
 SELECT * FROM Items WHERE itemId = ?;
 

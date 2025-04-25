@@ -100,8 +100,10 @@ class ItemRepo(
     }.stateIn(scope, SharingStarted.Companion.Eagerly, emptyList())
 
     // Items
-    fun addItem(itemName: String) {
+    fun addItem(itemName: String): Int {
         db.itemsQueries.addItem(itemName, ItemTemp.Ambient, UnitType.Count)
+        val itemId = db.itemsQueries.lastInsertRowId().executeAsOne().toInt()
+        return itemId
     }
 
     fun deleteItem(itemId: Int) {

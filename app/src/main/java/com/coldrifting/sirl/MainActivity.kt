@@ -96,7 +96,13 @@ class MainActivity : ComponentActivity() {
                     val searchText by viewModel.items.filterTextState.collectAsState()
                     ItemList(
                         navHostController = navController,
-                        addItem = viewModel.items::add,
+                        addItem = {
+                            val itemId = viewModel.items.add(it)
+                            coroutineScope.launch {
+                                delay(100)
+                                navController.navigate(RouteItemDetails(itemId))
+                            }
+                        },
                         deleteItem = viewModel.items::delete,
                         checkDeleteItem = viewModel.items::getUsedItems,
                         items = items,
