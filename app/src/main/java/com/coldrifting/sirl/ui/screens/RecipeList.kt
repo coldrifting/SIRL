@@ -49,8 +49,7 @@ fun RecipeList(
         TextDialog(title = "Add New Recipe",
             placeholder = "Recipe Name",
             action = "Add",
-            // TODO - Navigate directly to new screen?
-            onSuccess = { addRecipe(it) },
+            onSuccess = addRecipe,
             onDismiss = { showNewAlertDialog = false })
     }
 

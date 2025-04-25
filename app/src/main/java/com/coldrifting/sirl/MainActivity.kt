@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
@@ -48,6 +49,7 @@ import com.coldrifting.sirl.ui.screens.StoreList
 import com.coldrifting.sirl.ui.theme.SIRLTheme
 import com.coldrifting.sirl.viewModel.AppViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +66,8 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainContent() {
         val viewModel: AppViewModel by viewModels { AppViewModel.Factory }
+
+        val coroutineScope = rememberCoroutineScope()
 
         val navController = rememberNavController()
 
@@ -190,7 +194,13 @@ class MainActivity : ComponentActivity() {
                         navHostController = navController,
                         recipes = recipes,
                         toggleRecipePin = viewModel.recipes::pin,
-                        addRecipe = viewModel.recipes::add,
+                        addRecipe = {
+                            val recipeId = viewModel.recipes.add(it)
+                            coroutineScope.launch {
+                                delay(100)
+                                navController.navigate(RouteRecipeDetails(recipeId))
+                            }
+                        },
                         deleteRecipe = viewModel.recipes::delete
                     )
                 }

@@ -22,10 +22,11 @@ class RecipeRepo(
         db.recipesQueries.toggleRecipePin(recipeId)
     }
 
-    fun add(recipeName: String) {
+    fun add(recipeName: String): Int {
         db.recipesQueries.addRecipe(recipeName)
         val recipeId = db.recipesQueries.lastInsertRowId().executeAsOne().toInt()
         db.recipesQueries.addRecipeSection(recipeId, "Main")
+        return recipeId
     }
 
     fun rename(recipeId: Int, recipeName: String) {

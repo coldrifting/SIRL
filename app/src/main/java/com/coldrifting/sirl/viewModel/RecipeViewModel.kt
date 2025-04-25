@@ -9,7 +9,7 @@ class RecipeViewModel(private val repository: AppRepo) {
     val all = repository.recipes.all
 
     // Recipes
-    fun add(recipeName: String) =
+    fun add(recipeName: String): Int =
         repository.recipes.add(recipeName)
 
     fun delete(recipeId: Int) =
