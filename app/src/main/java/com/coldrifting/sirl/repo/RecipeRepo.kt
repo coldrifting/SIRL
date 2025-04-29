@@ -3,7 +3,7 @@ package com.coldrifting.sirl.repo
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.coldrifting.sirl.Database
-import com.coldrifting.sirl.data.enums.UnitType
+import com.coldrifting.sirl.data.objects.Amount
 import com.coldrifting.sirl.data.objects.RawRecipeEntry
 import com.coldrifting.sirl.data.objects.RecipeTree
 import com.coldrifting.sirl.repo.utils.toListStateFlow
@@ -56,7 +56,6 @@ class RecipeRepo(
                 sortIndex = it.sortIndex,
                 itemId = it.itemId,
                 itemName = it.itemName,
-                unitType = it.unitType,
                 amount = it.amount,
                 itemPrepId = it.itemPrepId,
                 prepName = it.prepName
@@ -78,11 +77,11 @@ class RecipeRepo(
     }
 
 
-    fun setEntryAmount(recipeItemEntryId: Int, unitType: UnitType, amount: Int) {
-        db.recipesQueries.updateRecipeEntryUnits(amount, unitType, recipeItemEntryId)
+    fun setEntryAmount(recipeItemEntryId: Int, amount: Amount) {
+        db.recipesQueries.updateRecipeEntryUnits(amount, recipeItemEntryId)
     }
 
-    fun addEntry(recipeSectionEntryId: Int?, recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, unitType: UnitType, amount: Int) {
+    fun addEntry(recipeSectionEntryId: Int?, recipeId: Int, recipeSectionId: Int, itemId: Int, itemPrepId: Int?, amount: Amount) {
         if (recipeSectionEntryId != null) {
             db.recipesQueries.insertRecipeEntry(
                 recipeSectionEntryId,
@@ -90,7 +89,6 @@ class RecipeRepo(
                 recipeSectionId,
                 itemId,
                 itemPrepId,
-                unitType,
                 amount)
         }
         else {
@@ -99,7 +97,6 @@ class RecipeRepo(
                 recipeSectionId,
                 itemId,
                 itemPrepId,
-                unitType,
                 amount)
         }
     }

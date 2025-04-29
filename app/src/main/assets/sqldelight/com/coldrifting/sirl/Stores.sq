@@ -6,7 +6,7 @@ import kotlin.Int;
 CREATE TABLE Stores (
     storeId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
     storeName TEXT NOT NULL,
-    selected INTEGER AS Boolean NOT NULL
+    selected INTEGER AS Boolean NOT NULL DEFAULT 0
 );
 
 lastInsertRowId:

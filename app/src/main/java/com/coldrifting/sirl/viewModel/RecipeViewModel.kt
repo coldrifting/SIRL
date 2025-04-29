@@ -1,8 +1,8 @@
 package com.coldrifting.sirl.viewModel
 
-import com.coldrifting.sirl.repo.AppRepo
-import com.coldrifting.sirl.data.enums.UnitType
+import com.coldrifting.sirl.data.objects.Amount
 import com.coldrifting.sirl.data.objects.RecipeTree
+import com.coldrifting.sirl.repo.AppRepo
 import kotlinx.coroutines.flow.StateFlow
 
 class RecipeViewModel(private val repository: AppRepo) {
@@ -41,23 +41,21 @@ class RecipeViewModel(private val repository: AppRepo) {
         recipeSectionId: Int,
         itemId: Int,
         itemPrepId: Int?,
-        unitType: UnitType,
-        amount: Int
+        amount: Amount
     ) = repository.recipes.addEntry(
         recipeSectionEntryId,
         recipeId,
         recipeSectionId,
         itemId,
         itemPrepId,
-        unitType,
         amount
     )
 
     fun deleteItem(recipeSectionEntryId: Int) =
         repository.recipes.deleteEntry(recipeSectionEntryId)
 
-    fun setItemAmount(recipeItemEntryId: Int, unitType: UnitType, amount: Int) =
-        repository.recipes.setEntryAmount(recipeItemEntryId, unitType, amount)
+    fun setItemAmount(recipeItemEntryId: Int, amount: Amount) =
+        repository.recipes.setEntryAmount(recipeItemEntryId, amount)
 
     fun editSteps(recipeId: Int, recipeSteps: String) =
         repository.recipes.setSteps(recipeId, recipeSteps)

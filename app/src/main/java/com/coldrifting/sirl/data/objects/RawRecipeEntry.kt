@@ -1,7 +1,5 @@
 package com.coldrifting.sirl.data.objects
 
-import com.coldrifting.sirl.data.enums.UnitType
-
 data class RawRecipeEntry(
     val recipeEntryId: Int = 0,
     val recipeId: Int = 0,
@@ -15,8 +13,7 @@ data class RawRecipeEntry(
 
     val itemId: Int? = 0,
     val itemName: String? = "",
-    val unitType: UnitType? = UnitType.Count,
-    val amount: Int? = 0,
+    val amount: Amount? = null,
 
     val itemPrepId: Int? = null,
     val prepName: String? = null
@@ -33,8 +30,8 @@ data class RawRecipeEntry(
                     RecipeTreeItemPrep(it.itemPrepId, it.prepName)
                 } else null
 
-                val item = if (it.itemId != null && it.itemName != null && it.unitType != null && it.amount != null) {
-                    RecipeTreeItemEntry(it.recipeEntryId, it.itemId, it.itemName, itemPrep, it.unitType, it.amount)
+                val item = if (it.itemId != null && it.itemName != null && it.amount != null) {
+                    RecipeTreeItemEntry(it.recipeEntryId, it.itemId, it.itemName, itemPrep, it.amount)
                 } else null
 
                 // Get or create current section

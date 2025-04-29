@@ -1,4 +1,4 @@
-import com.coldrifting.sirl.data.enums.UnitType;
+import com.coldrifting.sirl.data.objects.Amount;
 import kotlin.Boolean;
 import kotlin.Int;
 
@@ -6,7 +6,8 @@ CREATE TABLE Recipes (
     recipeId INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
     recipeName TEXT NOT NULL,
     url TEXT,
-    pinned INTEGER AS Boolean NOT NULL,
+    pinned INTEGER AS Boolean NOT NULL DEFAULT 0,
+    cartAmount INTEGER AS Int NOT NULL DEFAULT 0,
     steps TEXT
 );
 
@@ -20,12 +21,12 @@ SELECT * FROM Recipes
 ORDER BY pinned DESC, LOWER(recipeName);
 
 insertRecipe:
-INSERT INTO Recipes (recipeId, recipeName, url, pinned, steps)
-VALUES (?, ?, ?, ?, ?);
+INSERT INTO Recipes (recipeId, recipeName, url, pinned, cartAmount, steps)
+VALUES (?, ?, ?, ?, 0, ?);
 
 addRecipe:
-INSERT INTO Recipes (recipeName, url, pinned, steps)
-VALUES (?, NULL, 0, NULL);
+INSERT INTO Recipes (recipeName, url, pinned, cartAmount, steps)
+VALUES (?, NULL, 0, 0, NULL);
 
 renameRecipe:
 UPDATE Recipes
@@ -56,7 +57,6 @@ SELECT
     RecipeDetails.recipeSectionName,
     RecipeDetails.sortIndex,
     RecipeEntries.recipeEntryId,
-    RecipeEntries.unitType,
     RecipeEntries.amount,
     Items.itemId,
     Items.itemName,
@@ -113,8 +113,7 @@ CREATE TABLE RecipeEntries (
     recipeSectionId INTEGER AS Int NOT NULL,
     itemId INTEGER AS Int NOT NULL,
     itemPrepId INTEGER AS Int,
-    unitType TEXT AS UnitType NOT NULL,
-    amount INTEGER AS Int NOT NULL,
+    amount TEXT AS Amount NOT NULL,
     FOREIGN KEY (recipeId) REFERENCES Recipes(recipeId) ON DELETE CASCADE,
     FOREIGN KEY (recipeSectionId) REFERENCES RecipeSections(recipeSectionId) ON DELETE CASCADE,
     FOREIGN KEY (itemId) REFERENCES Items(itemId) ON DELETE CASCADE,
@@ -123,16 +122,16 @@ CREATE TABLE RecipeEntries (
 );
 
 insertRecipeEntry:
-INSERT INTO RecipeEntries (recipeEntryId, recipeId, recipeSectionId, itemId, itemPrepId, unitType, amount)
-VALUES (?, ?, ?, ?, ?, ?, ?);
+INSERT INTO RecipeEntries (recipeEntryId, recipeId, recipeSectionId, itemId, itemPrepId, amount)
+VALUES (?, ?, ?, ?, ?, ?);
 
 addRecipeEntry:
-INSERT INTO RecipeEntries (recipeId, recipeSectionId, itemId, itemPrepId, unitType, amount)
-VALUES (?, ?, ?, ?, ?, ?);
+INSERT INTO RecipeEntries (recipeId, recipeSectionId, itemId, itemPrepId, amount)
+VALUES (?, ?, ?, ?, ?);
 
 updateRecipeEntryUnits:
 UPDATE RecipeEntries
-SET amount = :amount, unitType = :unitType
+SET amount = :amount
 WHERE RecipeEntries.recipeEntryId = :recipeItemEntryId;
 
 deleteRecipeEntry:

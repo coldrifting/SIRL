@@ -237,6 +237,7 @@ fun ItemDetails(
                             width = 150.dp,
                             list = UnitType.entries,
                             label = "Default Units",
+                            toString = {it.getFriendlyName()},
                             value = item.defaultUnits,
                             select = { setItemDefaultUnits(item.itemId, it) }
                         )

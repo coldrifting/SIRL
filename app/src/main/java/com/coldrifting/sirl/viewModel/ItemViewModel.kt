@@ -34,6 +34,9 @@ class ItemViewModel(private val repository: AppRepo) {
     fun get(itemId: Int): StateFlow<Item> =
         repository.items.getItem(itemId)
 
+    fun getDefaultItemType(itemId: Int) =
+        repository.items.getDefaultItemType(itemId)
+
     fun add(itemName: String): Int =
         repository.items.addItem(itemName)
 

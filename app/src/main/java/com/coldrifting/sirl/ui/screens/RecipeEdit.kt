@@ -54,9 +54,9 @@ import com.coldrifting.sirl.ui.components.AppTopBar
 import com.coldrifting.sirl.ui.components.swipe.swipeDeleteAction
 import com.coldrifting.sirl.data.objects.RecipeTreeItem
 import com.coldrifting.sirl.data.objects.RecipeTree
-import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.data.RouteRecipeEditSteps
 import com.coldrifting.sirl.data.TopLevelRoute.Companion.routeRecipes
+import com.coldrifting.sirl.data.objects.Amount
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,13 +68,12 @@ fun RecipeEdit(
     addSection: (Int, String) -> Unit,
     deleteSection: (Int) -> Unit,
     setRecipeSectionName: (Int, String) -> Unit,
-    setRecipeItemAmount: (Int, UnitType, Int) -> Unit,
-    addRecipeEntry: (Int?, Int, Int, Int, Int?, UnitType, Int) -> Unit,
+    setRecipeItemAmount: (Int, Amount) -> Unit,
+    addRecipeEntry: (Int?, Int, Int, Int, Int?, Amount) -> Unit,
     deleteRecipeEntry: (Int) -> Unit,
 ) {
     var selectedRecipeItem by remember { mutableIntStateOf(-1) }
-    var selectedRecipeItemAmount by remember { mutableIntStateOf(0) }
-    var selectedRecipeItemUnitType by remember { mutableStateOf(UnitType.Count) }
+    var selectedRecipeItemAmount by remember { mutableStateOf<Amount>(Amount(1)) }
 
     var showAmountEditDialog by remember { mutableStateOf(false) }
 
@@ -126,7 +125,12 @@ fun RecipeEdit(
                 title = "Section Name",
                 placeholder = "New Section",
                 action = "Add",
-                onSuccess = { newTabTarget = recipe.recipeSections.size; addSection.invoke(recipe.recipeId, it) },
+                onSuccess = {
+                    newTabTarget = recipe.recipeSections.size; addSection.invoke(
+                    recipe.recipeId,
+                    it
+                )
+                },
                 onDismiss = { showAddSectionDialog = false }
             )
         }
@@ -150,11 +154,9 @@ fun RecipeEdit(
         if (showAmountEditDialog) {
             IngredientAmountEdit(
                 placeholderAmount = selectedRecipeItemAmount,
-                placeholderUnitType = selectedRecipeItemUnitType,
-                onSuccess = { unitType, amount ->
+                onSuccess = { amount ->
                     setRecipeItemAmount(
                         selectedRecipeItem,
-                        unitType,
                         amount
                     )
                 },
@@ -177,8 +179,7 @@ fun RecipeEdit(
                         currentSectionId,
                         itemWithPrep.itemId,
                         itemWithPrep.itemPrep?.itemPrepId,
-                        itemWithPrep.defaultUnits,
-                        1000
+                        Amount(1, itemWithPrep.defaultUnits)
                     )
                 },
                 onDismiss = { showAddIngredientDialog = false }
@@ -340,26 +341,25 @@ fun RecipeEdit(
 
                     Spacer(Modifier.width(8.dp))
 
-                        Surface(
-                            modifier = Modifier
-                                .width(80.dp)
-                                .fillMaxHeight()
-                                .padding(vertical = 8.dp),
-                            tonalElevation = 4.dp,
-                            shape = RoundedCornerShape(8.dp),
-                            onClick = {
-                                    selectedRecipeItem = it.recipeEntryId
-                                    selectedRecipeItemAmount = it.amount
-                                    selectedRecipeItemUnitType = it.unitType
+                    Surface(
+                        modifier = Modifier
+                            .width(80.dp)
+                            .fillMaxHeight()
+                            .padding(vertical = 8.dp),
+                        tonalElevation = 4.dp,
+                        shape = RoundedCornerShape(8.dp),
+                        onClick = {
+                            selectedRecipeItem = it.recipeEntryId
+                            selectedRecipeItemAmount = it.amount
 
-                                    showAmountEditDialog = true
-                            }
-                        ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                            showAmountEditDialog = true
+                        }
                     ) {
-                            Text(it.unitType.getPrepAbbreviation(it.amount))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Text(it.amount.toString())
                         }
                     }
                 }

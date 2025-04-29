@@ -15,6 +15,7 @@ import com.coldrifting.sirl.data.entities.interfaces.Insertable
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
+import com.coldrifting.sirl.data.objects.Amount
 import com.coldrifting.sirl.repo.AppRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -75,7 +76,7 @@ class AppApplication : Application() {
             ItemsAdapter = Items.Adapter(
                 itemIdAdapter = IntColumnAdapter,
                 temperatureAdapter = ItemTemp.Adapter,
-                defaultUnitsAdapter = UnitType.Adapter,
+                defaultUnitsAdapter = UnitType.Adapter
             ),
             ItemPrepsAdapter = ItemPreps.Adapter(
                 itemPrepIdAdapter = IntColumnAdapter,
@@ -88,7 +89,8 @@ class AppApplication : Application() {
                 bayAdapter = BayType.Adapter
             ),
             RecipesAdapter = Recipes.Adapter(
-                recipeIdAdapter = IntColumnAdapter
+                recipeIdAdapter = IntColumnAdapter,
+                cartAmountAdapter = IntColumnAdapter
             ),
             RecipeSectionsAdapter = RecipeSections.Adapter(
                 recipeSectionIdAdapter = IntColumnAdapter,
@@ -101,8 +103,7 @@ class AppApplication : Application() {
                 recipeSectionIdAdapter = IntColumnAdapter,
                 itemIdAdapter = IntColumnAdapter,
                 itemPrepIdAdapter = IntColumnAdapter,
-                unitTypeAdapter = UnitType.Adapter,
-                amountAdapter = IntColumnAdapter
+                amountAdapter = Amount.Companion.Adapter
             ),
             CartHeadersAdapter = CartHeaders.Adapter(
                 headerIdAdapter = IntColumnAdapter
@@ -110,6 +111,10 @@ class AppApplication : Application() {
             CartItemsAdapter = CartItems.Adapter(
                 cartItemIdAdapter = IntColumnAdapter,
                 headerIdAdapter = IntColumnAdapter
+            ),
+            CartItemsSelectedAdapter = CartItemsSelected.Adapter(
+                itemIdAdapter = IntColumnAdapter,
+                amountAdapter = Amount.Companion.Adapter
             )
         )
 

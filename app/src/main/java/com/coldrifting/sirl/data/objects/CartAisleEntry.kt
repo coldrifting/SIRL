@@ -11,11 +11,10 @@ data class CartAisleEntry(
 
             this.forEach { entry ->
                 var aisleEntries = entries[entry.aisleName]?.entries ?: emptyList()
-                val amount = entry.unitType.getPrepAbbreviation(entry.totalAmount)
                 val newEntry = CartAisleEntry(
                     entry.aisleId,
                     entry.aisleName,
-                    aisleEntries + CartAisleItemEntry(entry.itemId, entry.itemName, amount)
+                    aisleEntries + CartAisleItemEntry(entry.itemId, entry.itemName, entry.amount.toString())
                 )
                 entries[entry.aisleName] = newEntry
             }

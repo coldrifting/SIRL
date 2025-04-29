@@ -1,6 +1,5 @@
 package com.coldrifting.sirl.ui.screens
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -25,7 +24,6 @@ fun CartList(
     list: List<ChecklistHeader>,
     locationWarningItems: List<String>,
     dismissLocationWarning: () -> Unit,
-    onBack: () -> Unit,
     onHeaderClicked: (Int) -> Unit,
     onItemClicked: (Int, Int) -> Unit
 ) {
@@ -57,32 +55,14 @@ fun CartList(
         }
     }
 
-    var showResetListDialog by remember { mutableStateOf(false) }
-    if (showResetListDialog) {
-        AlertDialog(
-            title = "Exit Shopping List?",
-            onConfirm = {
-                onBack.invoke()
-            },
-            onDismiss = { showResetListDialog = false }
-        ) {
-            Text("The current list will be lost")
-        }
-    }
-
     var total = list.flatMap { i -> i.items }.size
     var inProgress = list.flatMap { i -> i.items }.count { e -> e.checked }
-
-    BackHandler(enabled = inProgress > 0) {
-        showResetListDialog = true
-    }
 
     Scaffold(
         topBar = {
             AppTopBar(
                 navHostController,
-                "Cart (${if(complete) "Complete" else "$inProgress / $total"})",
-                onBack = if (inProgress > 0) {{showResetListDialog = true}} else null
+                "Cart (${if(complete) "Complete" else "$inProgress / $total"})"
             )
         },
         bottomBar = { AppNavBar(navHostController, routeCart) },

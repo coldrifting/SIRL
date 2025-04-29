@@ -3,37 +3,37 @@
     "itemId": 1,
     "itemName": "Apple Cider Vinegar",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 2,
     "itemName": "Balsamic Vinegar",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 3,
     "itemName": "Red Wine Vinegar",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 4,
     "itemName": "Rice Wine Vinegar",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 5,
     "itemName": "Honey",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 6,
     "itemName": "Olive Oil",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 7,
@@ -51,7 +51,7 @@
     "itemId": 9,
     "itemName": "Croutons",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 10,
@@ -69,73 +69,73 @@
     "itemId": 12,
     "itemName": "Canned fruit",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 13,
     "itemName": "Spam",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 14,
     "itemName": "Tuna",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 15,
     "itemName": "Mayonnaise",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 16,
     "itemName": "Ranch Dressing",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 17,
     "itemName": "Natural Peanut Butter",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 18,
     "itemName": "Applesauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 19,
     "itemName": "Barbecue Sauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 20,
     "itemName": "Dijon Mustard",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 21,
     "itemName": "Ketchup",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 22,
     "itemName": "Mustard",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 23,
     "itemName": "Worcestershire sauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 24,
@@ -159,7 +159,7 @@
     "itemId": 27,
     "itemName": "Pizza Sauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 28,
@@ -183,91 +183,91 @@
     "itemId": 31,
     "itemName": "Black Beans",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 32,
     "itemName": "Butter Beans",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 33,
     "itemName": "Cannellini Beans",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 34,
     "itemName": "Corn (Canned)",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 35,
     "itemName": "Green Beans",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 36,
     "itemName": "Kidney Beans",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 37,
     "itemName": "Crushed Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 38,
     "itemName": "Diced Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 39,
     "itemName": "Fire Roasted Diced Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 40,
     "itemName": "Petite Diced Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 41,
     "itemName": "Tomato Paste",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 42,
     "itemName": "Basil Pesto",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 43,
     "itemName": "Grated Parmesan",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 44,
     "itemName": "Alfredo Sauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 45,
     "itemName": "Fettuccine Pasta",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "WeightOunces"
   },
   {
     "itemId": 46,
@@ -279,31 +279,31 @@
     "itemId": 47,
     "itemName": "Macaroni Pasta",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "WeightOunces"
   },
   {
     "itemId": 48,
     "itemName": "Marinara Sauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 49,
     "itemName": "Penne Pasta",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "WeightOunces"
   },
   {
     "itemId": 50,
     "itemName": "Taco Seasoning",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 51,
     "itemName": "Chicken Broth",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 52,
@@ -315,7 +315,7 @@
     "itemId": 53,
     "itemName": "Vegetable Broth",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 54,
@@ -333,331 +333,331 @@
     "itemId": 56,
     "itemName": "Oyster Sauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 57,
     "itemName": "Rice",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 58,
     "itemName": "Soy Sauce",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 59,
     "itemName": "Sriracha",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 60,
     "itemName": "Toasted Sesame Oil",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 61,
     "itemName": "Lemon Juice",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 62,
     "itemName": "Lime Juice",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 63,
     "itemName": "Panko",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 64,
     "itemName": "Diced Green Chilies",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 65,
     "itemName": "Salsa",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 66,
     "itemName": "Basil",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 67,
     "itemName": "Black Pepper",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTeaspoons"
   },
   {
     "itemId": 68,
     "itemName": "Cayenne pepper",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 69,
     "itemName": "Chili powder",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 70,
     "itemName": "Chipotle Powder",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 71,
     "itemName": "Cinnamon",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 72,
     "itemName": "Cocoa Powder",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 73,
     "itemName": "Coriander",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 74,
     "itemName": "Crushed Red Pepper",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 75,
     "itemName": "Cumin",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 76,
     "itemName": "Dill",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 77,
     "itemName": "Garlic Powder",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 78,
     "itemName": "Ground Cinnamon",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 79,
     "itemName": "Ground Cloves",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 80,
     "itemName": "Ground Cumin",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 81,
     "itemName": "Ground Ginger",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 82,
     "itemName": "Ground Nutmeg",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 83,
     "itemName": "Italian Seasoning",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 84,
     "itemName": "Lemon Pepper",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 85,
     "itemName": "Onion Powder",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 86,
     "itemName": "Oregano",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 87,
     "itemName": "Rosemary",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 88,
     "itemName": "Sage",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 89,
     "itemName": "Salt",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTeaspoons"
   },
   {
     "itemId": 90,
     "itemName": "Sesame seeds",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 91,
     "itemName": "Smoked Paprika",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 92,
     "itemName": "Thyme",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 93,
     "itemName": "Vanilla Extract",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 94,
     "itemName": "Baking Powder",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 95,
     "itemName": "Breadcrumbs",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 96,
     "itemName": "Brown Sugar",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 97,
     "itemName": "Chia Seeds",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 98,
     "itemName": "Cornmeal",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 99,
     "itemName": "Cornstarch",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 100,
     "itemName": "Evaporated Milk",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 101,
     "itemName": "Flour",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 102,
     "itemName": "Molasses",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 103,
     "itemName": "Powdered Sugar",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 104,
     "itemName": "Semi-Sweet Chocolate",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 105,
     "itemName": "Sugar",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 106,
     "itemName": "Sweetened Condensed Milk",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 107,
     "itemName": "Yeast",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 108,
     "itemName": "Canola Oil",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 109,
     "itemName": "Sesame Oil",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 110,
     "itemName": "Vegetable Oil",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 111,
@@ -675,13 +675,13 @@
     "itemId": 113,
     "itemName": "Canned Coconut Milk",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 114,
     "itemName": "Pumpkin Puree",
     "itemTemp": "Ambient",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 115,
@@ -723,31 +723,31 @@
     "itemId": 121,
     "itemName": "Rolled Oats",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 122,
     "itemName": "Cashews",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 123,
     "itemName": "Peanuts",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 124,
     "itemName": "Pecans",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 125,
     "itemName": "Walnuts",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 126,
@@ -759,73 +759,73 @@
     "itemId": 127,
     "itemName": "Impossible",
     "itemTemp": "Frozen",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "WeightOunces"
   },
   {
     "itemId": 128,
     "itemName": "Frozen Broccoli",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 129,
     "itemName": "Frozen Carrots",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 130,
     "itemName": "Frozen Corn",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 131,
     "itemName": "Frozen Edamame",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 132,
     "itemName": "Frozen Green Beans",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 133,
     "itemName": "Frozen Onions and Peppers",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 134,
     "itemName": "Frozen Peas",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 135,
     "itemName": "Frozen Pineapple",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 136,
     "itemName": "Frozen Raspberries",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 137,
     "itemName": "Frozen Spinach",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 138,
     "itemName": "Frozen Vegetables",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 139,
@@ -873,67 +873,67 @@
     "itemId": 146,
     "itemName": "Hashbrowns",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 147,
     "itemName": "Tater tots",
     "itemTemp": "Frozen",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 148,
     "itemName": "Milk",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 149,
     "itemName": "Oat Milk",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 150,
     "itemName": "Butter",
     "itemTemp": "Chilled",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 151,
     "itemName": "Half & Half",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 152,
     "itemName": "Heavy Cream",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 153,
     "itemName": "Heavy Whipping Cream",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 154,
     "itemName": "Margarine",
     "itemTemp": "Chilled",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 155,
     "itemName": "Greek Yogurt (Plain)",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 156,
     "itemName": "Yogurt",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 157,
@@ -945,7 +945,7 @@
     "itemId": 158,
     "itemName": "Sour Cream",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 159,
@@ -969,55 +969,55 @@
     "itemId": 162,
     "itemName": "Chicken",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 163,
     "itemName": "Chicken Breast",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 164,
     "itemName": "Ground beef",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 165,
     "itemName": "Ground Italian Sausage",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 166,
     "itemName": "Ground Pork",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 167,
     "itemName": "Ground Turkey",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 168,
     "itemName": "Porkchops",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 169,
     "itemName": "Sausage",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 170,
     "itemName": "Sausage (Kielbasa)",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 171,
@@ -1059,61 +1059,61 @@
     "itemId": 177,
     "itemName": "Parmesan",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 178,
     "itemName": "Cream Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 179,
     "itemName": "Feta Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 180,
     "itemName": "Cheddar Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 181,
     "itemName": "Monterey Jack Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 183,
     "itemName": "Mozzarella Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 184,
     "itemName": "Pepper Jack Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 185,
     "itemName": "Provolone Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 186,
     "itemName": "White Cheddar Cheese",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 187,
     "itemName": "Guacamole",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 188,
@@ -1125,49 +1125,49 @@
     "itemId": 189,
     "itemName": "Hummus",
     "itemTemp": "Chilled",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   },
   {
     "itemId": 190,
     "itemName": "Lunch Meat",
     "itemTemp": "Chilled",
-    "defaultUnits": "Pounds"
+    "defaultUnits": "WeightPounds"
   },
   {
     "itemId": 191,
     "itemName": "Kale",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 192,
     "itemName": "Lettuce",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 193,
     "itemName": "Mushrooms",
     "itemTemp": "Chilled",
-    "defaultUnits": "Ounces"
+    "defaultUnits": "VolumeOunces"
   },
   {
     "itemId": 194,
     "itemName": "Shredded Carrots",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 195,
     "itemName": "Spinach",
     "itemTemp": "Chilled",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 196,
     "itemName": "Sun Dried Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 197,
@@ -1257,7 +1257,7 @@
     "itemId": 211,
     "itemName": "Grape Tomatoes",
     "itemTemp": "Ambient",
-    "defaultUnits": "Cups"
+    "defaultUnits": "VolumeCups"
   },
   {
     "itemId": 212,
@@ -1389,6 +1389,6 @@
     "itemId": 233,
     "itemName": "Olive Oil (Extra-Virgin)",
     "itemTemp": "Ambient",
-    "defaultUnits": "Tablespoons"
+    "defaultUnits": "VolumeTablespoons"
   }
 ]

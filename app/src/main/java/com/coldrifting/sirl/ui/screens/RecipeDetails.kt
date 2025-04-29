@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavHostController
 import com.coldrifting.sirl.ui.components.AppNavBar
 import com.coldrifting.sirl.ui.components.AppTopBar
@@ -23,7 +24,7 @@ import com.coldrifting.sirl.data.TopLevelRoute.Companion.routeRecipes
 @Composable
 fun RecipeDetails(
     navHostController: NavHostController,
-    recipe: RecipeTree
+    recipe: RecipeTree,
 ) {
     val ingredients = recipe.recipeSections.fold(mutableListOf<ChecklistHeader>()) { l, s ->
         l.add(
@@ -35,7 +36,7 @@ fun RecipeDetails(
                         id = i.itemId,
                         name = i.itemName,
                         info = i.itemPrep?.prepName,
-                        details = i.unitType.getPrepAbbreviation(i.amount)
+                        details = i.amount.toString()
                     ))
                     lx
                 }))
@@ -44,9 +45,15 @@ fun RecipeDetails(
 
     var test = rememberSaveable(recipe) { ingredients }
 
+    val uriHandler = LocalUriHandler.current
+
     Scaffold(
         topBar = {
-            AppTopBar(navHostController, recipe.recipeName, topAction = {
+            AppTopBar(
+                navHostController,
+                recipe.recipeName,
+                titleAction = if (recipe.recipeUrl != null) {{ uriHandler.openUri(recipe.recipeUrl) }} else null,
+                topAction = {
                 IconButton({
                     navHostController.navigate(
                         RouteRecipeEdit(recipe.recipeId)

@@ -1,3 +1,4 @@
+import com.coldrifting.sirl.data.objects.Amount;
 import kotlin.Boolean;
 import kotlin.Int;
 
@@ -14,6 +15,12 @@ CREATE TABLE CartItems (
     cartItemDetails TEXT NOT NULL,
     cartItemChecked INTEGER AS Boolean NOT NULL DEFAULT 0,
     FOREIGN KEY (headerId) REFERENCES CartHeaders(headerId)
+);
+
+CREATE TABLE CartItemsSelected (
+    itemId INTEGER AS Int NOT NULL PRIMARY KEY,
+    amount TEXT AS Amount NOT NULL,
+    FOREIGN KEY (itemId) REFERENCES Items(itemId)
 );
 
 insertCartHeader:
@@ -67,6 +74,90 @@ DELETE FROM CartItems;
 clearCartHeaders:
 DELETE FROM CartHeaders;
 
+-- noinspection MissingWhere
+clearSelectedCartRecipes:
+UPDATE Recipes
+SET cartAmount = 0;
+
+-- noinspection MissingWhere
+clearSelectedCartItems:
+DELETE FROM CartItemsSelected;
+
+getAvailableRecipesForCart:
+SELECT Recipes.recipeId, Recipes.recipeName
+FROM Recipes
+WHERE Recipes.cartAmount = 0
+ORDER BY Recipes.recipeName;
+
+addRecipeToCart:
+UPDATE Recipes
+SET cartAmount = 1
+WHERE recipeId = :recipeId;
+
+updateRecipeInCart:
+UPDATE Recipes
+SET cartAmount = :newAmount
+WHERE recipeId = :recipeId;
+
+removeRecipeFromCart:
+UPDATE Recipes
+SET cartAmount = 0
+WHERE recipeId = :recipeId;
+
+getSelectedShoppingRecipes:
+SELECT Recipes.recipeId, Recipes.recipeName, COALESCE(SUM(Recipes.cartAmount), 1) AS recipeQuantity
+FROM Recipes
+WHERE Recipes.cartAmount > 0
+GROUP BY Recipes.recipeName
+ORDER BY Recipes.recipeName;
+
+getAvailableItemsForCart:
+SELECT Items.itemId, Items.itemName
+FROM Items
+WHERE Items.itemId NOT IN (SELECT itemId FROM CartItemsSelected)
+ORDER BY Items.itemName;
+
+addItemToCart:
+INSERT INTO CartItemsSelected (itemId, amount)
+VALUES(?, ?);
+
+updateItemInCart:
+UPDATE CartItemsSelected
+SET amount = :newAmount
+WHERE itemId = :itemId;
+
+removeItemFromCart:
+DELETE FROM CartItemsSelected
+WHERE itemId = :itemId;
+
+getSelectedShoppingItems:
+SELECT Items.itemId, Items.itemName, CartItemsSelected.amount
+FROM CartItemsSelected
+NATURAL JOIN Items
+ORDER BY Items.itemName;
+
+getSelectedShoppingItemsWithAisle:
+SELECT
+Aisles.aisleId,
+Aisles.aisleName,
+RecipeEntryItems.itemId,
+RecipeEntryItems.itemName,
+RecipeEntryItems.amount
+FROM (SELECT
+        Items.itemId,
+        Items.itemName,
+        CartItemsSelected.amount
+        FROM CartItemsSelected
+NATURAL JOIN Items) AS RecipeEntryItems
+LEFT JOIN ItemAisles ON RecipeEntryItems.itemId = ItemAisles.itemId AND ItemAisles.storeId = :storeId
+LEFT JOIN Aisles USING (aisleId)
+ORDER BY Aisles.sortingPrefix,
+        CASE WHEN ItemAisles.bay = 'Start' THEN 1
+            WHEN ItemAisles.bay = 'Middle' THEN 2
+            WHEN ItemAisles.bay = 'End' THEN 3 END ASC,
+        RecipeEntryItems.itemName;
+
+
 getShoppingList:
 SELECT
 Aisles.aisleId,
@@ -74,15 +165,14 @@ Aisles.aisleName,
 RecipeEntryItems.itemId,
 RecipeEntryItems.itemName,
 ItemPreps.prepName,
-RecipeEntryItems.unitType,
-SUM(RecipeEntryItems.amount) AS totalAmount
+RecipeEntryItems.amount,
+RecipeEntryItems.cartAmount
 FROM (SELECT
         Recipes.recipeId,
         Recipes.recipeName,
-        Recipes.pinned,
+        Recipes.cartAmount,
         RecipeSections.recipeSectionId,
         RecipeEntries.amount,
-        RecipeEntries.unitType,
         RecipeEntries.itemPrepId,
         Items.itemId,
         Items.itemName
@@ -93,8 +183,7 @@ NATURAL JOIN Items) AS RecipeEntryItems
 LEFT JOIN ItemAisles ON RecipeEntryItems.itemId = ItemAisles.itemId AND ItemAisles.storeId = :storeId
 LEFT JOIN Aisles USING (aisleId)
 LEFT JOIN ItemPreps USING (itemPrepId)
-WHERE RecipeEntryItems.pinned = 1
-GROUP BY RecipeEntryItems.itemName
+WHERE RecipeEntryItems.cartAmount > 0
 ORDER BY Aisles.sortingPrefix,
         CASE WHEN ItemAisles.bay = 'Start' THEN 1
             WHEN ItemAisles.bay = 'Middle' THEN 2

@@ -14,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -22,33 +21,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.coldrifting.sirl.data.enums.UnitType
+import com.coldrifting.sirl.data.objects.Amount
+import com.coldrifting.sirl.data.objects.Fraction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IngredientAmountEdit(
-    placeholderAmount: Int,
-    placeholderUnitType: UnitType,
-    onSuccess: (UnitType, Int) -> Unit,
+    placeholderAmount: Amount,
+    onSuccess: (Amount) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var unitType by remember { mutableStateOf(placeholderUnitType) }
-
-    var amount by remember { mutableIntStateOf(placeholderAmount) }
-    var amountAsText by remember { mutableStateOf((placeholderAmount / 1000.0f).toString().trimEnd{it == '0'}.trimEnd{it == '.'})}
-
+    var amount by remember(placeholderAmount) { mutableStateOf(placeholderAmount) }
+    var amountAsText by remember(placeholderAmount) { mutableStateOf(amount.fraction.toDecimalString()) }
     var dropDownExpanded by remember {mutableStateOf(false)}
 
     AlertDialog(
         title = "Select Ingredient Quantity",
-        onConfirm = {onSuccess.invoke(unitType, amount)},
-        confirmButtonEnabled = amount > 0.0f,
+        onConfirm = {
+            amount = amount.copy(fraction = Fraction.fromFloatString(amountAsText))
+            onSuccess.invoke(amount)
+        },
+        confirmButtonEnabled = amountAsText.toFloatOrNull() != null,
         bottomPadding = 80,
         onDismiss = {
-            unitType = UnitType.Count
-            amount = 0
-            amountAsText = ""
             dropDownExpanded = false
-
             onDismiss.invoke()
         }
     ) {
@@ -60,7 +56,7 @@ fun IngredientAmountEdit(
             ) {
                 TextField(
                     modifier = Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable),
-                    value = unitType.toString(),
+                    value = amount.type.getFriendlyName(),
                     onValueChange = {},
                     readOnly = true,
                     singleLine = true
@@ -71,9 +67,9 @@ fun IngredientAmountEdit(
                 ) {
                     UnitType.entries.forEach {
                         DropdownMenuItem(
-                            text = { Text(it.toString()) },
+                            text = { Text(it.getFriendlyName()) },
                             onClick = {
-                                unitType = it
+                                amount = amount.copy(type = it)
                                 dropDownExpanded = false
                             },
                             contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
@@ -87,13 +83,12 @@ fun IngredientAmountEdit(
             // Text input
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = {Text("Amount")},
+                label = { Text("Amount") },
                 value = amountAsText,
                 onValueChange = {
                     val output = it.replace(Regex("[^0-9.]"), "")
                     if ( output.filter { char -> char == ".".first()}.length <= 1 ) {
                         amountAsText = output
-                        amount = ((amountAsText.toFloatOrNull() ?: 0.0f) * 1000).toInt()
                     }
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Decimal)

@@ -3,15 +3,15 @@ package com.coldrifting.sirl.repo
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.coldrifting.sirl.Database
+import com.coldrifting.sirl.data.entities.Item
+import com.coldrifting.sirl.data.entities.ItemAisle
+import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.data.enums.BayType
 import com.coldrifting.sirl.data.enums.ItemTemp
 import com.coldrifting.sirl.data.enums.UnitType
 import com.coldrifting.sirl.data.objects.ItemWithAisleName
 import com.coldrifting.sirl.data.objects.RecipeTreeItem
 import com.coldrifting.sirl.data.objects.RecipeTreeItemPrep
-import com.coldrifting.sirl.data.entities.Item
-import com.coldrifting.sirl.data.entities.ItemAisle
-import com.coldrifting.sirl.data.entities.ItemPrep
 import com.coldrifting.sirl.repo.utils.toListStateFlow
 import com.coldrifting.sirl.repo.utils.toNullableStateFlow
 import com.coldrifting.sirl.repo.utils.toStateFlow
@@ -114,6 +114,10 @@ class ItemRepo(
         return db.itemsQueries.getItem(itemId).toStateFlow(scope, Item()) { item ->
             Item(item.itemId, item.itemName, item.temperature, item.defaultUnits)
         }
+    }
+
+    fun getDefaultItemType(itemId: Int): UnitType {
+        return db.itemsQueries.getDefaultItemType(itemId).executeAsOne()
     }
 
     fun setItemName(itemId: Int, itemName: String) {
